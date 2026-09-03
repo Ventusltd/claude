@@ -1136,3 +1136,56 @@ release that did, are one cause.** Recorded here rather than filed beside D8,
 because filing it separately would have produced two tickets, two owners and one
 defect — and the second owner would have "fixed" a title in a directory that is
 a verified copy.
+
+---
+
+## D3 — DEFINITIVE CENSUS, 2026-09-03T04:46Z, members not counts
+`census.sh` + `census.py`, 32 repositories, published cvaa, `state == fail`
+only. Every row carries its **control** — the number of repositories the rule is
+quiet on. Full membership in `_members.json`; reproduce with `bash census.sh`.
+
+**32 repositories measured. 14 immune.**
+
+| rule | failing | control (quiet on) |
+|---|---|---|
+| `monotonic-utc-generations` | 14 of 32 | 18 |
+| `chaining-token` | 12 of 32 | 20 |
+| `self-terminating-loops` | 7 of 32 | 25 |
+| `no-per-release-workflows` | 6 of 32 | 26 |
+| `no-time-based-gates` | 3 of 32 | 29 |
+| `pointer-verifies` | 2 of 32 | 30 |
+| `executor-declared` | 1 of 32 | 31 |
+| `loop-exists` | 1 of 32 | 31 |
+
+**Every rule is quiet somewhere, so no rule is a broken instrument** (RH27).
+That statement is the point of the control column and could not be made from a
+count.
+
+`monotonic-utc-generations` fails on: chatgpt-audits, claude, companies, cvaa,
+data-centres-gb, data-federation-map, data-gb-electricity, data-grid-gb,
+data-gridatlas, data-interconnectors, globalgrid2050, grid-distance-maths,
+gridatlas, pipelinenews. **Fourteen of the eighteen active repositories and none
+of the fourteen cold ones** — it is a disease of agent-driven development, and
+`claude` is on the list because I put it there (RH4, RH12, RH23).
+
+`self-terminating-loops` fails on: data-federation-map, data-gridatlas,
+data-interconnectors, globalgrid2050, globalgrid2050-hompage, pipelinenews,
+spiders.
+
+**WARNINGS — not failures.** `level: warning` is declared in the vaccine; these
+are accepted, ratcheted allowances with expiry dates (RH28):
+
+- `pinned-actions` 15 of 32 — cvaa, data-federation-map, data-gb-electricity,
+  data-grid-gb, data-interconnectors, data_uk_dno_and_tso, gb-electricity-ui,
+  globalgrid2050, globalgrid2050-hompage, pipelinenews, registry_of_all_content,
+  reports, solar-electrical-topology, spiders, v11. **gridatlas is no longer
+  among them.**
+- `least-permissions` 11 of 32.
+
+**SKIPPED — the rule declined to decide. A skip is not a pass.**
+
+- `rollback-exercised` — data-gridatlas, gridatlas. Both lack
+  `atlas/state/rollback-drills.json`, so the rewritten rule says so honestly
+  instead of reading a commit subject. This is D15's dangerous half converted
+  from a false negative into an honest abstention.
+- `derived-state-not-authored` — gridatlas.
