@@ -111,6 +111,17 @@ because it gets quoted rather than checked.**
   The token is never printed and never written to disk; it lives in one variable for one curl.
   Do not echo it, do not put it on a command line, do not commit it.
 - `python3` is a broken Windows Store stub. Use `python`.
+- **A heredoc that expands `$STAMP` also expands backticks.** `<<MSGEOF` (unquoted) is needed to
+  interpolate a stamp into a commit message, but it runs anything in backticks as a command — a
+  message containing `` `if (!scopes.length) return []` `` lost that clause to command
+  substitution and shipped mangled. Quoted `<<'MSGEOF'` is safe but interpolates nothing. Either
+  compute the stamp into the text with a quoted heredoc plus `sed`, or keep backticks out of
+  commit messages. Never amend a pushed commit to fix this; record the correction instead.
+- **Escaping is the most repeated failure in this estate's tooling.** Heredoc-piped Python,
+  backticks in commit messages, `$''` in a test, `
+` through three layers of quoting — each
+  cost a retry. When a string carries code, write it to a file with the Write tool and run the
+  file. Do not pipe it through a shell.
 - **`MSYS_NO_PATHCONV` is a per-command flag, never an environment.** Git Bash rewrites anything
   that looks like a path, so `git show origin/main:.gitattributes` reached git as
   `origin\main;.gitattributes` — the colon became a semicolon, every lookup failed, and a sweep
