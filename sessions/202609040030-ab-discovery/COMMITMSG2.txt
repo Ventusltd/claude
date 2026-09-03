@@ -1,0 +1,7 @@
+Lane A: the screenshots behind the 16 findings
+
+FINDINGS.md cites these by path as evidence a reader can check, so they
+belong beside it rather than only on this machine's disk.
+
+Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_013uW9p9yeJU75VqrjYJV1qE
