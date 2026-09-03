@@ -1,5 +1,10 @@
 # Menu-bar archaeology — what v9.94 actually shipped, and why the same idea works in the world
 
+> **CORRECTED by `01-CORRECTION.md`.** The at-rest and arrival percentages in section 1
+> (66.5 / 54.5 / 16.0 / 13.5) measured a page whose layer key list had not populated and are
+> **withdrawn** — do not quote them. Corrected: **40.3% v9.94, 28.4% v9.95** at rest;
+> **15.9% / 13.8%** on arrival. Sections 2 and 3 are unaffected.
+
 2026-09-03, ~22:24 UTC. Lane: ARCHAEOLOGY. Five tabs left open in the architect's Chrome.
 
 Everything below names the generation and the bytes it read. Where I could not measure, it says so.
