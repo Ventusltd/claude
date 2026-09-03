@@ -182,6 +182,15 @@ Several lanes run at once — Claude, Codex, Gemini, and subagents of each.
 
 - **Never `git add -A` or `git add .` in this repo.** Stage by explicit path. A commit race here
   swept another session's in-progress files into an unrelated commit.
+- **Staging by explicit path protects the other lane from you. It does not protect you from
+  them.** It happened again on 2026-09-03: 25 files staged for the memory-store commit sat in
+  the index for the ninety seconds it took to write a commit message, and another lane's broad
+  commit (`a19a108`) carried all 25 in under *its* message, which describes a different change.
+  Nothing was lost and nothing was corrupted — but the commit that ships a change no longer
+  names it, and `git log -- <path>` now attributes the work to the wrong entry.
+  **Stage and commit in the same shell call**, with the message written to a file *first*:
+  the index is shared mutable state between lanes, so time spent staged is time exposed.
+  Never amend the sweeping commit to fix this — it is pushed, and a correction is a new entry.
 - Fetch immediately before every write, not once per phase. `atlas/current.json` and
   `index.html` are single files every generation must touch; git cannot merge them meaningfully.
 - If a repo is mid-write by another lane, note it and move on. **Never treat a dirty tree as a
