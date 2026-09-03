@@ -365,10 +365,31 @@ go red again within minutes of every GridAtlas cut. GridAtlas made ten cuts over
 re-stamp it, because re-stamping is the treadmill you need to decide about, not escape from: it
 would buy roughly the nine minutes until v9.89.
 
-The two `token` failures are one mechanical fault in two places — an action requiring a `token`
-input that no step supplies. Both predate tonight, neither is in my assigned lane, and I did not
-touch workflow auth wiring in repositories I have not read at 04:50. Named here so they are not
-mistaken for content defects; they are the cheapest two greens available.
+**The two `token` failures are not a code fault, and they are quieter and worse than a red badge.**
+Both workflows check out with `token: ${{ secrets.GRIDBOT_PAT }}`. I checked whether that secret
+exists:
+
+| repo | secrets |
+|---|---|
+| `data-interconnectors` | **0 — none at all** |
+| `globalgrid2050-hompage` | **0 — none at all** |
+| `globalgrid2050` | 2 — `GRIDBOT_PAT`, `OCM_API_KEY` |
+
+The workflows were copied from `globalgrid2050` without the secret they depend on. Nothing in the
+code is wrong.
+
+**Why this matters more than it looks.** Both are *monthly* jobs — `cron: '17 6 2 * *'` and
+`'47 6 2 * *'`, the 2nd of each month. They fired on **2 September, failed at the checkout step,
+and will not try again until 2 October.** So the UK interconnector build and the federation
+systems map did not refresh this month, and nothing will say so again for four weeks. That is
+exactly the silent staleness you said destroys institutional trust — no corrupted number, just a
+number that quietly stopped moving.
+
+**I cannot fix this and did not try:** adding a repository secret is credential handling and it is
+yours to do. Add `GRIDBOT_PAT` to both repos, then re-run the two workflows manually — both have
+`workflow_dispatch`, so you do not have to wait for October. Worth deciding at the same time
+whether these two want a PAT at all, or whether `secrets.GITHUB_TOKEN` would do; that depends on
+whether they push beyond their own repository, which I did not read far enough to say.
 
 *(Method: `sessions/202609030422-handover/scripts/` — the sweep and the wall-walker.)*
 
