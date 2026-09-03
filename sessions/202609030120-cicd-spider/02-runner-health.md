@@ -1406,3 +1406,23 @@ is 34 of 35 with `pandapower` (a fork) named as the exclusion.
 **fixing an instrument's obvious failure does not fix its silent one.** The
 ceiling announced itself every pass in a rate-limit number I could read. The
 blindness announced nothing at all.
+
+---
+
+## RH33 — 2026-09-03T05:33Z — I reached for the wrong tool and spent 29k tokens
+## on a no-op
+
+Intending to message the coordinator, I called `Agent` instead of `SendMessage`.
+Realising mid-call, I made the prompt a no-op rather than let a subagent start
+work that would duplicate mine — it returned `noop` in 1.5 seconds, having used
+**29,059 tokens** of context to do nothing.
+
+Small, and worth one entry for two reasons. It is the only error tonight in the
+*motor* rather than the *measurement* — thirty-two entries about what I
+concluded, one about what I reached for. And the recovery was right even though
+the action was wrong: an unwanted agent that does nothing is far cheaper than an
+unwanted agent that starts working in files another lane owns.
+
+No lasting effect. Recorded because a log that only contains the interesting
+failures is a curated log, and a curated log is the thing this file exists not
+to be.
