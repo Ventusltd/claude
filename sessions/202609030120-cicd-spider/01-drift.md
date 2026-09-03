@@ -424,3 +424,55 @@ Worth recording because cvaa is the estate's instrument for exactly this class
 of defect — a check that answers differently depending on whose machine it runs
 on — and it has one in its own tooling. One line: use `fileURLToPath`, never
 `.pathname`.
+
+---
+
+## D1 — CLOSED 2026-09-03T02:31Z
+globalgrid2050 `687d03f` — "the homepage names v9.86, in both places it names a
+version". Re-ran the gate against the clean tree:
+
+    PUBLICATION TRUTH: PASS - 25 published snapshots, all reachable,
+                              newest is 202609030009
+
+Nine versions of drift closed by treating the stamp as the thing being cut
+rather than a field that follows.
+
+---
+
+## D12 — the publication gate now PASSES while omitting a check
+**First seen** 2026-09-03T02:31Z. Owned by the globalgrid2050 lane; recorded
+because the severity has changed direction, not because it is unowned.
+
+The same run that cleared D1 printed:
+
+    skipped: pipelinenews lineage head: HTTP Error 403: rate limit exceeded
+    PUBLICATION TRUTH: PASS - 25 published snapshots, all reachable
+
+`verify_published_versions.py:199` computes
+`status = "PASS" if not failures else "FAIL"`, and `check_network` files its
+rate-limit exception into `report["skipped"]`, which never joins `failures`.
+
+While the gate was failing, the skip was cosmetic — the verdict was FAIL either
+way. **Now that it passes, the skip is load-bearing.** A PASS computed over 24
+of 25 checks, with the omission stated four lines above the verdict and nowhere
+inside it, is the exact shape of "a skip is not a pass". It is strictly more
+dangerous than it was an hour ago, and the trigger is a shared 60/hour budget
+that any of four agents can exhaust at any moment — I did, at 02:02Z (RH15).
+
+The fix is already in hand in that lane: carry the skip into the verdict. Noting
+only that it is now urgent in a way it was not while the gate was red.
+
+---
+
+## Unconfirmed — gridatlas `attestation-freshness`
+Pass 5 reported `attestation-freshness incidence 0 -> 1 of 18`, gridatlas,
+"pointer changed after the last live attestation; re-verify". gridatlas had
+**4 uncommitted paths** at the time, so this is not a measurement (RH16). It is
+plausible on its face — gridatlas cut v9.80 through v9.86 in roughly two hours —
+but it is recorded as unconfirmed and will be re-measured on a clean tree.
+
+`no-time-based-gates` on gridatlas IS committed and does hold: three crons
+pinned to 30–31 August 2026 in `202608310015-gridatlas-overnight-next-versions.yml`
+and `202608310050-gridatlas-next-version-builders.yml`. Same class as the
+`companies` once-a-year cron in D6 — schedules that have already passed and
+cannot fire again until next year.
