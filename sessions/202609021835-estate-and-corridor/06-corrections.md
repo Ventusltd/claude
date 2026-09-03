@@ -98,3 +98,64 @@ check `git status --porcelain` before reporting any gate result.
 What was right in the same message, and verified: the unpinned `@main` edges are real, and the
 sequencing argument — `data-grid-gb b91e45b` and a gridatlas pin should land as one event — is the
 most valuable thing said tonight.
+
+---
+
+## C6 — I pushed a cvaa fix whose proof step never ran. Corrects nothing earlier; records a
+process failure of my own, 02:00 UTC.
+
+The chain was `set -e` with the proof written as `node block.js && echo PASS`. My `sed` extraction
+of the workflow's node heredoc pulled the `node - <<'NODE'` marker line in too, node threw a
+SyntaxError, and because the failing command sat on the left of `&&`, `set -e` did not stop the
+chain — it committed and pushed `57c19ea`. The disk arithmetic printed correctly (26 − 1 = 25,
+results 25), so the logic was right, but the workflow's own block had not executed. I found out
+by running it afterwards.
+
+**Lesson.** A proof on the left of `&&` under `set -e` is not a gate. Capture `rc=$?` on its own
+line, or the echo after it is the only thing that ran.
+
+## C7 — The spider's D10 root cause was one of two constants, and I accepted it without running
+the step. Corrects the acceptance, not the spider's finding.
+
+`202608301447-selftest.yml` has two hard-coded counts in one `run:` block: line 28 asserts
+**24** vaccine files on disk; line 41 asserts **23** active results. Both drifted by the same
+two vaccines on 31 August. Under `set -euo pipefail` the step aborts at line 28 — before
+`selftest.mjs`, before `inoculate`, before the node block. My first fix corrected line 41 only and
+could not have turned the runner green. Same step red before and after, which is what said so.
+
+**Lesson.** Reproduce the *step*, not the *assertion*. I verified the number I was told about and
+never executed the five lines above it.
+
+## C8 — I replaced a wrong constant with a check that cannot pass, and my proof printed PASS.
+02:01 UTC, `67c5e34`.
+
+Line 28 rewritten as `-eq "$(node -e "…require('./vaccines.lock')…")"`. node's `require()`
+chooses a parser by extension; `.lock` is not `.json`, so it parsed the file as JavaScript and
+threw. The substitution came back empty, `test 26 -eq ""` errored "integer expected" — and the
+`echo "PASS"` on the next line ran anyway, because `set -e` was not stopping this shell either.
+I read the echo and shipped.
+
+Fixed in `791e24b` with `JSON.parse(readFileSync)`, and the proof rewritten so every check
+reports its own `rc` explicitly, including line 28 run verbatim from the file. All three `rc=0`
+before the push.
+
+**Lesson, and it is the night's lesson.** Three times in ninety minutes I trusted a green line
+that measured nothing: the agent's local proof (F8), the spider's dirty-tree red (C5), and my own
+`&&`/`set -e` proofs (C6, C8). The estate's rule — *a skip is not a pass* — is exactly aimed at
+this, and it caught me the same way it caught the observer.
+
+---
+
+## Addition to 07-routing-table, 02:15 UTC — D9/D6, from the spider, reproduced in a clean LF clone
+
+| # | finding | owning files — **bound, move together** | class | measured | gate |
+|---|---|---|---|---|---|
+| D9/D6 | `data-gridatlas` hourly watchdog is **correct**: it has reported a dead gridatlas URL every hour since 1 Sep, and nobody read it | `.github/workflows/202608291239-verify-live-pointer.yml:123` · `releases/current.json:13,:23` · `state/live-set.json:13,:23` · `contracts/202608291507-automation.json` `baseline.pointer_sha256` | 4-file bound cut, no lane tonight | consumer probe 404 at `/gridatlas/202608291239-atlas-v9/release-manifest.json`; **200** under `/gridatlas/atlas/releases/…`. gridatlas moved its release directories; the probe holds the old shape. `current-integrity.py:158-163` requires both pointers byte-identical and their SHA-256 equal to the contract baseline (`08664a2f…`), so one file cannot move alone — an honest red would become a different red. | the watchdog's next hourly run |
+
+Also from the same message, and general to this machine: several working copies were checked out
+before their `.gitattributes` gained `* text=auto eol=lf` and have never been renormalised. Disk
+holds CRLF, the blob holds LF. **Any digest or byte comparison read off disk here is wrong and
+right on the runner.** `git ls-files --eol | grep w/crlf` names them per repo. Compare
+`git show HEAD:<path>` bytes, or use a clean clone. The spider nearly misreported D9's cause this
+way (RH14); the pipelinenews agent found 10 ledger digests wrong this way; the gridatlas proof
+hazard was this shape.
