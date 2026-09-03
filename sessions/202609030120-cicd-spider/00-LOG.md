@@ -312,3 +312,25 @@ reported as fact, and the rest hold.
 
 **Open:** D1 D3 D5 D6 D8 D11. **Closed:** D2 D7 D9 D10 D12 D13. **Withdrawn:**
 D4 D14.
+
+---
+
+## Pass 9 — 2026-09-03T03:36Z — no estate drift; the only movement is repair
+
+`CVAA-COMMIT` fired correctly on cvaa `77dcb28` — vaccine set unchanged at 25
+rules, so any findings delta would have been real. `CVAA-SKIP` withheld four
+mid-write repositories; `BYTE-UNSAFE` withheld byte-dependent verdicts for
+data-gridatlas.
+
+**D16 opened and closed inside six minutes.** I found that the word "cvaa" in a
+comment had pulled `202608312212-cartridge-proof.yml` into
+`full-history-checkout`'s scope; gridatlas fixed it without adding a spurious
+`fetch-depth: 0` and without deleting the explanation — *"rewritten because the
+finding was false, not because it was inconvenient"*.
+
+**D15 recorded**: four of the 25 active antibodies decide from prose, proved by
+`rollback-exercised` reporting gridatlas immune throughout the period
+`rollback-exists` showed it had no rollback mechanism at all.
+
+**Open:** D1 D3 D5 D6 D8 D11 D15. **Closed:** D2 D7 D9 D10 D12 D13 D16 + dead
+schedules + the gg2050 dead link. **Withdrawn:** D4 D14.

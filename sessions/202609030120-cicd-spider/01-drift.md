@@ -889,3 +889,33 @@ checkouts that do not need it, or to delete the sentence explaining the pinning.
 Both make the repository worse to satisfy a scope selector. The antibody should
 detect an actual invocation — `node …inoculate.mjs`, or a `uses:` of the cvaa
 workflow — rather than the word.
+
+---
+
+## D16 — CLOSED 2026-09-03T04:14Z, and the fix avoided both traps
+gridatlas `efa0102`, then `ed2135f`. Verified on a clean tree at `ed2135f`:
+`full-history-checkout` is off the FAIL list.
+
+Neither trap was taken. `fetch-depth: 0` was **not** added — the file still has
+2 checkouts and 0 of them, which is correct, because nothing in that job reads
+history. And the explanation was **not** deleted; it was expanded. Their note:
+
+> *"That sentence deliberately does not name the scanner. Naming it in a comment
+> here is enough to make it believe this workflow RUNS it: its
+> full-history-checkout antibody only inspects workflows whose raw text matches
+> `/cvaa|inoculate/i` … The checkouts here are shallow on purpose … and this
+> workflow does not run any scanner at all, so that sentence was simply untrue.
+> **Rewritten because the finding was false, not because it was inconvenient.**"*
+
+That last line is the right standard, and a better outcome than the rewording I
+suggested: the record of *why* is longer than it was, and the only thing removed
+is the token the scanner keys on.
+
+It is still a workaround for a rule that cannot tell a mention from an
+invocation, and D15 stands. But the repository has now hit this class twice in
+an hour and answered both times by keeping the truth and changing the shape.
+
+**gridatlas tonight:** 10 failing vaccines and 1 WARN at 01:20Z → **6 failing,
+0 WARN** at 04:14Z, with `pinned-actions`, `no-time-based-gates`,
+`rollback-exists`, `full-history-checkout` and the dead published paths all
+closed, and main-branch CI green across every workflow.
