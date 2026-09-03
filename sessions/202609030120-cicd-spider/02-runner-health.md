@@ -1059,3 +1059,61 @@ instance: **a correction protects only the call site you install it at, and
 only in the direction you were looking.** I have now made this error against my
 own gates, my own CVAA runs, my own denominators, a feature branch, my own
 clock, and now another tool's vocabulary.
+
+---
+
+## RH26 — 2026-09-03T04:40Z — I named a value and not the file it lives in, and
+## sent a reader to the wrong manifest
+
+I reported that the pages gate expects
+`pipelinenews.timestamp-folder-successor.v1` while "every recent release
+carries" `pipelinenews.additive-cartridge-release.v1`. True of
+`release-manifest.json` and misleading as written: grepping `releases/*/` for
+any manifest schema also returns `atlas-current-link-manifest.v1` and
+`current-atlas-link-build-manifest.v2`, and the coordinator lost minutes in the
+wrong file because of it.
+
+The gate reads exactly two names — `build-pages.py:641-642`:
+
+    releases/<release_id>/release-manifest.json
+    releases/<release_id>/build-manifest.json
+
+And checking both, which I had not done, shows **both diverge**:
+
+    release-manifest.json   expects timestamp-folder-successor.v1
+                            carries additive-cartridge-release.v1
+    build-manifest.json     expects timestamp-folder-build-manifest.v1
+                            carries current-atlas-link-build-manifest.v2
+
+So my report understated it: I found wall 1 and described it as though it were
+the wall. **A schema value is not an address.** When a check reads a file by
+exact name, the finding is the pair — file and value — and quoting the value
+alone lets a reader search a directory that contains several plausible matches.
+
+## RH27 — the control run, adopted as a habit
+
+The coordinator's harness replaced the gate's `require()` with a collector so
+one run walks as far as the code physically can: thirteen failing assertions for
+`202609030009-pipelinenews`, then a `TypeError`, so everything past thirteen is
+*unmeasured* rather than passing.
+
+The part I want to keep is not the harness but **the control**. The same run
+against `202608300309-pipelinenews` — the one release on
+`current-atlas-link-release.v2` — fails nothing and completes. That single
+comparison converts "thirteen assertions fail" from a possible instrument fault
+into a property of the newer format.
+
+I had the ingredients for this discipline and never generalised it. RH1 came
+from noticing that a vaccine firing on 18 of 18 repositories was a wall rather
+than a finding; I wrote *"a check that cannot fail is not a check"* and stopped
+there. The symmetric rule is the one that was missing all night:
+
+> **A sweep that returns the same answer for everything is a broken instrument.
+> A sweep that returns a different answer for a known-good control is a
+> finding.**
+
+Applied backwards, it would have caught D14 in seconds — `attestation-freshness`
+fired on gridatlas and nowhere else, and I treated that specificity as evidence
+rather than running a control. Applied forwards, every estate-wide claim in
+`01-drift.md` should carry one: a repository known to be clean on that rule, and
+a statement that the rule stayed quiet there.
