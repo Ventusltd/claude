@@ -1,5 +1,5 @@
 {
-  "generation": "202609031039",
+  "generation": "202609031839",
   "sessions": [
     {
       "session_id": "0e09c52a-c13e-42a7-b3dc-71349e17045c",
@@ -28,14 +28,14 @@
     {
       "session_id": "5b94bee7-197b-4cfd-944b-d4cf3aa02d18",
       "project": "C--Users-vikra",
-      "source_lines": 5159,
-      "distinct_source_lines": 5159,
-      "rows": 5159,
+      "source_lines": 6491,
+      "distinct_source_lines": 6491,
+      "rows": 6493,
       "parquet_file": "logs/parquet/session_5b94bee7.parquet",
-      "parquet_bytes": 781239,
-      "parquet_sha256": "7049f4a5a7eebd5dca3832deb81d450e58e8e352e94121a209a1495a7fb76693",
+      "parquet_bytes": 1674869,
+      "parquet_sha256": "8ff461924525d0d5efdd74395ad6a29cdf2cacc674c9c6a3ece8d821af70846d",
       "first_ts": "2026-09-02T18:29:52.377000+00:00",
-      "last_ts": "2026-09-03T10:17:34.937000+00:00"
+      "last_ts": "2026-09-03T18:34:11.711000+00:00"
     },
     {
       "session_id": "9556e57d-6c2a-4ea2-8037-fe2dee67f7ed",

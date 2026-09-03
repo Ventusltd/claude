@@ -5,16 +5,31 @@ read and useless to query: to answer "which Bash calls errored" you scan seven m
 of prose. This directory holds the same transcripts as **Parquet**, one row per transcript
 entry, so a question is a `WHERE` clause instead of a scroll.
 
-**It now holds every Claude Code session on this machine, not one.** Eleven transcripts
-across three project directories, 2026-08-30 to 2026-09-03, 30,684 rows. The point is
+> **Current state — 2026-09-03 18:39 UTC.** Eleven sessions, **32,018 rows** from 32,006
+> source lines. The figure changed because `session_5b94bee7` — the session that built this
+> store, and which kept running afterwards — was reconverted from 5,159 to **6,491** source
+> lines. Every count in the prose below that says *30,684* was measured at the earlier
+> 10:46 UTC state and is left as it was written: those passages are calibration evidence
+> for the sensitivity rule, and silently restating their denominators would break the link
+> between a claim and the measurement that supports it. The live figure is always
+> `logs/reports/memory-manifest.json`, which `verify_memory_store.py` regenerates.
+>
+> **If you are a fresh session, read `logs/202609031845-SESSION-INDEX.md` before any query
+> here.** It is the chronological index of what session `5b94bee7` shipped, found and left
+> open, with an evidence pointer for each. This README tells you how to ask; that file
+> tells you what to ask about.
+
+**It holds every Claude Code session on this machine, not one.** Eleven transcripts
+across three project directories, 2026-08-30 to 2026-09-03. The point is
 stated in the architect's words — *"retain long term memories for fault finding and
 growing"*: a fresh session with no memory of any of this can query what earlier sessions
 measured, broke, corrected and decided, instead of starting blind. Start at
 [Bootstrapping a fresh session](#bootstrapping-a-fresh-session).
 
-The Markdown rendering is not replaced by this and is not deleted by this. The two sit
-side by side; sizes for both are recorded below so the choice of what to keep is a human
-decision, not a side effect of this work.
+The Markdown rendering is not replaced by this. The two sit side by side and serve
+different questions — you query the Parquet to find *which* entry, then read the Markdown to
+see *what it said*. Sizes for both are recorded below. What is not kept side by side is two
+renderings of the *same* session at different coverage; see [Files](#files).
 
 ## Conventions adopted from `Ventusltd/data-gb-electricity`
 
@@ -52,8 +67,19 @@ logs/
   reports/session_<short>_audit.json     counts, bytes, reconciliation, flagged rows
   tools/jsonl_to_parquet.py              the converter
   tools/classify_sensitivity.py          the sensitivity rule, with its self-test
-  202609030940-full-session-5b94bee7.md  Markdown rendering (separate work, left alone)
+  tools/verify_memory_store.py           reconciles every parquet against its audit
+  tools/render_session_markdown.py       the Markdown renderer
+  202609031845-SESSION-INDEX.md          what session 5b94bee7 did — READ THIS FIRST
+  202609031845-full-session-5b94bee7.md  Markdown rendering, all 6,491 entries
 ```
+
+**`logs/202609030940-full-session-5b94bee7.md` was removed, not kept alongside.** It
+rendered the same session at 5,051 entries, cut at 09:40 UTC. Keeping both would have left
+two files disagreeing about how much of one session they cover, and nothing on the face of
+either saying which was complete — the 09:40 file's own header claims "nothing else is
+omitted", which stopped being true the moment the session continued. The 18:45 rendering is
+a strict superset: same source, same one-entry-per-line grain, 1,440 more entries. The old
+file is recoverable from git history at any time.
 
 The eleven sessions, in first-timestamp order:
 
@@ -69,12 +95,22 @@ The eleven sessions, in first-timestamp order:
 | `session_9556e57d.parquet` | `C--Users-vikra` | 2,360 | 2026-09-01 | 2026-09-02 |
 | `session_4114eb37.parquet` | `C--Windows-system32` | 320 | 2026-09-02 | 2026-09-02 |
 | `session_bbe4731a.parquet` | `C--Users-vikra` | 2,132 | 2026-09-02 | 2026-09-03 |
-| `session_5b94bee7.parquet` | `C--Users-vikra` | 5,159 | 2026-09-02 | 2026-09-03 |
+| `session_5b94bee7.parquet` | `C--Users-vikra` | 6,493 | 2026-09-02 | 2026-09-03 |
 
 `session_5b94bee7` is the session that built this store, so its transcript was still being
-written while it was converted. It was **snapshotted first** and the snapshot converted:
-5,159 JSONL lines, last row `2026-09-03 10:17:34.937+00`. Re-running the converter against
-the live file later will pick up the rest; nothing else in the store moves.
+written while it was converted. It is **snapshotted first** and the snapshot converted, and
+the snapshot is what every number here describes. It has been converted twice:
+
+| conversion | JSONL lines | rows | last row |
+|---|---:|---:|---|
+| 2026-09-03 10:17 UTC | 5,159 | 5,159 | `2026-09-03 10:17:34.937+00` |
+| 2026-09-03 18:34 UTC | 6,491 | 6,493 | `2026-09-03 18:34:11.711+00` |
+
+The second conversion supersedes the first in place — same filename, same audit record — so
+there is one claim about this session, not two. Rows exceed lines by 2 for the first time
+here: two JSONL lines each carry an image block beside their text, which is exactly what
+`block_no` is for. Re-running the converter against the live file later picks up whatever
+the session added after 18:34; nothing else in the store moves.
 
 `.gitattributes` at the repo root already carries `*.parquet binary`. That line is
 load-bearing: this repo sets `* text=auto eol=lf`, and line-ending translation inside a
@@ -82,15 +118,17 @@ Parquet file corrupts it silently and the corruption survives the commit.
 
 ## Sizes, measured
 
-Measured 2026-09-03 across all eleven transcripts.
+Measured 2026-09-03 18:39 UTC across all eleven transcripts. The JSONL figure reads the
+live files, one of which (`5b94bee7`) is this session's own and still growing; the Parquet
+beside it was built from a 15,405,496-byte snapshot of it taken at 18:34 UTC.
 
 | artefact | bytes | vs Parquet |
 |---|---:|---|
-| all 11 source JSONL transcripts (not committed) | 85,381,636 | **10.7x** larger |
-| Markdown rendering of *one* session, `202609030940-full-session-5b94bee7.md` | 7,131,299 | 9.1x larger than that one session's Parquet |
-| **`logs/parquet/*.parquet`, 11 files** | **7,954,308** | — |
+| all 11 source JSONL transcripts (not committed) | 90,138,232 | **10.2x** larger |
+| Markdown rendering of *one* session, `202609031845-full-session-5b94bee7.md` | 6,085,393 | 3.6x larger than that one session's Parquet (1,674,869) |
+| **`logs/parquet/*.parquet`, 11 files** | **8,847,938** | — |
 
-The whole cross-session memory — four days, eleven sessions, 30,684 rows — costs under
+The whole cross-session memory — four days, eleven sessions, 32,018 rows — costs under
 8 MB, roughly what the Markdown rendering of a *single* session costs.
 
 The ratio is not uniform, and the spread is the honest part of the number:
@@ -503,6 +541,13 @@ what was run. Add `AND content_kind <> 'image'` to any broad `ILIKE` — ten bas
 **This is the section that makes the store worth keeping.** A new session has no memory of
 any of the eleven. These six queries hand it the accumulated history in a few seconds.
 Every one was run against this store and the output below is real.
+
+The outputs below were captured at the 30,684-row state of 2026-09-03 10:46 UTC and have
+not been re-run, so `5b94bee7`'s row counts read 5,159 rather than 6,493. The queries
+themselves are unchanged and re-running them is the point; the numbers are illustrative of
+the shape of an answer, not a current claim about the store. For a current claim read
+`logs/reports/memory-manifest.json`. **Before running any of these, read
+`logs/202609031845-SESSION-INDEX.md`** — it names the things worth querying for.
 
 Define the view first (see [The `memory` view](#the-memory-view--start-here)).
 
