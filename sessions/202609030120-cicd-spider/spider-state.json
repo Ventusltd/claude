@@ -18,7 +18,7 @@
   "8. Two denominators, always stated: pass.py measures 18 local clones; census.sh measures 32 of 33 (pandapower is an uncloned upstream fork)."
  ],
  "org": "Ventusltd",
- "repos_in_org": 33,
+ "repos_in_org": 35,
  "repos_cloned_locally": 18,
  "repos_not_cloned": [
   "Mahabharata",
@@ -488,16 +488,18 @@
    "disk-is-not-what-ships": "FALSE POSITIVE on 18 of 18 repos; see 02-runner-health.md. Do not count it."
   },
   "estate": {
-   "repos": 32,
-   "of": 33,
-   "unscanned": [
+   "owned": 35,
+   "forks_excluded": [
     "pandapower"
    ],
-   "immune_repos": 14,
-   "findings_total": 513,
-   "measured_at": "2026-09-03T04:14Z",
-   "ruler_commit": "4666369",
-   "active_vaccines": 25
+   "measured": 34,
+   "immune_repos": 16,
+   "private_included": [
+    "cable_selection",
+    "crm"
+   ],
+   "measured_at": "2026-09-03T05:19Z",
+   "note": "the earlier 32 was the reach of an unauthenticated endpoint, not a rule (RH32)"
   },
   "measured_with_commit": "93e568ea7b1df4e328f395746976dcdc5c326922",
   "ruler": {
@@ -1188,5 +1190,5 @@
  ],
  "f5_status": "no remaining instances. 5 mutable shipped runtime edges at 01:05Z, 2 after gridatlas v9.83, 1 after RH17. The remaining one is the publication-truth gate following the live pointer, which should stay mutable.",
  "runner_health_entries": 21,
- "last_updated": "2026-09-03T05:14:29Z"
+ "last_updated": "2026-09-03T05:18:44Z"
 }

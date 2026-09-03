@@ -1239,3 +1239,33 @@ every lane tonight.
 is still the most widely failing rule at 14 of 32. What moves is the cost of
 fixing it. It is not a code change or a migration; it is one line in whatever
 produces a commit, and the evidence that it works is 51 to 0.
+
+---
+
+## D3 — denominator corrected, 2026-09-03T05:19Z. **34 of 35, 16 immune.**
+The "32" in every earlier entry was never a rule — it was the reach of an
+unauthenticated endpoint (RH32).
+
+    35   owned repositories (authenticated, affiliation=owner)
+    -1   pandapower, a fork of an upstream project
+    ----
+    34   measured        16 immune, 18 not
+
+The two repositories missing from every earlier count are **`cable_selection`**
+and **`crm`**, both **private**, and `users/Ventusltd/repos` — which I
+enumerated the estate from at 01:19Z — returns only public repositories. Both
+have now been cloned and measured: 1 and 4 commits, **0 workflows each, both
+immune**.
+
+**No rule count changes**, because both are immune. That is luck. Had either
+carried workflows, every figure in this session would have been wrong.
+
+The census tables above remain correct as counts of failures; only the
+denominator moves, 32 → 34, and the immune count 14 → 16. For the handover the
+honest single line is:
+
+> **35 owned; 1 fork excluded; 34 measured, 16 immune.**
+
+`census.sh` now clones and measures all 16 cold repositories and prints
+`cold clones present: N of 16` before measuring, so the denominator is asserted
+rather than inferred.
