@@ -1511,3 +1511,33 @@ That is the same shape as the whole night at one more level of remove: I have
 been checking the artefact, then the workspace, then the instrument — and this
 was the instrument's own output, which I had checked the contents of and never
 the encoding.
+
+---
+
+## RH36 — 2026-09-03T09:19Z — my CI table counted one red workflow as four
+
+`ci()` deduplicated runs with `latest.setdefault(x['name'], x)`. GitHub's
+`name` is the **run-name**, and `data-gridatlas` sets
+`run-name: Hourly watchdog ${{ github.sha }}`, so every commit produces a
+distinct key. Stale runs at superseded heads were therefore counted as separate
+failing workflows.
+
+    my table, keyed by run-name      data-gridatlas: 4 workflows not green
+    keyed by workflow file, at HEAD  data-gridatlas: 1 workflow not green
+
+Keyed correctly at `8bf88da`: `watchdog-router` **success**,
+`current-integrity` **success**, `contract-guard` success, `pages-build`
+success — and `202608301931-layer-fidelity.yml` **failure**. Three of the four
+"reds" were runs at `4dd5c2d` and `5484218`, both superseded, both since fixed.
+
+Fixed to key on `x['path']`, the workflow file, which is stable across runs.
+
+**Same family as RH20**, which taught me to filter CI to the default branch: a
+run is identified by *which workflow* and *which commit*, and I keyed on
+neither. It also flattered the estate's recovery in the wrong direction — I
+would have reported data-gridatlas as four-red when D9's fix had already turned
+its watchdog green on the runner.
+
+**And it found something real:** `layer-fidelity` failed at 08:29:37Z today, at
+the current head, during the hours I was stopped. New red, first seen 09:19Z,
+unowned.

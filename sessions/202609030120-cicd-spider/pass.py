@@ -329,7 +329,7 @@ def ci(repo):
     latest = {}
     for x in d.get('workflow_runs',[]):
         if x.get('head_branch') != 'main': continue
-        latest.setdefault(x['name'], x)
+        latest.setdefault(x.get('path') or x['name'], x)
     return repo, {n:{'conclusion':x['conclusion'],'head_sha':x['head_sha'][:7],
                      'at':x['updated_at']} for n,x in latest.items()}, None
 # RH15. The 60/hour unauthenticated budget is SHARED - by four agents on this
