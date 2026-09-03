@@ -229,8 +229,7 @@ if not QUICK:
     crlf = {}
     for d in cv:
         out = git(d, 'ls-files', '--eol') or ''
-        crlf[d] = sum(1 for l in out.split('
-') if 'w/crlf' in l or 'w/mixed' in l)
+        crlf[d] = sum(1 for l in out.splitlines() if 'w/crlf' in l or 'w/mixed' in l)
     st['cvaa']['crlf_drift'] = crlf
     now_fail = {d: sorted(r['vaccine'] for r in o['results'] if r['state'] != 'immune'
                           and not (crlf.get(d) and r['vaccine'] in BYTE_SENSITIVE))

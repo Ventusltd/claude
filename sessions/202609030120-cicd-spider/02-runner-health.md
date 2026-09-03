@@ -735,3 +735,31 @@ This is the fourth correction tonight in the same family — RH14 (the pointer
 mismatch), RH17 (the deleted string), RH8 and RH9 (text about code) — and they
 converge on one rule I should have started from: **measure the artefact, never
 the workspace.**
+
+### RH19 addendum, 2026-09-03T03:14Z — I pushed a driver that does not parse
+
+The RH19 patch was applied by a shell heredoc containing `out.split('\n')`. The
+heredoc consumed the escape, wrote a literal newline inside the string, and my
+patch script wrote the file **before** validating it. `pass.py` was committed and
+pushed in a state where `python -c "import ast; ast.parse(...)"` fails, so the
+next pass would not have run at all.
+
+This is the third time tonight a shell heredoc has silently eaten a backslash
+escape in a Python patch — it also broke `crosslink.py` and an earlier
+`pass.py` edit. Twice I caught it because the script refused to run; this time
+the write came first and the check came second, so it reached the remote.
+
+**Two changes, both mechanical:**
+
+1. Patches to the driver are applied with a file edit, never a shell heredoc.
+   The failure mode is not "I mistyped an escape" — it is that a heredoc is a
+   second, invisible layer of escaping between what I write and what lands.
+2. Validate, then write. My script did `write()` then `ast.parse()`, which is the
+   wrong order and is exactly the same shape as RH16's addendum, where the
+   account of a fix was committed by an `&&` chain that the fix itself had not
+   passed through. **A verification that runs after the irreversible step is not
+   a verification.**
+
+Both times the artefact reached the remote in a state I had already decided was
+unacceptable, because the ordering let it. That is a more useful lesson than
+either individual bug.
