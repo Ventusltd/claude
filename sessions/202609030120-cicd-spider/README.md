@@ -18,9 +18,12 @@ Also here:
 - **`pass.py`** — the driver. One pass, prints drift only. Every correction in
   `02-runner-health.md` that held is a line in this file; the two that did not
   hold were the two written only as prose.
-- **`crosslink.json`** — the estate dependency graph in
-  `federation_contents_cartridge.v1` shape, ready to adopt. Only
-  `evidenceTier: "shipped"` is a dependency.
+- **`crosslink-shipped.json`** — **the one to adopt.** The estate dependency
+  graph, `federation_contents_cartridge.v1` shape, 335 edges, every one live
+  code citing a file and a line.
+- `crosslink.json` — the full scan behind it, 6,854 edges and 2.2 MB. Only
+  `evidenceTier: "shipped"` is a dependency; the other seven tiers are text
+  *about* code. Kept for audit, not for use (RH22).
 - **`00-LOG.md`** — one block per pass, drift only.
 - `.cvaa-clean/` — gitignored working clone of published cvaa (RH11).
 
