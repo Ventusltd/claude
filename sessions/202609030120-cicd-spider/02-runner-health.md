@@ -1356,3 +1356,10 @@ ceiling, the log reader, both denominators, and the guard list.
 **a contract you have never executed is a description, not a contract.** I
 verified other people's fixes all night by running them in clean clones, and
 verified my own resume path by reading it.
+
+**Tested, not asserted.** Removed two cold clones and ran the self-heal block:
+
+    before: 14 of 14   ->   removed 2 -> 12   ->   cold clones present: 14 of 14
+
+Which is the point of the entry: the fix is verified the same way I verified
+every other agent's fix tonight.
