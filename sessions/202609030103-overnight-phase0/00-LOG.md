@@ -290,3 +290,84 @@ ledger line moves to stderr under that flag so the stream can be diffed
 directly, and an unrecognised flag exits 1 rather than being ignored. The same
 experiment now leaves `DELIBERATELY WRONG` on disk and the comparison
 disagrees.
+
+## 9. The gate I was running was not the gate — five red CI runs
+
+The coordinator stopped me. `202608312212 GridAtlas cartridge proof` had been
+**red since v9.79** while my local run was green every time.
+
+I caused it, at v9.79, and the cause is the shape this repository keeps
+finding: the checks I added resolve the published product by probing for a
+neighbouring `../data-grid-gb` checkout. My machine has that neighbour. The
+runner checks out `gridatlas` and `grid-distance-maths` and nothing else.
+
+Confirmed from the Actions API rather than reasoned about — v9.79
+(`ac810d6`), run `33702626898`, job `proof`:
+
+```
+    success   The composition matches what is declared and hashed
+    FAIL      The composed cartridge passes its own proof
+    skipped   The scope ledger and workflow budget still hold
+    skipped   STATE.md was regenerated before it was committed
+    skipped   No CRLF survives in a tracked text file
+```
+
+Reproduced locally in the runner's shape — a fresh `--shared` clone at
+`C:/gaw`, `grid-distance-maths` beside it, no `data-grid-gb`:
+
+```
+  [FAIL] the published node/branch product is on disk for a real-data check
+  59/60 checks passed
+```
+
+**The worse defect was underneath it.** The eight real-data checks were
+guarded by `if (topologyModule && PRODUCT_FILE)`. With the product absent they
+did not fail — they did not run. *"Cowley reports FIVE transformers, not ten"*
+had never executed on a runner in its life. And because `run-current` exits at
+the first failing proof, the 667-check sandbox proof behind it never ran there
+either. A missing input that makes a proof **quieter** is worse than one that
+makes it red, because a red is visible. That is the same lesson as the
+`--stdout` finding two hours earlier, in a different file, and I walked into
+it myself in between.
+
+**What I nearly did wrong.** My first fix was to add a `data-grid-gb` checkout
+to the workflow. The coordinator refused it, correctly: an `actions/checkout`
+at a branch is a mutable edge, and I had spent the previous generation
+removing the last of those. I reverted it. The amended instruction allowed a
+*pinned* checkout, but by then the better answer was already working — read
+the product **through the pin the composition declares**, which needs no
+workflow change at all and exercises the pin end-to-end.
+
+A neighbouring checkout is used only when its bytes hash to the pinned digest
+and match its recorded length; otherwise the pinned URL is fetched, which is
+what the runner does and what the Atlas does. Neither available means every
+dependent check fails with the reason.
+
+## 10. Three more defects fell out of fixing that one
+
+- **`bytes_seen` counted characters.** My own module reported `text.length`,
+  which is UTF-16 code units. The node/branch product is **10,069,964
+  characters and 10,069,966 bytes**, so a completely correct file disagreed
+  with its own recorded length by two.
+- **A short response and a wrong one now read differently.** Truncation is
+  what a length names immediately; a digest only says "different".
+- **The proof's fixture had drifted from the product it was copied from.** The
+  hand-written stub claimed Cottam's winter range as **2,780–3,326 MVA**; the
+  product publishes **2,009–3,326**. That check had been passing against a
+  minimum nobody serves. The loader now runs against the pinned product itself
+  — 886 points, 502 located — so the summariser is measured against what ships.
+
+That last one is the argument for the whole change, made by accident: a
+fixture is a shape somebody wrote, and it rots quietly.
+
+## 11. Standing corrections to how I was working
+
+- **A local proof run is not a gate.** From v9.84 the gate is the CI
+  conclusion for the pushed commit, polled from
+  `/actions/runs?head_sha=<sha>`. v9.84 is run **33705373009**, `success`,
+  with every step green including the four that had been skipped behind the
+  failure since v9.79.
+- **Every generation must restamp `sld-sandbox`.** Its proof derives the
+  generation from its own filename and asserts the composition manifest
+  matches. A cut that restamps only `substation-intelligence` fails three
+  manifest-identity checks. Found by doing it.

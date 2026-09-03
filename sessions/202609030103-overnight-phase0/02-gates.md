@@ -296,3 +296,94 @@ $ node tools/scope/loop.mjs state --bogus
 ```
 
 `node tools/proofs/run-current.mjs` exit `0`, unaffected.
+
+---
+
+## Generation 202609030151 — v9.84 — the proof reads through the pin
+
+**The gate changed here.** Up to v9.83 I recorded the local `run-current`
+result. It was green five times while CI was red five times. From v9.84 the
+gate is the CI conclusion for the pushed commit.
+
+**CI evidence for the failure**, from the Actions API keyed by commit:
+
+```
+v9.79  ac810d6  run 33702626898  202608312212 GridAtlas cartridge proof  failure
+       job proof:
+         success   The composition matches what is declared and hashed
+         FAIL      The composed cartridge passes its own proof
+         skipped   The scope ledger and workflow budget still hold
+         skipped   STATE.md was regenerated before it was committed
+         skipped   No CRLF survives in a tracked text file
+         skipped   Renormalising changes nothing, so .gitattributes is being obeyed
+```
+
+**Reproduced in the runner's shape** — fresh `--shared` clone, no
+`data-grid-gb` neighbour, node 24:
+
+```
+  [FAIL] the published node/branch product is on disk for a real-data check
+  59/60 checks passed
+```
+
+**After the fix, same shape, both products fetched through the pin:**
+
+```
+  [PASS] the connection-points product this proof measures is the product the pin names
+  [PASS] the product this proof measures is the product the pin names
+         read 10069966 bytes from the pinned URL
+73/73 checks passed
+real    0m0.738s
+```
+
+**Local, with the neighbour present** — the fast path, digest-verified:
+
+```
+  [PASS] the product this proof measures is the product the pin names
+         read 10069966 bytes from the checkout beside this repository
+73/73 checks passed
+```
+
+**Local full harness after the cut**: substation-intelligence `73/73`,
+sld-sandbox `667/667`, `verify-compose` PASS, `scope-ledger=PASS`.
+
+One cut was aborted before pushing: restamping only `substation-intelligence`
+failed three sld-sandbox manifest-identity checks (`it spans the whole reviewed
+session`, `the manifest states this generation everywhere it states one`, `the
+manifest chains by pointer, not by sort order`), because that proof derives the
+generation from its own filename. Re-cut restamping both.
+
+**CI — the gate**: commit `5a59e711bfdf3b18a04736ba55377a88d442e10d`,
+run **`33705373009`**, conclusion **`success`**, every step green:
+
+```
+JOB proof success
+    success   Checkout the pushed state
+    success   Checkout the canonical geodesy beside it
+    success   Node
+    success   The composition matches what is declared and hashed
+    success   The composed cartridge passes its own proof
+    success   The scope ledger and workflow budget still hold
+    success   STATE.md was regenerated before it was committed
+    success   No CRLF survives in a tracked text file
+    success   Renormalising changes nothing, so .gitattributes is being obeyed
+```
+
+The four steps after the proof had been skipped on every push since v9.79.
+They have now run.
+
+**Live**: generation `202609030151`, composition `202609030151-gridatlas-v9.84`,
+all four cartridges MATCH. sld-sandbox
+`2a0d558b74a39583026bf97d5c364ae7db5d47778b76bb950013cfb15398130c`,
+substation-intelligence
+`483f5f3ca7cf7a67c9526947f2f14723e091b64c960ea1fe3759d5db512f2c53`.
+
+Commit `5a59e71` over `4b1641e`.
+
+### CI status of the five generations before it
+
+`202608312212 GridAtlas cartridge proof` was `failure` on `ac810d6` (v9.79),
+`e9491b6` (v9.80), `f1f430d` (v9.81), `52ebabc` (v9.82) and `4a17fa3` (v9.83).
+None is amended — they are shipped, and each is superseded by the one after
+it. v9.84 is the successor that fixes the cause, and the CI run for it is
+green.
