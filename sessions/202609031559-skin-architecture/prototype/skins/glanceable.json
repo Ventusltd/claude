@@ -1,0 +1,51 @@
+{
+  "id": "glanceable",
+  "label": "Glanceable",
+  "author": "the one-answer case: watch, car head unit, peek detent",
+  "for": ["watch", "car head unit", "phone peek", "hub at arm's length"],
+
+  "detect": {
+    "maxWidth": 420,
+    "pointer": "coarse",
+    "maxDeviceMemory": 2,
+    "saveData": true,
+    "baseline": 0
+  },
+
+  "surface": {
+    "fullBleed": true,
+    "chromePosition": "none",
+    "panelWidth": 320
+  },
+
+  "type": { "base": 15, "scale": 1.0, "hero": 26, "lineHeight": 1.3 },
+
+  "palette": {
+    "ink": "#e6fffa", "dim": "#8fb5ae", "hero": "#7ff3d8",
+    "ground": "#000000", "panel": "#000000", "rule": "#12312a",
+    "warn": "#f0c674", "scenario": "#ff8fbf"
+  },
+
+  "autoCollapse": { "enabled": true, "idle_ms": 4000 },
+
+  "layers": { "mode": "none" },
+
+  "views": [
+    {
+      "id": "answer",
+      "title": "The answer",
+      "detent": "peek",
+      "blocks": [
+        { "field": "qualifier.scenario",    "style": "badge" },
+        { "field": "subject.name",          "style": "title" },
+        { "field": "state.notice",          "style": "notice" },
+        { "field": "measurement.target",    "style": "line" },
+        { "field": "measurement.headline",  "style": "hero" },
+        { "field": "measurement.kv",        "style": "stat" },
+        { "field": "qualifier.straight",    "style": "qualifier" },
+        { "field": "qualifier.sample",      "style": "qualifier" },
+        { "field": "measurement.range_note","style": "note" }
+      ]
+    }
+  ]
+}

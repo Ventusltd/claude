@@ -1,0 +1,52 @@
+{
+  "id": "tenfoot",
+  "label": "Ten-foot (TV)",
+  "author": "10-foot reading distance, D-pad focus order, no hover, no pointer",
+  "for": ["smart TV", "set-top box", "meeting-room display", "control-room wall"],
+
+  "detect": {
+    "uaMatch": "SmartTV|SMART-TV|GoogleTV|AndroidTV|HbbTV|Tizen|Web0S|BRAVIA|AFTM|AFTB",
+    "minScreenWidth": 1920,
+    "hover": false,
+    "pointer": "none",
+    "baseline": 0
+  },
+
+  "surface": {
+    "fullBleed": true,
+    "chromePosition": "bottom-band",
+    "panelWidth": 900,
+    "safeAreaPct": 5
+  },
+
+  "type": { "base": 24, "scale": 1.0, "hero": 56, "lineHeight": 1.35 },
+
+  "palette": {
+    "ink": "#ffffff", "dim": "#b8d6d0", "hero": "#7ff3d8",
+    "ground": "#000000", "panel": "rgba(0,0,0,0.82)", "rule": "#2b5850",
+    "warn": "#ffd479", "scenario": "#ff8fbf"
+  },
+
+  "autoCollapse": { "enabled": true, "idle_ms": 8000 },
+
+  "layers": { "mode": "dpad", "pageSize": 8, "startOpen": false },
+
+  "views": [
+    {
+      "id": "wall",
+      "title": "Ten-foot",
+      "detent": "half",
+      "blocks": [
+        { "field": "qualifier.scenario",    "style": "badge" },
+        { "field": "subject.name",          "style": "title" },
+        { "field": "subject.capacity",      "style": "stat" },
+        { "field": "state.notice",          "style": "notice" },
+        { "field": "measurement.label",     "style": "group" },
+        { "field": "measurement.headline",  "style": "hero" },
+        { "field": "qualifier.straight",    "style": "qualifier" },
+        { "field": "qualifier.sample",      "style": "qualifier" },
+        { "field": "measurement.range_note","style": "note" }
+      ]
+    }
+  ]
+}

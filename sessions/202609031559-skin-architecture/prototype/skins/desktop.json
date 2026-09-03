@@ -1,0 +1,60 @@
+{
+  "id": "desktop",
+  "label": "Desktop",
+  "author": "GridAtlas, the unregressed baseline",
+  "for": ["laptop", "workstation", "large tablet in landscape"],
+
+  "detect": {
+    "minWidth": 1024,
+    "pointer": "fine",
+    "hover": true,
+    "mobile": false,
+    "baseline": 5
+  },
+
+  "surface": {
+    "fullBleed": true,
+    "chromePosition": "right-panel",
+    "panelWidth": 380
+  },
+
+  "type": { "base": 13, "scale": 1.0, "hero": 20, "lineHeight": 1.45 },
+
+  "palette": {
+    "ink": "#cfe9e4", "dim": "#7f9a95", "hero": "#7ff3d8",
+    "ground": "#0a1512", "panel": "#0e1c19", "rule": "#1d3a34",
+    "warn": "#f0c674", "scenario": "#ff8fbf"
+  },
+
+  "autoCollapse": { "enabled": true, "idle_ms": 6000 },
+
+  "layers": { "mode": "facets", "pageSize": 40, "startOpen": false },
+
+  "views": [
+    {
+      "id": "panel",
+      "title": "Project",
+      "detent": "full",
+      "blocks": [
+        { "field": "subject.name",           "style": "title" },
+        { "field": "qualifier.scenario",     "style": "badge" },
+        { "field": "subject.technology",     "style": "line" },
+        { "field": "subject.capacity",       "style": "stat" },
+        { "field": "subject.address",        "style": "dim" },
+        { "field": "subject.reference",      "style": "dim" },
+
+        { "field": "state.notice",           "style": "notice" },
+
+        { "field": "measurement.label",      "style": "group" },
+        { "field": "measurement.headline",   "style": "hero" },
+        { "field": "qualifier.straight",     "style": "qualifier" },
+        { "field": "measurement.kv",         "style": "line" },
+        { "field": "measurement.range_note", "style": "note" },
+        { "field": "measurement.corridor",   "style": "line" },
+        { "field": "qualifier.corridor",     "style": "note" },
+        { "field": "qualifier.sample",       "style": "qualifier" },
+        { "field": "qualifier.sample_full",  "style": "note" }
+      ]
+    }
+  ]
+}
