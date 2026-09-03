@@ -639,3 +639,45 @@ whole job is to follow the live pointer. Pinning it would defeat it.
 
 **F5 has no remaining instances.** Every cross-repository runtime fetch in this
 estate that ought to be pinned now is. That was five at 01:05Z.
+
+---
+
+## RH18 — 2026-09-03T03:00Z — my fix for RH16 shipped a wrong denominator, the
+## exact error I had called the dangerous one
+
+Pass 6 reported seven vaccines improving at once:
+
+    monotonic-utc-generations  14 -> 11 of 15
+    pinned-actions             10 ->  8 of 15
+    chaining-token             10 ->  9 of 15
+    least-permissions           6 ->  5 of 15
+    ...
+
+Nothing improved. The denominator moved from 18 to 15, because RH16's new guard
+correctly declined to measure `claude`, `cvaa` and `pipelinenews` — all three
+mid-write. Every "improvement" is a repository that was **not looked at**.
+
+I wrote in RH11 that *"a wrong denominator is worse than a wrong finding — a
+wrong finding gets checked, a wrong denominator gets quoted"*, and then shipped
+one two hours later as a side effect of fixing something else. The guard was
+right; the reporting built on top of it was not, because incidence was still a
+raw count over "however many repositories happened to be measurable".
+
+**Fixed by changing the unit of comparison, not by patching the arithmetic.**
+The driver now stores, per repository, the set of vaccines it is not immune to,
+and diffs **per repository over the repositories measured in both passes**:
+
+    [VACCINE-RED]   gridatlas now fails attestation-freshness
+    [VACCINE-GREEN] cvaa no longer fails monotonic-utc-generations
+
+A repository absent from either pass simply does not appear. Counts are still
+kept in `spider-state.json` alongside `incidence_denominator`, so a total can
+never again be read without the number it is out of.
+
+This is the third time tonight a correction has created its own defect —
+RH13 (the ruler guard that would have raised a false ruler alarm, caught before
+it fired), RH16's addendum (the commit that described a guard it did not
+contain), and now this. The pattern is specific enough to name: **a guard
+changes what gets measured, and every summary computed downstream of it silently
+changes meaning.** Fixing a measurement is not finished until every number
+derived from it has been re-derived.

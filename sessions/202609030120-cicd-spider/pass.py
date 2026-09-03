@@ -211,18 +211,34 @@ if not QUICK:
     for d,obj in cv.items():
         if d in prev and prev[d]['findings'] != obj['findings']:
             D('CVAA', f"{d} findings {prev[d]['findings']} -> {obj['findings']}")
-    inc = collections.Counter(r['vaccine'] for v in cv.values()
-                              for r in v['results'] if r['state']!='immune')
-    old_inc = st['cvaa']['incidence']
-    for v in set(inc)|set(old_inc):
-        if inc.get(v,0) != old_inc.get(v,0):
-            D('VACCINE', f"{v} incidence {old_inc.get(v,0)} -> {inc.get(v,0)} of {len(cv)}")
+    # RH18. Comparing incidence COUNTS across passes is only valid when the
+    # denominator is the same, and RH16 made it vary: three repos mid-write meant
+    # "14 -> 11 of 15" and every one of those was a repo that was not looked at.
+    # A wrong denominator is worse than a wrong finding (RH11), and I shipped one
+    # as a side effect of fixing something else. So: diff PER REPOSITORY, over
+    # the repos measured in BOTH passes, and name the repo rather than a count.
+    now_fail = {d: sorted(r['vaccine'] for r in o['results'] if r['state'] != 'immune')
+                for d, o in cv.items()}
+    was_fail = st['cvaa'].get('not_immune') or {}
+    comparable = sorted(set(now_fail) & set(was_fail))
+    for d in comparable:
+        gained = sorted(set(now_fail[d]) - set(was_fail[d]))
+        lost   = sorted(set(was_fail[d]) - set(now_fail[d]))
+        for v in gained: D('VACCINE-RED',   f'{d} now fails {v}')
+        for v in lost:   D('VACCINE-GREEN', f'{d} no longer fails {v}')
+    st['cvaa']['not_immune'] = dict(was_fail, **now_fail)
+    st['cvaa']['incidence'] = dict(collections.Counter(
+        v for d in st['cvaa']['not_immune'] for v in st['cvaa']['not_immune'][d]))
+    st['cvaa']['incidence_denominator'] = len(st['cvaa']['not_immune'])
+    if len(comparable) != len(now_fail):
+        D('VACCINE-BASE', f'{len(now_fail)-len(comparable)} repo(s) had no prior vaccine '
+                          'record; baselined silently, not reported as change')
     # carry forward the last good figures for anything not measured this pass,
     # so an unmeasured repository can never read as a change next pass either
     carried = {k:v for k,v in prev.items() if k not in cv}
     st['cvaa']['per_repo'] = dict(carried,
         **{k:{"status":v['status'],"findings":v['findings']} for k,v in cv.items()})
-    st['cvaa']['incidence'] = dict(inc)
+
     for d,obj in cv.items():
         wf = obj['context']['workflows']
         if st['heads'][d].get('workflows') not in (None, wf):

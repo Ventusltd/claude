@@ -562,3 +562,35 @@ Unchanged from the original entry: the cut binds four files —
 to be byte-identical *and* to hash to `contracts/…-automation.json`
 `baseline.pointer_sha256`. Both pointers and the baseline move together, or the
 watchdog fails on the pointer check instead of the probe.
+
+---
+
+## D9 — CLOSED 2026-09-03T03:00Z
+data-gridatlas `8bf88da`, "the consumer probe reads the release directory that
+is served" — 29 lines in `atman/202608291507-current-integrity.py` and 2 in the
+automation contract. Verified in a clean clone at that HEAD, every step as CI
+runs it:
+
+    resolve              rc=0
+    probe data-pointer   rc=0   VERIFIED_WATCHDOG_PROBE
+    probe data-release   rc=0   VERIFIED_WATCHDOG_PROBE
+    probe consumer       rc=0   VERIFIED_WATCHDOG_PROBE
+
+An hourly watchdog that had been red since 2026-09-01 is green. It was right the
+whole time.
+
+## D6 — still open: the `companies` half
+`companies` HEAD is `ac70a37`, 2026-08-31T23:53Z — untouched since before this
+was found. `state/atlas-v9-link-contract.json` still carries the retired shape:
+
+    404  https://ventusltd.github.io/gridatlas/202608300453-atlas-v9/
+
+along with `?repd_ref=13599` and the `?repd_ref={repd_ref}` template — the
+golden deep link and the URL template for every company-to-map join. The
+equivalent at the served path returns 200
+(`/gridatlas/atlas/?repd_ref=13599`).
+
+`companies` is not published on Pages, so nothing external hits the dead URL
+today; the consequence is that anything generated from that contract inherits a
+404. Its regenerating workflow is `cron: '25 4-8 30 8 *'` — four hours on
+30 August, once a year — so it cannot self-heal until 2027.
