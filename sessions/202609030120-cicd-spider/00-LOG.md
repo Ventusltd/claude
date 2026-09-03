@@ -256,3 +256,33 @@ repository over repositories measured in both passes.
 pipelinenews compiler exists to delete.
 
 **Open:** D1 D3 D5 D6 D8 D11. **Closed:** D2 D4 D7 D9 D10 D12.
+
+---
+
+## Pass 7 — 2026-09-03T03:04Z — no estate drift; three guards fired, one more built
+
+All three guards added since pass 5 did their job on this pass: `CVAA-SKIP`
+(claude, cvaa, pipelinenews mid-write), `BYTE-UNSAFE` (gridatlas and
+data-gridatlas have CRLF drift, so byte-dependent vaccines are not reportable
+from the workspace), and `VACCINE-BASE` (15 repositories baselined silently
+rather than announced as 15 changes).
+
+**One apparent red, withdrawn before reporting.** `gridatlas :: Build GridAtlas
+v9.89 grid-data verified -> failure @b67d0a0` is on
+`refs/heads/codex/202609030251-grid-data-v9-89`, a feature branch on its first
+run. `main` is at `8fb95a2` with cartridge proof, next-version builders and
+pages deployment all green. RH20: CI sampling now reads only the default branch.
+
+**Genuine estate drift this pass: none.**
+
+**New, confirmed in both a workspace and a clean clone:** D13 — gridatlas can
+move its live pointer ten times in three hours and has no workflow that can move
+it back. D14 — `atlas/state/live-set.json` still attests
+`202608292311-atlas-v9` while the pointer has reached v9.88; the vaccine's own
+Symptom section names that exact file.
+
+**Withdrawn:** `pointer-verifies` on gridatlas. "checksums do not verify" was a
+CRLF artefact — `sha256sums.txt` itself has CRLF lines, so `sha256sum` looked
+for filenames ending in a carriage return. Clean clone returns 0 (RH19).
+
+**Open:** D1 D3 D5 D6 D8 D11 D13 D14. **Closed:** D2 D4 D7 D9 D10 D12.
