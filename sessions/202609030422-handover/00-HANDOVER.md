@@ -285,9 +285,18 @@ carries a real change". Either way the reader is not served: a person on that pa
 which generation they are looking at, and the only stamp shown names a different release than
 the URL they followed.
 
-Deciding which of those two things is true is yours. If the answer is "the title should name the
-generation being served", it is a contained fix and it would make a real Pipeline News cut —
-which is also the honest way to move that 3 toward 10.
+**Traced, and it is not a separate job from §5.** I checked how these pages reach the live site.
+globalgrid2050 publishes a **byte-for-byte copy** of `releases/<id>-pipelinenews`, verified in the
+publish commit itself with `diff -rq` against the cut. So the title is not applied at publication
+and cannot be corrected there — it is baked into the release artefact by the pipelinenews builder,
+and it still reads `202608300309` because that is the generation the page template was last built
+with, by `orchestration/202608300309-build-current-atlas-link-successor.py`. The newer
+`additive-cartridge-release.v1` builder carries the page forward without re-titling it.
+
+So I withdraw "it is a contained fix". It sits inside the same release-format question as §5, and
+it should be decided with it rather than patched separately. The two symptoms — a deploy that has
+not passed since 31 August, and a page still titled with the last release that did — have one
+cause.
 
 **What I could not test.** Your original report this session was that grid compute via the MAP
 link does not work on mobile. I tried to verify it on a 390×844 and a 414×896 viewport; Chrome
@@ -390,6 +399,35 @@ yours to do. Add `GRIDBOT_PAT` to both repos, then re-run the two workflows manu
 `workflow_dispatch`, so you do not have to wait for October. Worth deciding at the same time
 whether these two want a PAT at all, or whether `secrets.GITHUB_TOKEN` would do; that depends on
 whether they push beyond their own repository, which I did not read far enough to say.
+
+### Vaccine exposure — the ranking we have been quoting all night was wrong
+
+The spider corrected its own headline at 04:41Z, and this one matters for D3 (cvaa adoption
+sequencing) because the wrong version has been in every table.
+
+It had been counting `state != 'immune'`, which merges a **failure** with a **warning**. In this
+estate a warning is the opposite of a defect — it means *known, accepted, ratcheted, expires
+2026-09-30*. Counting states properly, across 32 repos × 25 vaccines: **727 immune, 47 fail,
+26 warn.**
+
+| | old ranking | corrected |
+|---|---|---|
+| 1 | pinned-actions | **monotonic-utc-generations** — 14/32 |
+| 2 | monotonic-utc-generations | **chaining-token** — 12/32 |
+| 3 | chaining-token | **self-terminating-loops** — 7/32 |
+
+`pinned-actions` declares `level: warning` in its own file and **fails nowhere in the estate** —
+17 immune, 15 warn, 0 fail. It led every table we produced. `self-terminating-loops` appeared in
+none of them.
+
+This changes the adoption story, not just the order. The remaining exposure is not "almost
+entirely CI supply-chain pinning"; the pinning half is a warning the estate consciously baselined
+with an expiry date. The real failing surface is 47 vaccine-repo pairs whose top two are **the
+estate misreporting its own time, and pushing with the default token.**
+
+Worth noting *how* it survived: the arithmetic was right and the category was wrong, so every
+recount reproduced it. It was recounted four times and agreed with itself each time, which reads
+as confirmation. A category error is immune to repetition — only a control catches it.
 
 *(Method: `sessions/202609030422-handover/scripts/` — the sweep and the wall-walker.)*
 
