@@ -309,3 +309,63 @@ Nothing was wrong with the data; the *framing* was wrong, and framing is most of
 what a drift report is. A first observation is a baseline, not a transition.
 Fixed: when a repository has no previous CI state, the sample is recorded
 silently and the drift line is one summary count instead of 24 alarms.
+
+---
+
+## RH11 — 2026-09-03T02:28Z — every CVAA number I have reported was measured
+## against a cvaa that exists only on this machine
+
+I ran `cvaa/inoculate.mjs` from the local working copy for three passes without
+once checking whether that copy matches what is published.
+
+    local  cvaa  c18cc13   28 vaccine files
+    remote cvaa  d2893fa   26 vaccine files
+
+Two commits — `b4454c3` and `c18cc13` — have never been pushed. And
+`vaccines/202608312252-disk-is-not-what-ships.md` is **untracked**: it exists in
+no commit, local or remote, alongside a modified `vaccines.lock`.
+
+So the vaccine I reported at 01:25Z as failing 18 of 18 repositories is not in
+the repository. It has never run in CI. It would not reach any consumer that
+adopted cvaa today. I spent a finding, and the coordinator's attention, on a
+rule nobody else has.
+
+The irony is exact: I opened `02-runner-health.md` by catching a check that
+could not fail, and then ran that check 82 more times across 32 repositories
+without asking whether it was real.
+
+**Re-measured against the published HEAD, 25 active vaccines, all 32 repos:**
+
+| | with the local cvaa | with the published cvaa |
+|---|---:|---:|
+| repositories immune | **0** | **14** |
+| findings | 546 | 517 |
+| `pinned-actions` | 16/32 | 16/32 |
+| `monotonic-utc-generations` | 14/32 | 14/32 |
+| `chaining-token` | 12/32 | 12/32 |
+
+The top three survive unchanged, which is why the headline of D3 stands. What
+does not survive is the framing. I wrote "**Zero repositories are immune,
+including cvaa**" in `01-drift.md` and repeated it to main. The truth is that
+**14 of 32 are immune**, cvaa among the ones that are not by only 4 findings,
+and every immune repository is a cold one. The estate is not uninoculated and
+hopeless; it has a clean half and a working half, and every finding is in the
+working half.
+
+A wrong denominator is worse than a wrong finding. A wrong finding gets checked;
+a wrong denominator gets quoted.
+
+**What I changed.** Any tool I run against the estate is now measured from a
+clean clone of its published HEAD, not from the working copy beside it — the
+same discipline I applied to gates in RH6, which I had not thought to apply to
+my own instrument. `spider-state.json` records the cvaa commit every result was
+produced under, so a later pass can tell a real change from a change of ruler.
+
+**And the finding that came out of asking:** cvaa's CI has been red since
+2026-08-31 because `202608301447-selftest.yml:41` asserts
+`run.results.length !== 23` and there are now 25. The self-test was last edited
+2026-08-30T18:26Z when 23 was true; two vaccines were added the following day at
+15:59Z and 21:46Z. 23 + 2 = 25. cvaa passes every one of its own vaccines and
+fails its own build on a hard-coded number that drifted away from the thing it
+describes — which is `derived-state-not-authored`, one of its own rules,
+inside its own self-test.

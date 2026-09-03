@@ -23,52 +23,55 @@ Two repositories have written an integration plan and not executed it:
 `uses: Ventusltd/cvaa/.github/workflows/202608301446-inoculate.yml@d2ebc01f`.
 Correctly pinned, in a plan, unadopted.
 
-**Coverage completed 2026-09-03T02:02Z: 32 of the 33 repositories.** The 14
-that had no local clone were cloned to scratch and measured. Only `pandapower`
-is unmeasured — an upstream fork, last pushed 2026-04-25, cold.
+**Coverage complete: 32 of the 33 repositories**, measured 2026-09-03T02:28Z
+against the **published** cvaa HEAD `d2893fa`, 25 active vaccines. Only
+`pandapower`, an upstream fork last pushed 2026-04-25, is unmeasured.
 
-**354 workflow files across the estate. 546 findings. Zero repositories immune,
-cvaa included.**
+Everything here was re-measured after RH11: my first three passes ran a local
+cvaa two commits ahead of the remote and carrying an untracked vaccine, and
+reported "zero repositories immune". That was wrong.
 
-`disk-is-not-what-ships` is excluded from every row below as a proven false
-positive (RH1); it reports 32/32 and means nothing.
+**14 of 32 repositories are already immune. 517 findings across the other 18.**
 
-| vaccine | all 32 | the 18 active | the 14 cold |
-|---|---|---|---|
-| `pinned-actions` | **16/32** | 10/18 | 6/14 |
-| `monotonic-utc-generations` | **14/32** | **14/18** | **0/14** |
-| `chaining-token` | **12/32** | 10/18 | 2/14 |
-| `least-permissions` | 11/32 | 6/18 | 5/14 |
-| `self-terminating-loops` | 7/32 | 6/18 | 1/14 |
-| `no-per-release-workflows` | 6/32 | 6/18 | 0/14 |
-| `no-time-based-gates` | 4/32 | 4/18 | 0/14 |
-| `pointer-verifies` | 2/32 | 2/18 | 0/14 |
-| `rollback-exists`, `rollback-exercised`, `executor-declared`, `loop-exists`, `derived-state-not-authored` | 1/32 each | 1/18 | 0/14 |
-| the remaining 13 vaccines | 0 | 0 | 0 |
+| vaccine | not immune |
+|---|---:|
+| `pinned-actions` | **16/32** |
+| `monotonic-utc-generations` | **14/32** |
+| `chaining-token` | **12/32** |
+| `least-permissions` | 11/32 |
+| `self-terminating-loops` | 7/32 |
+| `no-per-release-workflows` | 6/32 |
+| `no-time-based-gates` | 4/32 |
+| `pointer-verifies` | 2/32 |
+| `rollback-exists`, `rollback-exercised`, `executor-declared`, `loop-exists` | 1/32 each |
+| the remaining 13 vaccines | 0 |
 
-**The three that would fail most widely are `pinned-actions`, `monotonic-utc-generations`
-and `chaining-token`** — two of the three are the CI supply chain going unpinned,
-and the third is the estate misreporting its own time.
+Findings by repo: pipelinenews 167, globalgrid2050 92, gridatlas 80,
+chatgpt-audits 71, companies 30, data-gridatlas 20, claude 12,
+data-centres-gb 12, data-federation-map 8, data-grid-gb 7, data-gb-electricity 5,
+**cvaa 4**, data-interconnectors 2, solar-electrical-topology 2, spiders 2,
+globalgrid2050-hompage 1, grid-distance-maths 1, registry_of_all_content 1.
 
-Splitting active from cold is the finding the totals hide.
-`monotonic-utc-generations` is **14 of 18 in the repositories agents work in and
-0 of 14 everywhere else**. It is not an estate-wide hygiene problem; it is a
-disease of agent-driven development specifically, because only agent-driven
-repositories stamp generations at all — and the ones that stamp them, choose
-them. I committed one myself within the hour (RH4), which is the cleanest
-possible corroboration.
+**The split is the finding.** Every one of the 14 immune repositories is cold —
+`Mahabharata`, `architecture`, `data_uk_dno_and_tso`, `pv-arc-protection-circuit`,
+`reports`, `seed-data`, `uk-dno-data`, `v11`, `youengineer-code-review` and
+five more. Every finding is in a repository an agent works in.
+`monotonic-utc-generations` makes it sharpest: **14 of 18 active, 0 of 14 cold**.
+It is not estate hygiene, it is a disease of agent-driven development — only
+agent-driven repositories stamp generations at all, and the ones that stamp
+them, choose them rather than reading `date -u`. I committed one myself within
+the hour (RH4).
 
-`pinned-actions` and `least-permissions` run the other way: 6/14 and 5/14 in
+`pinned-actions` and `least-permissions` run the other way, 6/14 and 5/14 in
 cold repositories nobody has touched in months. Those are old workflows that
-predate the discipline, and they will not fix themselves because nothing
-triggers them.
+predate the discipline, and nothing will trigger them to fix themselves.
 
-Findings by repo, active: pipelinenews 172, globalgrid2050 93, gridatlas 83,
-chatgpt-audits 72, companies 31, data-gridatlas 21, data-centres-gb 13,
-data-federation-map 9, data-grid-gb 8, data-gb-electricity 6, cvaa 5, claude 4,
-spiders 3, data-interconnectors 3, grid-distance-maths 2, gb-electricity-ui 1,
-gemini 1, codex-chatgpt 1. Cold repos carry 1-3 findings each, most of which is
-the false positive.
+**354 workflow files estate-wide.** `globalgrid2050` alone carries 241.
+
+The adoption path this implies: fix D10 first (one line), then inoculate the 14
+already-immune repositories, which go green on day one and cost nothing to keep
+green. Beginning with pipelinenews at 167 findings produces a wall of red, and
+a wall of red gets switched off.
 
 ---
 
@@ -296,3 +299,32 @@ This compounds D3 and D4. The estate is being asked to adopt cvaa into 32 more
 repositories; cvaa is not immune to its own vaccines (5 findings), one of its
 vaccines is structurally broken (D4), and its self-test does not pass. Fix the
 immune system before injecting it.
+
+---
+
+## D10 — cause found: cvaa's self-test asserts a vaccine count that drifted
+**Updated 2026-09-03T02:28Z.**
+
+`.github/workflows/202608301447-selftest.yml:41`
+
+    if (run.results.length !== 23) throw new Error(`expected 23 active results, got ${run.results.length}`);
+
+Measured against the published HEAD `d2893fa` in a clean clone:
+
+    status      : immune       <- every vaccine passes
+    results len : 25           <- the assertion demands exactly 23
+    vaccine .md : 26 files, one superseded, so 25 active
+
+The self-test was last edited 2026-08-30T18:26Z, when 23 was true.
+`202608311458-release-name-convention` was added 2026-08-31T15:59Z and
+`202608312045-page-data-block-parses` at 21:46Z, and CI went red that day.
+**23 + 2 = 25.**
+
+So cvaa is not failing its own vaccines — it is immune to all of them, and its
+build fails on a hard-coded number that drifted away from the thing it
+describes. That is `derived-state-not-authored`, one of cvaa's own vaccines,
+inside cvaa's own self-test.
+
+**The cut:** derive the count from the vaccine files on disk minus superseded,
+or assert a floor rather than equality. One line, and it is the only thing
+keeping the estate's immune system red.
