@@ -639,3 +639,67 @@ already expired), `executor-declared`, `loop-exists`,
 **Withdrawn:** `pointer-verifies` — "atlas/releases/202608300453-atlas-v9
 checksums do not verify" was a CRLF artefact of the working copy. In a clean
 clone `sha256sum -c sha256sums.txt --quiet` returns 0. See RH19.
+
+---
+
+## D6 — `companies` half, fully diagnosed 2026-09-03T03:25Z. **The regenerating
+## workflow cannot self-heal, because it holds the retired shape too.**
+
+Measured against the live surface, from a clean clone of `companies` at
+`ac70a37` (untouched since 2026-08-31):
+
+**What the gridatlas migration actually did.** One directory was split into two
+roles that used to coincide:
+
+    before   /gridatlas/<release_id>/     was BOTH the served app and the release artefacts
+    after    /gridatlas/atlas/            the served app          (live_url)      200
+             /gridatlas/atlas/releases/<release_id>/   the release artefacts     200
+
+**Where `companies` holds the old shape** — five places, all still the
+pre-migration URL:
+
+    state/atlas-v9-link-contract.json:3    base_url
+    state/atlas-v9-link-contract.json:14   golden_url
+    state/atlas-v9-link-contract.json:18   url_template   ?repd_ref={repd_ref}
+    state/atlas-v9-link-contract.json:40   base_url  (the 202608292311 entry)
+    state/atlas-v9-link-audit.json:9       golden_url
+
+**Why running the sync workflow would not fix it.**
+`.github/workflows/202608300312-sync-gridatlas-v9-link-contract.yml` does the
+right thing at line 82 — it *derives* `live_url` from
+`gridatlas/state/live-set.json` rather than constructing it — and then asserts
+the retired shape against that derived value:
+
+    line 96   [[ "$live_url" == "https://ventusltd.github.io/gridatlas/$release_id/" ]]
+              live value  https://ventusltd.github.io/gridatlas/atlas/
+              release_id  202608300453-atlas-v9        ->  ASSERTION FAILS
+
+    line 101  curl "${live_url}release-manifest.json"
+              https://ventusltd.github.io/gridatlas/atlas/release-manifest.json   404
+              the manifest now lives at
+              /gridatlas/atlas/releases/202608300453-atlas-v9/release-manifest.json  200
+
+    line 105  curl "${live_url}?repd_ref=13599"
+              https://ventusltd.github.io/gridatlas/atlas/?repd_ref=13599          200  OK
+
+So a `workflow_dispatch` fails at line 96 before writing anything. **The stale
+artefact and the mechanism that would refresh it are stale in the same way.**
+
+**The conceptual fix, which is more than a URL swap.** The workflow needs two
+derived values where it currently has one: the **app base** (`live_url`, which
+the deep link belongs to) and the **artefact base**
+(`{live_url}releases/{release_id}/`, which the manifest belongs to). Line 105 is
+already right because a deep link is a property of the app; line 101 is wrong
+because a manifest is a property of the release. They used to be the same URL,
+so nothing written before the migration can distinguish them.
+
+Once pointed at the artefact base, line 102 passes: the manifest there carries
+`release_id = 202608300453-atlas-v9`, matching `live-set.json`
+`current.release_id`.
+
+**Consequence today is contained**: `companies` is not published on Pages (404),
+so no external reader hits the dead link; the cost is that anything generated
+from that contract inherits a 404. Its driver
+(`202608300327-bound-hourly-gridatlas-link-mission.yml`) and the sync workflow's
+own `cron: '25 4-8 30 8 *'` fire four hours on 30 August, so this cannot
+self-heal before 2027.
