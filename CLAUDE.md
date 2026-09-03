@@ -92,12 +92,35 @@ because it gets quoted rather than checked.**
 - The **canonical repos** are under `OneDrive/Documents/GitHub/`. Directories in the home folder
   are **worktrees** — their `.git` is a file pointing back. Enumerate repos from the GitHub API,
   never from disk: one session scanned 15 when the account had 30, and 33 by morning.
-- **No `gh` CLI, no token.** GitHub API is unauthenticated: **60 req/hour, per IP, shared by every
-  agent and the estate's own workflows.** It was exhausted once and a gate degraded as a result.
-  Query the free `/rate_limit` first; do not sample below 25 remaining. `git fetch`/`push` cost
-  nothing. `/actions/runs/<id>/logs` returns 403 — reproduce failures locally instead, which is
-  better evidence than a log anyway.
+- **No `gh` CLI — but there IS a token, and this note used to say there wasn't.** `gh` is not
+  installed on this machine, in Bash or in PowerShell. The API, however, is not limited to 60
+  requests an hour: every push already authenticates, so the credential helper holds a token and
+  `git credential fill` hands it back. Use **`scripts/gh-api.sh`**.
+
+  | | limit | measured 2026-09-03 04:33 UTC |
+  |---|---|---|
+  | unauthenticated | 60/hour | 35 remaining — nearly exhausted, as the old note predicted |
+  | with the stored credential | **5000/hour** | 4994 remaining, same minute |
+
+  **`/actions/runs/<id>/logs` returns 200, not 403.** The old note recorded a permanent 403 and
+  concluded "reproduce failures locally instead". That is why a nine-command CI step was split
+  into five named ones on 3 September — to read a failure's identity off the jobs API without
+  log access. **CI logs are readable.** Reproducing locally is still better evidence when the
+  failure is behavioural, but it is no longer the only route.
+
+  The token is never printed and never written to disk; it lives in one variable for one curl.
+  Do not echo it, do not put it on a command line, do not commit it.
 - `python3` is a broken Windows Store stub. Use `python`.
+- **`MSYS_NO_PATHCONV` is a per-command flag, never an environment.** Git Bash rewrites anything
+  that looks like a path, so `git show origin/main:.gitattributes` reached git as
+  `origin\main;.gitattributes` — the colon became a semicolon, every lookup failed, and a sweep
+  of all 18 repos reported "no `.gitattributes`" when **every one of them has it**. Setting
+  `MSYS_NO_PATHCONV=1` fixes that call and breaks the next one: with conversion off, git resolves
+  `/c/Users/...` against the MSYS root, so a clone destination silently lands somewhere else and
+  `git clone` reports "already exists" for a directory `[ -d ]` says is absent. Set it inline for
+  the one command that needs a refspec; use `C:/Users/...` for paths handed to git.
+  **A sweep that returns the same answer for every repository is a broken instrument, not a
+  finding** — that shape caught this one, and it is worth treating as a rule.
 - 20 cores. `--shared` clones are instant. A full estate scan is under a minute. Multiprocessing
   workers must live in a real `.py` file with a `__main__` guard — heredoc-piped code crashes the
   pool on Windows.
