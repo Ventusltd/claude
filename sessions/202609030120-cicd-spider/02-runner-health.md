@@ -1266,3 +1266,58 @@ Every estate-wide figure in this session should therefore be reproducible to a
 list, and `spider-state.json` already stores `cvaa.not_immune` as
 per-repository vaccine *sets* rather than counts (RH18), so it is. The census
 tables in `01-drift.md` are the summary; the state file is the evidence.
+
+---
+
+## RH30 — 2026-09-03T04:54Z — two of the coordinator's corrections are entries I
+## already had, which is what makes them worth recording again
+
+The coordinator hit two errors reaching the ahead/behind split, and both are
+mine from earlier tonight in different clothes. Recording the pairing because a
+failure mode that recurs across two independent agents in one night is a
+property of the work, not of either of us.
+
+**1. Concluding from a truncated read.** They ran the rule, read the first six
+lines, saw only *"is earlier than previous"*, and hypothesised concurrent agents
+committing out of order. The drift failures were below the fold.
+
+That is RH5 exactly: I summarised `gridatlas run-current` from `tail -4`,
+recorded "4 proofs" for a suite that runs 667 checks, and would have read a
+composition change as a catastrophic regression. Both times the output was
+correct and the *window onto it* was not.
+
+The general form, which neither of us had written down: **a truncated read of a
+complete output is indistinguishable from a complete read of a truncated
+output.** `head`, `tail` and the first screenful are sampling instruments, and
+a sample needs the same scepticism as any other measurement.
+
+**2. An instrument that was silently wrong.** They attributed drifted commits
+with `git log --grep=<generation>` and got the wrong commits back, because
+several commits share a generation stamp. They discarded it and computed
+per-commit from `%aI`.
+
+That is RH17 and RH8: I counted a string a compiler exists to delete, and
+counted retired cartridge generations as composed. All three are the same
+mistake — **matching text that resembles the answer instead of computing the
+answer** — and all three failed silently, returning plausible output rather than
+an error.
+
+Their observation is the sharper one, though, and I want it recorded: **the fact
+that `--grep` returned multiple commits per generation is itself a symptom of
+the disease being measured.** If stamps were read at commit time they would be
+near-unique. A broken instrument that breaks *because of* the defect it is
+pointed at is a genuinely difficult case, because its failure looks like noise
+rather than evidence.
+
+**Where this leaves the score.** Thirty runner-health entries. The recurring
+families, now that there are enough to count:
+
+| family | instances |
+|---|---|
+| measured a workspace mid-change and called it a state | RH6, RH14, RH19, RH20 |
+| counted text *about* code as code | RH7, RH8, RH9, RH17 |
+| a correction that protected only its own call site | RH12, RH16, RH18, RH23, RH25 |
+| trusted a category or definition I never read | RH11, RH24, RH28, RH29 |
+| concluded from a partial view | RH5, and the coordinator's first hypothesis |
+
+Nothing in that table is about the estate. Every one is about the instrument.
