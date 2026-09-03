@@ -354,14 +354,34 @@ then 33), CI filtered to each repo's **own** default branch, read authenticated.
 
 **35 repositories. 20 green · 4 red · 11 with no workflow runs.**
 
-> **Read the denominators before the numbers.** This section counts **35** — everything
-> `affiliation=owner` returns, of which 1 is a fork (`pandapower`), 0 archived, 2 private. The
-> vaccine census later in this section counts **32**. They are different populations and I have
-> not yet closed the gap of two; the reconciliation is in flight and will be recorded here rather
-> than smoothed over. Treat "35" as the CI population and "32" as the vaccine population until it
-> is. Two bare numbers forty lines apart in one document is the silent-denominator failure this
-> estate already warns about — *a wrong denominator is worse than a wrong finding, because it gets
-> quoted rather than checked* — so it is flagged rather than left for you to trip over.
+> **The denominator, stated once: 35 owned; 1 fork (`pandapower`) excluded; 34 measured, 16 immune.**
+>
+> An earlier draft of this document carried 35 here and 32 in the vaccine census forty lines
+> below. Both were mine to answer for. Resolved by diffing member lists rather than arguing counts:
+>
+> | | | |
+> |---|---|---|
+> | `user/repos?affiliation=owner` (authenticated) | **35** | the truth |
+> | `users/Ventusltd/repos` (unauthenticated) | 33 | **cannot see private repos** |
+> | the missing two | | `cable_selection`, `crm` — both private |
+> | the census's 32 | | 33 public − 1 fork |
+>
+> **The rule separating the two populations was not forks, empty repos, or the active/cold split.
+> It was credential.** The estate universe had been enumerated from an endpoint that returns only
+> public repositories. Confirmed with a control: the unauthenticated endpoint returns 33 and shows
+> `pandapower` while showing neither private repo.
+>
+> Both have since been cloned and measured — `cable_selection` (1 commit, 0 workflows) and `crm`
+> (4 commits, 0 workflows) are **immune**, so no rule count in this document changes. That is luck,
+> not diligence: had either carried workflows, every count here would have been wrong and would
+> have reached you that way.
+>
+> **This is the API-ceiling failure's second consequence, and we both missed it.** §7 treats that
+> false constraint as a *throughput* problem. The same missing credential was also a *visibility*
+> problem — it silently truncated the universe. The ceiling announced itself every pass as a
+> readable rate-limit number; the blindness announced nothing. The census was re-derived three
+> times after the ceiling was known to be false, and the enumeration was never re-derived once.
+> **Fixing an instrument's obvious failure does not fix its silent one.**
 
 The four reds, each with its cause read from the log rather than inferred:
 
@@ -416,14 +436,18 @@ sequencing) because the wrong version has been in every table.
 
 It had been counting `state != 'immune'`, which merges a **failure** with a **warning**. In this
 estate a warning is the opposite of a defect — it means *known, accepted, ratcheted, expires
-2026-09-30*. Counting states properly, across 32 repos × 25 vaccines: **727 immune, 47 fail,
-26 warn.**
+2026-09-30*. Counting states properly, across **34 repos × 25 vaccines = 850 states: 777 immune,
+47 fail, 26 warn** — 16 repositories immune outright.
+
+*(These were first published over 32 repos as 727/47/26. The two additions are the private repos
+named above; both carry zero workflows and are immune, so **no failing count moved** — only the
+denominator and the immune total.)*
 
 | | old ranking | corrected |
 |---|---|---|
-| 1 | pinned-actions | **monotonic-utc-generations** — 14/32 |
-| 2 | monotonic-utc-generations | **chaining-token** — 12/32 |
-| 3 | chaining-token | **self-terminating-loops** — 7/32 |
+| 1 | pinned-actions | **monotonic-utc-generations** — 14/34 |
+| 2 | monotonic-utc-generations | **chaining-token** — 12/34 |
+| 3 | chaining-token | **self-terminating-loops** — 7/34 |
 
 `pinned-actions` declares `level: warning` in its own file and **fails nowhere in the estate** —
 17 immune, 15 warn, 0 fail. It led every table we produced. `self-terminating-loops` appeared in
@@ -484,7 +508,7 @@ stamping at 01:57Z — `date -u +%Y%m%d%H%M` evaluated in the same command as th
 
 The single exception after is +18 minutes, three over the threshold — a slow commit, not a stamp
 chosen in advance. So the rank does not move (it is still the estate's most widely failing rule
-at 14 of 32) but **the cost of fixing it collapses**: no migration, no code change, no tooling.
+at 14 of 34) but **the cost of fixing it collapses**: no migration, no code change, no tooling.
 One line in whatever produces a commit, with 8-in-18 → 1-in-71 behind it.
 
 I first guessed this was an artefact of concurrent agents committing out of order. It is not, and
