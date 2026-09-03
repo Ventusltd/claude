@@ -476,3 +476,54 @@ pinned to 30–31 August 2026 in `202608310015-gridatlas-overnight-next-versions
 and `202608310050-gridatlas-next-version-builders.yml`. Same class as the
 `companies` once-a-year cron in D6 — schedules that have already passed and
 cannot fire again until next year.
+
+---
+
+## D12 — CLOSED 2026-09-03T02:50Z, and correctly
+globalgrid2050 `fafa4d2` — "the publication-truth gate stops saying PASS over a
+check it did not run". Verified at the line:
+
+    report["status"] = "FAIL" if failures else ("INCOMPLETE" if skipped else "PASS")
+
+A skip now yields INCOMPLETE. That is the cure rather than a patch: the verdict
+can no longer be computed over a smaller set of checks than it names. Open for
+19 minutes.
+
+---
+
+## D1 — REOPENED 2026-09-03T02:50Z, and the second opening is the finding
+The same run that closed D12:
+
+    PUBLICATION TRUTH: FAIL
+      - the homepage names Grid Atlas v9.86 / 202609030200 while the live
+        composition is v9.88 / 202609030234
+
+**This is not an oversight. gridatlas ships faster than the homepage can be cut
+by hand.** Ten version cuts in three hours:
+
+    v9.79 02:11  v9.80 02:16  v9.81 02:20  v9.82 02:28  v9.83 02:38
+    v9.84 02:52  v9.85 02:56  v9.86 03:00  v9.87 03:33  v9.88 03:35   (local)
+
+v9.87 → v9.88 was **ninety-six seconds**. The homepage stamp was cut twice in
+the same window. The gate went FAIL → PASS → FAIL in fifteen minutes and will do
+it again on the next cut.
+
+The stamp is hand-authored at `globalgrid2050/index.html:103` —
+`data_gridatlas_release:"202609030200-gridatlas-v9.86"`, plus a prose `note`
+field carrying the version twice more in readable text. The gate compares that
+authored string against a derived one, the live pointer. Two values required to
+be equal; one written by a person, one computed by a machine; only the machine's
+half moves on its own.
+
+That is the disease `derived-state-not-authored` names. **The vaccine does not
+catch it** — globalgrid2050 measures `immune` to it at `fafa4d2`, because the
+antibody looks for state files drifting from git, not for a version string
+drifting from a live pointer. Right about the class, blind to this instance.
+Worth recording as a gap in the rule rather than a gap in the repository.
+
+**The choice, which is the owner's:** derive the stamp at publish time from
+`gridatlas/atlas/current.json` so the two halves cannot disagree; or, if
+"current verified" is deliberately meant to lag the newest build, compare
+against a declared `reviewed_release` and report drift from live as information
+rather than FAIL. Cutting the stamp by hand again buys roughly nine minutes at
+tonight's cadence.
