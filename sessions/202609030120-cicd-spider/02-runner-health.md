@@ -541,3 +541,33 @@ fail, not skip, when it cannot reach the API — or state the skip in its verdic
 line rather than four lines above it. As written, its `PUBLICATION TRUTH` result
 can be produced from a strictly smaller set of checks than it names, and nothing
 in the verdict says so.
+
+---
+
+## RH16 — 2026-09-03T02:36Z — I guarded half my pass against dirty trees and
+## left the other half unguarded
+
+RH6 made `pass.py` refuse to run a **gate** against a working copy another agent
+is writing to. It reads the same working copies to run **cvaa**, and I never
+applied the guard there. So for four passes every CVAA findings delta was
+capable of the exact false signal RH6 exists to prevent.
+
+It surfaced immediately once I looked: at pass 5 the driver reported
+`gridatlas findings 80 -> 79` and `attestation-freshness incidence 0 -> 1`, and
+gridatlas had **4 uncommitted paths** at the time. I do not know whether that
+vaccine finding is real, and I should not have been in a position to report it.
+
+**Fixed the same way as RH6, and no other way is worth having:** `one_cvaa`
+calls `tree_state` before and after each run, returns `unmeasurable` for a dirty
+or moving tree, carries the previous pass's figures forward so an unmeasured
+repository cannot read as a change, and emits one `CVAA-SKIP` line naming which
+repositories were mid-write.
+
+The lesson is narrower and more useful than "check the tree". It is: **a
+correction applied to one call site is not a correction.** RH6 fixed the gates
+because that was where the error had happened; the same reasoning applied
+unchanged to cvaa, and I did not carry it across. Every guard in this driver
+should be asked "what else reads a working copy?" before it is called done.
+
+`attestation-freshness` on gridatlas remains unconfirmed and is recorded as
+such, not as a finding.

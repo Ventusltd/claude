@@ -159,9 +159,7 @@ if not QUICK:
     ruler = {}
     for f in sorted(_glob.glob(os.path.join(CV,'vaccines','*.md'))):
         body = open(f,'rb').read()
-        text = body.decode('utf-8','replace').replace('
-','
-')
+        text = body.decode('utf-8','replace').replace(chr(13)+chr(10), chr(10))
         if re.search(r'^superseded_by:', text, re.M): continue
         ruler[os.path.basename(f)] = hashlib.sha256(text.encode()).hexdigest()[:12]
     prev_ruler = st['cvaa'].get('ruler') or {}
