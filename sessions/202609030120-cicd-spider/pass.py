@@ -283,8 +283,15 @@ def ci(repo):
             d = json.loads(r.read())
     except Exception as e:
         return repo, None, str(e)[:80]
+    # RH20. A CI failure on a feature branch is another agent's work in
+    # progress, not estate drift. gridatlas b67d0a0 on
+    # codex/202609030251-grid-data-v9-89 failed its first run and I was about to
+    # report it - the same mistake as the pass-2 dirty-tree red, one level out.
+    # Only the default branch describes the estate.
     latest = {}
-    for x in d.get('workflow_runs',[]): latest.setdefault(x['name'], x)
+    for x in d.get('workflow_runs',[]):
+        if x.get('head_branch') != 'main': continue
+        latest.setdefault(x['name'], x)
     return repo, {n:{'conclusion':x['conclusion'],'head_sha':x['head_sha'][:7],
                      'at':x['updated_at']} for n,x in latest.items()}, None
 # RH15. The 60/hour unauthenticated budget is SHARED - by four agents on this

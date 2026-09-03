@@ -763,3 +763,43 @@ the write came first and the check came second, so it reached the remote.
 Both times the artefact reached the remote in a state I had already decided was
 unacceptable, because the ordering let it. That is a more useful lesson than
 either individual bug.
+
+---
+
+## RH20 — 2026-09-03T03:16Z — I was about to report another agent's feature
+## branch as an estate regression
+
+Pass 7 produced one apparently real red:
+
+    [CI-RED] gridatlas :: 202609030251 Build GridAtlas v9.89 grid-data verified
+             -> failure @b67d0a0 2026-09-03T03:00:32Z
+
+Before reporting it I checked which branch it belonged to:
+
+    $ git ls-remote origin | grep b67d0a0
+    b67d0a02…  refs/heads/codex/202609030251-grid-data-v9-89
+    $ git ls-remote origin refs/heads/main
+    8fb95a21…
+
+It is a Codex feature branch, on its first run, and `main` is elsewhere and
+fully green — cartridge proof, next-version builders and pages deployment all
+succeeded at both `1fb6262` and `8fb95a2`. A new workflow failing its first
+run is how new workflows start; the cartridge-proof workflow's own header says
+exactly that about itself.
+
+**This is the pass-2 error one level out.** There I ran a gate against a working
+tree an agent was mid-write in; here I read CI for a branch an agent is
+mid-build on. Same mistake, different surface: I measured someone's work in
+progress and was ready to call it drift. The dirty-tree guard I built for the
+first case simply did not reach the second, which is RH16's lesson again — *a
+correction applied to one call site is not a correction.*
+
+**Fixed:** `ci()` now filters `workflow_runs` to `head_branch == 'main'`. Only
+the default branch describes the estate. Feature-branch CI belongs to whoever
+owns the branch, and reporting it costs them attention and costs me credibility.
+
+I have now made this class of error four times — dirty tree (RH6), dirty bytes
+(RH14, RH19), and now a non-default branch. Each time the shape is identical:
+**I measured a workspace mid-change and described it as a state.** The estate is
+four agents deep and nothing here is ever at rest; a measurement that does not
+say which commit, which branch and which bytes it read is not a measurement.
