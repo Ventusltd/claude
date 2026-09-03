@@ -962,3 +962,47 @@ correction one visible event. That was the entire point.
 waiting for gridatlas, and because the pin existed that was safe. At 01:05Z it
 would not have been. F5 closed at 02:44Z; this is the first firing since, and it
 was uneventful, which is what a closed defect looks like.
+
+---
+
+## D15 — half closed 2026-09-03T04:08Z. Two of the four prose rules now read the
+## artefact.
+cvaa `4666369`. My `CVAA-RULER` guard caught it correctly and for the first time
+on a real change: *active vaccine set changed (25 → 25); ~[attestation-freshness,
+full-history-checkout]* — same count, different content, which is exactly the
+case RH13 was built to distinguish from a repository change.
+
+**`attestation-freshness`** now takes `liveSet` and `pointer` from its context
+and compares them directly:
+
+    if (liveSet.generation !== pointer.generation)
+      out.push(`the live attestation names generation ${liveSet.generation}
+                while the pointer is at ${pointer.generation}; re-verify`)
+
+That is the fix named in D15 — both files were already in the context object.
+And it closes RH21 properly: the rule now measures what I had to measure by hand
+to withdraw D14. gridatlas reports **immune, for the right reason** — I verified
+independently that `live-set.json` and `current.json` both carry generation
+`202609030234`.
+
+**`full-history-checkout`** now detects an actual invocation rather than the
+word:
+
+    const runsCvaa = /\binoculate\.mjs\b/.test(code)
+      || /uses:\s*\S*cvaa\/\.github\/workflows\//.test(code)
+      || /\bcvaa_sha\s*:/.test(code);
+
+and its own note warns against "adding fetch-depth to checkouts that do not"
+need it — the trap recorded in D16. gridatlas is immune.
+
+**Two remain prose-dependent** and D15 stays open on them:
+
+- `rollback-exercised` — still satisfied by any commit subject matching
+  `/roll ?back/i`. It now happens to be *accidentally* correct on gridatlas,
+  because D13's fix gave the repository a real rollback mechanism — but the rule
+  still cannot tell the difference between a drill and a word.
+- `on-ledger-commits` — still exempts subjects matching
+  `/verify|roll ?back|inoculate|drill/i`.
+
+Both are false negatives. **The dangerous half of D15 is the half that is
+left.**

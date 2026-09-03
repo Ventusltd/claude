@@ -334,3 +334,26 @@ finding was false, not because it was inconvenient"*.
 
 **Open:** D1 D3 D5 D6 D8 D11 D15. **Closed:** D2 D7 D9 D10 D12 D13 D16 + dead
 schedules + the gg2050 dead link. **Withdrawn:** D4 D14.
+
+---
+
+## Pass 10 — 2026-09-03T04:06Z — the edge fired, the pin held, two rules rewritten
+
+**`data-grid-gb` origin/main 1c9909d → 5181de3 at 04:02:57Z.** Watched since
+01:05Z. The pinned URL still serves `11e28859a6d1` / 2,896,561 B; main now
+serves `8db7171d9476` / 2,934,509 B. The shipped map is unaffected. Schema
+string identical on both sides while 882 of 886 records changed — the diagnosis
+confirmed in production. `gb-transmission-network.v1.json` changed content at
+identical byte length, so only a digest catches it.
+
+**`CVAA-RULER` fired on a real change** for the first time: 25 → 25 rules but two
+antibodies rewritten. `attestation-freshness` and `full-history-checkout` now
+read the artefact instead of commit prose. D15 half closed;
+`rollback-exercised` and `on-ledger-commits` remain, and they are the false
+negatives.
+
+**`VACCINE-GREEN` ×2** on gridatlas: `no-time-based-gates`, `pinned-actions`.
+Findings 74 → 66.
+
+**Open:** D1 D3 D5 D6 D8 D11 D15. **Closed:** D2 D7 D9 D10 D12 D13 D16 + dead
+schedules + gg2050 dead link. **Withdrawn:** D4 D14.
