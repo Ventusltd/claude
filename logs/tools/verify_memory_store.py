@@ -284,17 +284,32 @@ def main() -> int:
 
     if args.transcripts:
         tdir = Path(args.transcripts)
-        known = {s["session_id"] for s in sessions}
-        unconverted = sorted(p.stem for p in tdir.rglob("*.jsonl") if p.stem not in known)
+        # A session is keyed <project>__<uuid> in the store and named <uuid>.jsonl on
+        # disk. Compare on the uuid, or every transcript reads as unconverted and the
+        # check becomes a rule that always fires - which is no more useful than one
+        # that never does.
+        uuid_of = lambda s: str(s).rsplit("__", 1)[-1]
+        known = {uuid_of(s["session_id"]) for s in sessions}
+        missing = [p.stem for p in tdir.rglob("*.jsonl") if uuid_of(p.stem) not in known]
+        # A subagent's sidechain transcript is not a session. 23 of them sit beside the
+        # 11 sessions here, and counting them as holes would make this fire on a store
+        # that is complete - a rule that always fires is worth no more than one that
+        # never does. They are reported, and they are not failures.
+        sidechains = sorted(s for s in missing if s.startswith("agent-"))
+        unconverted = sorted(s for s in missing if not s.startswith("agent-"))
+        if sidechains:
+            print(f"\n{len(sidechains)} subagent sidechain transcript(s) in {tdir} are "
+                  "outside the store's scope, which is whole sessions")
         if unconverted:
-            print(f"\n{len(unconverted)} transcript(s) in {tdir} never reached the store:")
+            print(f"\n{len(unconverted)} session transcript(s) in {tdir} never reached the store:")
             for stem in unconverted:
                 print(f"  - {stem}")
             problems.append(
-                f"{len(unconverted)} transcript(s) under {tdir} have no parquet in the store"
+                f"{len(unconverted)} session transcript(s) under {tdir} have no parquet "
+                "in the store"
             )
         else:
-            print(f"\nevery transcript under {tdir} is in the store")
+            print(f"\nevery session transcript under {tdir} is in the store")
 
     generation = _dt.datetime.now(_dt.timezone.utc).strftime("%Y%m%d%H%M")
     manifest = {"generation": generation,

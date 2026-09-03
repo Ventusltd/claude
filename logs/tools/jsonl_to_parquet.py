@@ -13,10 +13,28 @@ against the input line count. Assistant turns that carry several blocks
 a query can filter to `content_kind = 'text'` without scanning tool payloads.
 
 Usage:
-    python logs/tools/jsonl_to_parquet.py <input.jsonl> <output.parquet>
+    python logs/tools/jsonl_to_parquet.py <input.jsonl> <output.parquet> [--project NAME] [--session UUID]
 
 Idempotent: rerunning over the same input rewrites the same output byte-for-byte
 (no timestamps or run ids are embedded in the Parquet), and rewrites the audit JSON.
+
+CROSS-SESSION STORE. Every session on this machine converts into its own Parquet in
+logs/parquet/, and `read_parquet('logs/parquet/*.parquet')` unions them. Three columns
+beyond the original 22 make a row attributable and filterable across that union:
+
+    project              the Claude Code project directory the transcript came from,
+                         e.g. `C--Users-vikra`. Defaults to the input file's parent
+                         directory name; override with --project.
+    sensitivity          ok | opinion_about_person | credential  (see classify_sensitivity)
+    sensitivity_reason   short free text, empty when ok
+
+Nothing is ever dropped. The `memory` view documented in logs/README.md selects
+`WHERE sensitivity = 'ok'`, so the safe set is the default and the raw union stays
+reachable for audit.
+
+`session_id` is taken from the JSONL line as before, and falls back to the source
+file's own session uuid when a bookkeeping line carries none -- otherwise a third of
+the rows in the union would be unattributable to a session.
 """
 
 from __future__ import annotations
@@ -31,6 +49,9 @@ from pathlib import Path
 
 import pyarrow as pa
 import pyarrow.parquet as pq
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import classify_sensitivity as sens  # noqa: E402
 
 # ---------------------------------------------------------------------------
 # Redaction. Credential VALUES only. Paths, SHAs, emails, repo names are kept.
@@ -53,10 +74,11 @@ _redaction_counts: Counter = Counter()
 
 
 def redact(text):
-    """Return (text, n_redactions). Leaves everything that is not a credential value."""
+    """Return (text, hits). `hits` names the patterns that fired, so the row can be
+    labelled `credential` and the audit can say which rule matched."""
     if not text:
-        return text, 0
-    total = 0
+        return text, []
+    hits = []
     for name, rx in REDACTION_PATTERNS:
         if rx.groups >= 2:
             text, n = rx.subn(lambda m: m.group(1) + REDACTED, text)
@@ -64,8 +86,8 @@ def redact(text):
             text, n = rx.subn(REDACTED, text)
         if n:
             _redaction_counts[name] += n
-            total += n
-    return text, total
+            hits.extend([name] * n)
+    return text, hits
 
 
 # ---------------------------------------------------------------------------
@@ -116,7 +138,10 @@ def attachment_text(att):
     return None
 
 
-def convert(jsonl_path: Path, out_path: Path):
+def convert(jsonl_path: Path, out_path: Path, project=None, session=None):
+    global _redaction_counts
+    _redaction_counts = Counter()   # per-run, so a batch does not accumulate across sessions
+
     rows = []
     tool_names = {}          # tool_use_id -> tool name, so tool_result rows get a name too
     line_count = 0
@@ -124,16 +149,35 @@ def convert(jsonl_path: Path, out_path: Path):
     bad_lines = []           # (line_no, error)
     kind_counts = Counter()
     type_counts = Counter()
+    sens_counts = Counter()
+    flagged = []             # (source_line, sensitivity, reason, snippet) for the audit
     ordinal = 0
+
+    if project is None:
+        project = jsonl_path.parent.name
+    # Bookkeeping lines carry no sessionId; fall back to the file's own uuid so every
+    # row in the cross-session union is attributable. Pass --session when the input is
+    # a snapshot copy whose filename is not the bare session uuid.
+    session_fallback = session or jsonl_path.stem
 
     def emit(**kw):
         nonlocal ordinal
         content = kw.get("content")
-        content, n = redact(content)
+        content, hits = redact(content)
         kw["content"] = content
-        kw["redacted"] = n > 0
+        kw["redacted"] = bool(hits)
         kw["content_len"] = len(content) if content is not None else 0
         kw["ord"] = ordinal
+        kw["project"] = project
+        if not kw.get("session_id"):
+            kw["session_id"] = session_fallback
+        label, reason = sens.classify(content, hits)
+        kw["sensitivity"] = label
+        kw["sensitivity_reason"] = reason
+        sens_counts[label] += 1
+        if label != sens.OK:
+            snippet = (content or "")[:300].replace("\n", " ")
+            flagged.append((kw["source_line"], label, reason, snippet))
         ordinal += 1
         kind_counts[kw["content_kind"]] += 1
         rows.append(kw)
@@ -270,10 +314,7 @@ def convert(jsonl_path: Path, out_path: Path):
         out_path,
         compression="zstd",
         compression_level=9,
-        use_dictionary=[
-            "entry_type", "subtype", "role", "content_kind",
-            "tool_name", "model", "session_id", "cwd", "git_branch", "cli_version",
-        ],
+        use_dictionary=DICT_COLUMNS,
         write_statistics=True,
         row_group_size=8192,
         version="2.6",
@@ -286,6 +327,9 @@ def convert(jsonl_path: Path, out_path: Path):
         kind_counts=dict(kind_counts),
         type_counts=dict(type_counts),
         redaction_counts=dict(_redaction_counts),
+        sens_counts=dict(sens_counts),
+        flagged=flagged,
+        project=project,
     )
 
 
@@ -312,7 +356,19 @@ SCHEMA = pa.schema([
     ("redacted", pa.bool_()),
     ("content_len", pa.int32()),
     ("content", pa.string()),
+    # --- cross-session additions. Appended, so the original 22 keep their order. ---
+    ("project", pa.string()),
+    ("sensitivity", pa.string()),
+    ("sensitivity_reason", pa.string()),
 ])
+
+# Low-cardinality columns. `content` and `sensitivity_reason` are deliberately absent:
+# one is high-cardinality prose, the other is empty on all but a handful of rows.
+DICT_COLUMNS = [
+    "entry_type", "subtype", "role", "content_kind",
+    "tool_name", "model", "session_id", "cwd", "git_branch", "cli_version",
+    "project", "sensitivity",
+]
 
 
 def build_table(rows):
@@ -331,6 +387,17 @@ def build_table(rows):
 
 
 def main(argv):
+    argv = list(argv)
+    project = None
+    session = None
+    if "--project" in argv:
+        i = argv.index("--project")
+        project = argv[i + 1]
+        del argv[i:i + 2]
+    if "--session" in argv:
+        i = argv.index("--session")
+        session = argv[i + 1]
+        del argv[i:i + 2]
     if len(argv) != 3:
         print(__doc__)
         return 2
@@ -340,15 +407,21 @@ def main(argv):
         print("input not found: %s" % jsonl_path)
         return 1
 
-    table, stats = convert(jsonl_path, out_path)
+    table, stats = convert(jsonl_path, out_path, project=project, session=session)
 
     src_bytes = jsonl_path.stat().st_size
     out_bytes = out_path.stat().st_size
     distinct_lines = len(set(table.column("source_line").to_pylist()))
 
+    ts_vals = [t for t in table.column("ts").to_pylist() if t is not None]
+
     audit = {
         "source_jsonl": jsonl_path.name,
         "output_parquet": out_path.name,
+        "project": stats["project"],
+        "session_id": session or jsonl_path.stem,
+        "first_ts": min(ts_vals).isoformat() if ts_vals else None,
+        "last_ts": max(ts_vals).isoformat() if ts_vals else None,
         "source_bytes": src_bytes,
         "parquet_bytes": out_bytes,
         "compression_ratio": round(src_bytes / out_bytes, 3) if out_bytes else None,
@@ -362,11 +435,16 @@ def main(argv):
         "lines_by_entry_type": stats["type_counts"],
         "redactions": stats["redaction_counts"],
         "redaction_total": sum(stats["redaction_counts"].values()),
-        "compression": "zstd level 9",
-        "dictionary_encoded": [
-            "entry_type", "subtype", "role", "content_kind",
-            "tool_name", "model", "session_id", "cwd", "git_branch", "cli_version",
+        "rows_by_sensitivity": stats["sens_counts"],
+        "flagged_rows": [
+            {"source_line": ln, "sensitivity": lab, "reason": why, "snippet": snip}
+            for ln, lab, why, snip in stats["flagged"]
         ],
+        "flagged_pct": round(
+            100.0 * (table.num_rows - stats["sens_counts"].get("ok", 0)) / table.num_rows, 4
+        ) if table.num_rows else 0.0,
+        "compression": "zstd level 9",
+        "dictionary_encoded": DICT_COLUMNS,
         "row_group_size": 8192,
     }
 
@@ -385,6 +463,7 @@ def main(argv):
     print("lines reconciled     : %s" % (distinct_lines == stats["line_count"]))
     print("unparseable lines    : %d %s" % (len(stats["bad_lines"]), stats["bad_lines"][:5]))
     print("redactions           : %d %s" % (sum(stats["redaction_counts"].values()), dict(stats["redaction_counts"])))
+    print("rows by sensitivity  : %s" % json.dumps(stats["sens_counts"], sort_keys=True))
     print("rows by content_kind : %s" % json.dumps(stats["kind_counts"], sort_keys=True))
     print("audit written        : %s" % audit_path)
     return 0

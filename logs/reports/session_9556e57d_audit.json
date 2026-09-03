@@ -1,0 +1,74 @@
+{
+  "blank_lines_skipped": 0,
+  "compression": "zstd level 9",
+  "compression_ratio": 4.976,
+  "dictionary_encoded": [
+    "entry_type",
+    "subtype",
+    "role",
+    "content_kind",
+    "tool_name",
+    "model",
+    "session_id",
+    "cwd",
+    "git_branch",
+    "cli_version",
+    "project",
+    "sensitivity"
+  ],
+  "distinct_source_lines": 2356,
+  "first_ts": "2026-09-01T22:23:50.787000+00:00",
+  "flagged_pct": 0.0424,
+  "flagged_rows": [
+    {
+      "reason": "judgement 'reckless' applied to person reference 'the owner'",
+      "sensitivity": "opinion_about_person",
+      "snippet": "=== quantumspawn-recovery vaccine === --- vaccine: quantumspawn-recovery generation: \"202609012359\" dose: every-deploy --- Disease An unattended version loop survives longer than the agent context that created it, but its mission, personality, authority boundaries and unresolved gates exist only in ",
+      "source_line": 688
+    }
+  ],
+  "jsonl_lines": 2356,
+  "last_ts": "2026-09-02T00:50:01.859000+00:00",
+  "lines_by_entry_type": {
+    "ai-title": 106,
+    "assistant": 797,
+    "atis-latch": 106,
+    "attachment": 433,
+    "bridge-session": 107,
+    "cost-state": 2,
+    "file-history-delta": 31,
+    "file-history-snapshot": 5,
+    "last-prompt": 106,
+    "mode": 106,
+    "permission-mode": 106,
+    "queue-operation": 58,
+    "system": 2,
+    "user": 391
+  },
+  "lines_reconciled": true,
+  "output_parquet": "session_9556e57d.parquet",
+  "parquet_bytes": 1320265,
+  "parquet_rows": 2360,
+  "project": "C--Users-vikra",
+  "redaction_total": 0,
+  "redactions": {},
+  "row_group_size": 8192,
+  "rows_by_content_kind": {
+    "attachment": 433,
+    "image": 4,
+    "meta": 733,
+    "system": 2,
+    "text": 200,
+    "thinking": 220,
+    "tool_result": 384,
+    "tool_use": 384
+  },
+  "rows_by_sensitivity": {
+    "ok": 2359,
+    "opinion_about_person": 1
+  },
+  "session_id": "9556e57d-6c2a-4ea2-8037-fe2dee67f7ed",
+  "source_bytes": 6569948,
+  "source_jsonl": "C--Users-vikra__9556e57d-6c2a-4ea2-8037-fe2dee67f7ed.jsonl",
+  "unparseable_lines": []
+}

@@ -1,0 +1,63 @@
+{
+  "blank_lines_skipped": 0,
+  "compression": "zstd level 9",
+  "compression_ratio": 5.224,
+  "dictionary_encoded": [
+    "entry_type",
+    "subtype",
+    "role",
+    "content_kind",
+    "tool_name",
+    "model",
+    "session_id",
+    "cwd",
+    "git_branch",
+    "cli_version",
+    "project",
+    "sensitivity"
+  ],
+  "distinct_source_lines": 77,
+  "first_ts": "2026-08-30T21:26:58.944000+00:00",
+  "flagged_pct": 0.0,
+  "flagged_rows": [],
+  "jsonl_lines": 77,
+  "last_ts": "2026-08-30T21:34:41.547000+00:00",
+  "lines_by_entry_type": {
+    "ai-title": 4,
+    "assistant": 21,
+    "atis-latch": 4,
+    "attachment": 12,
+    "bridge-session": 5,
+    "cost-state": 2,
+    "file-history-snapshot": 2,
+    "last-prompt": 4,
+    "mode": 4,
+    "permission-mode": 4,
+    "system": 2,
+    "user": 13
+  },
+  "lines_reconciled": true,
+  "output_parquet": "session_b1c826bc.parquet",
+  "parquet_bytes": 24660,
+  "parquet_rows": 77,
+  "project": "C--Users-vikra-OneDrive-Documents-GitHub",
+  "redaction_total": 0,
+  "redactions": {},
+  "row_group_size": 8192,
+  "rows_by_content_kind": {
+    "attachment": 12,
+    "meta": 29,
+    "system": 2,
+    "text": 6,
+    "thinking": 5,
+    "tool_result": 11,
+    "tool_use": 12
+  },
+  "rows_by_sensitivity": {
+    "ok": 77
+  },
+  "session_id": "b1c826bc-a79c-406b-b2ac-a261ebc63603",
+  "source_bytes": 128825,
+  "source_jsonl": "C--Users-vikra-OneDrive-Documents-GitHub__b1c826bc-a79c-406b-b2ac-a261ebc63603.jsonl",
+  "unparseable_lines": []
+}
