@@ -33,6 +33,8 @@ and I will cut them; I did not assume that.
 
 - **cvaa `7c8ed09`** — the security fix in §3. Self-test and full-history workflow **green**,
   confirmed against the Actions API for that exact SHA, not inferred from a local run.
+- **cvaa `93e568e`** — `rollback-exercised` stops deciding from commit prose (§4). Also green,
+  confirmed the same way.
 - **Four repositories were holding unpushed commits and now are not.** Unpushed work is
   invisible work at a handover:
 
@@ -116,10 +118,32 @@ rc=0 on Windows, where it previously could not run at all.
 
 **D16 — closed.**
 
-**D15 — half closed, and the remaining half is the dangerous half.** `full-history-checkout`
-and `attestation-freshness` now read state instead of ranking commit-subject regexes.
-`rollback-exercised` and `on-ledger-commits` still decide from prose — and those two are the
-**false negatives**, the ones that report immunity that was never earned.
+**D15 — three of four closed. `rollback-exercised` is fixed; `on-ledger-commits` is a policy
+call I deliberately left for you.** `full-history-checkout` and `attestation-freshness` already
+read state instead of ranking commit-subject regexes.
+
+`rollback-exercised` (cvaa `93e568e`, CI green) searched commit **subjects** for
+`/roll ?back|rollback drill/`. Across gridatlas's last 200 commits exactly one matched:
+
+> `32bc3bb  202609012105: carry Codex's assembler boundary — staged, exclusive, and owned rollback`
+
+That commit describes an assembler boundary. It exercised no rollback. On the strength of that
+single subject the rule reported gridatlas **immune** to *"no rollback has ever been exercised"*.
+Naming a thing is not doing it. It now reads `atlas/state/rollback-drills.json` — a drill record
+with a `release_id` and an `outcome` — and where the estate emits none it **skips and names the
+artefact that would let it decide**. That honest answer only had somewhere to go because the
+skip state landed in `7c8ed09` an hour earlier. It also gained a diseased fixture it never had,
+so for the first time the self-test proves the rule can fire at all.
+
+Verified against the live gridatlas worktree under `--no-write`: the rule skips, and the working
+tree's porcelain digest and `STATE.md` SHA-256 are **identical before and after** — the scan
+touched nothing, which is the whole point of §3.
+
+**`on-ledger-commits` is untouched and you should decide it.** It exempts any commit whose
+subject matches `/verify|roll ?back|inoculate|drill/` — **6 of gridatlas's last 200 commits** are
+excused from the ledger by a word in the subject, including *"record A-roads forensic drill
+request"*. Narrowing that lights up findings estate-wide, so it is not a change to make at
+04:40 with you asleep.
 
 **My own attestation-freshness limitation stands**, recorded in the vaccine: it measured 0
 divergences across 12 generations, because `verified_at` is not in `live-set.json`. The rule is
@@ -150,10 +174,16 @@ close to tautological. I wrote that down rather than let the green read as proof
    the exit code still treats "not evaluated" as "fine". Making skips non-zero is the honest
    choice and has estate-wide blast radius, so I did not do it at 04:00 with you asleep.
 
-4. **D8 — PipelineNews has no route by which an owner could authorise a deploy.** Unchanged; the
+4. **NEW — `on-ledger-commits`' prose escape hatch.** Any commit whose subject contains
+   *verify*, *rollback*, *inoculate* or *drill* is excused from citing a scope file. Six of
+   gridatlas's last 200 commits take that exit. The honest fix makes the exemption structural
+   rather than textual, and it will surface findings across every repo the first time it runs.
+   Yours to time.
+
+5. **D8 — PipelineNews has no route by which an owner could authorise a deploy.** Unchanged; the
    third gate is an authorisation freeze working as designed, not a defect.
 
-5. **The parallel session's cvaa worktree.** `OneDrive/Documents/GitHub/cvaa` is a *different
+6. **The parallel session's cvaa worktree.** `OneDrive/Documents/GitHub/cvaa` is a *different
    session's* checkout: 9 commits behind origin, 2 commits ahead that are not on origin
    (a federation-mission README and a vaccine named `a-skip-is-not-a-pass-needs-source-text`),
    plus an untracked vaccine and a modified `vaccines.lock`. I did **not** touch, rebase or push
