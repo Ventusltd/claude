@@ -387,3 +387,79 @@ Commit `5a59e71` over `4b1641e`.
 None is amended — they are shipped, and each is superseded by the one after
 it. v9.84 is the successor that fixes the cause, and the CI run for it is
 green.
+
+---
+
+## Generation 202609030156 — v9.85 — the version ledger moves
+
+**Before** (tip `5a59e71`): substation-intelligence `73/73`, sld-sandbox `667/667`.
+**After**: substation-intelligence `73/73`, sld-sandbox `668/668`, exit `0`.
+
+```
+  [PASS] the ledger exists and is embedded, not fetched
+  [PASS] the sandbox reads it rather than carrying a second copy
+  [PASS] the sandbox cartridge is back under the 400 kB boundary with room to spare  326331 bytes
+```
+
+One cut aborted before pushing: `tools/recompose.mjs` scans part files for
+`const VERSION_LEDGER = [` and found that literal inside the new module's
+header comment, then tried to `JSON.parse` the sentence:
+
+```
+[` is written here verbatim because that is the
+ ^
+SyntaxError: Unexpected token '`', "[` is writt"... is not valid JSON
+```
+
+Reworded, then verified by counting: the module matches that regex exactly
+once, and the match parses to 68 entries.
+
+`verify-compose` PASS, `scope-ledger=PASS`, `STATE.md=UPDATED`.
+
+**CI — the gate**: commit `f0c29ab0ce31c937a630a01951347717de0dffa2`,
+run **`33705700987`**, conclusion **`success`**.
+
+Commit `f0c29ab` over `5a59e71`.
+
+---
+
+## Generation 202609030200 — v9.86 — F4, the coverage of "nearest"
+
+**Before** (tip `f0c29ab`): substation-intelligence `73/73`, sld-sandbox `668/668`.
+**After**: substation-intelligence `82/82`, sld-sandbox `676/676`, exit `0`.
+
+The coverage checks compare what the cartridge REPORTS against the payload it
+was GIVEN, so they cannot pass on a remembered number:
+
+```
+  [PASS] the coverage it reports is counted from the payload it was given
+  [PASS] and it agrees with the state it publishes for the whole product
+  [PASS] at 400 kV it counts only what a 400 kV search would consider
+  [PASS] the predicate is the one the distance search itself uses
+  [PASS] no coverage figure is written down anywhere in the cartridge
+  [PASS] the four numbers the sentence prints are all interpolated
+         at 400 kV: 214 of 355 published carry coordinates, 141 cannot be measured to
+         whole product: 502 of 886
+```
+
+One check of mine was rewritten rather than disabled: `every number in the
+sentence is interpolated, never written down` matched the voltage class `400`
+inside a template literal. The voltage is what the search asked for, not
+something it counted, so the check now names the figures that actually rot —
+214, 355, 141, 502, 886, 384, 489, 206 — and asserts none appears outside a
+comment.
+
+`verify-compose` PASS, `scope-ledger=PASS`, `STATE.md=UPDATED`.
+
+**CI — the gate**: commit `97d3ffca580b94ff048ccf9792cbb0ddf39cb2e8`,
+run `33705965506`. Polling was cut off by the API budget reaching zero; the
+conclusion is recorded in the entry for the cut that follows it, which could
+not be made until it was confirmed.
+
+**Live**: generation `202609030200`, composition `202609030200-gridatlas-v9.86`,
+all four cartridges MATCH. sld-sandbox
+`d7cc6c4db72de6efe755ef7e276dcb9dff985f1ce2ca2d372bc95382d25cc68d`,
+substation-intelligence
+`3c3e53c1d7c7d93f40b5d3eb67c37f1a73db7693094f9c1786e174e87c328c26`.
+
+Commit `97d3ffc` over `f0c29ab`.

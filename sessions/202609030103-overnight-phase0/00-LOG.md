@@ -371,3 +371,80 @@ fixture is a shape somebody wrote, and it rots quietly.
   generation from its own filename and asserts the composition manifest
   matches. A cut that restamps only `substation-intelligence` fails three
   manifest-identity checks. Found by doing it.
+
+## 12. Generation 202609030156, v9.85 — headroom, made the sanctioned way
+
+The three remaining features were all card-facing and the sandbox had about
+600 characters of room. Raising the guard was available and was rejected, as
+it was at v9.76 and at every cut tonight.
+
+The `VERSION_LEDGER` was **13,657 characters of pure data** sitting in the
+cartridge with the least room, and every cut appends another row to it. It
+moved to a module composed into `substation-intelligence`, which the shell
+evaluates first — the same route geodesy already takes. The sandbox reads it
+under the same name, so no reader below it changed, and falls back to an empty
+ledger the panel reports rather than a throw that would cost the session.
+
+```
+sandbox cartridge   339,367 -> 326,331 characters
+                     84.8%  ->   81.6% of the 400 kB boundary
+```
+
+**A comment a tool reads is code.** My first version of the module header
+quoted the declaration it was describing — `const VERSION_LEDGER = [` — and
+`tools/recompose.mjs` scans part files for exactly that literal when it appends
+the row for a cut. It found my comment before it found the data and tried to
+`JSON.parse` an English sentence. The cut died with `SyntaxError: Unexpected
+token '`'`. Reworded; the module now matches that regex exactly once, verified
+by counting the matches rather than by reading it again.
+
+## 13. Generation 202609030200, v9.86 — F4, and the two denominators
+
+"Nearest 400 kV substation: Cowley · 15.76 km" is nearest among what the search
+could see, and the card said nothing about that. Two different limits, and the
+brief named only one of them:
+
+- **the search itself.** `nearestTransmission` runs over the substation
+  features the MAP has loaded, not over the published connection points. So
+  the first denominator is how many features were actually eligible. It is
+  counted inside the loop whose predicate decides eligibility, because a
+  second implementation of that predicate in a caller would drift from it.
+- **the published list.** ETYS names substations and does not place them, so
+  the geometry comes from OpenStreetMap through a GridAtlas release.
+
+The second is computed at runtime from the fetched payload, using exactly the
+predicate `state.nearest` uses, so the denominator on the card is the
+denominator of the search. Against the pinned product it reproduces the
+finding's figures exactly, without either being written down:
+
+```
+at 400 kV       214 of 355 published carry coordinates, 141 cannot be measured to
+whole product   502 of 886
+```
+
+**No coverage figure is a literal anywhere in the served bytes.** The proof
+asserts that none of 214, 355, 141, 502, 886, 384, 489 or 206 appears outside a
+comment, and that all four printed numbers are template interpolations. The
+voltage class stays a literal, because 400 kV is what the search asked for
+rather than something it counted — my first version of that check was blunter
+and failed on exactly that, which is how the distinction got made explicit.
+
+This matters more than the usual tidiness argument: Codex's correction, waiting
+behind the pin, takes located points from 502 to 489 on its own. A sentence
+with a number typed into it would have gone quietly false the day the pin moved.
+
+## 14. The GitHub API budget is a shared, hard constraint
+
+I burned the unauthenticated 60/hour to zero polling CI, and the coordinator
+reports a `globalgrid2050` gate skipped a check as a result. That is my cost
+imposed on another lane.
+
+The limit is **per IP**, and four agents plus the estate's own gates draw on
+the same pool. `git fetch` and `git push` do not touch it; only the REST API
+does.
+
+Protocol from here, and it should be the standing one: query the free
+`https://api.github.com/rate_limit` first, never sample below 25 remaining,
+and poll **once per cut, not once per curiosity**. My earlier loop of twelve
+polls at 25-second intervals per generation was the whole problem — four
+generations of that is the entire hour's budget.
