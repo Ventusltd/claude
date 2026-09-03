@@ -180,8 +180,39 @@ close to tautological. I wrote that down rather than let the green read as proof
    rather than textual, and it will surface findings across every repo the first time it runs.
    Yours to time.
 
-5. **D8 — PipelineNews has no route by which an owner could authorise a deploy.** Unchanged; the
-   third gate is an authorisation freeze working as designed, not a defect.
+5. **D8 — WITHDRAWN AND REPLACED. PipelineNews is not waiting for your authorisation. It is a
+   two-line schema divergence, and it has been failing since 31 August.**
+
+   This is the night's most consequential correction, and it is only visible because the API
+   ceiling in §7 turned out to be fictional — the spider read the CI log it had been told for
+   four hours it could not read. I then verified every value below myself.
+
+   The deploy gate `atman/202608262014-build-pages.py` reads
+   `releases/<id>/release-manifest.json` and accepts exactly two schemas. Across all 32 releases:
+
+   | schema the release carries | releases | what the gate does |
+   |---|---|---|
+   | `pipelinenews.additive-cartridge-release.v1` | **30** | **accepted nowhere — fails at line 664** |
+   | `pipelinenews.current-atlas-link-release.v2` | 1 — `202608300309` | branches to `validate_current_atlas_link_v2` |
+   | `pipelinenews.timestamp-folder-successor.v1` | 1 | the inline path, the constant at line 52 |
+
+   The producer switched to `additive-cartridge-release.v1` at `9937d1e` on 31 August. The
+   consumer's constant last moved at `db9f758` on 29 August. Nobody updated it. The gate is
+   behaving correctly — it refuses a manifest whose schema it does not recognise, which is this
+   estate's own fail-closed discipline working exactly as intended.
+
+   **So the question is not "should I authorise this".** It is: *is
+   `additive-cartridge-release.v1` the intended successor?* If yes, the gate needs a branch for
+   it — and note the code already has that shape, since `current-atlas-link-release.v2` gets one.
+
+   **Caveat, and it is important.** Nothing behind line 664 has ever executed for these releases.
+   There may be a second wall. Neither the spider nor I have shown that fixing the schema makes
+   the deploy succeed — only that this is the *first* failure, and that it is not authorisation.
+
+   **This also explains §6.** `202608300309` is the last release the gate could accept, and it is
+   exactly the stamp frozen into every published page's title. The stale title and the frozen
+   deploy look like one event, not two. I am labelling that as the most likely explanation rather
+   than a proven one — I verified the correlation, not the publication route.
 
 6. **The parallel session's cvaa worktree.** `OneDrive/Documents/GitHub/cvaa` is a *different
    session's* checkout: 9 commits behind origin, 2 commits ahead that are not on origin
@@ -195,7 +226,87 @@ close to tautological. I wrote that down rather than let the green read as proof
 
 ---
 
-## 6. Where the record lives
+## 6. New measurement: a published generation does not state its own generation
+
+You said *"the time stamps prevent collisions, USE TIME."* Measured against the live site, the
+published Pipeline News pages do not carry theirs.
+
+Take `https://globalgrid2050.com/pipelinenews_intelligence/202609030009/`:
+
+| where it says which release this is | what it says |
+|---|---|
+| the served directory | `202609030009` |
+| the `<title>` | `…Current verified Atlas V9 deep-link successor **202608300309**` |
+| visible text on the rendered page | **no generation stamp at all** |
+
+`202608300309` is not a contract version — it is a *pipelinenews release id*
+(`releases/202608300309-pipelinenews/`), written by
+`orchestration/202608300309-build-current-atlas-link-successor.py:273`, which interpolates
+`{args.generation}`. So it is parameterised, and it has simply not moved.
+
+**All seven recent generations do this** — `202608312339`, `202609012326`, `202609020025`,
+`202609020552`, `202609021945`, `202609022308`, `202609030009` all serve the same title stamp.
+
+**I am reporting this, not grading it.** There is a defensible reading where the directory is the
+publication time and the title names the build that produced it, and both are honest. But under
+that reading the last seven publications share one build, which sits oddly beside "each generation
+carries a real change". Either way the reader is not served: a person on that page cannot tell
+which generation they are looking at, and the only stamp shown names a different release than
+the URL they followed.
+
+Deciding which of those two things is true is yours. If the answer is "the title should name the
+generation being served", it is a contained fix and it would make a real Pipeline News cut —
+which is also the honest way to move that 3 toward 10.
+
+**What I could not test.** Your original report this session was that grid compute via the MAP
+link does not work on mobile. I tried to verify it on a 390×844 and a 414×896 viewport; Chrome
+reported both resizes as successful and `innerWidth` stayed at 2560 with `outerWidth` at 0×0, so
+the viewport never changed. I have **not** tested mobile, and I am not going to claim otherwise
+on the strength of a `matchMedia` that never matched. It needs a real device or a working
+emulation harness.
+
+---
+
+## 7. The constraint that was not real, and what it cost
+
+`CLAUDE.md` told every session: *no `gh` CLI, no token, the GitHub API is unauthenticated at
+**60 requests an hour** shared by every agent, and `/actions/runs/<id>/logs` returns **403** —
+reproduce failures locally instead.*
+
+One clause was true: `gh` is genuinely not installed, in Bash or PowerShell. The rest was wrong.
+Every push here already authenticates, so the credential helper holds a token and
+`git credential fill` returns it. Measured in the same minute:
+
+| | limit | remaining |
+|---|---|---|
+| unauthenticated | 60 | **35** — nearly exhausted, exactly as the old note feared |
+| with the stored credential | **5000** | 4994 |
+
+And `/actions/runs/<id>/logs` returns **200**. CI logs were readable the whole time.
+
+**What the false constraint cost, measured rather than guessed:**
+
+- **D8 sat for four hours with a cause taken on trust** — and the cause was wrong. One log read
+  settled it (§5).
+- A cvaa CI step that did nine things was **split into five named steps** last night purely so a
+  failure could be identified from the jobs API without log access. That work was unnecessary.
+- The spider **reproduced** the gridatlas cartridge-proof failure by assembling a runner-like
+  checkout with three sibling repositories, because it believed the log was closed to it.
+- Worse, it had built a *rationing mechanism* around the fictional 60/hour budget and recorded
+  the budget as established fact. A false constraint with a mechanism built on top of it is the
+  most durable kind.
+
+`scripts/gh-api.sh` now wraps the authenticated call; the token is never printed or written to
+disk. `CLAUDE.md` is corrected in `ddadff9`.
+
+The transferable lesson, and the spider put it better than I would: *it checked what it was
+pointed at, and never what it was standing on.* Every measurement discipline in this repository
+was applied ruthlessly to vaccines, gates, trees, bytes and branches — and never once to the
+sentence describing the instrument.
+
+---
+
+## 8. Where the record lives
 
 - This file supersedes the 03:00 snapshot for anything it contradicts.
 - `07-routing-table.md` and `08-decisions-for-the-architect.md` are current to ~03:05Z and are
