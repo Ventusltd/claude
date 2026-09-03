@@ -616,3 +616,50 @@ environment does not have), `monotonic-utc-generations` and `on-ledger-commits`
 (historical, not fixable without rewriting shipped history), `executor-declared`
 (7 ledger files), `loop-exists` (1 — and it demands what gridatlas's own lint
 forbids, B8).
+
+---
+
+## Cycle 11 — 03:38Z–03:48Z — a cut built, measured three ways, and deliberately not shipped
+
+Full working in `02-blocked.md` B5. In short: I found the real bug in the
+layer-fidelity harness — the explicit wait for a source to load is gated on the
+label saying `[OK]`, so the seventeen layers that end in a statistic never enter
+it and survive on sixty seconds of accidental timeout — and fixing it took the
+job from **26 failures in 1,049 s to 4 in about 40 s**.
+
+Then I ran the fixed harness a second time against the same live surface:
+
+    run A   4 layer failures    empty sources: 11kv, 132, 275, air, subs
+    run B   2 layer failures    empty sources: 11kv, 132, 66
+    disagreements: 4 layers (66, subs, tram, wind)
+
+**Not shipped.** A gate that answers differently each run is not a gate, and
+tightening its predicates moves the flake rather than removing it — the cause is
+that sixteen layers share one source whose load state races the previous layer's
+uncheck. Shipping it would have replaced 26 wrong failures with 2-4 different
+wrong failures and looked like progress.
+
+Stable across all four runs and currently buried under the noise: **zero console
+errors**, and **`src-11kv` and `src-132` produce no features under any camera or
+toggle order**.
+
+---
+
+## Close — 03:48Z — the queue is empty and I have stopped
+
+Both repositories clean and in sync with origin; both heads green on the runner.
+
+    gridatlas       ed2135f   33711995891  cartridge proof  success
+    data-gridatlas  8bf88da   33708715190 / 33708715223 / 33708715205  success
+
+One honest caveat on D9: the closure rests on the **push-triggered** watchdog run
+at 02:43Z. The `17 * * * *` scheduled run due at 03:17Z had not appeared in the
+Actions list by 03:44Z — GitHub commonly delays or skips scheduled runs — so the
+hourly cadence has not yet re-confirmed it. Green on the gate, not yet green on
+a cron.
+
+Nine generations landed, every one gated on the runner's conclusion for the
+pushed commit. Nothing was amended. The remaining findings are recorded in
+`02-blocked.md` B3, B5-B11: they need a credential I do not hold, a shipped
+record I must not rewrite, or a decision between two tools that disagree. Per
+the brief, I stopped rather than padded.

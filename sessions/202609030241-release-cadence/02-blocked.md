@@ -334,3 +334,42 @@ not contentious; (2) move the verdict from per layer to per source; (3) keep the
 400 MB ceiling as a named session observation rather than a per-layer test;
 (4) assert `console_errors === 0`, which the harness already collects and does
 not check.
+
+## B10 — gridatlas `executor-declared`: not cut, because it means amending shipped records
+
+Seven findings, one per scope ledger file:
+
+    202608301321-01-move-atlas-into-atlas-folder.md: no executor field (agent|script|human)
+    … and six more, through 202608301525-closure.md
+
+Every one carries `status: "done"`. They are closed records of completed scopes,
+and the estate's standing rule is that published bytes are not edited in place.
+Adding a field to seven finished records to satisfy a scan is amending them.
+
+There is a second reason, and it is the stronger one: **I would be writing an
+attribution I cannot evidence.** The vaccine wants `agent|script|human` per
+scope. I could infer "agent" from the fact that this estate is agent-driven, but
+inferring is not knowing, and a provenance field whose value was guessed is
+worse than an absent one — it is the same failure as an attestation written
+without verifying.
+
+The right fix is forward: new scope ledgers declare an executor at the time they
+are written, when the answer is known. The seven historical ones stay as they
+are and the vaccine stays red on them, honestly.
+
+## B11 — what remains in gridatlas, and why none of it is mine to cut
+
+Measured at `ed2135f`, published cvaa `791e24b`, 74 findings:
+
+| vaccine | findings | why not cut |
+|---|---:|---|
+| `chaining-token` | 4 | needs a GitHub App token. There is none in this environment, and minting credentials is not a cut. |
+| `monotonic-utc-generations` | ~57 | historical. Every finding names a commit already shipped; closing them means rewriting published history. |
+| `on-ledger-commits` | 10 | same — ten shipped commits cite no scope file, and the scope-of-works is closed. |
+| `executor-declared` | 7 | B10 — amending shipped records, with a guessed value. |
+| `no-per-release-workflows` | 3 | retiring two workflows. `loop.mjs` asserts the archive holds exactly 21 files, so moving one there fails the lint; retirement is a decision with a shape to agree first. |
+| `loop-exists` | 1 | B8 — cvaa demands a schedule gridatlas's own lint forbids. Not resolvable in either repository alone. |
+
+**So the queue of things I can honestly cut here is empty.** Everything left is
+a credential I do not hold, a shipped record I must not rewrite, or a rule two
+tools disagree about. Per the brief, I have stopped rather than padded.
