@@ -328,3 +328,24 @@ run 33698385910   47a99b09   2026-09-03T00:10:51Z   failure
 That step is `python3 atman/202608262014-build-pages.py`, which is the command
 reproduced above. And after five pushes tonight the newest Pages run is still
 `47a99b0` at 00:10:51Z — none of my commits touched a trigger path.
+
+### The other two harnesses in the repository
+
+Found by search rather than by the brief, and both pass:
+
+```
+$ node tools/intelligence/audits/202609010015-sector-ledger-relevance-proof.mjs
+  "inspected_real_rows": 51,
+  "real_rows_retained": 12,
+  "real_rows_rejected": 39,
+  "real_rows_reassigned": 1,
+  "diseased_examples_rejected": 7
+exit 0
+
+$ node tools/intelligence/audits/sector_topic_relevance_audit.mjs
+exit 0
+```
+
+`tools/overnight/steps/*.mjs` are step definitions for the night-shift runner,
+not proofs, and are not run here — running the runner publishes into
+`globalgrid2050` (see `03-blocked.md` B2).
