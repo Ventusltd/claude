@@ -117,11 +117,16 @@ because it gets quoted rather than checked.**
   substitution and shipped mangled. Quoted `<<'MSGEOF'` is safe but interpolates nothing. Either
   compute the stamp into the text with a quoted heredoc plus `sed`, or keep backticks out of
   commit messages. Never amend a pushed commit to fix this; record the correction instead.
-- **Escaping is the most repeated failure in this estate's tooling.** Heredoc-piped Python,
-  backticks in commit messages, `$''` in a test, `
-` through three layers of quoting — each
-  cost a retry. When a string carries code, write it to a file with the Write tool and run the
-  file. Do not pipe it through a shell.
+- **Escaping is the most repeated failure in this estate's tooling - five times in one night.**
+  Heredoc-piped Python that would not parse; backticks in a commit message executed as
+  commands; a carriage-return literal in a grep that killed the shell; an escaped newline
+  flattened through three layers of quoting. Each cost a retry.
+
+  **This entry was itself mangled by the defect it describes.** Written through an unquoted
+  heredoc, it arrived with its own examples eaten and had to be repaired with a script. That
+  is the argument rather than an anecdote: **when a string carries code, write it to a file
+  with the Write/Edit tool and run the file - do not pipe it through a shell.** A warning
+  about escaping is not exempt from escaping.
 - **`MSYS_NO_PATHCONV` is a per-command flag, never an environment.** Git Bash rewrites anything
   that looks like a path, so `git show origin/main:.gitattributes` reached git as
   `origin\main;.gitattributes` — the colon became a semicolon, every lookup failed, and a sweep
