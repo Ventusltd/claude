@@ -1426,3 +1426,49 @@ unwanted agent that starts working in files another lane owns.
 No lasting effect. Recorded because a log that only contains the interesting
 failures is a curated log, and a curated log is the thing this file exists not
 to be.
+
+---
+
+## RH34 — 2026-09-03T05:37Z — renormalising fixes the blob and leaves every
+## working copy CRLF, silently. All four of my JSON deliverables were affected.
+
+After the coordinator fixed `claude/.gitattributes` and ran
+`git add --renormalize`, I pulled and measured. 23 tracked files were
+`i/lf w/crlf` — **blob LF, working copy CRLF** — and `git status` reported the
+tree clean, because `.gitattributes` now says `eol=lf` and git does not
+proactively rewrite files already on disk.
+
+Four of the 23 were mine, and they are exactly the wrong four:
+
+    census-members.json       22,619 on disk    21,644 in the blob
+    crosslink-shipped.json   107,431            103,764
+    crosslink.json         2,282,805          2,213,228
+    spider-state.json         38,606             37,413   (1,193 CR characters)
+
+**Every machine-readable artefact I produced tonight** — the census membership,
+both dependency graphs, and the resume contract itself. The files a consumer
+would hash, diff or byte-compare were the files that differed from what ships,
+and nothing announced it.
+
+Fixed for my lane only, by `rm` then `git checkout --` on those four paths;
+they now match their blobs byte for byte and my directory reports 0 CRLF. The
+other 19 belong to other sessions and I have not touched them.
+
+**The estate-wide finding, and it retires a wrong explanation of my own.** At
+RH14 I recorded that 15 of 18 working copies hold CRLF despite correct
+`.gitattributes`, and explained it as *"checked out before the file was added
+and never renormalised"*. That is only half. The full mechanism:
+
+> `* text=auto eol=lf` plus `git add --renormalize` fixes **the blob**. It does
+> not touch a working copy that already exists, and `git status` stays silent,
+> because the file matches the index. The working copy is only corrected by a
+> fresh checkout of those paths — or a fresh clone.
+
+So cvaa's 45 and gridatlas's 238 are not evidence that anyone forgot to
+renormalise. They are the expected residue *after* renormalising, and they will
+persist until someone re-checks-out. **A repository can be simultaneously
+correct in git and wrong on disk, with every indicator green.**
+
+Which is the same shape as everything else tonight: the artefact is right, the
+workspace is wrong, and the instrument that would tell you is reporting on the
+artefact.
