@@ -527,3 +527,38 @@ Worth recording as a gap in the rule rather than a gap in the repository.
 against a declared `reviewed_release` and report drift from live as information
 rather than FAIL. Cutting the stamp by hand again buys roughly nine minutes at
 tonight's cadence.
+
+---
+
+## D6/D9 — still open at data-gridatlas `4dd5c2d`. The commit is adjacent, not
+## the fix.
+**Re-measured 2026-09-03T02:56Z.**
+
+data-gridatlas moved 5484218 → 4dd5c2d, "the automation boundary names the file
+that pins its line endings". The whole diff is one line:
+
+    contracts/202608291507-automation.json
+    +    ".gitattributes",
+
+That is a good change and it addresses the neighbouring concern — the automation
+boundary now declares the file its byte-level checks depend on, which is the
+right response to RH14. **It does not touch the defect.** Re-run in a clean
+clone at the new HEAD:
+
+    resolve              rc=0
+    probe data-pointer   rc=0   VERIFIED_WATCHDOG_PROBE
+    probe data-release   rc=0   VERIFIED_WATCHDOG_PROBE
+    probe consumer       rc=1   404 on
+                                .../gridatlas/202608291239-atlas-v9/release-manifest.json
+
+The hourly watchdog will keep failing. Recorded explicitly because **a HEAD move
+in the right repository looks like a fix and is not one** — the cheapest possible
+way for this to be marked handled and carried red into the 10:00 handoff.
+
+Unchanged from the original entry: the cut binds four files —
+`.github/workflows/202608291239-verify-live-pointer.yml:123`,
+`releases/current.json:13,23`, `state/live-set.json:13,23` — and
+`atman/202608291507-current-integrity.py:158-163` requires the two pointer files
+to be byte-identical *and* to hash to `contracts/…-automation.json`
+`baseline.pointer_sha256`. Both pointers and the baseline move together, or the
+watchdog fails on the pointer check instead of the probe.
