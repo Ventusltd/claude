@@ -169,9 +169,45 @@ rc=0 on Windows, where it previously could not run at all.
 
 **D16 — closed.**
 
-**D15 — three of four closed. `rollback-exercised` is fixed; `on-ledger-commits` is a policy
-call I deliberately left for you.** `full-history-checkout` and `attestation-freshness` already
-read state instead of ranking commit-subject regexes.
+**D15 — all four closed.** `full-history-checkout`, `attestation-freshness`, `rollback-exercised`
+and now `on-ledger-commits` all read state instead of ranking regexes over commit subjects.
+
+**`on-ledger-commits` (cvaa `fb769b1`, CI `success`, verified by SHA).** The prose escape hatch
+`/verify|roll ?back|inoculate|drill/` is gone. The decision between deleting it and replacing it
+with a structural test was made by measurement, not preference, and both results are worth having:
+
+- **The exemption was already inert.** The rule ends in `.slice(0, 10)`. In gridatlas — the only
+  repo where it evaluates at all — **195 of the last 200 commits** are candidates. Removing 6
+  prose-exempted commits from 195 still leaves far more than the cap. The escape hatch changed the
+  reported number by **exactly zero**. It was protecting nothing; it only looked like it was.
+- **The structural alternative was built and rejected on evidence.** Pulling file lists for all 195
+  candidates, a "touched only operational paths" test would exempt **1** of the 6 the prose clause
+  excuses — the other 5 touch product code (`tools/rollback.mjs`, `tools/build-cartridge.mjs`,
+  `atman/`, `bootstrap/`) — while exempting a *different* 10 commits overall. It would not preserve
+  what the prose clause protected, and would need a path taxonomy nobody can justify.
+
+Blast radius, measured by running old and new `inoculate.mjs` side by side: gridatlas **74 → 74**
+findings; pipelinenews, globalgrid2050 and cvaa unchanged. The single observable difference is one
+more honest name in the list. **It also got its first fixture** — it had been `null` in the
+self-test and had never been shown to fire at all — with a negative control confirming rc=1 on the
+previous commit and rc=0 on the new one.
+
+> **A bigger hole was found and deliberately left open, and you should know why.**
+> `if (!scopes.length) return []` means the rule **silently passes on any repo without a
+> `scope-of-works/` ledger** — pipelinenews, globalgrid2050, and **cvaa itself** all print
+> `immune on-ledger-commits` having evaluated nothing. That is the same disease as the prose
+> clause and a wider one.
+>
+> It was not fixed because of a genuine trap: the honest return is `{ skip: … }`, but cvaa's own
+> `202608301447` workflow asserts the literal last line
+> `test "$(tail -n 1 …)" = 'repo is immune to all vaccines on file'` — so telling the truth about
+> a skip **fails cvaa's own CI on the spot**. *cvaa's gate currently prevents cvaa from reporting
+> that it did not check something.*
+>
+> This makes open decision **#3 concrete rather than hypothetical**: until you decide whether a
+> skipped rule should fail CI, the skip mechanism built tonight cannot be used where it is most
+> needed. The deeper remedy — giving those repos a scope ledger — is yours, not a check change.
+> Recorded as a `Limitation` section inside the vaccine so it lives with the rule, not in a chat log.
 
 `rollback-exercised` (cvaa `93e568e`, CI green) searched commit **subjects** for
 `/roll ?back|rollback drill/`. Across gridatlas's last 200 commits exactly one matched:
