@@ -1363,3 +1363,46 @@ verified my own resume path by reading it.
 
 Which is the point of the entry: the fix is verified the same way I verified
 every other agent's fix tonight.
+
+---
+
+## RH32 — 2026-09-03T05:18Z — the false API ceiling also cost me two whole
+## repositories, and I never noticed
+
+Reconciling the coordinator's 35 against my 32:
+
+    authenticated  user/repos?affiliation=owner       35
+    unauthenticated users/Ventusltd/repos             33
+    difference                                         2   cable_selection, crm
+                                                           BOTH PRIVATE
+    forks                                              1   pandapower
+    my census                                         32   = 33 - pandapower
+
+**The unauthenticated endpoint cannot see private repositories.** My brief said
+*"Enumerate repos from the GitHub API, never from disk"* — because a previous
+session scanned 15 when the account had 30 — and I obeyed the letter of it while
+enumerating from an endpoint that is blind to two of them.
+
+This is RH24's **second** consequence and I missed it entirely. I treated the
+false 60/hour ceiling as a throughput problem and fixed the throughput. It was
+also a **visibility** problem: the same lack of credential that rationed my
+calls silently truncated my universe. I re-derived the census three times after
+learning the ceiling was fictional and never re-derived the *enumeration*.
+
+**Closed rather than explained.** Both cloned and measured:
+
+    cable_selection   1 commit,  0 workflows   immune
+    crm               4 commits, 0 workflows   immune
+
+**Corrected estate figures: 34 non-fork repositories, 16 immune.** No failing
+count changes, because both are immune — which is luck, not diligence. Had
+either carried workflows, every rule count in this session would have been
+wrong and would have gone to the architect that way.
+
+`census.sh` now clones and measures all 16 cold repositories, so the denominator
+is 34 of 35 with `pandapower` (a fork) named as the exclusion.
+
+**The general form**, and it is the third distinct instance of the same root:
+**fixing an instrument's obvious failure does not fix its silent one.** The
+ceiling announced itself every pass in a rate-limit number I could read. The
+blindness announced nothing at all.
