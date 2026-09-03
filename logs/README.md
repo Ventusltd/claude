@@ -1039,3 +1039,66 @@ python -c "import json,glob; [print(f, json.load(open(f))['lines_reconciled'], j
 ```
 
 All eleven report `True` and `[]`.
+
+---
+
+## What is required, and what checks it
+
+Everything above describes *how* the store is built and queried. This section is the part
+that is not optional.
+
+**A session is not closed until it is in the store and the store has been verified.**
+Converting a transcript is half the job; a conversion nobody reconciled is a claim, not a
+record. The failure this guards against is not a crash — it is a store that answers every
+query while holding less than it should, because the rows that are missing are exactly the
+rows nothing asks about.
+
+Three requirements, in order:
+
+1. **Convert the session.** `logs/tools/jsonl_to_parquet.py` writes the Parquet and its
+   `logs/reports/session_<short>_audit.json` beside it.
+2. **Verify, and regenerate the manifest.** This must exit 0:
+
+   ```bash
+   python logs/tools/verify_memory_store.py
+   ```
+
+   It reads every Parquet with DuckDB, reconciles each against its audit record — rows,
+   distinct source lines, byte size, and that `source_line` runs 1..N with no gaps — and
+   rewrites `logs/reports/memory-manifest.json`. Any mismatch is a non-zero exit.
+3. **Commit the regenerated manifest with the Parquet.** The manifest is derived state. A
+   store whose manifest was not regenerated fails CI on the next push.
+
+### The checks, and what each one can see
+
+```bash
+python logs/tools/verify_memory_store.py --check          # writes nothing; what CI runs
+python logs/tools/verify_memory_store.py --transcripts ~/.claude/projects
+pip install -r requirements.txt                           # duckdb 1.3.2, pyarrow 25.0.1
+```
+
+`--check` validates the committed manifest instead of rewriting it, so a **stale** manifest
+fails rather than being silently refreshed. It is what
+`.github/workflows/202609031030-verify-memory-store.yml` runs on every push touching
+`logs/`, on pull requests, and on cron every six hours. That workflow is the loop.
+
+`--transcripts` is the only check that can see a session which was **never converted at
+all** — the manifest-based checks compare the store against what the store claims, which
+cannot reveal an absence. It compares against what exists outside the store, so CI cannot
+run it: a runner has no access to `~/.claude/projects`. Run it locally before closing a
+session. Measured here: 34 transcripts on disk, 11 sessions, 23 subagent `agent-*`
+sidechains that are outside scope and are reported rather than failed.
+
+Repo-external enforcement lives in `Ventusltd/cvaa` as the vaccine
+**`memory-store-complete`**, which reads `memory-manifest.json` structurally and asserts
+that every session's `distinct_source_lines` equals its `source_lines`, that no session has
+zero rows, that every `parquet_file` named exists, and that `generation` is a 12-digit UTC
+stamp. If the manifest is absent while `logs/parquet/` holds files, it returns a **skip**
+naming what it needs — not `immune`, which it has not earned.
+
+**It does not assert `rows == source_lines`, and neither should anything else.** One
+transcript line carrying three images and a caption becomes four rows; `fe663175` and
+`9556e57d` are complete at 11236/11230 and 2360/2356. The reconciliation key is
+`count(DISTINCT source_line)`, as the section above sets out. A check written against the
+row count would fail forever on a healthy store, and the only way to satisfy it would be to
+make the converter throw content blocks away.
