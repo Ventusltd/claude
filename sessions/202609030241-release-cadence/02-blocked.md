@@ -89,3 +89,106 @@ matters, and it is in another repository.
 `33606380156`, failed 2026-09-02T07:59Z. Observed, not investigated — outside
 tonight's two cuts. Recorded so it is not mistaken for something either cut
 caused.
+
+## B5 — data-gridatlas: the layer-fidelity harness cut, specified but not made
+
+Reproduced in full (Playwright 1.62.1, headless Chromium, `live.mjs` verbatim,
+60 layers, 0 console errors, 26 FAIL). Working in `00-LOG.md`. The cut has two
+parts and both are in `.github/workflows/202608301931-layer-fidelity.yml`,
+which is inside `first_checkpoint_files` and therefore mine to change:
+
+1. **The terminal-state regex does not match seventeen of the sixty layers.**
+   `/\[(OK|EMPTY|FAIL)\]/` never matches a statistics label such as
+   `Solar PV [2819 | 52.3GW]` or
+   `Major Industrial Sites [2458 | 102,956,634 tCO₂e]`. Those layers all report
+   `loaded=true` with real feature counts; the harness waits the full 60 s on
+   each and then fails them. Seventeen minutes of a forty-minute job.
+2. **The 400 MB heap budget is judged per layer and measured per session.**
+   `Runtime.getHeapUsage()` is process-wide. It crosses 400 MB at row 40
+   (`trunk_roads`, 18,398 features) and never returns below ~309 MB, so every
+   later layer inherits the verdict. `motorway_services` — 1,574 features,
+   0.5 s — is recorded at 513 MB. Four rows fail on nothing else.
+
+**Not made because the lane moved to gridatlas mid-cycle**, and because the
+correct fix is a redesign of someone's gate rather than a repair: a per-layer
+heap delta plus a separately named session ceiling, and a terminal condition
+the app actually reaches. Lowering the threshold to go green would be exactly
+the move the estate forbids, so it is written down instead of guessed at.
+
+Note for whoever takes it: the `offline` job passes completely, so the
+repository's own V8-origin fidelity is verified today. Splitting the two jobs
+would surface that — but it would also hide a live red, so it is a decision.
+
+## B6 — cvaa: two vaccines on gridatlas are passing on commit-subject coincidence
+
+Not a gridatlas defect and not fixable there. Recorded because a green light
+that means nothing is worse than the red it replaced, and because I caused one
+of them.
+
+`attestation-freshness` decides freshness by comparing the positions of two
+commits found by regex over commit **subjects**:
+
+    const last = commits.find(c => /live|verif|accept/i.test(c.subject));
+    const pointerCommit = commits.find(c => /scope|cartridge|compos|promote/i.test(c.subject));
+    if (last && pointerCommit && commits.indexOf(last) > commits.indexOf(pointerCommit)) …
+
+A single commit whose subject contains both — *"the live verifier expects the
+composition this repository declares"* — is found by both `find` calls, giving
+`0 > 0`, which is false, which is immune. Measured: gridatlas flipped FAIL →
+immune at `1762170`, before the verifier was touched.
+
+`rollback-exercised` has the same shape and has been passing on a false
+positive since 2026-09-01: the only matching subject is `32bc3bb`, *"carry
+Codex's assembler boundary — staged, exclusive, and owned rollback"*, which is
+not a drill.
+
+**Meanwhile the underlying facts are unchanged:**
+`state/live-set.json` still carries `verified_at 2026-08-30T04:07:46Z`, and no
+rollback has ever been exercised.
+
+The cure is in the antibodies. A subject line is not an event. Freshness should
+compare the attestation's own recorded timestamp or digest against the pointer
+it covers — both are in the file — and a drill should be recognised by an
+artefact it leaves behind, not by a word in a sentence a human chose.
+
+I did not raise, relax or work around either vaccine, and neither green is
+claimed as an outcome of my cuts.
+
+## B7 — the rollback drill: runnable procedure, not run here
+
+`rollback-exists` is closed on evidence. `rollback-exercised` needs a real
+drill, and I stopped short of it for three reasons, in order of weight:
+
+1. It takes another lane's shipped work off the live site. Rolling back to
+   v9.87 removes the 44 px action the gridatlas UI lane shipped at 02:34Z from
+   the live map for the duration. That lane did not ask for it.
+2. **`workflow_dispatch` is unreachable from here** — no `gh` CLI, no token.
+   Running `tools/rollback.mjs` locally and pushing would exercise the tool but
+   not the workflow, and the workflow carries the confirmation and the gates.
+3. Doing it by hand and recording it as a drill of the automated path is the
+   "merely appear to" failure, in the one place it matters most.
+
+**The procedure, for whoever holds the token.** It is symmetric, and that is
+the point: after a rollback lands, the generation it replaced is an ancestor of
+the new one, so rolling forward again uses the same tool and the same guards —
+there is no second mechanism to test.
+
+    1. confirm the UI lane is idle: git fetch, HEAD unchanged for one cadence
+    2. dispatch  rollback-composition.yml
+                 to_generation = 202609030233      (v9.87, one back)
+                 reason        = "rollback drill; nothing is wrong with v9.88"
+                 confirm       = ROLL BACK
+    3. gate      the cartridge proof on the pushed commit must be success
+    4. verify    https://ventusltd.github.io/gridatlas/atlas/current.json
+                 generation == the new stamp, composition_version == v9.87
+    5. dispatch  rollback-composition.yml again
+                 to_generation = 202609030234      (v9.88, now an ancestor)
+                 reason        = "rollback drill complete; restoring v9.88"
+                 confirm       = ROLL BACK
+    6. gate + verify as above; composition_version back to v9.88
+
+Ends where it started, with three new generations and a path that has been
+used. Expect `atlas/current.json`, `atlas/state/live-set.json`, one new
+`atlas/manifests/<stamp>-composition.json` and `STATE.md` to change and nothing
+else — the workflow enforces exactly that allowlist and fails if anything else
+moves.

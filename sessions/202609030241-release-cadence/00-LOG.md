@@ -166,3 +166,282 @@ steps plus the guard:
 `Current integrity` recovered without being touched: `command_verify` calls the
 same `verify_consumer`, so it had been failing on the identical 404 and nobody
 had connected the two. **D9 and D6 are closed on the runner, not on my disk.**
+
+---
+
+## Cycle 3 — 02:47Z–03:0xZ — measurement, no cut yet
+
+Two things were measured rather than cut. Both were open items in the brief.
+
+### The `attestation-freshness` signal is confirmed. It was recorded as unconfirmed.
+
+The spider's pass 5 reported `attestation-freshness 0 -> 1 of 18` on gridatlas
+and correctly refused to call it a measurement, because gridatlas had four
+uncommitted paths at the time (RH16). Re-measured properly:
+
+    subject   clean --shared clone of gridatlas at 8fb95a2 (v9.88)
+              0 CRLF paths on disk, 0 missing tracked files, 301 commits
+    tool      cvaa cloned fresh from github.com/Ventusltd/cvaa, HEAD 791e24b
+              26 vaccine .md, 1 superseded, 25 active, 0 CRLF
+
+Deliberately **not** the local cvaa working copy: it sits at `c18cc13` with 3
+dirty paths and 2 untracked vaccines, which is exactly the trap that made the
+spider's first three passes report "zero repositories immune" (RH11).
+
+    status   not-immune      shallow  false      findings  85
+    immune 15 · fail 9 · warn 1
+
+    attestation-freshness   FAIL
+      - pointer changed after the last live attestation; re-verify
+
+**Confirmed.** No longer unconfirmed, and consistent with gridatlas cutting
+v9.79 through v9.88 in under ninety minutes.
+
+`no-time-based-gates` also holds on the clean tree, with exactly the three crons
+named in B2 and no others.
+
+Neither is cut here: gridatlas is another lane's repository tonight.
+
+### `202608301931 Layer fidelity` — the red is real, and it is not a fidelity failure
+
+One API call to `/actions/runs/33606380156/jobs` gave per-step conclusions
+without needing logs, which are 403 unauthenticated:
+
+    JOB offline   success   all 9 steps, including the fidelity judgement
+    JOB browser   failure   step 5, "Toggle every live layer and measure
+                            MapLibre readiness, heap and features"
+
+So the half that verifies **this repository's own data against its pinned V8
+origin passes completely**. The workflow is red because of a live browser test
+of *another* repository's app.
+
+**A false trail I walked into and discarded.** Driving the live app through the
+Chrome extension, `#scada-ui-container` had 0 children, `[data-layer-id]`
+matched 0 elements anywhere in 509 elements, and the map reported
+`loaded: false` with 4 sources against 114 style layers. That reads like a
+broken selector contract. It is not:
+
+    document.visibilityState  "hidden"
+    requestAnimationFrame     never fires (1500 ms timeout)
+
+The tab was backgrounded, so MapLibre's render loop was stalled and the panel
+had never been built. **Every one of those numbers was an artefact of the
+harness, not a property of the app.** Recording it because the conclusion it
+invites — "gridatlas dropped `data-layer-id`" — is wrong and would have been
+filed against the wrong lane.
+
+Reproduced properly instead, with Playwright 1.62.1 + Chromium headless,
+running the workflow's `live.mjs` verbatim against
+`https://ventusltd.github.io/gridatlas/atlas/`. The selector contract is intact:
+**60 layers enumerated**, and every layer so far reports `[OK]`, `loaded=true`,
+under 4 s, with real feature counts. Run in progress; findings in the next block.
+
+### The layer-fidelity red, measured in full
+
+Reproduced with Playwright 1.62.1 + headless Chromium, the workflow's `live.mjs`
+verbatim against `https://ventusltd.github.io/gridatlas/atlas/`, 60 layers,
+**0 console errors**, **26 of 60 rows FAIL**. Failure reasons, counted:
+
+    label never reaches [OK]   17
+    timed out at 60 s          17     (the same 17)
+    features < 1                5
+    heap > 400 MB               5     (4 of them fail on nothing else)
+
+**17 of the 26 are one harness assumption.** The generation and technology
+layers render a statistics label, not a status one:
+
+    naei_co2   "Major Industrial Sites [2458 | 102,956,634 tCO₂e]"
+    solar      "Solar PV [2819 | 52.3GW]"
+    bess       "Battery Storage [2070 | 127.0GW]"
+    …          solar_operational, solar_roof, wind, wind_onshore_operational,
+               wind_offshore_operational, bess_operational, biomass, tidal,
+               hydrogen and five more
+
+`live.mjs` waits on `/\[(OK|EMPTY|FAIL)\]/`, which those labels never match, so
+it spends the full 60 s timeout on each and then records the layer as failed.
+Every one of them was `loaded=true` with real feature counts. Seventeen minutes
+of a forty-minute job spent waiting for a string the app does not print.
+
+**The heap budget is cumulative, not per-layer.** `Runtime.getHeapUsage()` is
+process-wide and the harness attributes the whole session's heap to whichever
+layer it toggled last. The trajectory, in MB:
+
+    21 19 34 31 39 … 46 214 231 183 164 … 226 453 501 513 499 518 320 …
+
+It crosses 400 at row 40 (`trunk_roads`, 18,398 features, genuinely heavy) and
+never returns below ~309. So `motorway_services` — 1,574 features, 0.5 s — is
+recorded at 513 MB and failed. That is not a measurement of that layer.
+
+The `features < 1` rows (`11kv`, `ind`, `dc`, `rail`, `tram`) are the only ones
+that may be a real signal, and even there `querySourceFeatures` returns only
+what is in loaded tiles, so a layer outside the default viewport reports zero
+legitimately.
+
+**This is a harness defect in `data-gridatlas`, not a fault in gridatlas.** The
+cut is specified in `02-blocked.md` B5; it was not made because the coordinator
+redirected the lane to gridatlas mid-cycle.
+
+---
+
+## Cycle 4 — 03:16Z — `1762170` — the live composition can be moved back
+
+    rollback-exists  FAIL
+      - something writes atlas/current.json but no workflow can roll it back
+
+Ten generations in three hours, every one repointing the live route, and no
+reverse path. v9.83 pinned the runtime products so a bad *product* cannot reach
+a shipped release; nothing gave a bad *release* the same treatment.
+
+**`tools/rollback.mjs`** cuts a NEW generation carrying a previously shipped
+composition. Not an amend: the restored generation is untouched,
+`previous_generation` still names what it replaced, and the manifest records
+`restored_from`, `restored_over` and `restored_generations_back`, so a rollback
+reads as a rollback rather than as a cut that happens to repeat itself.
+
+It refuses before it writes, and both refusals were exercised rather than
+asserted:
+
+    --to on a generation with no manifest        exit 1
+    --to on the live generation                  exit 1
+    --to with no --reason                        exit 1
+    one recorded digest corrupted in a scratch clone:
+      DIGEST_MISMATCH sld-sandbox atlas/cartridges/202609030233-sld-sandbox-v9-8.js
+      refusing to point the live route at them   exit 1
+
+Digests come from `git show HEAD:<path>`, never the working copy. `atlas/` is
+LF today and both readings agree, which is exactly why reading the wrong one
+now would go unnoticed until the day they stop agreeing.
+
+**`.github/workflows/rollback-composition.yml`** — `workflow_dispatch` only,
+with `confirm` that must be typed `ROLL BACK`. It runs the same gates an
+ordinary cut runs, *before* it pushes: `verify-compose`, `run-current`, `lint`,
+STATE.md regenerated, and a path allowlist so a rollback cannot change anything
+but the composition. Pushing first and finding out afterwards would repeat the
+failure it exists to answer.
+
+It carries **no 12-digit prefix**, deliberately. `no-per-release-workflows`
+counts timestamped workflows and exempts `scope-loop|verify-live|inoculate` —
+perpetual single-purpose paths. This is that class. Measured after the cut: the
+count stayed at **3**, so the budget did not worsen. `chaining-token` also
+stayed at 4 findings, not 5.
+
+`tools/scope/lib.mjs` `ACTIVE_WORKFLOWS` gained the entry with its reasoning
+written above it, because that file asks for exactly that: *"a decision that
+gets written down rather than a number that gets nudged."* STATE.md regenerated
+to 6 active workflows.
+
+    local before push   lint PASS · composition PASS · 702/702 across 4 proofs
+    runner              33710776859  202608312212 GridAtlas cartridge proof  success
+
+Measured after, published cvaa 791e24b against a clean clone:
+
+    rollback-exists   FAIL -> immune
+    findings          85 -> 83
+
+---
+
+## Cycle 5 — 03:19Z — `cc449d5` — the live verifier expects what the repo declares
+
+`attestation-freshness`. The measurement first, because it changes what the cut
+should be:
+
+    state/live-set.json  verification.verified_at  2026-08-30T04:07:46Z
+    verification block last written                edd56fa, 2026-08-29T21:49Z
+    same file, current.atlas_composition.generation restamped every cut,
+                                                   202609030234 tonight
+
+Two halves of one file moving four days apart. The pointer half is maintained;
+the attestation half is inherited untouched, `promotion_eligible: true` and
+`failed_gates: 0` carried forward across thirty-odd generations that were never
+verified.
+
+**Why it is stale is not "nobody ran the verifier".** `tools/scope/verify-live.mjs`
+waited for a composition written down as a literal:
+
+    current?.generation === '202608301624' && current?.composition_version === 'v9.5'
+
+Measured against the live surface, with the repository's declared composition
+beside it:
+
+    live served       202609030234  v9.88
+    declared          202609030234  v9.88
+    BEFORE predicate  false     <- and false for every cut after 2026-08-30
+    AFTER  predicate  true
+
+`waitForDeployedCurrent` could only poll for four minutes and throw. **The
+attestation is stale because the verifier could not pass.** That is
+`derived-state-not-authored` applied to a verifier rather than to a build.
+
+The expectation is now read from `atlas/current.json` — generation,
+composition_version, and the full `cartridge_order` compared in order rather
+than by one member — and the timeout message names both generations, because
+"did not reach the composition" sends a reader hunting a broken deploy when the
+expectation is the thing that is wrong.
+
+    local before push   lint PASS · STATE.md already current · 702/702
+    runner              33710958571  202608312212 GridAtlas cartridge proof  success
+
+### What I did NOT do in cycle 5, stated plainly
+
+**`verified_at` is still 2026-08-30T04:07:46Z.** I fixed the reason the
+attestation could not be refreshed. I did not refresh it. Refreshing it means
+running the full browser verifier against the live surface and recording what
+it found; hand-editing the timestamp would be writing an attestation without
+verifying, which is the disease rather than the cure.
+
+**And `attestation-freshness` now reports immune anyway — falsely, because of
+my own commit message.** The antibody is:
+
+    const last = commits.find(c => /live|verif|accept/i.test(c.subject));
+    const pointerCommit = commits.find(c => /scope|cartridge|compos|promote/i.test(c.subject));
+    if (last && pointerCommit && commits.indexOf(last) > commits.indexOf(pointerCommit)) return [...]
+
+`commits.find` returns the most recent match. My subject — *"the live verifier
+expects the composition this repository declares"* — matches **both** regexes,
+so `last` and `pointerCommit` are the same commit, `0 > 0` is false, and the
+vaccine goes green. Measured: gridatlas went `attestation-freshness FAIL ->
+immune` at `1762170`, whose subject contains *"verify"* and *"composition"*
+too, before I had touched the verifier at all.
+
+`rollback-exercised` is immune for the same kind of reason and has been all
+along: the only commit whose subject matches `/roll ?back/i` is `32bc3bb`,
+*"carry Codex's assembler boundary — staged, exclusive, and owned rollback"*,
+which is not a rollback drill and never was.
+
+**So two of these three vaccines are currently passing on commit-subject
+coincidence rather than on evidence, and one of them I caused.** That is worse
+than the red was: the signal is gone and the defect is not. Recorded as a
+finding against cvaa in `02-blocked.md` B6, because the cure is in the
+antibodies — they read commit subjects as if a subject were an event — and not
+in gridatlas.
+
+I have not raised or relaxed either vaccine, and I have not claimed either
+green as a result.
+
+### The rollback drill was not run. Why, precisely.
+
+`rollback-exists` is closed on evidence: the path exists, its refusals were
+exercised, and the runner is green. `rollback-exercised` asks for more — a real
+drill — and the coordinator asked for roll back, verify the live route, roll
+forward.
+
+I did not run it, and this is a deliberate stop rather than an omission:
+
+1. **It moves another lane's shipped work off the live site.** Rolling back to
+   v9.87 removes the 44 px action the gridatlas UI lane shipped at 02:34Z from
+   `globalgrid2050.com`'s map for as long as the drill lasts. That lane did not
+   ask for that and is not mine to interrupt.
+2. **I cannot dispatch the workflow.** There is no `gh` CLI and no token in
+   this environment, so `workflow_dispatch` is unreachable from here. Running
+   the drill would mean running `tools/rollback.mjs` locally and pushing the
+   result — which exercises the tool but *not* the workflow, and the workflow
+   is the half that carries the gates and the confirmation.
+3. Doing it by hand and calling it a drill of the automated path would be
+   exactly the "satisfy it rather than merely appear to" failure I was warned
+   against.
+
+The drill is written up as a runnable procedure in `02-blocked.md` B7 for
+whoever holds the token, including the detail that makes it symmetric: once a
+rollback lands, the generation it replaced becomes an ancestor of the new one,
+so *rolling forward again uses the same tool and the same guards* — the path
+does not need a second mechanism.
