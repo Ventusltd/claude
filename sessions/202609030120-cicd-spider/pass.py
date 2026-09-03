@@ -137,8 +137,26 @@ with cf.ThreadPoolExecutor(max_workers=8) as ex:
 
 # --------------------------------------------------------------- 3. cvaa
 if not QUICK:
+    # RH11: measure with the PUBLISHED cvaa, never the working copy beside it.
+    # The local copy was two commits ahead of origin and carried an untracked
+    # 28th vaccine, so three passes of estate numbers described a ruler nobody
+    # else has. Refresh a clean clone each pass and record the commit measured.
+    CV = os.environ.get('CVAA_CLEAN') or os.path.join(HERE, '.cvaa-clean')
+    if not os.path.isdir(os.path.join(CV,'.git')):
+        subprocess.run(['git','clone','-q','--no-tags',
+                        'https://github.com/Ventusltd/cvaa.git', CV], timeout=600)
+    else:
+        subprocess.run(['git','-C',CV,'fetch','-q','--no-tags','origin','main'], timeout=300)
+        subprocess.run(['git','-C',CV,'reset','-q','--hard','origin/main'], timeout=120)
+    cv_head = subprocess.run(['git','-C',CV,'rev-parse','HEAD'],
+                             capture_output=True, text=True).stdout.strip()
+    if cv_head and cv_head != st['cvaa'].get('measured_with_commit'):
+        D('CVAA-RULER', f"cvaa published HEAD {str(st['cvaa'].get('measured_with_commit'))[:7]} -> {cv_head[:7]}; "
+                        "vaccine set changed, so a findings delta this pass may be the ruler, not the repo")
+    st['cvaa']['measured_with_commit'] = cv_head
+
     def one_cvaa(d):
-        rc,out = run('.', ['node', os.path.join(GH,'cvaa','inoculate.mjs'),
+        rc,out = run('.', ['node', os.path.join(CV,'inoculate.mjs'),
                            os.path.join(GH,d), '--json','--no-write'], timeout=900)
         for line in out.split('\n'):
             line = line.strip()
