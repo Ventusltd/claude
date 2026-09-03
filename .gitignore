@@ -12,3 +12,12 @@ logs/board.md.tmp
 logs/runners.log
 logs/runners-estate.json
 logs/runners-shots/
+
+# familiars/triage.py rewrites these every sweep, for the same reason. red-board.md is a
+# reading of whatever the estate's CI happens to be at that minute; triage-cache holds the
+# raw Actions job logs it read (immutable per job id, but they are GitHub's bytes and can be
+# refetched); triage-estate.json is one audit_estate.py snapshot.
+logs/red-board.md
+logs/red-board.json
+logs/triage-estate.json
+logs/triage-cache/
