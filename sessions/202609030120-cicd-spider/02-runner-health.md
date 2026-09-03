@@ -1016,3 +1016,46 @@ whose HEAD moved. Added `ci-log.sh` for reading a run's log by id. The
 `known_flaky` entry F3 — "check the API budget before trusting a pass" — is
 withdrawn, because the gate that skipped on a 403 was skipping on a limit that
 did not have to bind.
+
+---
+
+## RH25 — 2026-09-03T04:38Z — I counted someone else's skip as a failure, having
+## invented that exact distinction for myself two hours earlier
+
+Pass 11 reported:
+
+    [VACCINE-RED] gridatlas now fails derived-state-not-authored
+    [VACCINE-RED] gridatlas now fails rollback-exercised
+
+Both false. cvaa `7c8ed09` added a **third result state**, and the runner now
+emits `immune`, `fail` and `skipped`. Measured on a clean gridatlas tree:
+
+    derived-state-not-authored   state=skipped   findings=-
+    rollback-exercised           state=skipped   findings=-
+
+`rollback-exercised`, rewritten at `93e568e`, returns
+`{ skip: "no atlas/state/rollback-drills.json; emit one … and this rule can
+decide. Commit subjects are not evidence that a drill ran" }`. That is a rule
+declining to decide for want of evidence. It is not a finding, and gridatlas has
+not regressed.
+
+My driver classified anything `!= 'immune'` as a failure, so a new third state
+became two red lines the moment it appeared.
+
+**The part that stings.** RH6 and RH16 exist because I insisted a gate run
+against a dirty tree is `unmeasurable-dirty-tree` — *a third state, never a
+fail* — and I wrote that a verdict must never be manufactured from an absence of
+evidence. Two hours later cvaa introduced the identical concept and I read it as
+a failure. I built the idea and did not recognise it wearing someone else's
+name.
+
+**What I changed.** `now_fail` counts `state == 'fail'` only. Skips are tracked
+separately and surfaced as `VACCINE-SKIP` — *"a skip is not a pass"* — because
+the estate's discipline is that an undecided rule must be visible, just not
+alarming. The two false entries are withdrawn from `spider-state.json`.
+
+The night's recurring lesson, stated once more because this is its sixth
+instance: **a correction protects only the call site you install it at, and
+only in the direction you were looking.** I have now made this error against my
+own gates, my own CVAA runs, my own denominators, a feature branch, my own
+clock, and now another tool's vocabulary.
