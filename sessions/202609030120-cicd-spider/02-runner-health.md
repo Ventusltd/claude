@@ -803,3 +803,62 @@ I have now made this class of error four times — dirty tree (RH6), dirty bytes
 **I measured a workspace mid-change and described it as a state.** The estate is
 four agents deep and nothing here is ever at rest; a measurement that does not
 say which commit, which branch and which bytes it read is not a measurement.
+
+---
+
+## RH21 — 2026-09-03T03:42Z — D14 was never real. I reported it twice, and my
+## own cross-check could not catch it because both checks used the same
+## broken instrument.
+
+I filed D14 — "the gridatlas live attestation is four days and ten releases
+stale" — and told the coordinator it was *"confirmed in both the working copy
+and a clean clone, so not an artefact"*. Then, when it went green, I filed a
+second report saying the vaccine had been silenced by commit wording.
+
+**Both messages were wrong.** The attestation was never stale. Measured directly
+from the two JSON files at every relevant commit:
+
+    commit    atlas/current.json generation   live-set.json generation
+    8fb95a2   202609030234                    202609030234    MATCH
+    1762170   202609030234                    202609030234    MATCH
+    cc449d5   202609030234                    202609030234    MATCH
+
+`live-set.json` was last written at `8fb95a2`, the same commit that set the
+pointer generation, and `1762170` and `cc449d5` were tooling changes that cut no
+new composition — so the pointer legitimately did not advance and the
+attestation legitimately did not need to. The state was correct throughout.
+
+What fired was `attestation-freshness`'s heuristic: it finds the newest commit
+subject matching `/live|verif|accept/` and the newest matching
+`/scope|cartridge|compos|promote/` and complains if the first is older. At
+`8fb95a2` those happened to fall in that order. It never opened either file.
+
+**The lesson, and it is the sharpest of the night.** I built the clean-clone
+discipline (RH19) precisely so a finding could not be an artefact of my
+environment, and I leaned on it explicitly in the D14 message. It did not help,
+because **reproducing a finding in two places does not validate it when both
+places run the same instrument.** The clean clone controls for environment; it
+controls for nothing about whether the check measures what it claims. Two
+identical wrong answers read exactly like corroboration.
+
+What would have caught it is what finally did: **going to the underlying state
+and comparing the two numbers myself.** Both files were sitting in the vaccine's
+own context object. I had been treating "the vaccine says so, twice" as evidence
+when the vaccine's own antibody was four lines long and readable in ten seconds.
+
+`disk-is-not-what-ships` I distrusted immediately because it fired on 18 of 18 —
+the wall was conspicuous. `attestation-freshness` fired on 1 of 18, which looked
+like a specific finding rather than a broken rule, and specificity is not
+evidence either.
+
+**What I changed.** Any vaccine finding I intend to report is now read at the
+antibody and confirmed against the underlying data before it leaves this
+machine. Reproducing it is not enough. `01-drift.md` records D14 as withdrawn,
+not as fixed, because it was never a defect.
+
+**What remains true**, and is worth separating from my error: the vaccine cannot
+measure what it names. It infers freshness from prose, so it will report a stale
+attestation as fresh whenever a single commit subject contains both a
+verification word and a composition word — a false negative, which is the
+dangerous direction. That finding stands on its own and does not depend on
+gridatlas having had a defect.

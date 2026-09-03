@@ -715,7 +715,15 @@ is now reversible, twenty minutes after it was reported.
 
 ---
 
-## D14 — NOT closed. The vaccine went green on wording, not on substance.
+## D14 — WITHDRAWN. It was never a defect. See RH21.
+
+**I reported this twice and it was wrong both times.** Measured directly:
+`atlas/current.json` and `atlas/state/live-set.json` both carry generation
+`202609030234` at 8fb95a2, 1762170 and cc449d5. The attestation matched the
+pointer throughout. What follows is retained because the weakness in the rule is
+real even though the finding was not.
+
+### The original entry, retained
 **Re-measured 2026-09-03T03:34Z.**
 
 `attestation-freshness` now reports `immune` on gridatlas. The attestation has
