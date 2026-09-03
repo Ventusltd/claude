@@ -138,3 +138,53 @@ not a state — it is a state plus three agents writing to it. A measurement tha
 does not name the commit it measured is not a measurement. `pass.py` now guards
 before and after every gate, and takes CI state from the API rather than from a
 local run.
+
+---
+
+## Pass 3 — 2026-09-03T01:50Z — coverage completed, the graph corrected
+
+Cloned the 14 unscanned repositories and measured **32 of 33** (only
+`pandapower`, a cold upstream fork, remains). 354 workflow files estate-wide.
+
+Regenerated the crosslink graph and had to correct it three ways before any
+number was usable (RH7–RH9): a catalogue repository emitted 6,124 of 6,153
+runtime-data "edges"; retired gridatlas cartridge generations were counted as
+composed; and a URL inside a `.json` was counted as a fetch. **6,854 raw
+cross-repo edges, 336 real ones.** Mutable shipped runtime edges **5 → 2**,
+converging with the coordinator's independent count. One of the two should stay
+mutable by design.
+
+D7 cause proved in a clean runner-like checkout: the cartridge-proof workflow
+never checks out `data-grid-gb`, `run-current` exits at the first failing proof,
+and **675 of 735 checks had never run on a runner.** The eight real-data checks
+were skipped in silence rather than failed.
+
+---
+
+## Pass 4 — 2026-09-03T01:56Z — one green, one retraction, no real movement
+
+**GREEN.** `gridatlas 202608312212 cartridge proof` failure → success at
+5a59e71 (v9.84). First green across five commits, taken from the runner's
+conclusion. **D7 closed.**
+
+**Every CVAA count fell by exactly one, and none of it was real.** The driver
+now measures with the published cvaa rather than the working copy beside it, so
+the untracked vaccine stopped firing. `pass.py` emitted the `CVAA-RULER` line it
+exists to emit. Genuine movement this pass: none.
+
+**Retracted the estate's headline number.** RH11: three passes of CVAA results
+were produced by a local cvaa two commits ahead of origin carrying an untracked
+28th vaccine. Re-measured against published HEAD `d2893fa`: **14 of 32
+repositories are immune**, not zero. The top three survive unchanged.
+
+**D10 cause found**, one line: the self-test asserts `results.length !== 23` and
+there are now 25. cvaa passes every one of its own vaccines and fails its build
+on a stale constant.
+
+**RH12.** I recorded RH4, said I had fixed my BST-for-UTC stamps, and made the
+same error five more times, drifting +2 → +45 minutes. A correction that changes
+only what you intend changes nothing; the ones that held all became lines in
+`pass.py`.
+
+**Open drift:** D1 D3 D5 D6 D8 D9 D10. Closed: D2 (v9.83), D4 (not in the
+repository — RH11), D7 (v9.84).
