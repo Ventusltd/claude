@@ -177,3 +177,122 @@ all four cartridges MATCH. sld-sandbox
 `18e7ead290e789bc1ebe8749a89f95d3b1375f798d09d06dd50e7a70b0f5d100`.
 
 Commit `f1f430d` over `e9491b6`.
+
+---
+
+## Generation 202609030128 — v9.82 — Reg3 technology gate
+
+**Before** (tip `f1f430d`): substation-intelligence `53/53`, sld-sandbox `653/653`.
+**After**: substation-intelligence `53/53`, sld-sandbox `660/660`, exit `0`.
+
+Seven checks added. Two re-cuts were needed and neither was pushed:
+
+1. first cut failed `the camera is set BEFORE the zoom is honoured and before
+   the tech gate` — my own v9.81 proof anchored on source text that this change
+   replaced. The check was rewritten to compare three indices rather than one
+   literal, which is what it should always have done.
+2. first cut also failed `the sandbox cartridge is back under the 400 kB
+   boundary with room to spare -- 341028 bytes` against a `< 340000` guard.
+   Raising the guard was available and rejected, per v9.76's own precedent.
+   1,661 characters of my own commentary were trimmed instead; the recut
+   measured 339,367.
+
+`scope-ledger=PASS`, `STATE.md=UPDATED`.
+
+**Live**: generation `202609030128`, all four cartridges MATCH. sld-sandbox
+`4c8ff0…` (recorded in full in the commit trail). Commit `52ebabc`.
+
+---
+
+## Generation 202609030137 — v9.83 — F5, pinned products
+
+**Before** (tip `52ebabc`): substation-intelligence `53/53`, sld-sandbox `660/660`.
+**After**: substation-intelligence `68/68`, sld-sandbox `667/667`, exit `0`,
+cartridge `339,367` characters — unchanged, because the new code went into a
+module composed into `substation-intelligence` rather than into the sandbox.
+
+Fifteen checks added to substation-intelligence, seven to sld-sandbox. The pin
+table is exercised in its own vm context with real WebCrypto, so the refusal
+path executes:
+
+```
+  [PASS] it froze its surface and named its schema
+  [PASS] every pinned product names a 40-character commit, never a branch
+  [PASS] and a 64-character SHA-256 of the bytes served at that commit
+  [PASS] the URL it builds is the commit, not the branch
+  [PASS] its digest arithmetic is the arithmetic, checked against node
+  [PASS] bytes that disagree with the recorded digest are a MISMATCH
+  [PASS] and the mismatch says which bytes it got and which it wanted
+  [PASS] an unknown id is unverified rather than quietly accepted
+  [PASS] a pin says which bytes were read and nothing about whether they are right
+  [PASS] a MISMATCH refuses to answer rather than reading on
+  [PASS] and an uncomposed pin table is a refusal, not a guessed URL
+  [PASS] the load published which pinned bytes it read
+  [PASS] and where there is no crypto it says so, and still reads the product
+```
+
+Three pre-existing checks asserted the DEFECT and were rewritten to assert the
+fix, not disabled:
+
+- `it reads the data repository product` matched `Ventusltd/data-grid-gb/` as a
+  contiguous string; it now matches the pin table's `repository` field.
+- `it reads the repository that owns the data, not a copy` matched
+  `data-gb-electricity/main/derived/...`; it now matches the pin lookup.
+- `the product is named once, at data-grid-gb main, and is the v1 schema`
+  asserted the branch by name. It now asserts the pin AND that no
+  `main/derived/gb-transmission-network.v1.json` string survives anywhere.
+
+Independent of the harness, all three pinned URLs were fetched over the network
+and hashed before the cut:
+
+```
+gb-transmission-network.v1.json  10,069,966 B  fc331cc20b061f85adf18d890762a164328a1c5e84acef6a23d35d36f849fc8a
+price-decade-rollup.json              6,873 B  18da5059c93cf09f6036bfcaabf56afaedf16d5f03e664c3cf0b0cff1dca970d
+connection-points.v3.json         2,896,561 B  11e28859a6d17cc8ee4047c2032d55d043be98f7123743f3b2b03225e07a4c0c
+```
+
+**Live**: generation `202609030137`, composition `202609030137-gridatlas-v9.83`,
+all four MATCH. sld-sandbox
+`0a71e32dc5ab52b128f797959157d513ec77c962095c8f14379e131729c67109`,
+substation-intelligence
+`ceb80e26da587964567b090ac81513006f7703051798c25e50471f03aee9e451`.
+
+Commit `4a17fa3` over `52ebabc`.
+
+---
+
+## `tools/scope/loop.mjs --stdout` — commit `4b1641e` (no composition change)
+
+Not a generation: it touches no cartridge, so nothing was recomposed.
+
+Before:
+
+```
+$ printf 'DELIBERATELY WRONG\n' > STATE.md
+$ node tools/scope/loop.mjs state --stdout
+scope-ledger=PASS active=none master=done
+STATE.md=UPDATED
+$ head -1 STATE.md
+# GridAtlas durable state          <- the check repaired the drift it exists to detect
+```
+
+After:
+
+```
+$ printf 'DELIBERATELY WRONG\n' > STATE.md
+$ node tools/scope/loop.mjs state --stdout > /tmp/s.txt 2>/dev/null
+$ head -1 STATE.md
+DELIBERATELY WRONG                 <- untouched
+$ cmp -s /tmp/s.txt STATE.md; echo $?
+1                                  <- the comparison can now fail
+
+$ node tools/scope/loop.mjs state         # no flag: unchanged, writes the file
+$ node tools/scope/loop.mjs state --stdout > /tmp/s.txt 2>/dev/null
+$ cmp -s /tmp/s.txt STATE.md; echo $?
+0                                  <- byte-identical when it should be
+
+$ node tools/scope/loop.mjs state --bogus
+[scope-loop:state] unknown flag --bogus     exit 1
+```
+
+`node tools/proofs/run-current.mjs` exit `0`, unaffected.

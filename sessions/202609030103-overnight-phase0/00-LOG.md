@@ -155,3 +155,138 @@ existing links land exactly where they landed before.
 The proof establishes the premise from the other two lanes' bytes rather than
 asserting it, so if either lane ever starts flying, the check fails loudly
 instead of leaving two cartridges fighting over the camera.
+
+## 5. Generation 202609030128, v9.82 — Reg3, and the brief's premise corrected
+
+The brief said a whitelist "rejects 20 of 24 REPD categories" and asked me to
+expand it. Three things are wrong with that as stated, and I could not fix the
+thing it names.
+
+**Where the whitelist is.** `allowedTechnologies = new Set(['solar','bess',
+'wind_onshore','wind_offshore'])` is at
+`atlas/releases/202608300453-atlas-v9/ventus-corev8engine.js:805` — the
+immutable shell. `AGENTS.md` says `atlas/releases/` is immutable, and the
+substation-intelligence cartridge carries that engine byte for byte as its
+slot contract, asserted by its own proof. Not mine to widen.
+
+**Widening it would change nothing a reader sees.** The product it gates,
+`uk_renewables_pipeline/v9/data/v9.1/build_manifest.json`, publishes 18
+`atlas_partitions` covering exactly those four technologies and declares
+`scope.technologies` as the same four. A wider whitelist moves the throw one
+fetch later, from "canonical project technology is invalid" to "no canonical
+Landfill Gas partitions".
+
+**The parameter never carries a raw DESNZ label.** Pipeline News sends the
+normalised id — I read a real built link:
+`?repd_ref=13599&project=Beacon+Fen+Energy+Park&technology=solar&capacity_mw=400&latitude=52.9989987&longitude=-0.4092339&zoom=12`.
+`Landfill Gas` is a `repd_technology` value, and it normalises to `biomass`,
+which the sandbox has always accepted.
+
+I also nearly filed a false defect here. A grep for `technology=` found 229
+occurrences with an empty value and I briefly believed 229 of 231 links were
+broken. They are `data-technology="..."` attributes on filter buttons. Checked
+the context before writing it down.
+
+**Measured, over `data/repd_projects_202608290716.parquet` — 11,069 rows, the
+REPD product this Atlas's own search lane reads:**
+
+```
+25 DESNZ categories normalise to 14 ids
+shell whitelist (4 ids)      accepts  6,560 of 11,069   59.3%
+                             rejects  4,509 — including all 3,397 rooftop solar
+sandbox PROJECT_TECHS (18)   accepts 11,065 of 11,069   99.96%
+                             rejects  4 — normalised `other`
+                                        (2 "Unknown", 2 "Air Source Heat Pumps")
+```
+
+**What I fixed.** `other` is added. Far more consequentially, the guard did
+`return` — abandoning the card, the project ring, the nearest-substation
+measurement, the declared connection and the substation layer. All of that is
+arithmetic over two coordinates and a register row; only the one technology
+layer needs to know what a project generates. An unrecognised id now costs
+that layer alone.
+
+## 6. The size boundary, which cost me two re-cuts
+
+`the sandbox cartridge is back under the 400 kB boundary with room to spare`
+asserts `cartridgeSource.length < 340000`. My generations pushed it over twice.
+
+Precedent is explicit: v9.76's own note says "the boundary refused the cut and
+it was right to. Raising it, or leaving the module uncomposed and calling the
+version shipped, were both available and both rejected." So I did not raise it.
+I trimmed 1,661 characters of my own commentary at v9.82 and another 804 at
+v9.83, and at v9.83 I moved the new code into a module composed into
+`substation-intelligence`, which has 200 kB of headroom, instead of into the
+sandbox.
+
+Growth since the guard was set is not all mine: v9.78's `pipeline-news-layers`
+module is 479 lines. **The sandbox cartridge is at 339,367 characters against
+a 340,000 guard.** Anything card-facing tomorrow needs headroom made first, and
+the only sanctioned way to make it is to move a block into the sibling
+cartridge — as v9.76 did and as v9.83 did.
+
+## 7. Generation 202609030137, v9.83 — F5, and the collision it was about to cause
+
+The coordinator was right to make this urgent. Codex has committed `b91e45b`
+on `codex/20260903-phase0-integrity` in data-grid-gb. I read both products
+(read-only) and diffed them:
+
+```
+                        main 1c9909d      codex b91e45b
+schema        data-grid-gb.connection-points.v3   IDENTICAL
+points                       886                886
+located                      502                489
+COWLEY transformers           10                  5
+ABHAM  transformers            4                  2
+```
+
+Every one of the 886 records differs, under an unchanged schema string. The
+Atlas fetched that file from `main`. So a published, immutable Atlas release
+was one merge away from halving a number on its card with none of its own
+bytes changing — and v9.79's client-side deduplication would have been applied
+to a figure that no longer needed it.
+
+Three products, all from `main`, all now pinned to a commit **and** hashed:
+
+```
+connection-points.v3.json         1c9909d1138704b2…  11e28859…  2,896,561 B
+gb-transmission-network.v1.json   1c9909d1138704b2…  fc331cc2… 10,069,966 B
+price-decade-rollup.json          d310e3cec8cd14bc…  18da5059…      6,873 B
+```
+
+All three URLs were fetched and hashed before the cut and serve exactly those
+bytes.
+
+The table lives in one module in `substation-intelligence`, which the shell
+evaluates before the sandbox — the same route the geodesy module already
+takes. A digest that disagrees refuses. An absent WebCrypto (any non-secure
+context) reports unverified and still reads the product, because refusing on
+absence would make the Atlas unusable outside production while proving nothing.
+The proof exercises **both**: the pin table runs in its own context with real
+WebCrypto so the MISMATCH path executes, while the cartridge's fixture context
+has none and proves the unverified path still loads.
+
+**Pinning strands Codex's correction, and that is deliberate.** It is stated in
+the cut message and in the module: the correction does not reach a reader until
+a human moves the pin, which is one file and one cut. The alternative is not
+knowing which of the two numbers is on the card.
+
+## 8. `loop.mjs state --stdout` — a governance check that could not fail
+
+Codex's audit flagged that a read-only helper rewrote `STATE.md`. It is worse
+than that. `tools/scope/loop.mjs` reads only `process.argv[2]`, so `--stdout`
+was never implemented — it was silently discarded and the command took its
+ordinary path, which writes the file.
+
+`AGENTS.md` step 2 of the handover contract says: "Prove `node tools/scope/
+loop.mjs state --stdout` exactly matches STATE.md." **That check could not
+fail.** I proved it: put the single line `DELIBERATELY WRONG` in STATE.md, run
+the command, and the file comes back correct. A drifted STATE.md was repaired
+by the check that existed to detect it, and the operator saw a match every
+time.
+
+Fixed in `4b1641e`: `--stdout` renders to stdout and writes nothing, the
+ledger line moves to stderr under that flag so the stream can be diffed
+directly, and an unrecognised flag exits 1 rather than being ignored. The same
+experiment now leaves `DELIBERATELY WRONG` on disk and the comparison
+disagrees.
