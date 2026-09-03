@@ -463,3 +463,105 @@ substation-intelligence
 `3c3e53c1d7c7d93f40b5d3eb67c37f1a73db7693094f9c1786e174e87c328c26`.
 
 Commit `97d3ffc` over `f0c29ab`.
+
+---
+
+## Generation 202609030233 — v9.87 — the corridor scalar
+
+**Before** (tip `97d3ffc`): substation-intelligence `82/82`, sld-sandbox `676/676`.
+**After**: substation-intelligence `97/97`, sld-sandbox `687/687`, exit `0`,
+cartridge `330,634` characters.
+
+The scalar runs as arithmetic in its own context, not as a regex over source:
+
+```
+  [PASS] the factor is the calibrated 1.245
+  [PASS] the estimate is the arithmetic, not a lookup
+  [PASS] THE SAMPLE IS 59 DISTINCT SITE PAIRS, not 95 circuits
+  [PASS] the error the calibration actually achieved travels with it
+  [PASS] under a kilometre it withholds rather than scaling
+  [PASS] and says what the numbers were in that band
+  [PASS] at the boundary it answers, so the rule is a threshold and not a gap
+  [PASS] nothing, zero and a negative are null, never zero kilometres
+  [PASS] IT OFFERS NO OVERHEAD ANSWER AT ALL
+  [PASS] and publishes 1.13 as the reason the cable factor is not that answer
+  [PASS] the standing caveat is exactly the four things it is not
+  [PASS] THE SAMPLE ON THE CARD IS THE SITE PAIRS, not the circuit count
+  [PASS] no corridor number is written into the sentence
+  [PASS] the sandbox never carries its own copy of the factor
+```
+
+`verify-compose` PASS, `scope-ledger=PASS`.
+
+**Gate — CI job reproduced locally** at the exact pushed commit
+`1fb6262e2ab524ad87a07b658c9a06ca2e494c44`, runner shape (fresh clone,
+`grid-distance-maths` beside it, no `data-grid-gb`), all six steps:
+
+```
+composition matches what is declared and hashed   PASS
+composed cartridge passes its own proof           97/97, 687/687, exit 0
+scope ledger and workflow budget                  scope-ledger=PASS
+STATE.md was regenerated before it was committed  clean
+no CRLF survives in a tracked text file           all LF
+renormalising changes nothing                     clean
+```
+
+The runner's own conclusion was not sampled: API budget at zero.
+
+**Live**: generation `202609030233`, all four MATCH. sld-sandbox
+`0290dc54a3046b86bc134a844c61e702da39184e21508bc71e0c766bc8531d3b`.
+
+Commit `1fb6262` over `97d3ffc`.
+
+---
+
+## Generation 202609030234 — v9.88 — the 44 px action
+
+**Before** (tip `1fb6262`): substation-intelligence `97/97`, sld-sandbox `687/687`.
+**After**: substation-intelligence `97/97`, sld-sandbox `687/687` -> `702/702`,
+exit `0`, cartridge `339,864` characters — **136 under the guard**.
+
+```
+  [PASS] the target is 44 px, and so is every control inside the sheet
+  [PASS] the sheet is a labelled dialog, closable by button and by Escape
+  [PASS] it honours a reader who asked for reduced motion
+  [PASS] visibility is toggled with hidden, not by rewriting display
+  [PASS] the desktop slot it takes is one nothing else binds
+  [PASS] the long press cancels on movement, with a stated threshold
+  [PASS] a second finger is not a long press
+  [PASS] AND IT NEVER FIRES DURING AN SLD DRAG, checked twice
+  [PASS] touchend and touchcancel disarm it
+  [PASS] the listeners are passive, so they cannot block a scroll or a pan
+  [PASS] an absent corridor module leaves the measured distances standing
+```
+
+`verify-compose` PASS, `scope-ledger=PASS`.
+
+**Gate — the runner's own conclusion**: commit
+`8fb95a2138010851039a1d648e730f1e10889576`, run **`33708191973`**,
+conclusion **`success`**.
+
+**Live**: generation `202609030234`, composition `202609030234-gridatlas-v9.88`,
+all four MATCH. sld-sandbox
+`660d4a2a680ffc5fcc9fa4cf706ed7470609cfe648903e044b2c6bb6ae062c83`,
+substation-intelligence
+`8fd02f24cc49233393091c73a3a7b321e5f48ed44482d886dd9db85fcca7003d`.
+
+Commit `8fb95a2` over `1fb6262`.
+
+---
+
+## Retrospective confirmation for v9.86
+
+The poll I abandoned when the budget hit zero completed in the background and
+is recorded here for completeness:
+
+```
+remaining=58
+RUN 33705965414  202608310050 GridAtlas next-version builders  | completed success
+RUN 33705965506  202608312212 GridAtlas cartridge proof        | completed success
+RUN 33705964271  pages build and deployment                    | completed success
+```
+
+The local reproduction of that same commit had reached the same conclusion,
+which is the only evidence I have that the substitute gate is sound.

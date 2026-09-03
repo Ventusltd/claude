@@ -448,3 +448,97 @@ Protocol from here, and it should be the standing one: query the free
 and poll **once per cut, not once per curiosity**. My earlier loop of twelve
 polls at 25-second intervals per generation was the whole problem — four
 generations of that is the entire hour's budget.
+
+## 15. Generation 202609030233, v9.87 — the corridor scalar
+
+Beside every measured distance, additively:
+
+```
+Cowley · 15.76 km straight · ~19.6 km corridor estimate
+(x1.245, 73% of GB transmission cable circuits within 15% of published
+ length, 59 distinct site pairs)
+```
+
+The straight-line figure is unchanged, still first, still the measurement.
+
+**The sample on the card is 59 distinct site pairs, never 95 circuits.**
+Parallel circuits between the same two sites duplicate the geometry exactly,
+so quoting 95 would count one measurement up to four times.
+
+**Under about a kilometre it withholds rather than scaling**, and says why:
+median published length 0.59 km against a median error of 52.5% in that band.
+That is not the factor being wrong — it is a straight line between two site
+centroids not measuring route factor at that scale.
+
+**It cannot become an overhead-line answer.** The module deliberately exports
+no `forOverhead`. The measured 1.13 is published only as the reason the cable
+factor does not answer that question: a tower line crosses open country in
+long spans while a cable follows the highway network, so it is the wrong model
+regardless of the error. The proof asserts the absence, not just the presence.
+
+The scalar is exercised as arithmetic in its own vm context — 15.76 × 1.245 to
+twelve decimal places, 0.4 km returning null with its reason — rather than
+matched as a string, and the sandbox carries no copy of the factor.
+
+## 16. Generation 202609030234, v9.88 — the 44 px action, and the half of the brief that was wrong
+
+`Explore route corridors ›` opens a bottom sheet with the full basis. 44 px,
+and every control inside the sheet the same.
+
+**The brief said the v8 engine binds no `contextmenu` and no `touchstart`, so
+both gesture slots are free. Half of that is wrong in a way that mattered.**
+Measured:
+
+```
+contextmenu   0 in the carried engine, 0 in index.html, 0 in every composed part
+touchstart    0 in the engine  -  but 1 in THIS cartridge:
+              atlas/parts/202609012045-sld-sandbox-body.js:4543
+              map.on('touchstart', beginDrag)   - the SLD array, its rotate
+              handle and its route pins
+```
+
+So the engine statement is true and the conclusion drawn from it is not. The
+right-click slot is genuinely free. The touch slot is occupied by this
+cartridge's own dragging.
+
+The long press therefore stands down for everything: single finger only, so a
+pinch never starts it; cancelled by movement over 10 px, so a pan never fires
+it; cancelled by touchend and touchcancel; and it checks for an SLD drag
+**twice** — when arming and again when firing, because a drag can begin inside
+the 500 ms. Every listener is passive, so none can block a scroll or a pan.
+
+## 17. The substitute gate, and how it held up
+
+The API budget was at zero for most of the last stretch — four agents on one
+IP. Rather than stall or keep sampling, I did what `CLAUDE.md` prescribes and
+reproduced the runner's job locally against the exact pushed commit: a fresh
+`--shared` clone at that SHA, `grid-distance-maths` beside it, no
+`data-grid-gb`, and all six workflow steps run in order.
+
+**It was then validated against the real thing.** The v9.86 poll I had given up
+on landed from the background: run `33705965506`, `success`. My local
+reproduction had said the same. v9.87 was reproduced the same way before
+v9.88 was pushed, and v9.88's runner conclusion was sampled directly and is
+green.
+
+So the substitute is sound, but it is a substitute: it runs the same commands
+on a different machine. It cannot catch anything that is specific to the
+runner's environment — which is exactly the class of defect that produced the
+five red generations in the first place. I would not treat it as equivalent
+except under a budget that is genuinely exhausted.
+
+## 18. Where the size boundary now stands
+
+```
+v9.84   339,367   84.8%   before the ledger moved
+v9.85   326,331   81.6%   ledger moved out
+v9.86   330,634   82.7%   coverage sentence
+v9.87   330,634   82.7%   corridor - the module went to the sibling cartridge
+v9.88   339,864   85.0%   the sheet
+```
+
+**136 characters to spare.** v9.85 bought 13,036 and v9.88 spent almost all of
+it. The next card-facing change needs headroom made first. The candidate I
+identified and did not take is the GB price panel: self-contained, its own
+loader, its own state object, and about electricity prices rather than the SLD
+sandbox.
