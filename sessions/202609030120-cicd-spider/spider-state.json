@@ -433,7 +433,35 @@
    "immune_repos": 0,
    "cold_clones_at": "scratchpad/estate (14 repos cloned 2026-09-03T01:41Z)"
   },
-  "measured_with_commit": "d2893fab63fbcdae491e04a0be8c6a783b840911"
+  "measured_with_commit": "d2893fab63fbcdae491e04a0be8c6a783b840911",
+  "ruler": {
+   "202608301321-one-active-scope.md": "2b9cf9774285",
+   "202608301322-no-app-copies.md": "587c82a21b6e",
+   "202608301323-no-per-release-workflows.md": "e7413f209ef6",
+   "202608301325-self-terminating-loops.md": "0a39b1eccc11",
+   "202608301326-chaining-token.md": "1f79357a5fcc",
+   "202608301327-pointer-verifies.md": "df61a2cf2d27",
+   "202608301328-derived-state-not-authored.md": "29fbed3907f2",
+   "202608301329-context-diet.md": "5dd01451dfcf",
+   "202608301330-rollback-exists.md": "bee82a3eaf53",
+   "202608301440-registry-integrity.md": "62dfec4d01ea",
+   "202608301441-no-dangerous-apis.md": "9d2806cb606c",
+   "202608301442-pinned-actions.md": "6e3a949c8ec2",
+   "202608301443-least-permissions.md": "026e6594b855",
+   "202608301444-agent-quarantine.md": "f73721834bd6",
+   "202608301445-vocabulary.md": "f56cf97ff388",
+   "202608301701-monotonic-utc-generations.md": "0a19b8e03e39",
+   "202608301702-on-ledger-commits.md": "9d683709f1f5",
+   "202608301703-executor-declared.md": "95123bd94f62",
+   "202608301704-loop-exists.md": "97123837ecab",
+   "202608301705-rollback-exercised.md": "722f4a9788e8",
+   "202608301706-attestation-freshness.md": "fedb4a04a66d",
+   "202608301720-full-history-checkout.md": "af62e0569ad8",
+   "202608301810-no-time-based-gates.md": "3729a1e87969",
+   "202608311458-release-name-convention.md": "e72a06e079e6",
+   "202608312045-page-data-block-parses.md": "73682abef592"
+  },
+  "active_vaccines": 25
  },
  "crosslink": {
   "artefact": "crosslink.json",
@@ -476,7 +504,33 @@
   ],
   "regenerate": "scratchpad/crosslink.py . then scratchpad/analyse.py"
  },
- "known_flaky": [],
+ "known_flaky": [
+  {
+   "id": "F1",
+   "what": "any gate run in a live working copy",
+   "why": "three agents write continuously; pass.py returns unmeasurable-dirty-tree rather than a verdict (RH6)"
+  },
+  {
+   "id": "F2",
+   "what": "any local check that hashes or byte-compares a file read off disk",
+   "why": "15 of 18 working copies on this machine hold CRLF where the blob holds LF (RH14). globalgrid2050 3597/5281, companies 75/76, cvaa 46/51. Reproduce in a clean clone or compare git show HEAD:<path>"
+  },
+  {
+   "id": "F3",
+   "what": "globalgrid2050/scripts/verify_published_versions.py",
+   "why": "skips its pipelinenews lineage check on a 403 and still reports a verdict (RH15). Check the API budget before trusting a pass"
+  },
+  {
+   "id": "F4",
+   "what": "a fresh Windows clone of gridatlas",
+   "why": "needs -c core.longpaths=true and still silently omits 12 files under nightly/.../runs/"
+  },
+  {
+   "id": "F5",
+   "what": "CVAA findings deltas",
+   "why": "the ruler moves too. pass.py hashes the active vaccine set and emits CVAA-RULER vs CVAA-COMMIT so a rule change cannot read as a repo change (RH13)"
+  }
+ ],
  "open_drift": [
   {
    "id": "D1",
@@ -817,5 +871,27 @@
   "disk-is-not-what-ships is a false positive on every repo (RH1)",
   "never run a gate against a dirty tree (RH6) - pass.py guards before and after",
   "only shipped-tier edges are dependencies (RH7-RH9)"
+ ],
+ "drift_closed": [
+  {
+   "id": "D2",
+   "closed": "2026-09-03T01:44Z",
+   "by": "gridatlas v9.83 pinned-products module"
+  },
+  {
+   "id": "D4",
+   "closed": "2026-09-03T02:28Z",
+   "by": "not a defect - the vaccine is untracked and not in the repository (RH11)"
+  },
+  {
+   "id": "D7",
+   "closed": "2026-09-03T01:56Z",
+   "by": "gridatlas v9.84, CI success at 5a59e71"
+  },
+  {
+   "id": "D9",
+   "closed": "2026-09-03T02:10Z",
+   "by": "merged into D6 - same defect, the watchdog was right"
+  }
  ]
 }

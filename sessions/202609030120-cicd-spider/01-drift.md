@@ -113,9 +113,27 @@ HEAD moved at 01:20Z, so this is minutes old and may be a normal lag.
       - the homepage names Grid Atlas v9.77 / 202609020018 as the current
         verified release while the live composition is v9.81 / 202609030119
 
-This is the estate's own gate, working. gridatlas advanced past the homepage's
-stamp and the homepage has not caught up. Watch for it to clear on its own; if
-it is still failing at 06:00Z it is not lag, it is drift.
+**Confirmed DRIFT, not lag, at 2026-09-03T02:02Z.** I filed this with a note to
+watch whether it cleared on its own. It has not, and the gap is widening:
+
+    homepage names     v9.77 / 202609020018
+    live composition   v9.86 / 202609030200
+    gridatlas versions shipped past the homepage stamp: v9.78 .. v9.86, nine
+
+globalgrid2050's own HEAD moved at 01:10Z (87e6da86) without refreshing the
+stamp. This is not a publish that has not caught up; it is nine publishes that
+have not. The homepage version is being treated as a field that follows rather
+than as the thing being cut.
+
+**And the gate itself degrades silently.** At 02:02Z it printed
+
+    skipped: pipelinenews lineage head: HTTP Error 403: rate limit exceeded
+
+four lines above its verdict, and reported PUBLICATION TRUTH anyway. The 60/hour
+unauthenticated budget is per IP and shared by four agents and by the estate's
+own gates; I had exhausted it myself (RH15). So this verdict can be produced
+from a strictly smaller set of checks than it names, and nothing in the verdict
+line says which. It should fail closed, or carry the skip into the verdict.
 
 Note the shape: this gate reads `gridatlas@main/atlas/current.json`
 (`verify_published_versions.py:54`) — unpinned — so it is a truth check whose
