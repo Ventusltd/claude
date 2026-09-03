@@ -133,9 +133,29 @@ reason written into it, and the tree is renormalised. The remaining three —
 other lanes' note repositories and may be mid-write, and none is a shipping surface.
 
 **One trap if you re-check this yourself:** do not rank by CRLF count. `cvaa` carries 45 and
-`gridatlas` 238 *with the correct rule*, because those working copies predate the rule and were
-never renormalised. Ranking by CRLF count puts the two most correct repositories at the top. The
-rule is the measurement; the CRLF count is a symptom with a second cause.
+`gridatlas` 238 *with the correct rule*. Ranking by CRLF count puts the two most correct
+repositories at the top. The rule is the measurement; the CRLF count is a symptom with a second
+cause.
+
+**And the second cause is not what either of us assumed — my own fix demonstrated it.** The
+standing explanation was "those working copies predate the rule and nobody renormalised". That is
+only half right, and applying the fix here proved the other half:
+
+> `* text=auto eol=lf` plus `git add --renormalize` fixes the **blob**. It never rewrites a
+> working copy that already exists, and **`git status` stays silent**, because the file still
+> matches the index. Only a fresh checkout of those paths — or a fresh clone — corrects the disk.
+
+So after I fixed this repository, 23 tracked files sat at `i/lf w/crlf` — blob LF, disk CRLF —
+with the tree reporting clean. **A repository can be simultaneously correct in git and wrong on
+disk with every indicator green.** cvaa's 45 and gridatlas's 238 are the expected residue *after*
+renormalising, not evidence anyone forgot.
+
+It landed on exactly the wrong files. Four were the spider's machine-readable deliverables —
+`census-members.json`, both crosslink graphs, and `spider-state.json` (1,193 stray CR characters,
+38,606 bytes on disk against 37,413 in the blob). **The files a consumer would hash or diff were
+the files that differed from what ships** — which is the precise hazard `.gitattributes` exists to
+prevent, reintroduced by the act of fixing it. All 23 are now restored by `rm` + `git checkout`
+(the spider's four, my nineteen); `i/lf w/crlf` is **0**, and no blob changed.
 
 The only CRLF blobs in the estate are **223 CSVs in globalgrid2050**, deliberately exempt under
 `*.csv -text` with the reasoning written into `.gitattributes`: RFC 4180 specifies CRLF for
