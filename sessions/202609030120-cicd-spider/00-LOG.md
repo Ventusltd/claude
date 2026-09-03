@@ -393,3 +393,30 @@ control, and a rule that fires everywhere and is quiet nowhere emits
 
 **Open:** D1 D3 D5 D6 D8 D11 D15. **Closed:** D2 D7 D9 D10 D12 D13 D16 + dead
 schedules + gg2050 dead link. **Withdrawn:** D4 D14.
+
+---
+
+## Pass 14 — 2026-09-03T04:55Z — no estate drift
+
+Three guards fired as designed; nothing else moved. The hour's work was all
+refinement of findings rather than new drift.
+
+**D3's #1 rule refined.** `monotonic-utc-generations` splits by sign, and only
+AHEAD is a defect — `date -u` does not return the future, so a stamp ahead of
+its commit was chosen at task start. Verified independently: pipelinenews 125
+of 220 ahead, gridatlas 118 of 298, globalgrid2050 19 of 56 (worst **827
+minutes**), claude 8 of 87, cvaa 3 of 15, data-grid-gb 5 of 5. Behind can be
+innocent; `claude`'s one case at −385 min is an archive commit correctly titled
+with the session it files.
+
+**The remedy tested on myself**, split at RH12 where I mechanised the stamp:
+
+    before   4 commits,  2 outside 15 min, worst +49
+    after   51 commits,  0 outside 15 min, worst  -1
+
+**RH29, RH30** recorded. Thirty runner-health entries now sort into five
+families — workspace-mid-change, text-about-code, corrections that protected
+only their own call site, definitions never read, and partial views. **None of
+the thirty is about the estate.**
+
+**Open:** D1 D3 D5 D6 D8 D11 D15.
