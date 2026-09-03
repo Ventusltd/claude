@@ -1,0 +1,147 @@
+{
+  "assessment_of_16_rejections": {
+    "defensible_removed_wrong_duplicate": [
+      "AREX",
+      "BLEX",
+      "BOSO",
+      "BOSW",
+      "GREG",
+      "ORMW",
+      "MOWE"
+    ],
+    "over_conservative_regex_collateral": [
+      "BEAT",
+      "EACO",
+      "LONO",
+      "NNGO",
+      "SGRX",
+      "TKNO",
+      "WDSO"
+    ],
+    "wrong_shore_heuristic_inverted": [
+      "BBWO",
+      "HOWB"
+    ]
+  },
+  "coverage_by_voltage_kv": {
+    "132": 353,
+    "275": 198,
+    "400": 206
+  },
+  "denominators": {
+    "corrected_cable_pairs": 60,
+    "corrected_cable_records": 95,
+    "global_node_end_landings": 2944,
+    "global_sites_with_transformers": 525,
+    "global_transformer_records": 1472,
+    "global_transformer_site_incidences": 1550,
+    "historical_cable_pairs": 59,
+    "historical_cable_records": 95,
+    "hygiene": "pass",
+    "rollup_node_end_landings": 2920,
+    "rollup_sites_with_transformers": 515,
+    "rollup_transformer_site_incidences": 1526,
+    "sites_inflated_by_endpoint_count": 484
+  },
+  "file_sha256": {
+    "README.md": "a78fcc1b23ee28857fca88a8ba8b04ff869f1c7ea73d46915ec6e374b94c4387",
+    "derived/build_connection_points.py": "a90bbf7ded28c134c45e8023d4380f42a7531eb053bc75e2c755f0a60ea2f031",
+    "derived/connection-points.v3.json": "8db7171d94763399d85c819e522dcb83ef1ecedc93fbeff032fb45ca02f81f35",
+    "derived/gb-transmission-network.v1.json": "fc331cc20b061f85adf18d890762a164328a1c5e84acef6a23d35d36f849fc8a",
+    "derived/verify_connection_points.py": "da0e83c2f1040f65ceb36e47995bb4391f0e4cc8ffc698456919204a8de0e932",
+    "derived/verify_phase0_acceptance.py": "b49227eb04966e2952cd94d931414a89de1e9394b16d86b43cf1a0cfd282a22c",
+    "docs/routing/LEGACY_LAYER_AUDIT.md": "20e8f55ee3ec37235f742e66bd2cf99df473ea6268823c8752bbaf5deb64e9df",
+    "docs/routing/LITERATURE_REVIEW.md": "250e8a23fabeb725b68a8cd9fe60bd7c5dda21f8e26f5cfba6691177e7702822",
+    "docs/routing/METHOD_AND_LIMITATIONS.md": "fdf44a5e281c48087d90ab4a89246809e8ec5eed300cb2cadcf7da61d47f2580",
+    "sources/routing-sources-manifest.json": "7681e7491917978243dab0d77241097e0e3a0885387b1c38d6705785c174f4f8"
+  },
+  "findings": {
+    "A": "shore heuristic inverted for 'X Offshore Wind Farm Substation' naming; HOWB(onshore) rejected while HOWW(offshore) retained a land coordinate 163 m away",
+    "B": "WERO/WERW both named WESTERMOST ROUGH OFFSHORE still share one coordinate; survives context check only because voltages differ",
+    "C": "WLEE/WLEX gains are genuine \u2014 two distinct coordinates 8.4 km apart",
+    "D": "sharpest civil parameters (Glaslyn, River Ouse, EA FRA3) cite sources with sha256:null; README calls locators 'exact'",
+    "E": "NG undergrounding paper has published:null yet supplies trench/swathe dimensions presented as current",
+    "F": "Versleijen DOI 10.1007/s12667-026-00827-x called peer-reviewed; unverified, sha256:null"
+  },
+  "git_status_porcelain": [],
+  "head_commit": "b91e45b231464c24339f5a58b81e6b1eb4c8b47f",
+  "head_committed_at": "2026-09-03T02:21:01+01:00",
+  "head_subject": "20260903: correct transformer identity and fail-closed joins",
+  "location_delta_vs_1c9909d": {
+    "changed": [],
+    "gained": [
+      "THAW",
+      "WLEE",
+      "WLEX"
+    ],
+    "lost": [
+      "AREX",
+      "BBWO",
+      "BEAT",
+      "BLEX",
+      "BOSO",
+      "BOSW",
+      "EACO",
+      "GREG",
+      "HOWB",
+      "LONO",
+      "MOWE",
+      "NNGO",
+      "ORMW",
+      "SGRX",
+      "TKNO",
+      "WDSO"
+    ],
+    "net": -13
+  },
+  "offshore_sites_still_located_on_land": [
+    "HOWW",
+    "HUMW",
+    "RAMW",
+    "WERO",
+    "WERW"
+  ],
+  "product": {
+    "connection_points": 886,
+    "cowley_transformers": 5,
+    "join": {
+      "ambiguous_authoritative_identity": 2,
+      "ambiguous_distinctive_tokens": 31,
+      "ambiguous_exact_name": 14,
+      "distinctive_tokens": 39,
+      "exact_name": 450,
+      "geometry_source": "OpenStreetMap contributors, via the GridAtlas release",
+      "rejected_shore_qualifier_conflict": 1,
+      "unlocated": 397,
+      "unlocated_are_published": "a site nobody has mapped is published without coordinates rather than dropped",
+      "why": "ETYS names substations and does not locate them"
+    },
+    "sites_with_transformers": 515,
+    "transformer_sum_over_sites": 1526,
+    "with_fault_current": 605,
+    "with_location": 489,
+    "with_planned_changes": 629
+  },
+  "repo": "data-grid-gb",
+  "schema": "claude.codex-audit-baseline.v1",
+  "shared_coordinate_groups": {
+    "after": 13,
+    "before": 19
+  },
+  "taken_utc": "2026-09-03T01:20:00Z",
+  "verdict": "ADOPT WITH CHANGES",
+  "verifier": {
+    "verify_connection_points": {
+      "assertions_printed": 44,
+      "check_call_sites_at_1c9909d": 31,
+      "check_call_sites_working_tree": 41,
+      "passed": 44
+    },
+    "verify_phase0_acceptance": {
+      "failures": 0,
+      "passed": 22,
+      "total": 22
+    }
+  },
+  "work_is_uncommitted": true
+}

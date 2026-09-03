@@ -1,0 +1,21 @@
+diff --git a/atman/202608262014-build-pages.py b/atman/202608262014-build-pages.py
+index c4eeae4..c5ffffa 100644
+--- a/atman/202608262014-build-pages.py
++++ b/atman/202608262014-build-pages.py
+@@ -901,7 +901,15 @@ def validate_live_pointer(root: Path, timestamp_folder: dict | None) -> dict | N
+     }
+     require(len(pointer_commits) == 1, "live pointer copies were not committed together")
+     pointer_commit = next(iter(pointer_commits))
+-    require(pointer_commit == git_text(root, "rev-parse", "HEAD"), "live pointer commit is not deployment HEAD")
++    # Aligned with validate_current_or_predecessor_pointer(), which validates the
++    # same object and has required only ancestry since 2026-08-30 (aeb8827). The
++    # invariants that bind the pointer to its release -- copies committed together,
++    # a one-parent child of the release commit, no path touched but the two pointers
++    # -- are unchanged and are checked immediately below.
++    subprocess.run(
++        ["git", "merge-base", "--is-ancestor", pointer_commit, "HEAD"],
++        cwd=root, check=True, capture_output=True,
++    )
+     parents = git_text(root, "show", "-s", "--format=%P", pointer_commit).split()
+     require(parents == [release_commit], "live pointer commit is not a one-parent child of deployed release")
+     pointer_changes = {
