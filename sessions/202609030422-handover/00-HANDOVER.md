@@ -354,6 +354,15 @@ then 33), CI filtered to each repo's **own** default branch, read authenticated.
 
 **35 repositories. 20 green · 4 red · 11 with no workflow runs.**
 
+> **Read the denominators before the numbers.** This section counts **35** — everything
+> `affiliation=owner` returns, of which 1 is a fork (`pandapower`), 0 archived, 2 private. The
+> vaccine census later in this section counts **32**. They are different populations and I have
+> not yet closed the gap of two; the reconciliation is in flight and will be recorded here rather
+> than smoothed over. Treat "35" as the CI population and "32" as the vaccine population until it
+> is. Two bare numbers forty lines apart in one document is the silent-denominator failure this
+> estate already warns about — *a wrong denominator is worse than a wrong finding, because it gets
+> quoted rather than checked* — so it is flagged rather than left for you to trip over.
+
 The four reds, each with its cause read from the log rather than inferred:
 
 | repo | since | cause |
