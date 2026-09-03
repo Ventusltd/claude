@@ -114,3 +114,66 @@ LIVE VERIFIED: every composed cartridge matches local bytes and its manifest has
 ```
 
 Commit `ac810d6`, pushed to `origin/main` over `d20437e`.
+
+---
+
+## Generation 202609030116 — v9.80 — Reg1 mobile HIDE LAYERS
+
+**Before the cut** (tip `ac810d6`): substation-intelligence `53/53`,
+sld-sandbox `638/638`.
+
+**After the cut**: substation-intelligence `53/53`, sld-sandbox `645/645`,
+`proofs run: 4`, exit code `0`.
+
+Seven checks added. The first reads the SHELL rather than the cartridge,
+because the containment is a fact about the page:
+
+```
+  [PASS] HIDE LAYERS collapses the layer panel and NOT the application
+  [PASS] the control targets the wrapper by name, and says so for a reader
+  [PASS] a shell without that wrapper gets NO control, never a fallback to .dashboard
+  [PASS] the toggle hides itself while a fullscreen element is present
+  [PASS] and the hidden state is published rather than left to be inspected
+  [PASS] the toggle is a 44 px touch target
+  [PASS] the refusal path does not read `link`, which is in its dead zone there
+```
+
+`scope-ledger=PASS`, `STATE.md=UPDATED`.
+
+**Live**: generation `202609030116`, composition `202609030116-gridatlas-v9.80`,
+all four cartridges MATCH. sld-sandbox
+`17b8cfd3d014df20a268b07dcfc1a26883d64cbd03f1e42be0a379773a78349c`.
+
+Commit `e9491b6` over `ac810d6`.
+
+---
+
+## Generation 202609030119 — v9.81 — Reg2 deep-link camera
+
+**Before the cut** (tip `e9491b6`): substation-intelligence `53/53`,
+sld-sandbox `645/645`.
+
+**After the cut**: substation-intelligence `53/53`, sld-sandbox `653/653`,
+`proofs run: 4`, exit code `0`.
+
+Eight checks added. The first two establish the premise from the other two
+lanes' real bytes and passed BEFORE the fix, which is the point of them:
+
+```
+  [PASS] the shell stands down before any flyTo when there is no repd_ref
+  [PASS] and the search lane stands down at the same test, reporting ABSENT
+  [PASS] so this cartridge flies, and only when there is no repd_ref
+  [PASS] the centre is the link's, and the zoom the link's where it is usable
+  [PASS] a reader who asked for reduced motion still arrives
+  [PASS] the move it made is published, with the reason it had to
+  [PASS] the camera is set BEFORE the zoom is honoured and before the tech gate
+  [PASS] a failed camera is recorded rather than taking the arrival with it
+```
+
+`scope-ledger=PASS`, `STATE.md=UPDATED`.
+
+**Live**: generation `202609030119`, composition `202609030119-gridatlas-v9.81`,
+all four cartridges MATCH. sld-sandbox
+`18e7ead290e789bc1ebe8749a89f95d3b1375f798d09d06dd50e7a70b0f5d100`.
+
+Commit `f1f430d` over `e9491b6`.

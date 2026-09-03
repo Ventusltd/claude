@@ -104,3 +104,54 @@ inside a proof. It resolves its path from `atlas/current.json` now.
 
 Live-verified: all four composed cartridges match local bytes and their
 manifest hashes at `https://ventusltd.github.io/gridatlas/atlas/`.
+
+## 3. Generation 202609030116, v9.80 — Reg1, HIDE LAYERS blanked the app
+
+Confirmed exactly as briefed, and the shell structure is the evidence:
+`.dashboard` opens at `index.html:22` and contains BOTH `.map-container`
+(line 36, holding `#map`) and `.scada-wrapper` (line 112, holding the layer
+keys and the legend). The control collapsed `.dashboard` to `max-height:0;
+overflow:hidden`, so it took the WebGL canvas down with the checkboxes, and
+the choice is remembered per browser so the reload a reader reaches for
+blanked it again.
+
+Retargeted to `.scada-wrapper`. **No fallback**: a shell that stops publishing
+that wrapper gets no control at all and says so on `__GRIDATLAS_DASH__`. The
+last fallback is what blanked the map.
+
+Toggle hidden while a fullscreen element is present, because
+`keepLayersInFullscreen` MOVES the layer panel into the fullscreen element and
+a fixed-position button outside it acts on a node the reader is not looking at.
+
+**One thing I nearly shipped.** My first refusal path called
+`link.failures.push(...)`. `link` is declared at line 1170 and this control
+runs on the way past at line ~466 — a ReferenceError at load that would have
+taken the whole cartridge, not just the control. Caught by reading before
+running. The proof now asserts that the control body never touches `link`.
+
+## 4. Generation 202609030119, v9.81 — Reg2, and its real mechanism
+
+The brief pointed at `202609011141-place-global-search-v9-5.js:497`. That is
+one of three lanes involved and, on its own, not where the fix belongs.
+Measured from the real bytes of all three:
+
+- the **shell** returns at `if (!/^[A-Za-z0-9-]{1,40}$/.test(repdRef)) return;`
+  inside `focusCanonicalProjectDeepLink`, **before** it reaches any `flyTo`;
+- the **search lane** returns `status: 'ABSENT'` at the same test, with no
+  `flyTo` before it;
+- the **sandbox** then called `honourRequestedZoom(map)`, which eases the ZOOM
+  and never sets the CENTRE.
+
+So a link with coordinates and no `repd_ref` zoomed in on whatever view the map
+had opened with. That is worse than not moving, because it looks deliberate.
+
+The camera move belongs in the sandbox, which is where v9.67 already put the
+arrival zoom for the same reason (the shell cannot be edited). It flies to the
+link's coordinates only when `repd_ref` is absent; the identity path is
+untouched, per the brief. Zoom is the link's own where usable and 12 otherwise
+— the shell's long-standing hard-coded value and what Pipeline News sends — so
+existing links land exactly where they landed before.
+
+The proof establishes the premise from the other two lanes' bytes rather than
+asserting it, so if either lane ever starts flying, the check fails loudly
+instead of leaving two cartridges fighting over the camera.
