@@ -1303,3 +1303,53 @@ fail most widely are about the estate misreporting its own time and pushing with
 the default token; and the two most-cited "problems" of the night —
 `pinned-actions` and `least-permissions` — are warnings the estate has already
 priced, with expiry dates.
+
+---
+
+## D11 — CLOSED 2026-09-03T05:32Z, verified independently
+cvaa `93e568e`, `tools/selftest.mjs:7` is now
+`dirname(dirname(fileURLToPath(import.meta.url)))`. Run on this Windows machine:
+
+    rc=0   all antibodies fire on disease and stay silent on health
+
+It could not run at all here before. Closed.
+
+## D5 — NOT closed. Still 4 of 18, and the file content settles it.
+**Re-measured 2026-09-03T05:31Z**, against the coordinator's "0 of 18".
+
+    LACKS the rule: chatgpt-audits, claude, codex-chatgpt, gemini      4 of 18
+
+All four carry **bare `* text=auto`** — GitHub's default template — not
+`* text=auto eol=lf`:
+
+    $ cat claude/.gitattributes
+    # Auto detect text files and perform LF normalization
+    * text=auto
+
+That is not a near-miss; it is the case the `disk-is-not-what-ships` vaccine
+singles out by name:
+
+> *"Bare `text=auto` is the trap: it normalises the blob and still hands Windows
+> CRLF, which is exactly the situation that causes this."*
+
+and for which it emits a distinct finding
+(`.gitattributes has bare '* text=auto' … it needs '* text=auto eol=lf'`).
+
+**The consequence is observable**, not theoretical: `chatgpt-audits` carries 38
+CRLF blobs in its working copy and `claude` 23.
+
+**Why the two sweeps disagree.** Mine tests the anchored rule
+`^\s*\*\s+text=auto\s+eol=lf\s*$`. A sweep testing for the *presence* of
+`.gitattributes`, or matching `text=auto` loosely, returns 0 of 18 — correctly,
+for the question it asks. Both measurements are right about their own predicate;
+only one of them is the vaccine's predicate.
+
+**Note the discriminator that does NOT work:** CRLF count. `cvaa` (45) and
+`gridatlas` (238) carry far more CRLF than the four, despite having the correct
+rule, because those working copies predate the `.gitattributes` addition and
+were never renormalised (RH14). The rule is the measurement; the CRLF count is a
+symptom with a second cause.
+
+Low consequence — all four are agent-notes repositories rather than shipping
+surfaces — but it stays open, because it is the exact defect the estate wrote a
+vaccine about.
