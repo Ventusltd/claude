@@ -966,3 +966,53 @@ for the same reason: it checks what is committed, and prose is not.
 between roughly 03:15Z and 03:54Z is about thirty minutes late. The measurements
 those messages carry — commit SHAs, counts, HTTP status codes, vaccine
 verdicts — are unaffected, because none of them was derived from a clock.
+
+---
+
+## RH24 — 2026-09-03T04:35Z — I never measured my own instrument, and then built
+## a mechanism that entrenched the false constraint
+
+`CLAUDE.md` says: no gh CLI, 60 requests/hour shared, and
+`/actions/runs/<id>/logs` returns 403. I took all of it as fact for four hours.
+Measured, all three in one minute:
+
+    gh CLI                   absent          TRUE
+    unauthenticated          limit 60,   remaining 35
+    scripts/gh-api.sh        limit 5000, remaining 4992
+    /actions/runs/<id>/logs  200, not 403
+
+Every push in this estate already authenticates, so the credential helper holds
+a token the whole time. My binding constraint was fictional.
+
+**And I did not merely inherit it — I reinforced it.** At RH15 I wrote *"the
+60/hour unauthenticated budget is per IP"* as though I had established it, built
+a floor of 25 into `pass.py`, and told the coordinator I was rationing calls so
+the estate's gates kept their share. A guard around a constraint that does not
+exist is the most durable way to keep believing in it: every pass afterwards
+printed `API-BUDGET 24/60 left`, which reads as confirmation.
+
+**The cost, measured rather than estimated:**
+
+- I reproduced the gridatlas cartridge-proof failure (D7) by cloning three
+  repositories into a runner-like layout, because I believed the log was
+  unreadable. The log names the cause in one line.
+- D8 sat for four hours with a cause taken on trust — "authorisation freeze by
+  design". Two minutes after gaining log access it turned out to be
+  `AssertionError: timestamp release schema changed`, a producer/consumer
+  divergence dating to 31 August.
+- The estate itself paid: a nine-command cvaa step was split into five named
+  steps specifically so a failure could be identified without log access.
+
+**The pattern, and it is the cleanest instance of the night's recurring one:
+I check what I am pointed at and not what I am standing on.** Twenty-three
+runner-health entries interrogating vaccines, gates, trees, bytes, branches and
+denominators — and not one line testing the sentence that told me my instrument
+was crippled. The brief's own first principle is *"You have found nothing until
+you have measured it"*, and the thing I never measured was the measuring.
+
+**What I changed:** `pass.py` uses `scripts/gh-api.sh`; the budget floor is
+removed; CI sampling covers every repository every pass instead of only those
+whose HEAD moved. Added `ci-log.sh` for reading a run's log by id. The
+`known_flaky` entry F3 — "check the API budget before trusting a pass" — is
+withdrawn, because the gate that skipped on a 403 was skipping on a limit that
+did not have to bind.
