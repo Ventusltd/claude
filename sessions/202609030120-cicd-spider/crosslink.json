@@ -4,15 +4,15 @@
  "repo": "Ventusltd/<estate>",
  "parentScope": "Ventusltd/data-federation-map-for-globalgrid2050-all-repos",
  "uiScope": "estate-crosslink",
- "generatedAt": "2026-09-03T01:49:24Z",
+ "generatedAt": "2026-09-03T02:34:56Z",
  "generatedBy": "claude/sessions/202609030120-cicd-spider",
  "method": "static evidence extraction from working copies; every edge cites a file and a line. evidenceTier=shipped is the dependency graph; record/doc/archive/catalogue are mentions and MUST NOT be counted as dependencies.",
  "reposTotal": 33,
  "reposScanned": 32,
  "nodeCount": 33,
- "edgeCount": 6854,
- "edgeCountShipped": 336,
- "mutableShippedRuntimeEdges": 2,
+ "edgeCount": 6926,
+ "edgeCountShipped": 335,
+ "mutableShippedRuntimeEdges": 1,
  "status": "ready-to-adopt",
  "nodes": [
   {
@@ -174,7 +174,7 @@
    "nodeKind": "repo",
    "scanned": true,
    "inDegreeRepos": 14,
-   "inDegreeEdges": 152,
+   "inDegreeEdges": 151,
    "outDegreeRepos": 10
   },
   {
@@ -1682,7 +1682,7 @@
    "pinned": true,
    "targetPath": "/202608292311-atlas-v9/",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/01-drift.md:164"
+   "evidence": "sessions/202609030120-cicd-spider/01-drift.md:185"
   },
   {
    "from": "claude",
@@ -1692,7 +1692,7 @@
    "pinned": true,
    "targetPath": "/atlas/releases/202608292311-atlas-v9/",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/01-drift.md:167"
+   "evidence": "sessions/202609030120-cicd-spider/01-drift.md:188"
   },
   {
    "from": "claude",
@@ -1702,7 +1702,27 @@
    "pinned": true,
    "targetPath": "/atlas/releases/202608291239-atlas-v9/",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/01-drift.md:168"
+   "evidence": "sessions/202609030120-cicd-spider/01-drift.md:189"
+  },
+  {
+   "from": "claude",
+   "to": "gridatlas",
+   "type": "published-surface",
+   "ref": "pages",
+   "pinned": true,
+   "targetPath": "/202608291239-atlas-v9/release-manifest.json",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/01-drift.md:315"
+  },
+  {
+   "from": "claude",
+   "to": "gridatlas",
+   "type": "published-surface",
+   "ref": "pages",
+   "pinned": true,
+   "targetPath": "/atlas/releases/202608291239-atlas-v9/release-manifest.json",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/01-drift.md:316"
   },
   {
    "from": "claude",
@@ -1712,7 +1732,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:427"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:461"
   },
   {
    "from": "claude",
@@ -1722,7 +1742,7 @@
    "pinned": true,
    "targetPath": "v2",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:447"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:481"
   },
   {
    "from": "claude",
@@ -1732,7 +1752,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:517"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:551"
   },
   {
    "from": "claude",
@@ -1742,7 +1762,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:527"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:561"
   },
   {
    "from": "claude",
@@ -1752,7 +1772,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:537"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:571"
   },
   {
    "from": "claude",
@@ -1762,7 +1782,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:547"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:581"
   },
   {
    "from": "claude",
@@ -1772,7 +1792,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:567"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:601"
   },
   {
    "from": "claude",
@@ -1782,7 +1802,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:587"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:621"
   },
   {
    "from": "claude",
@@ -1792,7 +1812,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:597"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:631"
   },
   {
    "from": "claude",
@@ -1802,7 +1822,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:627"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:661"
   },
   {
    "from": "claude",
@@ -1812,7 +1832,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:1637"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:1811"
   },
   {
    "from": "claude",
@@ -1822,7 +1842,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:1867"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:1821"
   },
   {
    "from": "claude",
@@ -1832,7 +1852,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:1877"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:1831"
   },
   {
    "from": "claude",
@@ -1842,7 +1862,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2127"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:1841"
   },
   {
    "from": "claude",
@@ -1852,7 +1872,7 @@
    "pinned": true,
    "targetPath": "v3",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2147"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:1851"
   },
   {
    "from": "claude",
@@ -1862,7 +1882,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2557"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:1861"
   },
   {
    "from": "claude",
@@ -1872,7 +1892,7 @@
    "pinned": true,
    "targetPath": "v2",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2567"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:1871"
   },
   {
    "from": "claude",
@@ -1882,7 +1902,7 @@
    "pinned": true,
    "targetPath": "v3",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2587"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:1881"
   },
   {
    "from": "claude",
@@ -1892,7 +1912,7 @@
    "pinned": true,
    "targetPath": "v3",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2597"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:1891"
   },
   {
    "from": "claude",
@@ -1902,7 +1922,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2607"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:1901"
   },
   {
    "from": "claude",
@@ -1912,7 +1932,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2617"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:1911"
   },
   {
    "from": "claude",
@@ -1922,7 +1942,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2627"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:1921"
   },
   {
    "from": "claude",
@@ -1932,7 +1952,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2647"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:1931"
   },
   {
    "from": "claude",
@@ -1942,7 +1962,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2687"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:1941"
   },
   {
    "from": "claude",
@@ -1952,7 +1972,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2697"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:1951"
   },
   {
    "from": "claude",
@@ -1962,7 +1982,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2727"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:1961"
   },
   {
    "from": "claude",
@@ -1972,7 +1992,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2737"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:1971"
   },
   {
    "from": "claude",
@@ -1982,7 +2002,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2747"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:1981"
   },
   {
    "from": "claude",
@@ -1992,7 +2012,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2767"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:1991"
   },
   {
    "from": "claude",
@@ -2002,7 +2022,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2777"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2001"
   },
   {
    "from": "claude",
@@ -2012,7 +2032,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2787"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2011"
   },
   {
    "from": "claude",
@@ -2022,7 +2042,7 @@
    "pinned": true,
    "targetPath": "v3",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2797"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2021"
   },
   {
    "from": "claude",
@@ -2032,7 +2052,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2807"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2031"
   },
   {
    "from": "claude",
@@ -2042,7 +2062,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2817"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2041"
   },
   {
    "from": "claude",
@@ -2052,7 +2072,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2827"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2051"
   },
   {
    "from": "claude",
@@ -2062,7 +2082,7 @@
    "pinned": true,
    "targetPath": "v3",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2837"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2061"
   },
   {
    "from": "claude",
@@ -2072,7 +2092,7 @@
    "pinned": true,
    "targetPath": "v3",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2847"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2071"
   },
   {
    "from": "claude",
@@ -2082,7 +2102,7 @@
    "pinned": true,
    "targetPath": "v3",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2857"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2081"
   },
   {
    "from": "claude",
@@ -2092,7 +2112,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2867"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2091"
   },
   {
    "from": "claude",
@@ -2102,7 +2122,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2877"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2101"
   },
   {
    "from": "claude",
@@ -2112,7 +2132,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2887"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2111"
   },
   {
    "from": "claude",
@@ -2122,7 +2142,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2897"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2121"
   },
   {
    "from": "claude",
@@ -2132,7 +2152,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2907"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2131"
   },
   {
    "from": "claude",
@@ -2142,7 +2162,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2917"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2141"
   },
   {
    "from": "claude",
@@ -2152,7 +2172,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2927"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2151"
   },
   {
    "from": "claude",
@@ -2162,7 +2182,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2937"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2161"
   },
   {
    "from": "claude",
@@ -2172,7 +2192,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2947"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2171"
   },
   {
    "from": "claude",
@@ -2182,7 +2202,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2957"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2181"
   },
   {
    "from": "claude",
@@ -2192,7 +2212,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2967"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2191"
   },
   {
    "from": "claude",
@@ -2202,7 +2222,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2977"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2201"
   },
   {
    "from": "claude",
@@ -2212,7 +2232,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2987"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2211"
   },
   {
    "from": "claude",
@@ -2222,7 +2242,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:3007"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2221"
   },
   {
    "from": "claude",
@@ -2232,7 +2252,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:3017"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2231"
   },
   {
    "from": "claude",
@@ -2242,7 +2262,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:3067"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2241"
   },
   {
    "from": "claude",
@@ -2252,7 +2272,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:3077"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2251"
   },
   {
    "from": "claude",
@@ -2262,7 +2282,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:3087"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2261"
   },
   {
    "from": "claude",
@@ -2272,7 +2292,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:3097"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2271"
   },
   {
    "from": "claude",
@@ -2282,7 +2302,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:3117"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2281"
   },
   {
    "from": "claude",
@@ -2292,7 +2312,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:3127"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2291"
   },
   {
    "from": "claude",
@@ -2302,7 +2322,7 @@
    "pinned": true,
    "targetPath": "v2",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:3147"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2301"
   },
   {
    "from": "claude",
@@ -2312,7 +2332,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:3167"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2311"
   },
   {
    "from": "claude",
@@ -2322,7 +2342,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:3237"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2321"
   },
   {
    "from": "claude",
@@ -2332,7 +2352,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:3247"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2331"
   },
   {
    "from": "claude",
@@ -2342,7 +2362,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:3307"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2341"
   },
   {
    "from": "claude",
@@ -2352,7 +2372,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:3317"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2351"
   },
   {
    "from": "claude",
@@ -2362,7 +2382,7 @@
    "pinned": true,
    "targetPath": "v2",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:3337"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2361"
   },
   {
    "from": "claude",
@@ -2372,7 +2392,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:3347"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2371"
   },
   {
    "from": "claude",
@@ -2382,7 +2402,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:3367"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2381"
   },
   {
    "from": "claude",
@@ -2392,7 +2412,7 @@
    "pinned": true,
    "targetPath": "v2",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:3417"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2391"
   },
   {
    "from": "claude",
@@ -2402,7 +2422,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:3427"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2401"
   },
   {
    "from": "claude",
@@ -2412,7 +2432,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:3457"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2411"
   },
   {
    "from": "claude",
@@ -2422,7 +2442,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:3537"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2421"
   },
   {
    "from": "claude",
@@ -2432,7 +2452,7 @@
    "pinned": true,
    "targetPath": "v2",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:3547"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2431"
   },
   {
    "from": "claude",
@@ -2442,7 +2462,7 @@
    "pinned": true,
    "targetPath": "v2",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:3557"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2441"
   },
   {
    "from": "claude",
@@ -2452,7 +2472,7 @@
    "pinned": true,
    "targetPath": "v2",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:3657"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2451"
   },
   {
    "from": "claude",
@@ -2462,7 +2482,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:3717"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2461"
   },
   {
    "from": "claude",
@@ -2472,7 +2492,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:3727"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2471"
   },
   {
    "from": "claude",
@@ -2482,7 +2502,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:3767"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2481"
   },
   {
    "from": "claude",
@@ -2492,7 +2512,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:3817"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2491"
   },
   {
    "from": "claude",
@@ -2502,7 +2522,7 @@
    "pinned": true,
    "targetPath": "v9",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:3997"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2501"
   },
   {
    "from": "claude",
@@ -2512,7 +2532,7 @@
    "pinned": true,
    "targetPath": "v9",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:4157"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2511"
   },
   {
    "from": "claude",
@@ -2522,7 +2542,7 @@
    "pinned": true,
    "targetPath": "v9",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:4167"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2521"
   },
   {
    "from": "claude",
@@ -2532,7 +2552,7 @@
    "pinned": true,
    "targetPath": "v9",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:4187"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2531"
   },
   {
    "from": "claude",
@@ -2542,7 +2562,7 @@
    "pinned": true,
    "targetPath": "v9",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:4227"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2541"
   },
   {
    "from": "claude",
@@ -2552,7 +2572,7 @@
    "pinned": true,
    "targetPath": "v9",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:4237"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2551"
   },
   {
    "from": "claude",
@@ -2562,7 +2582,7 @@
    "pinned": true,
    "targetPath": "v9",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:4247"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2561"
   },
   {
    "from": "claude",
@@ -2572,7 +2592,7 @@
    "pinned": true,
    "targetPath": "v6",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:4317"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2571"
   },
   {
    "from": "claude",
@@ -2582,7 +2602,7 @@
    "pinned": true,
    "targetPath": "v6",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:4327"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2581"
   },
   {
    "from": "claude",
@@ -2592,7 +2612,7 @@
    "pinned": true,
    "targetPath": "v6",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:4337"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2591"
   },
   {
    "from": "claude",
@@ -2602,7 +2622,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:4347"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2601"
   },
   {
    "from": "claude",
@@ -2612,7 +2632,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:4357"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2611"
   },
   {
    "from": "claude",
@@ -2622,7 +2642,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:4367"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2621"
   },
   {
    "from": "claude",
@@ -2632,7 +2652,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:4377"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2631"
   },
   {
    "from": "claude",
@@ -2642,7 +2662,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:4387"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2641"
   },
   {
    "from": "claude",
@@ -2652,7 +2672,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:4397"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2651"
   },
   {
    "from": "claude",
@@ -2662,7 +2682,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:4407"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2661"
   },
   {
    "from": "claude",
@@ -2672,7 +2692,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:4417"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2671"
   },
   {
    "from": "claude",
@@ -2682,7 +2702,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:4427"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2681"
   },
   {
    "from": "claude",
@@ -2692,7 +2712,7 @@
    "pinned": true,
    "targetPath": "v5",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:4437"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2691"
   },
   {
    "from": "claude",
@@ -2702,7 +2722,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:4447"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2701"
   },
   {
    "from": "claude",
@@ -2712,7 +2732,7 @@
    "pinned": true,
    "targetPath": "v7",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:4457"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2711"
   },
   {
    "from": "claude",
@@ -2722,7 +2742,7 @@
    "pinned": true,
    "targetPath": "v7",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:4467"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2721"
   },
   {
    "from": "claude",
@@ -2732,7 +2752,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:4477"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2731"
   },
   {
    "from": "claude",
@@ -2742,7 +2762,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:4487"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2741"
   },
   {
    "from": "claude",
@@ -2752,7 +2772,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:4497"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2751"
   },
   {
    "from": "claude",
@@ -2762,7 +2782,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:4507"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2761"
   },
   {
    "from": "claude",
@@ -2772,7 +2792,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:4517"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2771"
   },
   {
    "from": "claude",
@@ -2782,7 +2802,7 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:4527"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2781"
   },
   {
    "from": "claude",
@@ -2792,7 +2812,7 @@
    "pinned": true,
    "targetPath": "v9",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:4537"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2791"
   },
   {
    "from": "claude",
@@ -2802,7 +2822,697 @@
    "pinned": true,
    "targetPath": "v1",
    "evidenceTier": "record",
-   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:4707"
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2801"
+  },
+  {
+   "from": "claude",
+   "to": "data-grid-gb",
+   "type": "contract",
+   "ref": "data-grid-gb.connection-points.v4",
+   "pinned": true,
+   "targetPath": "v4",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:2821"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.microbuild-plan.v1",
+   "pinned": true,
+   "targetPath": "v1",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:67671"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.programme-state.v1",
+   "pinned": true,
+   "targetPath": "v1",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:67681"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.build-plan.v1",
+   "pinned": true,
+   "targetPath": "v1",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:67691"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.build-plan.v2",
+   "pinned": true,
+   "targetPath": "v2",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:67701"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.build-026-receipt.v1",
+   "pinned": true,
+   "targetPath": "v1",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:67711"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc-computation.v10",
+   "pinned": true,
+   "targetPath": "v10",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:67721"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.authority-response.v1",
+   "pinned": true,
+   "targetPath": "v1",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:67741"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.reference-block-command.v1",
+   "pinned": true,
+   "targetPath": "v1",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:67751"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.inverter-block.v1",
+   "pinned": true,
+   "targetPath": "v1",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:67761"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.build-025.v1",
+   "pinned": true,
+   "targetPath": "v1",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:67771"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.local-authority-bridge.v1",
+   "pinned": true,
+   "targetPath": "v1",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:67791"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.microbuild-evidence.v1",
+   "pinned": true,
+   "targetPath": "v1",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:67801"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.authority-slice.v1",
+   "pinned": true,
+   "targetPath": "v1",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:67811"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.ts004-integration.v1",
+   "pinned": true,
+   "targetPath": "v1",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:67821"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.v10-validation-execution-envelope.v2",
+   "pinned": true,
+   "targetPath": "v2",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:67831"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.calculation-receipt.v10",
+   "pinned": true,
+   "targetPath": "v10",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:67841"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.complete-circuit-r-vdrop-loss.v10",
+   "pinned": true,
+   "targetPath": "v10",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:67851"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.circuit.v10",
+   "pinned": true,
+   "targetPath": "v10",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:67861"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.cartridge-circuit-adapter.v10",
+   "pinned": true,
+   "targetPath": "v10",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:67871"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.ordered-traversal.v10",
+   "pinned": true,
+   "targetPath": "v10",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:67881"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.contradictions.v10",
+   "pinned": true,
+   "targetPath": "v10",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:67891"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.diagnostics.v10",
+   "pinned": true,
+   "targetPath": "v10",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:67901"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.diagnostic-adapters.v10",
+   "pinned": true,
+   "targetPath": "v10",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:67911"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.diagnostic-bridges.v10",
+   "pinned": true,
+   "targetPath": "v10",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:67921"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.duckdb-segments.v10",
+   "pinned": true,
+   "targetPath": "v10",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:67931"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.electrical-study.v10",
+   "pinned": true,
+   "targetPath": "v10",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:67941"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.cold-voc.v10",
+   "pinned": true,
+   "targetPath": "v10",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:67951"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.equipment-profile.v1",
+   "pinned": true,
+   "targetPath": "v1",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:67961"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.evidence.v10",
+   "pinned": true,
+   "targetPath": "v10",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:67971"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.evidence-boundary.v10",
+   "pinned": true,
+   "targetPath": "v10",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:67981"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.evidence-register.v10",
+   "pinned": true,
+   "targetPath": "v10",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:67991"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.geometry-receipt.v10",
+   "pinned": true,
+   "targetPath": "v10",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:68001"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.identifiers.v10",
+   "pinned": true,
+   "targetPath": "v10",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:68011"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.kernel-authority.v10",
+   "pinned": true,
+   "targetPath": "v10",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:68021"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.persistence.v10",
+   "pinned": true,
+   "targetPath": "v10",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:68031"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.public-api.v10",
+   "pinned": true,
+   "targetPath": "v10",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:68041"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.public-topology.v10",
+   "pinned": true,
+   "targetPath": "v10",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:68051"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.resistance-evidence.v10",
+   "pinned": true,
+   "targetPath": "v10",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:68061"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.resistance-registry.v10",
+   "pinned": true,
+   "targetPath": "v10",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:68071"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.resistance-source-qualification.v10",
+   "pinned": true,
+   "targetPath": "v10",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:68081"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.study-applicability.v10",
+   "pinned": true,
+   "targetPath": "v10",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:68091"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.study-registry.v10",
+   "pinned": true,
+   "targetPath": "v10",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:68101"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.complete-circuit.v10",
+   "pinned": true,
+   "targetPath": "v10",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:68111"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.voltage-drop.v10",
+   "pinned": true,
+   "targetPath": "v10",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:68121"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.ampacity.v10",
+   "pinned": true,
+   "targetPath": "v10",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:68131"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.topology-receipt.v10",
+   "pinned": true,
+   "targetPath": "v10",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:68141"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.uncertainty.v10",
+   "pinned": true,
+   "targetPath": "v10",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:68151"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.complete-circuit-interval-propagation.v10",
+   "pinned": true,
+   "targetPath": "v10",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:68161"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.strategy-comparison.v1",
+   "pinned": true,
+   "targetPath": "v1",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:68171"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.table-routing.v2",
+   "pinned": true,
+   "targetPath": "v2",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:68181"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.installed-length.v1",
+   "pinned": true,
+   "targetPath": "v1",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:68191"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.table-topology.v2",
+   "pinned": true,
+   "targetPath": "v2",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:68201"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.input-allocation.v1",
+   "pinned": true,
+   "targetPath": "v1",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:68211"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.v10.geometry-workbench.v1",
+   "pinned": true,
+   "targetPath": "v1",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:68221"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc.cross-language-fixture.v1",
+   "pinned": true,
+   "targetPath": "v1",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:68231"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.v10-validation-repository-pointer.v2",
+   "pinned": true,
+   "targetPath": "v2",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:68241"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc-computation.v9",
+   "pinned": true,
+   "targetPath": "v9",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:68251"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.solar-dc-debug-test-report.v1",
+   "pinned": true,
+   "targetPath": "v1",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:68261"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.v11.programme-state.v1",
+   "pinned": true,
+   "targetPath": "v1",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:68791"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.v11.control-plane-validation.v1",
+   "pinned": true,
+   "targetPath": "v1",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:68801"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.v11.build-plan.v1",
+   "pinned": true,
+   "targetPath": "v1",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:68811"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.v11.capability-matrix.v1",
+   "pinned": true,
+   "targetPath": "v1",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:68821"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.v11.operator-session.v1",
+   "pinned": true,
+   "targetPath": "v1",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:68831"
+  },
+  {
+   "from": "claude",
+   "to": "globalgrid2050",
+   "type": "contract",
+   "ref": "globalgrid2050.v11.source-resource-register.v1",
+   "pinned": true,
+   "targetPath": "v1",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/crosslink.json:68851"
+  },
+  {
+   "from": "claude",
+   "to": "cvaa",
+   "type": "repo-ref",
+   "ref": "-",
+   "pinned": null,
+   "targetPath": "",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/pass.py:147"
+  },
+  {
+   "from": "claude",
+   "to": "gridatlas",
+   "type": "published-surface",
+   "ref": "pages",
+   "pinned": true,
+   "targetPath": "/?b=$RANDOM",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/.cvaa-clean/202608301321-gridatlas-amnesia-vaccine.txt:342"
+  },
+  {
+   "from": "claude",
+   "to": "cvaa",
+   "type": "ci",
+   "ref": "REPLACE_WITH_40_CHAR_SHA",
+   "pinned": false,
+   "targetPath": "/.github/workflows/202608301446-inoculate.yml",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/.cvaa-clean/consumer-workflow-template.yml:16"
+  },
+  {
+   "from": "claude",
+   "to": "cvaa",
+   "type": "ci",
+   "ref": "main",
+   "pinned": false,
+   "targetPath": "/...",
+   "evidenceTier": "record",
+   "evidence": "sessions/202609030120-cicd-spider/.cvaa-clean/vaccines/202608301442-pinned-actions.md:11"
   },
   {
    "from": "codex-chatgpt",
@@ -4548,8 +5258,8 @@
    "from": "gridatlas",
    "to": "data-gb-electricity",
    "type": "runtime-data",
-   "ref": "main",
-   "pinned": false,
+   "ref": "d310e3cec8cd14bc7cd3eef1e37037197bcb0798",
+   "pinned": true,
    "targetPath": "derived/price-decade-rollup.json",
    "evidenceTier": "declared",
    "evidence": "atlas/current.json:292"
@@ -4593,6 +5303,16 @@
    "targetPath": "v1",
    "evidenceTier": "shipped",
    "evidence": "atlas/cartridges/202608301825-streaming-parquet-bridge-v9-5.js:109"
+  },
+  {
+   "from": "gridatlas",
+   "to": "data-gb-electricity",
+   "type": "runtime-data",
+   "ref": "main",
+   "pinned": false,
+   "targetPath": "derived/price-decade-rollup.json",
+   "evidenceTier": "superseded",
+   "evidence": "atlas/cartridges/202609012045-sld-sandbox-v9-8.js:2420"
   },
   {
    "from": "gridatlas",
@@ -4772,7 +5492,7 @@
    "pinned": true,
    "targetPath": "derived/connection-points.v3.json",
    "evidenceTier": "shipped",
-   "evidence": "tools/proofs/202609030137-substation-intelligence.proof.mjs:238"
+   "evidence": "tools/proofs/202609030200-substation-intelligence.proof.mjs:401"
   },
   {
    "from": "gridatlas",
@@ -6011,7 +6731,7 @@
    "ref": "main",
    "pinned": false,
    "targetPath": "dist/major_project_news_v9_5_1.json",
-   "evidenceTier": "shipped",
+   "evidenceTier": "build-rewrite",
    "evidence": "index/202608261927-compile-index.mjs:128"
   },
   {

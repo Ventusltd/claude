@@ -585,3 +585,57 @@ one worth keeping: **I wrote the account of the fix and the fix in the same
 command, and only one of them was conditional on success.** A record that can be
 committed without the thing it records is not a record. From here the change is
 made and verified first, and described second.
+
+---
+
+## RH17 — 2026-09-03T02:44Z — I counted a string being deleted as a dependency,
+## and it was the last one on my F5 list
+
+`pipelinenews/index/202608261927-compile-index.mjs:128` contains
+
+    https://raw.githubusercontent.com/Ventusltd/globalgrid2050/main/dist/major_project_news_v9_5_1.json
+
+and I recorded it for four passes as the estate's remaining mutable runtime
+edge. Read in context, it is the `original` argument to `replaceExactly()`:
+
+    const original = `const NEWS_SOURCES = Object.freeze([
+      ["Pages", "../../dist/major_project_news_v9_5_1.json"],
+      ["GitHub main", "https://raw.githubusercontent.com/.../main/..."],
+    ]);`;
+    const replacement = `const NEWS_SOURCES = Object.freeze([
+      ["PipelineNews", "../data/news/${GENERATION}-major-project-news-v9-5-1.json"],
+    ]);`;
+
+**The compiler exists to remove that URL.** It replaces a two-source list
+containing a branch fallback with a single generation-pinned local path.
+Verified against the built artefact rather than the build script:
+
+    $ grep -rc "githubusercontent.com/Ventusltd/[a-z0-9-]*/main/" \
+        releases/202609030009-pipelinenews
+    (zero matches)
+
+So pipelinenews does the opposite of what I reported: it is the one repository
+that mechanically strips mutable refs at build time. I read the removal as the
+addition.
+
+**The general rule, which is the part worth keeping.** For any repository that
+compiles, the dependency graph must be read from **the built artefact, not the
+source**. A build script contains, by necessity, strings describing what it is
+eliminating — every rewrite rule holds its own `before`. A scanner that reads
+source treats `before` and `after` identically, and therefore reports the
+carefully-removed thing as present. This is the same family as RH8 (retired
+cartridge generations) and RH9 (a URL in JSON prose): four times tonight the
+graph has counted text about code as code.
+
+**The consequence for the estate, and it is the good kind.** With this corrected
+and gridatlas v9.83's pins in place, the count is:
+
+    mutable shipped runtime edges, estate-wide:  1
+    that one: globalgrid2050 -> gridatlas@main/atlas/current.json
+              scripts/verify_published_versions.py:54
+
+and that one **should** stay mutable — it is the publication-truth gate, whose
+whole job is to follow the live pointer. Pinning it would defeat it.
+
+**F5 has no remaining instances.** Every cross-repository runtime fetch in this
+estate that ought to be pinned now is. That was five at 01:05Z.
