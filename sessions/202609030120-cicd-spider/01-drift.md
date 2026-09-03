@@ -703,3 +703,55 @@ from that contract inherits a 404. Its driver
 (`202608300327-bound-hourly-gridatlas-link-mission.yml`) and the sync workflow's
 own `cron: '25 4-8 30 8 *'` fire four hours on 30 August, so this cannot
 self-heal before 2027.
+
+---
+
+## D13 — CLOSED 2026-09-03T03:31Z
+gridatlas `1762170`, "the live composition can be moved back, and the tool
+refuses what it cannot verify". Real code: `tools/rollback.mjs` (238 lines) and
+`.github/workflows/rollback-composition.yml` (180 lines). Measured `immune` to
+`rollback-exists` on a genuinely clean tree (dirty=0, crlf=0). The pointer side
+is now reversible, twenty minutes after it was reported.
+
+---
+
+## D14 — NOT closed. The vaccine went green on wording, not on substance.
+**Re-measured 2026-09-03T03:34Z.**
+
+`attestation-freshness` now reports `immune` on gridatlas. The attestation has
+not been refreshed. The antibody is a regex over commit *subjects*:
+
+    const last = commits.find(c => /live|verif|accept/i.test(c.subject));
+    const pointerCommit = commits.find(c => /scope|cartridge|compos|promote/i.test(c.subject));
+    if (last && pointerCommit && commits.indexOf(last) > commits.indexOf(pointerCommit))
+      return ["pointer changed after the last live attestation; re-verify"];
+
+Commit `1762170`'s subject — *"the **live** composition can be moved back, and
+the tool refuses what it cannot **verif**y"* — matches **both** patterns. It
+contains `live` and `verif` for the first, and `compos` for the second. So both
+`find()` calls return the same commit at index 0, `0 > 0` is false, and the
+vaccine reports immune.
+
+Measured against the actual state:
+
+    atlas/state/live-set.json   last changed at 8fb95a2 (v9.88)
+    atlas/current.json          generation 202609030234
+    HEAD                        1762170
+
+The attestation is exactly as stale as it was when I filed D14. Nothing
+re-verified it.
+
+**This is a false NEGATIVE, which is worse than the false positive in RH1.** A
+false positive gets investigated and found out — `disk-is-not-what-ships` was
+caught within an hour. A false negative gets trusted. The vaccine never reads
+`live-set.json` and never reads the pointer; it compares the positions of two
+regex matches in a commit log, so **any single commit whose subject contains
+both a verification word and a composition word silences it**, and it stays
+silent until some later commit happens to match only one of them.
+
+The rule is right about the disease and cannot measure it. It should compare the
+attestation's recorded release or digest against the current pointer — both are
+sitting in the two JSON files it already has in context — rather than inferring
+freshness from prose that anyone can write in any order.
+
+D14 stays open.
