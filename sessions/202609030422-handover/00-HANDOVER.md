@@ -449,6 +449,33 @@ denominator and the immune total.)*
 | 2 | monotonic-utc-generations | **chaining-token** — 12/34 |
 | 3 | chaining-token | **self-terminating-loops** — 7/34 |
 
+The complete failing surface, at ruler cvaa `93e568e`. The right-hand column is the one that
+matters and a bare count cannot produce it:
+
+| rule | failing | **quiet on** |
+|---|---|---|
+| `monotonic-utc-generations` | 14 of 34 | 20 |
+| `chaining-token` | 12 of 34 | 22 |
+| `self-terminating-loops` | 7 of 34 | 27 |
+| `no-per-release-workflows` | 6 of 34 | 28 |
+| `no-time-based-gates` | 3 of 34 | 31 |
+| `pointer-verifies` | 2 of 34 | 32 |
+| `executor-declared` · `loop-exists` | 1 of 34 each | 33 |
+
+**Every rule is quiet somewhere, so no rule is a broken instrument.** That is the whole purpose of
+carrying the control, and it is the sentence tonight earned the hard way: a rule that fires
+everywhere and is quiet nowhere is a rule to suspect before the estate.
+
+Eight rules fail at all. The two that fail most widely are the estate **misreporting its own time**
+and **pushing with the default token**. `rollback-exercised` and `derived-state-not-authored` now
+*skip* where the evidence is absent rather than passing. And the two most-cited problems of the
+night — `pinned-actions` (15) and `least-permissions` (11) — are `level: warning` with dated
+allowances that **fail nowhere**: things the estate has already priced.
+
+*(Measured by the spider's `census.sh`, ruler named, membership committed. I verified the
+denominator and the drift figures independently; the per-rule counts are its measurement, not a
+second one.)*
+
 `pinned-actions` declares `level: warning` in its own file and **fails nowhere in the estate** —
 17 immune, 15 warn, 0 fail. It led every table we produced. `self-terminating-loops` appeared in
 none of them.
