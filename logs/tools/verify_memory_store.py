@@ -94,9 +94,16 @@ def load_audits() -> dict[str, dict]:
 def measure(con, path: Path) -> dict:
     """Everything we know about a parquet file, read out of the file."""
     rel = path.as_posix()
+    # epoch_us, not min(ts)/max(ts). Handing a TIMESTAMP WITH TIME ZONE back to Python
+    # makes DuckDB import pytz, which is not a declared dependency of anything here - it
+    # was merely installed on the machine this was written on, so the verifier passed
+    # locally and died on a clean runner with ModuleNotFoundError. Microseconds since the
+    # epoch are a plain integer: no pytz, no ICU, and no dependence on the session
+    # timezone, which would otherwise render the same instant differently on a BST laptop
+    # and a UTC runner and show up as a spurious manifest mismatch.
     row = con.execute(
         "select count(*), count(distinct source_line), min(source_line), "
-        "max(source_line), min(ts), max(ts), count(distinct session_id), "
+        "max(source_line), epoch_us(min(ts)), epoch_us(max(ts)), count(distinct session_id), "
         "any_value(session_id), any_value(cwd) from read_parquet(?)",
         [rel],
     ).fetchone()
@@ -186,12 +193,14 @@ def reconcile(m: dict, audit: dict | None) -> list[str]:
     return problems
 
 
-def iso(value) -> str | None:
-    if value is None:
+EPOCH = _dt.datetime(1970, 1, 1, tzinfo=_dt.timezone.utc)
+
+
+def iso(micros) -> str | None:
+    """Microseconds since the epoch to an ISO-8601 UTC string, identically everywhere."""
+    if micros is None:
         return None
-    if isinstance(value, _dt.datetime):
-        return value.astimezone(_dt.timezone.utc).isoformat()
-    return str(value)
+    return (EPOCH + _dt.timedelta(microseconds=int(micros))).isoformat()
 
 
 def main() -> int:
@@ -340,7 +349,12 @@ def main() -> int:
                     )
     else:
         REPORT_DIR.mkdir(parents=True, exist_ok=True)
-        MANIFEST.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+        # newline="" so Python does not translate \n to \r\n on Windows. .gitattributes
+        # here mandates eol=lf in the WORKING COPY as well as the blob, precisely so the
+        # file on disk is the file that ships; writing CRLF puts this one file out of
+        # step with the rule the repository sets for itself.
+        with MANIFEST.open("w", encoding="utf-8", newline="") as fh:
+            fh.write(json.dumps(manifest, indent=2) + "\n")
         print(f"\nwrote {MANIFEST.relative_to(REPO).as_posix()} (generation {generation})")
 
     if problems:
