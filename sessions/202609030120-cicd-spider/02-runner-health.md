@@ -405,3 +405,27 @@ The transferable part: a correction that changes only what you *intend* changes
 nothing. Every correction in this file that survived — the dirty-tree guard, the
 published-cvaa clone, the tier rule — survived because it became a line of code
 in `pass.py`. The two that did not, RH4 and this one, were resolutions.
+
+---
+
+## RH13 — 2026-09-03T02:05Z — my ruler-change guard compared the wrong thing,
+## caught before it fired
+
+`pass.py` emitted `CVAA-RULER` whenever cvaa's published HEAD moved. The
+coordinator is about to push a fix to cvaa's self-test — a workflow constant,
+with **no change to any vaccine** — and that commit would have moved the HEAD
+and made my driver announce a ruler change that had not happened.
+
+The guard I built in RH11 to stop a ruler change reading as a repo change would
+itself have produced a false ruler change. Same class of error, one level up.
+
+**Fixed:** the ruler is now the *active vaccine set* — the sorted slugs of
+`vaccines/*.md` minus any carrying `superseded_by:`, each with a SHA-256 of its
+LF-normalised text. `CVAA-RULER` fires only when a rule is added, removed or
+edited, and names which. A commit that moves the HEAD without touching a rule
+now emits `CVAA-COMMIT` instead, which says explicitly that any findings delta
+this pass is real.
+
+This one cost nothing because it was caught before it ran. That is the whole
+argument for writing corrections into the driver rather than into prose: a
+mechanism can be inspected before the next pass, and a resolution cannot.

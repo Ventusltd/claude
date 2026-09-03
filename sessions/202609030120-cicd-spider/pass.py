@@ -150,9 +150,32 @@ if not QUICK:
         subprocess.run(['git','-C',CV,'reset','-q','--hard','origin/main'], timeout=120)
     cv_head = subprocess.run(['git','-C',CV,'rev-parse','HEAD'],
                              capture_output=True, text=True).stdout.strip()
-    if cv_head and cv_head != st['cvaa'].get('measured_with_commit'):
-        D('CVAA-RULER', f"cvaa published HEAD {str(st['cvaa'].get('measured_with_commit'))[:7]} -> {cv_head[:7]}; "
-                        "vaccine set changed, so a findings delta this pass may be the ruler, not the repo")
+    # The RULER is the ACTIVE VACCINE SET, not the commit. cvaa can be committed
+    # to for a hundred reasons that leave every rule identical -- a workflow fix,
+    # a README -- and firing on the SHA would cry ruler-change at each of them,
+    # which is the same noise in the other direction. Compare the set: active
+    # vaccine slugs and their content hashes, superseded ones excluded.
+    import hashlib, glob as _glob
+    ruler = {}
+    for f in sorted(_glob.glob(os.path.join(CV,'vaccines','*.md'))):
+        body = open(f,'rb').read()
+        text = body.decode('utf-8','replace').replace('
+','
+')
+        if re.search(r'^superseded_by:', text, re.M): continue
+        ruler[os.path.basename(f)] = hashlib.sha256(text.encode()).hexdigest()[:12]
+    prev_ruler = st['cvaa'].get('ruler') or {}
+    if prev_ruler and ruler != prev_ruler:
+        added   = sorted(set(ruler) - set(prev_ruler))
+        removed = sorted(set(prev_ruler) - set(ruler))
+        changed = sorted(k for k in set(ruler) & set(prev_ruler) if ruler[k] != prev_ruler[k])
+        D('CVAA-RULER', f"active vaccine set changed ({len(prev_ruler)} -> {len(ruler)}): "
+                        f"+{added} -{removed} ~{changed}; a findings delta this pass may be the ruler, not the repo")
+    elif cv_head != st['cvaa'].get('measured_with_commit'):
+        D('CVAA-COMMIT', f"cvaa published HEAD -> {cv_head[:7]}, active vaccine set UNCHANGED "
+                         f"({len(ruler)} rules); any findings delta is real")
+    st['cvaa']['ruler'] = ruler
+    st['cvaa']['active_vaccines'] = len(ruler)
     st['cvaa']['measured_with_commit'] = cv_head
 
     def one_cvaa(d):
