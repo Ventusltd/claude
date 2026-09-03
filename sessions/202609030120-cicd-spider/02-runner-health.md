@@ -862,3 +862,36 @@ attestation as fresh whenever a single commit subject contains both a
 verification word and a composition word — a false negative, which is the
 dangerous direction. That finding stands on its own and does not depend on
 gridatlas having had a defect.
+
+### RH21 addendum, 2026-09-03T03:46Z — auditing the rest of my own headline
+
+After withdrawing D14 I read the antibodies behind every finding I have reported
+as fact, which is what I should have done before reporting any of them. Result:
+
+**Substantive — they read state, and my numbers stand:**
+
+- `pinned-actions` — scans workflow text for actions not pinned to a 40-char
+  SHA. Hand-confirmed against cvaa's own workflow at 01:20Z.
+- `monotonic-utc-generations` — compares commit generation stamps against
+  `%cI`. Hand-confirmed against my own commits (RH4, RH12); it caught me.
+- `chaining-token` — finds `git push` in a workflow with no App token.
+- `no-per-release-workflows` — counts timestamped workflow files against a
+  declared baseline.
+- `loop-exists` — checks for `schedule:` in the scope-loop workflow.
+- `rollback-exists` — went immune at `1762170` alongside 238 lines of
+  `tools/rollback.mjs` and a 180-line workflow, so the verdict and the artefact
+  agree. D13's closure holds.
+
+**Prose-dependent — a second instance of the D14 class, narrower:**
+
+`on-ledger-commits` requires each generation-stamped commit to cite a scope
+file, then exempts any commit whose subject matches
+`/verify|roll ?back|inoculate|drill/i`. So a commit can exempt itself from the
+ledger by wording. Unlike `attestation-freshness`, prose is only the escape
+hatch rather than the whole test — but it is the same defect: **a rule about
+what was done, decided by what was written about it.**
+
+Two of the 25 active vaccines carry prose-dependent logic. That is the caveat
+that belongs on every estate-wide figure in `01-drift.md`: the incidence table
+is as good as the antibodies behind it, and I have now read all of them rather
+than trusting the runner.
