@@ -504,6 +504,49 @@ return **zero features**, and the large layers (`solar`, `wind`, `bess`, `naei_c
 still pass, so the instrument discriminates and this is a real signal rather than a broken check.
 Diagnosis in flight.
 
+### `data-gridatlas` diagnosed: the red is real, the blast radius is zero
+
+**Nothing downstream is exposed.** A sweep across gridatlas, globalgrid2050, pipelinenews, cvaa
+and data-grid-gb for any reference to `data-gridatlas` on `main`/`HEAD`/`master` returned **zero
+matches**. No consumer checks the repo out either. The pin is **enforced rather than merely
+declared**, at two independent layers, and both arrive at the same digest:
+
+- **Build time** — `gridatlas/compiler/202608292126-build-map-ready-v9.py` fetches from a commit
+  pinned in `contracts/202608292126-map-ready-runtime.json` (`3245923…`, matching
+  `current.publication_commit` in `live-set.json`) and asserts
+  `sha256_bytes(manifest_payload) == manifest_sha256`.
+- **Runtime** — the cartridge hardcodes the immutable Pages release path and re-verifies the
+  digest **in the browser**: `invariant(await sha256Hex(bytes) === MANIFEST_SHA256, …)`.
+
+The same `3246dbda…` matched three ways: served bytes, clean-clone blob, and the `live-set.json`
+pin. **So the failing workflow cannot reach a reader.** This is the pinned-products architecture
+doing precisely what it was built for — the second time in one night, after the `data-grid-gb`
+edge fired at 04:02Z.
+
+**Two pin weaknesses surfaced on the way, unrelated to this failure and worth your eye:**
+
+1. `gridatlas/state/streaming-road-fix.json` pins `data_fidelity_commit: b335aca6…` with **no
+   digest beside it** — commit-only. A commit pin without a digest cannot detect a force-push or
+   a same-length rewrite, and tonight already produced one same-byte-length content change that
+   only a digest caught.
+2. **A regression: `gridatlas.live-set.v5` dropped the data-plane pin.** `releases/current-v5.json`
+   and its byte-identical twin `state/live-set.json` contain **no `data_plane`/`data_release`
+   block at all** — `current-v4.json` carried one. Nothing is floating, because the cartridge and
+   the build still enforce the digest, but **the top-level live pointer no longer attests the
+   pin.** The guarantee survives in two places that happen to check rather than in the document
+   that is supposed to declare it.
+
+**And one instrument to distrust, which is the transferable part.** GitHub's **code search index
+is stale for this org**: `search/code?q=data-gridatlas+org:Ventusltd` returns 22 hits, while the
+targeted `repo:Ventusltd/gridatlas` returns `total_count: 0` — provably false, since that repo is
+full of such references. **Anyone running an estate sweep through the code-search API tonight gets
+a false all-clear.** Every conclusion above was drawn from local worktrees verified in sync with
+`origin/main`, not from code search.
+
+*Not checked:* `architecture` and `registry_of_all_content_in_repos_and_dependencies` have no
+local worktree — trees listed, contents COULD-NOT-CHECK. Every other org repo was last pushed
+before `data-gridatlas` existed (2026-08-29T08:01Z), so they are excluded by date, not by grep.
+
 **Method note, because it is why finding two surfaced at all.** The 05:00Z sweep took *the latest
 run on the default branch*. The audit took *the latest run per workflow file at head*. The first
 cannot see a red workflow sitting behind a newer green one from a different workflow — which is
