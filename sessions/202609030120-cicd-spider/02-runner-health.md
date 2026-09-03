@@ -1187,3 +1187,37 @@ Both are now stated with their denominator on every write, because RH18 was
 exactly this confusion and RH28 was the same confusion about categories rather
 than counts. A number in this session's files without a denominator beside it
 should be treated as unfinished.
+
+---
+
+## RH24 + RH25 + RH28, consolidated — one failure, three instances, and the
+## corollary that names it
+
+The coordinator is right that these should not be filed as separate lessons.
+The ceiling I never tested (RH24), the third state I never read (RH25) and the
+field I never read (RH28) are one failure wearing three costumes, and the estate
+already had the general form written down:
+
+> **Measure the artefact, never the workspace.**
+
+What was missing, and is worth more than any of the three incidents:
+
+> ## **The instrument is part of the workspace.**
+
+Everything I built tonight applied the first sentence outward — clean clones for
+bytes, commit-and-branch discipline for CI, dirty-tree guards for gates — and
+nothing applied it to the thing doing the measuring. The API ceiling, the
+runner's state vocabulary and the meaning of its `level` field were all
+workspace, and I treated all three as fixed background.
+
+**The signature, which both of us hit in the same hour and which is the
+practical test:** a sweep that agrees with itself across every subject is a
+broken instrument, not a discovery. The coordinator's `.gitattributes` sweep
+returned "no repository has one" for all 18 and was filed as a finding; my
+`disk-is-not-what-ships` finding was 18 of 18; my vaccine table was recounted
+four times and reproduced the same category error each time, which felt like
+corroboration. **Agreement across subjects is not evidence. Disagreement with a
+known-good control is.**
+
+That pair — *the instrument is part of the workspace*, and *a control, always* —
+is the whole of what I would carry out of tonight if I could carry one thing.

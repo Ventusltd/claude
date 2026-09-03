@@ -1120,3 +1120,19 @@ at `build-pages.py:399` — a new function, not a constant edit.
 deliberate guarantee about an immutable release. Deciding which still hold for
 the new format is a design judgement, and writing it means loosening a
 fail-closed deploy gate on our own authority.
+
+### D8, continued — the stale page title is the same defect, not a second one
+**2026-09-03T04:43Z**, from the coordinator, and it closes the loop cleanly.
+
+globalgrid2050 publishes a **byte-for-byte copy** of
+`releases/<id>-pipelinenews` — the publish commit says so and verifies with
+`diff -rq`. So the page title is not applied at publication and **cannot be
+fixed there.** Every published generation reads `202608300309` because that is
+the last generation the page template was built with, and the
+additive-cartridge builder carries the page forward without re-titling.
+
+**A deploy that has not passed since 31 August, and a page titled with the last
+release that did, are one cause.** Recorded here rather than filed beside D8,
+because filing it separately would have produced two tickets, two owners and one
+defect — and the second owner would have "fixed" a title in a directory that is
+a verified copy.
