@@ -1,0 +1,14 @@
+# Session memory store: logs/tools/jsonl_to_parquet.py and verify_memory_store.py.
+#
+# Pinned to the versions actually installed on the machine the store was built and
+# verified on, read from pip freeze rather than chosen:
+#
+#   python 3.12.10, duckdb 1.3.2, pyarrow 25.0.1
+#
+# pyarrow writes the parquet (jsonl_to_parquet.py); duckdb reads it back for the
+# reconciliation (verify_memory_store.py). Neither pandas nor numpy is required, and
+# the verifier is written to fetchall() rather than .df() precisely because numpy is
+# absent here - a verifier that only runs where pandas happens to be installed is a
+# gate that silently does not run.
+duckdb==1.3.2
+pyarrow==25.0.1
