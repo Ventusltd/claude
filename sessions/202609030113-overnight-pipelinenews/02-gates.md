@@ -212,3 +212,119 @@ rows 1104   duplicate groups 3   extra rows 3
 capacity double-counted by duplicate rows: 47.30 MW
 duplicate REPD refs: 0
 ```
+
+---
+
+## After the night's tooling changes, `origin/main` = `1a9868e`
+
+Same release, same commands. Nothing I changed touches a release, so the four
+baselines must be identical, and are:
+
+```
+render_proof               26 checks, 0 failed
+surface_truth_proof        8 checks, 0 failed
+sector_render_proof        11 checks, 0 failed
+deep-link-contract       11/11 checks passed
+wider-fleet-deep-link     9/11 checks passed      <- new tonight
+release --check census   32 releases checked, 6 failing   <- unchanged
+```
+
+### The new harness, verbatim, on `202609030009-pipelinenews`
+
+```
+$ node tools/intelligence/202609030132-verify-wider-fleet-deep-link.mjs \
+       202609030009-pipelinenews
+
+  wider fleet sets: capacity_mw, latitude, longitude, project, repd_ref, technology, zoom
+PASS  the wider-fleet link sets a technology parameter
+  technology comes from: row.t
+PASS  the technology parameter is traceable to one payload field
+
+  REPD technology types in the cut : 20
+  distinct technology values emitted: 9 — act, biomass, caes, flywheel, geothermal, hydro, hydrogen, other, tidal
+  rows 1104, with a REPD reference 1091 (98.82%), without 13
+PASS  no REPD reference is claimed by two rows
+
+  x2  Kelvin Energy Recovery Facility — EfW Incineration, 47 MW
+  x2  S P & G Blything, Cross Lanes - Biomass Boiler — Biomass (dedicated), 0.3 MW
+  x2  Cashmere Works, Birksland Street - Anaerobic Digestion Facility — Anaerobic Digestion, 0 MW
+FAIL  no project appears twice with the same name, type, capacity and position:
+      3 duplicated identities, 3 extra rows, 47.30 MW double-counted
+
+  the 13 rows the Atlas cannot resolve:
+        200 MW  Hydrogen             BOC Limited, Wholeflats Road - Green Hydrogen Electrolyser Plant
+         80 MW  Hydrogen             Kemsley Fields Business Park - Hydrogen Renewable Energy Generation Plant
+         50 MW  Hydrogen             Chapelcross - Hydrogen Production Facility
+         49 MW  EfW Incineration     Skelton Grange  Energy Recovery Facility
+         47 MW  EfW Incineration     Kelvin Energy Recovery Facility
+         47 MW  EfW Incineration     Kelvin Energy Recovery Facility
+         10 MW  Hydrogen             Singleton Birch - Hydrogen Production Facility
+       0.21 MW  Biomass (dedicated)  Dalton Gates Farm, Dalton On Tees - Biomass Boilers
+          0 MW  Anaerobic Digestion  Barrow Clump Farm, Elveden - Anaerobic Digestion Plant
+          0 MW  Anaerobic Digestion  Naylor Farms, Rangell Gate - Anaerobic Digestor Plant
+          0 MW  Large Hydro          Scottish Water, Buchanan Gate - Hydro Energy Scheme
+          0 MW  Anaerobic Digestion  Beckside, Sile croft - Anaerobic Digester Plants
+          0 MW  Anaerobic Digestion  Cross Lane, Glentham 2 - Anaerobic Digestion Facility
+PASS  the GridAtlas checkout this contract binds to is available
+
+  GridAtlas composition 202609030128 (v9.82), 4 cartridges
+PASS  the checkout being read is a composition, not an empty tree
+PASS  the composed GridAtlas declares a technology allow-set
+
+  substation-intelligence accepts: bess, solar, wind_offshore, wind_onshore
+FAIL  every technology value the wider fleet emits is one GridAtlas accepts:
+      act, biomass, caes, flywheel, geothermal, hydro, hydrogen, other, tidal
+      — 1104 of 1104 MAP links throw 'canonical project technology is invalid'
+      on arrival.
+
+9/11 checks passed
+```
+
+Refusal-to-skip verified by pointing it at a path that does not exist: 6/8, and
+it names the missing checkout.
+
+### Cartridge applicability
+
+```
+$ python tools/intelligence/release_builder.py --applicable 202609030009-pipelinenews
+  no-grading                   CANNOT APPLY   PATCH FAILED [one neutral colour for every distance, no green-to-red grade]: expected 1, found 0
+  phone-first-heights          CANNOT APPLY   PATCH FAILED [the desktop shell measures the viewport that is actually visible]: expected 1, found 0
+  sector-open-neutral-sort     CANNOT APPLY   PATCH FAILED [separate module identity from payload identity]: expected 1, found 0
+  withdraw-nonanswers          CANNOT APPLY   PATCH FAILED [masthead reports the edition actually shown]: expected 1, found 0
+
+  ALREADY APPLIED  15
+  CANNOT APPLY     4
+  APPLIES          0
+
+$ python tools/intelligence/release_builder.py --applicable 202608312037-pipelinenews
+  APPLIES          9
+  ALREADY APPLIED  7
+  CANNOT APPLY     3
+```
+
+### Step 7, proven both ways
+
+```
+$ PN_PARENT=202608312037-pipelinenews PN_CART=no-grading python prove_selfcheck.py happy  ...
+Built 202609039021-pipelinenews
+mode: happy    cmd_build returned: 0    release directory : PRESENT
+
+$ PN_PARENT=202608312037-pipelinenews PN_CART=no-grading python prove_selfcheck.py inject ...
+[INJECT] one phantom line added to sha256sums.txt
+SystemExit: FAIL: 202609039022-pipelinenews does not pass its own --check. Nothing shipped.
+mode: inject   cmd_build returned: 1    release directory : DISCARDED
+```
+
+### The failing Pages run, from the API, corroborating the local repro
+
+```
+run 33698385910   47a99b09   2026-09-03T00:10:51Z   failure
+  deploy / Validate, browser-prove and package exact public closure -> failure
+     FAILED STEP: Validate committed products and stage public closure
+  deploy / Deploy exact checked artifact               -> skipped
+  deploy / Verify public bytes, pointers and browser behaviour -> skipped
+```
+
+That step is `python3 atman/202608262014-build-pages.py`, which is the command
+reproduced above. And after five pushes tonight the newest Pages run is still
+`47a99b0` at 00:10:51Z — none of my commits touched a trigger path.

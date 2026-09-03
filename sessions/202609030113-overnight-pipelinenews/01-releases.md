@@ -29,9 +29,17 @@ trigger set (`releases/*-pipelinenews/**`, `releases/current-v*.json`,
 `state/**`, `machine-learning/proofs/**`), so none of them provokes another red
 deploy.
 
-| stamp | commit | what it carries | proof |
-|---|---|---|---|
-| _(filled in below as each lands)_ | | | |
+| commit | what it carries | proof |
+|---|---|---|
+| `78fbd42` | a release's digests describe the bytes it ships, not the bytes on disk. `sha256_published` existed and `cmd_check` used it; the four places that RECORD a digest did not (sidecars, build manifest, registry re-derivation, `sha256sums.txt`). Byte counts go through `published_size` so a recorded size and a recorded digest describe the same bytes. | `--check` census over all 32 release folders before and after: 6 failing, the same 6, unchanged. A no-op on a current checkout, which is the point: the recorded answer can no longer depend on whose machine ran the build. |
+| `733cc5f` | a build proves the release against itself before declaring it built. Step 7 of `cmd_build` runs the release's own `cmd_check` and refuses on failure, before `build_ok["done"] = True`, so the existing atexit handler discards it. | end to end against `202608312037-pipelinenews` + `no-grading`. happy: exit 0, directory PRESENT. inject (one phantom ledger line naming a file never built): `FAIL: ... does not pass its own --check. Nothing shipped.`, exit 1, directory DISCARDED. Nine cartridges build cleanly onto that parent and all nine passed step 7, so the guard is not simply refusing everything. |
+| `bc9de57` | `--applicable PARENT` answers whether a cartridge can actually be built, and `--list` marks each `[applied]` / `[new    ]`. | against `202609030009`: ALREADY APPLIED 15, CANNOT APPLY 4, **APPLIES 0**. Cross-checked against `202608312037`: APPLIES 9, ALREADY APPLIED 7, CANNOT APPLY 3, each reason named. |
+| `b4c446a` | `202609030132-verify-wider-fleet-deep-link.mjs` — the wider fleet's own MAP link (a second emitter, which no contract check read) and the *values* it carries, against the allow-set in the composed GridAtlas. | 9/11 on `202609030009` against composition `202609030128` (v9.82). Two real failures, both named with counts. Refuses to skip: pointed at a path that does not exist it reports 6/8 and says so. |
+| `1a9868e` | `docs/coordination/BOARD.md` — the three facts the GridAtlas lane needs before it widens `allowedTechnologies`, and the corrected Pages diagnosis. | n/a |
+
+None of these paths is in the `pages.yml` trigger set, and the Pages workflow
+run list confirms it: the newest run is still `47a99b0` at 2026-09-03T00:10:51Z.
+My five pushes added no red run.
 
 ---
 

@@ -280,3 +280,61 @@ the same shape as every other finding in this estate's log.
 (widen the allow-set, or scope the check to the lane that owns those four), and
 that repository is the other agent's tonight. What my lane owed was the
 measurement, and a check that asks the question. Both are here.
+
+---
+
+## 4. What shipped, and why none of it is a generation
+
+Five commits to `Ventusltd/pipelinenews` `main`, listed with their proofs in
+`01-releases.md`. Zero generations, and the reason is `03-blocked.md` B2: the
+only live route for a PipelineNews generation runs through the `globalgrid2050`
+repository, which this brief puts out of bounds, and the other route is B1.
+Building ten release directories that no surface serves would have taken the
+count of unpublished releases from 30 to 40, and the brief's own rule is that a
+cut which does not verify live is not a generation. So the night's work went
+into the two things that are verifiable from inside this repository: making the
+builder unable to ship the defect it already shipped six times, and making the
+unasked question askable.
+
+A second, independent confirmation of B2 arrived from the build side. Of the
+nineteen cartridges in `tools/intelligence/cartridges/`, fifteen are already in
+the head release and the other four **cannot apply at all** — a later cartridge
+rewrote the text their patches anchor on. `APPLIES 0`. There was no queued
+product change waiting to be cut tonight; a new generation needs a newly
+authored cartridge. `--list` had been calling all nineteen "Available".
+
+## 5. What I got wrong
+
+**I believed F1 for an hour.** F1 is precise, quotes the right line, and that
+line does fail — so I read the surrounding invariants, reasoned about ancestry
+versus equality, and had most of an argument for fix (a) before I had run
+anything. Then I ran the build and the first failure was a schema error two
+gates earlier. Reading the gate could never have told me which assertion fires
+first. The run took ninety seconds.
+
+**I nearly reported ten releases as corrupt.** The ledger audit produced ten
+files whose bytes disagree with their own release's published SHA-256, across
+six immutable releases. That is a dramatic finding and it would have been
+wrong. Before writing it down I checked whether the digest matched the CRLF
+form of the same bytes. All ten did. The files are fine; the ledgers name bytes
+that were never served. This repository had already recorded that exact defect
+class twice, in `sha256_published` and in `.gitattributes`, which is why the
+check was cheap — and it is why the fix in `78fbd42` is a no-op today and worth
+having anyway.
+
+**I checked a cartridge's intent against the product before assuming it.**
+`no-grading` — "Grid proximity reports distances and no longer grades them" —
+cannot apply to head, and for a moment that read as *the standing
+report-measurements-never-grade-them rule is being violated in the shipped
+product*. It is not: the failing anchor is the OLD text, and the grading was
+already removed by a later cartridge, which says so in its own comment. The one
+surviving `STRONG` is a variable name over a payload band; the string a reader
+sees says *"within 2 km of a circuit"*, a measurement. `no-grading` is
+superseded, not pending.
+
+**A cross-lane collision, recorded so it is not mistaken for mine.** My first
+checkpoint was staged in the `claude` repository at the same moment another
+lane committed, and their commit `3e9aaa0` — *"independent audit baseline of the
+Codex data-grid-gb lane"* — swept my five staged files in with theirs. The
+content is correct and on origin; only the commit message is somebody else's.
+Nothing was rewritten to fix it. Later checkpoints commit their own files.
