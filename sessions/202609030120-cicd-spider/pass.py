@@ -217,8 +217,31 @@ if not QUICK:
     # A wrong denominator is worse than a wrong finding (RH11), and I shipped one
     # as a side effect of fixing something else. So: diff PER REPOSITORY, over
     # the repos measured in BOTH passes, and name the repo rather than a count.
-    now_fail = {d: sorted(r['vaccine'] for r in o['results'] if r['state'] != 'immune')
+    # RH19. git status compares through .gitattributes normalisation, so a tree
+    # can be git-clean while the bytes on disk are CRLF and the blob is LF. Any
+    # verdict that depends on file BYTES is then wrong in both directions: the
+    # working copy invented pointer-verifies on gridatlas and concealed
+    # on-ledger-commits. Vaccines that hash or byte-compare are therefore not
+    # reportable from a workspace with CRLF drift; they are dropped, and the
+    # count of what was dropped is stated rather than silently omitted.
+    BYTE_SENSITIVE = {'pointer-verifies', 'disk-is-not-what-ships',
+                      'registry-integrity', 'attestation-freshness'}
+    crlf = {}
+    for d in cv:
+        out = git(d, 'ls-files', '--eol') or ''
+        crlf[d] = sum(1 for l in out.split('
+') if 'w/crlf' in l or 'w/mixed' in l)
+    st['cvaa']['crlf_drift'] = crlf
+    now_fail = {d: sorted(r['vaccine'] for r in o['results'] if r['state'] != 'immune'
+                          and not (crlf.get(d) and r['vaccine'] in BYTE_SENSITIVE))
                 for d, o in cv.items()}
+    suppressed = sorted(d for d in cv if crlf.get(d) and
+                        any(r['vaccine'] in BYTE_SENSITIVE and r['state'] != 'immune'
+                            for r in cv[d]['results']))
+    if suppressed:
+        D('BYTE-UNSAFE', f"{len(suppressed)} repo(s) have CRLF drift, so byte-dependent "
+                         f"vaccines are not reportable from the workspace: {', '.join(suppressed)}"
+                         " - re-measure in a clean clone")
     was_fail = st['cvaa'].get('not_immune') or {}
     comparable = sorted(set(now_fail) & set(was_fail))
     for d in comparable:

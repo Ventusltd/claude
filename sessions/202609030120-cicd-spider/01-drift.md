@@ -594,3 +594,48 @@ equivalent at the served path returns 200
 today; the consequence is that anything generated from that contract inherits a
 404. Its regenerating workflow is `cron: '25 4-8 30 8 *'` — four hours on
 30 August, once a year — so it cannot self-heal until 2027.
+
+---
+
+## D13 — gridatlas can move its live pointer ten times in three hours and cannot
+## move it back
+**First seen** 2026-09-03T03:10Z, confirmed in both the working copy and a clean
+clone of `8fb95a2`, so not an artefact.
+
+    FAIL rollback-exists
+      - something writes atlas/current.json but no workflow can roll it back
+
+v9.83 pinned the runtime products by commit, SHA-256 and byte length precisely
+so that a bad *product* cannot reach a shipped release. Nothing gives the same
+protection to a bad *release* reaching the pointer. The pin made the data side
+reversible and left the pointer side one-way, on a repository cutting a version
+every nine minutes.
+
+Not urgent tonight. It is the shape of thing that is cheap now and expensive at
+exactly the moment it is needed.
+
+---
+
+## D14 — the gridatlas live attestation is four days and ten releases stale
+**First seen** 2026-09-03T03:10Z, confirmed in both measurements.
+
+    FAIL attestation-freshness
+      - pointer changed after the last live attestation; re-verify
+
+`atlas/state/live-set.json` still carries `parent_release_id`
+`202608292311-atlas-v9` and its manifest digests, while the pointer has moved
+through v9.79 to v9.88.
+
+The vaccine's own Symptom section names this file: *"gridatlas
+atlas/state/live-set.json attested by its own verifier, never re-run."* The rule
+was written from this repository, about this file, and the condition it
+describes is live again.
+
+Also confirmed real on gridatlas at `8fb95a2`, from the clean clone:
+`on-ledger-commits`, `no-time-based-gates` (three crons pinned to 30–31 August,
+already expired), `executor-declared`, `loop-exists`,
+`monotonic-utc-generations`, `chaining-token`, `no-per-release-workflows`.
+
+**Withdrawn:** `pointer-verifies` — "atlas/releases/202608300453-atlas-v9
+checksums do not verify" was a CRLF artefact of the working copy. In a clean
+clone `sha256sum -c sha256sums.txt --quiet` returns 0. See RH19.
