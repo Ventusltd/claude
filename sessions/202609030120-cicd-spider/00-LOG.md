@@ -286,3 +286,29 @@ CRLF artefact — `sha256sums.txt` itself has CRLF lines, so `sha256sum` looked
 for filenames ending in a carriage return. Clean clone returns 0 (RH19).
 
 **Open:** D1 D3 D5 D6 D8 D11 D13 D14. **Closed:** D2 D4 D7 D9 D10 D12.
+
+---
+
+## Pass 8 — 2026-09-03T03:23Z — one real green, no new drift
+
+`[VACCINE-GREEN] gridatlas no longer fails rollback-exists` — D13 closed, and
+the verdict agrees with the artefact (238 lines of `tools/rollback.mjs`, a
+180-line workflow, and `[COUNT] gridatlas workflow files 5 -> 6`).
+
+`globalgrid2050` a0f93e8 fixed its dead Grid Atlas link. Verified against the
+file rather than the diff — the diff shows an added line still carrying the 404
+and the file does not. Every gridatlas URL in `index.html` now returns 200.
+
+`API-BUDGET 24/60, floor 25` withheld CI sampling by one call. `CVAA-SKIP` and
+`BYTE-UNSAFE` both fired correctly.
+
+**Withdrawn: D14.** It was never a defect. `atlas/current.json` and
+`atlas/state/live-set.json` both carry generation `202609030234` at every commit
+I examined. I reported it twice, and told the coordinator it was *"confirmed in
+both the working copy and a clean clone"* — which is where I went wrong.
+Reproducing a finding in two places does not validate it when both run the same
+instrument. See RH21; I have since read the antibody behind every finding I have
+reported as fact, and the rest hold.
+
+**Open:** D1 D3 D5 D6 D8 D11. **Closed:** D2 D7 D9 D10 D12 D13. **Withdrawn:**
+D4 D14.
