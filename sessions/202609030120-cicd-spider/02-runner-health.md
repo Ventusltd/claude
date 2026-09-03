@@ -369,3 +369,39 @@ produced under, so a later pass can tell a real change from a change of ruler.
 fails its own build on a hard-coded number that drifted away from the thing it
 describes — which is `derived-state-not-authored`, one of its own rules,
 inside its own self-test.
+
+---
+
+## RH12 — 2026-09-03T01:56Z — I recorded RH4, said I had fixed it, and then
+## made the same error five more times
+
+RH4 recorded, at 01:36Z, that I had committed a generation stamp in BST for a
+UTC event. Every commit I made afterwards did it again:
+
+    stamp           actual UTC commit time    error
+    202609030140    01:38Z                     +2 min
+    202609030150    01:42Z                     +8 min
+    202609030220    01:51Z                    +29 min
+    202609030235    01:55Z                    +40 min
+    202609030240    01:55Z                    +45 min
+
+The cause is small and worth naming exactly: `git log` renders these commits as
+`2026-09-03T02:55:37+01:00`, and I kept reading the `02:55` off my own output.
+The offset was in front of me every time. I had also written, in RH4, "every
+timestamp I write now comes from `date -u`" — and then went on choosing them.
+
+**Naming an error is not fixing it.** RH4 was a description; what was needed was
+a mechanism. From here the stamp is produced by `date -u +%Y%m%d%H%M` evaluated
+inside the same command as the commit, so there is no step at which my reading
+of a clock can enter.
+
+This is `monotonic-utc-generations` — the rule I have been reporting as the
+estate's second most widely failing, at 14 of 32 — and my own commits are now
+among the findings it reports against the `claude` repository. The vaccine is
+right, it is right about me, and it was right about me for the two hours in
+which I was quoting it at everyone else.
+
+The transferable part: a correction that changes only what you *intend* changes
+nothing. Every correction in this file that survived — the dirty-tree guard, the
+published-cvaa clone, the tier rule — survived because it became a line of code
+in `pass.py`. The two that did not, RH4 and this one, were resolutions.
