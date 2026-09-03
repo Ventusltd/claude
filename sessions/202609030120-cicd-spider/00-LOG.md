@@ -188,3 +188,36 @@ only what you intend changes nothing; the ones that held all became lines in
 
 **Open drift:** D1 D3 D5 D6 D8 D9 D10. Closed: D2 (v9.83), D4 (not in the
 repository — RH11), D7 (v9.84).
+
+---
+
+## Pass 5 — 2026-09-03T02:30Z — two guards fired correctly, one was missing
+
+**Closed: D1** (globalgrid2050 687d03f, PUBLICATION TRUTH: PASS — nine versions
+of drift) and **D10** (cvaa 791e24b; every assertion of the rewritten self-test
+verified against a clean clone — 26 files = 26 lock keys, active 25 =
+results.length 25, inoculate exit 0 with the exact expected final line).
+
+**Both of my new guards were exercised and both held.** `CVAA-COMMIT` fired
+rather than `CVAA-RULER` across cvaa's three commits — vaccine set unchanged at
+25 rules, so a findings delta would have been real (RH13). `API-BUDGET 0/60
+left, floor 25` withheld CI sampling so the estate's gates keep their share
+(RH15).
+
+**New: D11** — cvaa's own self-test cannot run on Windows
+(`new URL('..', import.meta.url).pathname` → `C:\C:\...`). Passes on every
+runner; not a CI blocker. Recorded because cvaa is the estate's instrument for
+checks that answer differently per machine.
+
+**New: D12** — the publication gate now PASSES while omitting a check. While it
+was failing the skip was cosmetic; now it is load-bearing.
+
+**RH16, and its addendum.** I had guarded gates against dirty trees and not the
+cvaa half of the same pass. It showed at once — `gridatlas 80 → 79` and
+`attestation-freshness 0 → 1` against a tree with 4 uncommitted paths, both
+recorded as unconfirmed. Then the patch script's third assertion failed, it
+exited before writing, and my `&&` chain committed a runner-health entry
+describing a guard the driver did not contain. A record that can be committed
+without the thing it records is not a record.
+
+**Open:** D3 D5 D6/D9 D8 D11 D12. **Closed:** D1 D2 D4 D7 D10.
