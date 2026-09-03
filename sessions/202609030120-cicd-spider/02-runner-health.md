@@ -1117,3 +1117,60 @@ fired on gridatlas and nowhere else, and I treated that specificity as evidence
 rather than running a control. Applied forwards, every estate-wide claim in
 `01-drift.md` should carry one: a repository known to be clean on that rule, and
 a statement that the rule stayed quiet there.
+
+---
+
+## RH28 — 2026-09-03T04:40Z — my headline answer was wrong all night: two of my
+## "three vaccines that would fail most widely" fail nowhere
+
+My brief asks for *"the three vaccines that would fail most widely"*. I answered,
+from pass 1 onward and in three messages: `pinned-actions`,
+`monotonic-utc-generations`, `chaining-token`.
+
+Applying RH27's control discipline to my own table, I counted result **states**
+rather than "not immune", and the picture changed:
+
+    all 32 repos, 25 vaccines:   immune 727    fail 47    warn 26
+
+    pinned-actions        immune 17   warn 15   fail  0
+    least-permissions     immune 21   warn 11   fail  0
+    monotonic-utc-gens    immune 18   warn  0   fail 14
+
+`pinned-actions` declares `level: warning` on line 5 of its own vaccine file.
+So does `least-permissions`. **They are warnings by design and fail nowhere in
+the estate.** I had been counting `state != 'immune'`, which silently merges a
+warning with a failure — and warnings are the estate's way of saying *known,
+accepted, ratcheted, with a dated allowance* (`cvaa/cvaa.json` carries
+`pinned-actions max 6 expires 2026-09-30`).
+
+**The corrected answer to the question I was actually asked:**
+
+| rank | vaccine | fails |
+|---|---|---:|
+| 1 | `monotonic-utc-generations` | 14/32 |
+| 2 | `chaining-token` | 12/32 |
+| 3 | `self-terminating-loops` | **7/32** |
+| 4 | `no-per-release-workflows` | 6/32 |
+| 5 | `no-time-based-gates` | 3/32 |
+| 6 | `pointer-verifies` | 2/32 |
+| 7= | `rollback-exercised`, `executor-declared`, `loop-exists` | 1/32 each |
+
+`self-terminating-loops` was never in any table I published. `pinned-actions`
+led every one of them.
+
+**This changes the adoption story, not just the ranking.** I said the estate's
+remaining exposure was "almost entirely CI supply-chain pinning and generation
+stamping". Half of that is wrong: supply-chain pinning is already a *warning*
+the estate has consciously baselined with an expiry date. The real failing
+surface is **47 vaccine-repo pairs**, and its top two are about the estate
+misreporting its own time and pushing with the default token.
+
+**Why I did not catch it sooner.** `not-immune` is the union of two states with
+opposite meanings — one says *"this is broken"* and the other says *"we know,
+here is the expiry"*. I built every count on the union because the runner's
+summary line prints `immune` or not, and I never looked at the field. Nine
+passes of a number I had defined wrongly, quoted three times.
+
+Same family as RH18's denominator: **the arithmetic was right and the category
+was wrong**, and a category error survives repetition because every recount
+reproduces it.

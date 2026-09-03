@@ -1009,7 +1009,17 @@ left.**
 
 ---
 
-## D3 — headline re-measured under the new ruler, 2026-09-03T04:14Z
+## D3 — headline re-measured 04:14Z, then CORRECTED at 04:40Z (RH28)
+
+**The table below counts `state != immune`, which merges failures with
+warnings.** `pinned-actions` and `least-permissions` declare `level: warning`
+and fail nowhere. The corrected failure ranking is
+`monotonic-utc-generations` 14/32, `chaining-token` 12/32,
+`self-terminating-loops` 7/32 — 47 failing vaccine-repo pairs, 26 warnings,
+727 immune. See RH28. The original is retained below because the warning counts
+are themselves real and useful.
+
+### The original, retained
 cvaa `4666369`, 25 active vaccines, all 32 repositories. Two antibodies changed
 since the first measurement, so the table was re-derived rather than carried
 forward.
