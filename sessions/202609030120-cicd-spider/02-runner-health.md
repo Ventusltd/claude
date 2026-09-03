@@ -681,3 +681,57 @@ contain), and now this. The pattern is specific enough to name: **a guard
 changes what gets measured, and every summary computed downstream of it silently
 changes meaning.** Fixing a measurement is not finished until every number
 derived from it has been re-derived.
+
+---
+
+## RH19 — 2026-09-03T03:10Z — a git-clean tree is not a byte-clean tree, and
+## the difference lies in BOTH directions
+
+My `tree_state` guard (RH6, RH16) asks `git status --porcelain`. gridatlas
+answered `dirty=0`, so I measured it and believed the result. `git status` compares
+through `.gitattributes` normalisation, so **it reports clean while the bytes on
+disk are CRLF and the blob is LF.** Clean tree, wrong bytes.
+
+The same vaccine run, same commit `8fb95a2`, one in the OneDrive working copy and
+one in a fresh clone:
+
+    OneDrive copy (git-clean, CRLF bytes)   clean clone (LF bytes)
+    ------------------------------------    ----------------------
+    FAIL pointer-verifies                   — absent
+    — absent                                FAIL on-ledger-commits
+    (8 others identical, including attestation-freshness)
+
+**One false positive and one hidden real finding.** I had been about to report
+`atlas/releases/202608300453-atlas-v9 checksums do not verify` — that the
+currently-pointed-to release fails its own manifest. Checked directly:
+
+    clean clone:      sha256sum -c sha256sums.txt --quiet   rc=0
+    OneDrive copy:    sha256sum: '202608291818-place-postcode-search.js'$'\r':
+                      No such file or directory                rc=1
+
+The mechanism is a variant worth knowing: it is not the hashed files that differ,
+it is **`sha256sums.txt` itself** ending its lines with CRLF, so `sha256sum`
+looks for filenames with a trailing carriage return and cannot open them. The
+manifest, not the payload.
+
+That would have been my second false report of a serious defect tonight, and a
+worse one than the first — "the live release does not verify" is the kind of
+sentence that stops work.
+
+**What I changed.** `tree_state` returning clean is necessary and not
+sufficient. Any measurement whose answer depends on file *bytes* — digests,
+checksum manifests, byte-identity — must be taken from a clean clone of the
+published HEAD, not from a working copy that merely has no pending edits. The
+cheap discriminator is `git ls-files --eol | grep -c w/crlf`; gridatlas answers
+239, and 15 of 18 repositories on this machine answer non-zero (RH14).
+
+**Confirmed real on gridatlas at 8fb95a2**, holding in both measurements and
+therefore not an artefact: `attestation-freshness`, `rollback-exists`,
+`no-time-based-gates`, `executor-declared`, `loop-exists`,
+`monotonic-utc-generations`, `chaining-token`, `no-per-release-workflows`, plus
+`on-ledger-commits` which only the clean clone could see.
+
+This is the fourth correction tonight in the same family — RH14 (the pointer
+mismatch), RH17 (the deleted string), RH8 and RH9 (text about code) — and they
+converge on one rule I should have started from: **measure the artefact, never
+the workspace.**
