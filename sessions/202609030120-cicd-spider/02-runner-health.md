@@ -1472,3 +1472,42 @@ correct in git and wrong on disk, with every indicator green.**
 Which is the same shape as everything else tonight: the artefact is right, the
 workspace is wrong, and the instrument that would tell you is reporting on the
 artefact.
+
+---
+
+## RH35 — 2026-09-03T09:17Z — my own driver put the CRLF back every pass
+
+I fixed `spider-state.json` at 05:37Z with `rm` + `git checkout`, verified it
+byte-identical to its blob, and reported that. Resuming after the session limit,
+it was CRLF again — 38,606 bytes against a 37,413-byte blob, exactly as before.
+
+The cause is `pass.py:397`:
+
+    json.dump(st, open(tmp,'w'), indent=1)
+
+On Windows, `open(path,'w')` translates every `\n` to `\r\n`. **Every pass I
+have run since pass 1 rewrote the resume contract in CRLF**, and the coordinator
+and I then took turns restoring it by hand while the thing that broke it ran
+again nine minutes later.
+
+Fixed at the source: `open(tmp,'w',encoding='utf-8',newline=chr(10))`. Every
+other file I write here goes through `newline='\n'` already; this one call did
+not, because it was the first one I wrote and I never revisited it.
+
+**Two things this makes plain.**
+
+First, it is the exact defect `disk-is-not-what-ships` exists to prevent,
+committed by the session auditing the estate for it, in the file that is my
+deliverable. RH14 caught the estate's version; RH34 caught the residue of the
+estate's fix; RH35 is mine, and it was upstream of both fixes the whole time.
+
+Second, and more useful: **a defect that a fix cannot outlive is not fixed.** I
+restored the file twice and the coordinator restored 19 more, all correctly, and
+none of it would have held for one more pass. The question I did not ask after
+the first restore was *what wrote it that way* — I treated a recurring symptom
+as a one-off state.
+
+That is the same shape as the whole night at one more level of remove: I have
+been checking the artefact, then the workspace, then the instrument — and this
+was the instrument's own output, which I had checked the contents of and never
+the encoding.

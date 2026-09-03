@@ -394,7 +394,7 @@ st['pass_completed_utc'] = now()
 st['pipelinenews_release'] = RELEASE
 st['last_pass_drift'] = drift
 tmp = STATE + '.tmp'
-json.dump(st, open(tmp,'w'), indent=1)
+json.dump(st, open(tmp,'w',encoding='utf-8',newline=chr(10)), indent=1)
 os.replace(tmp, STATE)
 
 print(f"pass {st['pass']}  {now()}  {'quick' if QUICK else 'full'}")
