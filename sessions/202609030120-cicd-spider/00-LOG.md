@@ -5,7 +5,7 @@ contract is `spider-state.json`.
 
 ---
 
-## Pass 1 — 2026-09-03T01:19Z → 02:20Z — BASELINE
+## Pass 1 — 2026-09-03T01:19Z → 01:22Z — BASELINE
 
 No diff is possible on a first pass. Everything here is the baseline against
 which later passes report.
@@ -64,3 +64,37 @@ across lines, which had hidden the single most important edge in the estate.
 All three in `02-runner-health.md`.
 
 **Open drift at close of pass 1:** D1 D2 D3 D4 D5. Next pass due 02:55Z.
+
+---
+
+## Pass 2 — 2026-09-03T01:35Z — one gate went red, one new defect
+
+**RED.** `gridatlas tools/proofs/run-current.mjs` pass → FAIL. Green at 01:20Z
+on f1f430d (v9.81, exit 0); red at 01:35Z on 52ebabc (v9.82, committed 01:28Z),
+664/667 checks, three failures:
+
+    it reads the repository that owns the data, not a copy
+    the product is named once, at data-grid-gb main, and is the v1 schema
+    the sandbox cartridge is back under the 400 kB boundary...  340171 bytes
+
+The first two are the D2 edge. The third disagrees with its own printed
+evidence — 340,171 bytes is under 400 kB. Reported to main.
+
+**HEAD moves.** gridatlas f1f430d → 52ebabc (v9.82). pipelinenews 78fbd42 →
+1a9868e ("the deep-link allow-set"). claude 3e9aaa0 → f23d76c (mine).
+data-grid-gb unchanged at b91e45b, still on `codex/20260903-phase0-integrity`;
+`origin/main` verified by `ls-remote` at 01:34Z as still 1c9909d. **D2 has not
+fired.** A 90-second poll is armed on it.
+
+**CVAA.** pipelinenews 172 → 169 findings, claude 4 → 5 (mine). No vaccine
+changed incidence.
+
+**New:** D6 — three consumers hold a Grid Atlas published path that now 404s.
+Found by HTTP against the live surface, not by any gate, because none of the
+three triggers can fire. Nothing is red; there is simply no light.
+
+**Corrected myself twice more.** RH4: I committed the pass-1 generation stamp in
+BST — `202609030220` for an 01:22Z commit, 58 minutes ahead — which is the exact
+disease of `monotonic-utc-generations`, the vaccine I had just called the
+estate's most widely failing rule. RH5: I summarised a gate from `tail -4` and
+recorded "4 proofs" for a suite that runs 667 checks.

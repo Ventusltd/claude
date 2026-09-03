@@ -104,7 +104,7 @@ finding.
 
 ---
 
-## RH3 — 2026-09-03T02:10Z — my crosslink extractor was blind to the three
+## RH3 — 2026-09-03T01:10Z — my crosslink extractor was blind to the three
 ## most important edges in the estate
 
 The first extractor scanned line by line. Shipped gridatlas cartridges build
@@ -135,3 +135,57 @@ The two recovered edges are `gridatlas -> data-grid-gb@main` for
 will split them at the 80th column. A line-oriented scanner under-reports
 dependencies systematically, and it under-reports them silently — the graph
 still looks plausible, just smaller. Count before trusting a count.
+
+---
+
+## RH4 — 2026-09-03T01:36Z — I committed a generation stamp in BST and
+## labelled my own timestamps `Z`
+
+My pass-1 commit is `202609030220: cicd-spider pass 1 baseline…`. Its actual
+UTC commit time was 01:22Z. The stamp is **58 minutes ahead of the event it
+names**, because I read the machine clock (BST, UTC+1) and wrote it as a
+generation without converting.
+
+    $ date -u +%Y-%m-%dT%H:%M:%SZ   ->  2026-09-03T01:35:56Z
+    $ date    +%Y-%m-%dT%H:%M:%S %Z ->  2026-09-03T02:35:56 GMTDT
+
+Several timestamps in `00-LOG.md`, `01-drift.md` and `03-crosslink.md` carried
+the same error and have been corrected in place.
+
+This is precisely `monotonic-utc-generations`, the vaccine I had just reported
+as the estate's most widely failing rule at 14 of 18 repositories — "generations
+are read from `date -u` at commit time, never chosen". I made the error in the
+same hour, in the artefact reporting it. The vaccine is right, and it would have
+caught me.
+
+**What I changed.** Every timestamp I write now comes from
+`date -u +%Y-%m-%dT%H:%M:%SZ` or Python's `datetime.now(timezone.utc)`, never
+from the local clock. `pass.py` already used the UTC form, which is how the
+discrepancy surfaced — the driver and I disagreed by exactly one hour and the
+driver was right. The session directory name `202609030120` is correct UTC and
+stays as it is; renaming it would break the resume contract for no gain.
+
+The commit stamp itself cannot be corrected without rewriting a pushed commit,
+which is not worth it. It is recorded here instead, which is what the vaccine
+asks for: a wrong generation that is admitted beats a wrong generation that is
+tidied away.
+
+---
+
+## RH5 — 2026-09-03T01:37Z — I summarised a gate from `tail -4` and reported
+## the wrong scale
+
+In pass 1 I recorded `gridatlas run-current` as "4 proofs run; every composed
+cartridge passed its generation-matched proof", taken from the last four lines
+of its output. The exit code was 0, so the verdict was right — but the *scale*
+was wrong: at v9.82 the same gate prints `664/667 checks passed`, and the "4
+proofs" line I quoted is a per-section footer, not the suite total.
+
+The consequence is that a later pass comparing "4 proofs" to "667 checks" would
+read a composition change as a catastrophic regression, or the reverse. A tail
+is not a summary; it is whatever happened to be printed last.
+
+**What I changed.** `pass.py` records the exit code as the verdict and stores
+only the last non-empty line as a hint. When a gate goes red I now read the
+`FAILURES` block explicitly rather than quoting the tail — which is how the
+three real gridatlas failures were found.

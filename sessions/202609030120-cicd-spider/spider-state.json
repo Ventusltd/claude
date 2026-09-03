@@ -1,9 +1,9 @@
 {
  "schema": "cicd-spider.state.v1",
  "session_dir": "claude/sessions/202609030120-cicd-spider",
- "pass": 1,
+ "pass": 2,
  "pass_started_utc": "2026-09-03T01:19:00Z",
- "pass_completed_utc": "2026-09-03T01:27:48Z",
+ "pass_completed_utc": "2026-09-03T01:35:42Z",
  "next_pass_due_utc": "2026-09-03T02:55:00Z",
  "run_until_utc": "2026-09-03T09:00:00Z",
  "read_only_except": "claude/sessions/202609030120-cicd-spider",
@@ -53,12 +53,12 @@
    "workflows": 0
   },
   "claude": {
-   "head": "3e9aaa0d02f6ec0c5e5436d48409ffb5a9f9d04e",
+   "head": "f23d76c55afaea118d1b93fcddbf60cb478c8591",
    "branch": "main",
-   "committed_at": "2026-09-03T02:23:05+01:00",
-   "subject": "202609030120: independent audit baseline of the Codex data-grid-gb lane",
+   "committed_at": "2026-09-03T02:30:44+01:00",
+   "subject": "202609030220: cicd-spider pass 1 baseline, estate crosslink graph, three self-corrections",
    "dirty_files": 2,
-   "commit_count": 4,
+   "commit_count": 8,
    "workflows": 0
   },
   "codex-chatgpt": {
@@ -121,7 +121,7 @@
    "committed_at": "2026-09-03T02:21:01+01:00",
    "subject": "20260903: correct transformer identity and fail-closed joins",
    "dirty_files": 0,
-   "commit_count": 9,
+   "commit_count": 10,
    "workflows": 1
   },
   "data-gridatlas": {
@@ -179,21 +179,21 @@
    "workflows": 0
   },
   "gridatlas": {
-   "head": "f1f430db7d0de1db9e471078fcffcca5d03dcc55",
+   "head": "52ebabc231bde9f03899b18059b9b7c6b1522414",
    "branch": "main",
-   "committed_at": "2026-09-03T02:20:00+01:00",
-   "subject": "202609030119-gridatlas-v9.81: a link with coordinates and no identity moves the camera",
-   "dirty_files": 2,
-   "commit_count": 293,
+   "committed_at": "2026-09-03T02:28:26+01:00",
+   "subject": "202609030128-gridatlas-v9.82: an unknown technology costs one layer, not the arrival",
+   "dirty_files": 4,
+   "commit_count": 294,
    "workflows": 5
   },
   "pipelinenews": {
-   "head": "78fbd42b9e8a18e71d4659a95fc5a1697f8460fa",
+   "head": "1a9868e76f970f20590a4110acc337e92d360f94",
    "branch": "main",
-   "committed_at": "2026-09-03T02:26:17+01:00",
-   "subject": "tooling: a release's digests describe the bytes it ships, not the bytes on disk",
-   "dirty_files": 8,
-   "commit_count": 385,
+   "committed_at": "2026-09-03T02:34:03+01:00",
+   "subject": "202609030133: board - the deep-link allow-set, and what Pipeline News actually emits",
+   "dirty_files": 7,
+   "commit_count": 391,
    "workflows": 51
   },
   "spiders": {
@@ -210,70 +210,82 @@
   "gridatlas__run-current": {
    "repo": "gridatlas",
    "cmd": "node tools/proofs/run-current.mjs",
-   "state": "pass",
-   "detail": "4 proofs run; every composed cartridge passed its generation-matched proof"
+   "state": "FAIL",
+   "detail": "  and where there is no crypto it says so, and still reads the product",
+   "last_run": "2026-09-03T01:35:14Z",
+   "first_seen": "2026-09-03T01:35:14Z"
   },
   "datagridgb__verify-connection-points": {
    "repo": "data-grid-gb",
    "cmd": "python derived/verify_connection_points.py",
    "state": "pass",
-   "detail": "44/44 checks"
+   "detail": "both products are clean: parameters as published, join reported, and neither claims to assess a connection.",
+   "last_run": "2026-09-03T01:35:14Z"
   },
   "datagridgb__verify-phase0-acceptance": {
    "repo": "data-grid-gb",
    "cmd": "python derived/verify_phase0_acceptance.py",
    "state": "pass",
-   "detail": "exit 0; emits a JSON acceptance report"
+   "detail": "}",
+   "last_run": "2026-09-03T01:35:14Z"
   },
   "datagridgb__verify-product": {
    "repo": "data-grid-gb",
    "cmd": "python chatgpt/verify_product.py chatgpt/derived/etys-2025.normalized.json",
    "state": "pass",
-   "detail": "sha 40f0aa1c; sites 1735 circuits 1392 transformers 1472",
-   "note": "REQUIRES a product path argument"
+   "detail": "PASS chatgpt\\derived\\etys-2025.normalized.json 40f0aa1cbdcb35d9f62e9c87e89d8230b93faa4e45d0e08e6ecd18cf287010d0 counts={'circuit_changes': 1520, 'circuits': 1392, 'fault_scenarios': 7316, 's",
+   "note": "REQUIRES a product path argument",
+   "last_run": "2026-09-03T01:35:14Z"
   },
   "pipelinenews__render_proof": {
    "repo": "pipelinenews",
    "cmd": "node tools/intelligence/render_proof.mjs <release-id>",
    "state": "pass",
-   "detail": "26 checks, 0 failed (release 202609030009-pipelinenews)",
-   "note": "REQUIRES a release-id argument"
+   "detail": "  26 checks, 0 failed",
+   "note": "REQUIRES a release-id argument",
+   "last_run": "2026-09-03T01:35:14Z"
   },
   "pipelinenews__sector_render_proof": {
    "repo": "pipelinenews",
    "cmd": "node tools/intelligence/sector_render_proof.mjs <release-id>",
    "state": "pass",
-   "detail": "11 checks, 0 failed"
+   "detail": "  11 checks, 0 failed",
+   "last_run": "2026-09-03T01:35:14Z"
   },
   "pipelinenews__surface_truth_proof": {
    "repo": "pipelinenews",
    "cmd": "node tools/intelligence/surface_truth_proof.mjs <release-id>",
    "state": "pass",
-   "detail": "8 checks, 0 failed"
+   "detail": "  8 checks, 0 failed",
+   "last_run": "2026-09-03T01:35:14Z"
   },
   "gdm__verify": {
    "repo": "grid-distance-maths",
    "cmd": "node test/verify.mjs",
    "state": "pass",
-   "detail": "34/34"
+   "detail": "34/34 checks passed",
+   "last_run": "2026-09-03T01:35:14Z"
   },
   "gdm__verify_nearest": {
    "repo": "grid-distance-maths",
    "cmd": "node test/verify_nearest.mjs",
    "state": "pass",
-   "detail": "54/54; 0 understatements"
+   "detail": "54/54 checks passed",
+   "last_run": "2026-09-03T01:35:15Z"
   },
   "gdm__verify_parity": {
    "repo": "grid-distance-maths",
    "cmd": "python test/verify_parity.py",
    "state": "pass",
-   "detail": "446/446; geodesy.py and geodesy.mjs agree"
+   "detail": "446/446 parity checks passed - geodesy.py and geodesy.mjs agree",
+   "last_run": "2026-09-03T01:35:15Z"
   },
   "dgbe__price_decade_rollup": {
    "repo": "data-gb-electricity",
    "cmd": "python derived/verify_price_decade_rollup.py",
    "state": "pass",
-   "detail": "price rollup v2 states inclusion, coverage, shares and exact extremes"
+   "detail": "PASS: price rollup v2 states inclusion, coverage, shares and exact extremes",
+   "last_run": "2026-09-03T01:35:15Z"
   },
   "dgbe__bounded_growth": {
    "repo": "data-gb-electricity",
@@ -286,8 +298,9 @@
    "repo": "globalgrid2050",
    "cmd": "python scripts/verify_published_versions.py",
    "state": "FAIL",
-   "detail": "PUBLICATION TRUTH: FAIL - the homepage names Grid Atlas v9.77 / 202609020018 as the current verified release while the live composition is v9.81 / 202609030119",
-   "first_seen": "2026-09-03T01:27:48Z"
+   "detail": "  - the homepage names Grid Atlas v9.77 / 202609020018 as the current verified release while the live composition is v9.82 / 202609030128",
+   "first_seen": "2026-09-03T01:27:48Z",
+   "last_run": "2026-09-03T01:35:15Z"
   }
  },
  "gate_discovery": {
@@ -320,7 +333,7 @@
    },
    "claude": {
     "status": "not-immune",
-    "findings": 4
+    "findings": 5
    },
    "codex-chatgpt": {
     "status": "not-immune",
@@ -380,7 +393,7 @@
    },
    "pipelinenews": {
     "status": "not-immune",
-    "findings": 172
+    "findings": 169
    },
    "spiders": {
     "status": "not-immune",
@@ -487,5 +500,15 @@
    "repo": "chatgpt-audits, claude, codex-chatgpt, gemini",
    "what": ".gitattributes present but lacks `* text=auto eol=lf` - hand-verified, NOT taken from the broken vaccine"
   }
+ ],
+ "pipelinenews_release": "202609030009-pipelinenews",
+ "last_pass_drift": [
+  "[HEAD] claude 3e9aaa0 -> f23d76c [main] 202609030220: cicd-spider pass 1 baseline, estate crosslink graph, three self-corrections",
+  "[HEAD] gridatlas f1f430d -> 52ebabc [main] 202609030128-gridatlas-v9.82: an unknown technology costs one layer, not the arrival",
+  "[HEAD] pipelinenews 78fbd42 -> 1a9868e [main] 202609030133: board - the deep-link allow-set, and what Pipeline News actually emits",
+  "[REL] pipelinenews release None -> 202609030009-pipelinenews",
+  "[RED] gridatlas__run-current: pass -> FAIL ::   and where there is no crypto it says so, and still reads the product",
+  "[CVAA] claude findings 4 -> 5",
+  "[CVAA] pipelinenews findings 172 -> 169"
  ]
 }

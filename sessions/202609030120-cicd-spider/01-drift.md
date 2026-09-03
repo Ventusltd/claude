@@ -105,8 +105,8 @@ input the subject controls. It cannot distinguish "the homepage is stale" from
 
 ## D2 — three shipped gridatlas cartridges fetch data-grid-gb at `main`, and
 ## data-grid-gb has a 882-record change loaded on a branch
-**First seen** 2026-09-03T02:05Z. **Touched since:** reported to main
-2026-09-03T02:08Z; awaiting a decision.
+**First seen** 2026-09-03T01:05Z. **Touched since:** reported to main
+2026-09-03T01:08Z; awaiting a decision.
 
 Full working in `03-crosslink.md`. In one paragraph: `b91e45b` on
 `codex/20260903-phase0-integrity` changes 882 of 886 connection points and drops
@@ -117,3 +117,46 @@ silently states different numbers at the same generation stamp.
 
 Highest consequence item on this list, and the only one with a deadline —
 it resolves the moment someone merges.
+
+---
+
+## D6 — three consumers hold a Grid Atlas published-path shape that was retired
+**First seen** 2026-09-03T01:30Z, by HTTP against the live surface.
+**Touched since:** no. Nobody has recorded this.
+
+gridatlas migrated its published release path. Measured:
+
+    404  https://ventusltd.github.io/gridatlas/202608300453-atlas-v9/
+    404  https://ventusltd.github.io/gridatlas/202608292311-atlas-v9/
+    404  https://ventusltd.github.io/gridatlas/202608291239-atlas-v9/
+    200  https://ventusltd.github.io/gridatlas/atlas/releases/202608300453-atlas-v9/
+    200  https://ventusltd.github.io/gridatlas/atlas/releases/202608292311-atlas-v9/
+    200  https://ventusltd.github.io/gridatlas/atlas/releases/202608291239-atlas-v9/
+    200  https://ventusltd.github.io/gridatlas/atlas/            (the live app)
+
+gridatlas is healthy and its own `atlas/current.json:8` names the new shape
+(`release_route: /gridatlas/atlas/releases/202608300453-atlas-v9/`). Three
+consumer artefacts still hold the old one:
+
+1. `companies/state/atlas-v9-link-contract.json` — `base_url`, `golden_url` and
+   `url_template` all at `/gridatlas/202608300453-atlas-v9/?repd_ref={repd_ref}`.
+   This is the company-to-map deep-link contract and its golden URL 404s. The
+   equivalent at the new path works: `/gridatlas/atlas/?repd_ref=13599` → 200.
+2. `companies/.github/workflows/202608300312-sync-gridatlas-v9-link-contract.yml:96`
+   builds URLs in the dead shape. Its schedule is `cron: '25 4-8 30 8 *'` —
+   four hours on 30 August, once a year. It has already passed and will not run
+   again until 2027, so it cannot self-heal.
+3. `data-gridatlas/.github/workflows/202608291239-verify-live-pointer.yml:123`
+   asserts `live_url == 'https://ventusltd.github.io/gridatlas/202608291239-atlas-v9/'`
+   and would `SystemExit('app binding mismatch: live_url')` if it ran. It is
+   `push`-triggered on three paths, so it is dormant rather than red.
+
+**Why nothing is red.** All three are dormant. A once-a-year cron and a
+path-filtered push trigger mean a broken contract produces no signal at all.
+This is the failure mode the estate should care about most: not a red light, but
+no light. `companies` is not published on Pages (404), so no external user hits
+the dead URL today — which is the only reason this ranks below D1 and D2.
+
+Consequence is moderate and rising: `pipelinenews` committed
+"the deep-link allow-set" at 01:33Z, so deep links are being worked on right
+now against a contract artefact whose golden URL does not resolve.
