@@ -1,0 +1,33 @@
+{
+  "url": "https://ventusltd.github.io/gridatlas/atlas/?repd_ref=12588&project=Botley+West%2C+Botley+-+Botley+West+Solar+Project&technology=solar&capacity_mw=840&latitude=52.10&longitude=-1.60&zoom=12",
+  "hidden": false,
+  "center": {
+    "lng": -1.3489730000000009,
+    "lat": 51.813209
+  },
+  "zoom": 12,
+  "pin": {
+    "shown": true,
+    "name": "Botley West, Botley - Botley West Solar Project"
+  },
+  "last_selection": {
+    "name": "Botley West, Botley - Botley West Solar Project",
+    "tech": "solar",
+    "direction": "to-substation",
+    "count": 5,
+    "nearest_km": 3.708
+  },
+  "deep": {
+    "status": "RESOLVED",
+    "repd_ref": "12588",
+    "resolved": true,
+    "mapped": true,
+    "name": "Botley West, Botley - Botley West Solar Project",
+    "postcode": "OX29 4DZ",
+    "longitude": -1.348973,
+    "latitude": 51.813209,
+    "technology": "solar",
+    "capacity_mw": 840
+  },
+  "identity": "Botley West, Botley - Botley West Solar Project\nsolar\n840 MW\nBotley West, Botley, Oxford · OX29 4DZ · Oxfordshire\nREPD 12588 · application submitted"
+}

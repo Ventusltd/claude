@@ -1,0 +1,71 @@
+⋮⋮
+Botley West, Botley - Botley West Solar Project
+−
+×
+Botley West, Botley - Botley West Solar Project
+solar
+840 MW
+Botley West, Botley, Oxford · OX29 4DZ · Oxfordshire
+REPD 12588 · application submitted
+×
+COWLEY SUBSTATION
+SITE-WIDE
+NESO PUBLISHED
+
+Site-wide published envelope across the 400/132 kV buses at this site, not a value for any one bus.
+
+6 circuits · 10 transformer winding connections at the site (a transformer whose windings are both here is published at each of them, so this is not a count of machines) · circuit winter ratings across the site 1,180–2,779 MVA · three-phase RMS break current 12.4–49.4 kA across every busbar at this site over 15 peak-demand rows at 3 buses (2025/26 to 2033/34) · 5 reactive compensation units · 14 changes published for 2026–2030.
+
+Appendix D publishes eight current metrics and they are not interchangeable; this is one published breaker-duty metric, and switchgear carries several relevant ratings besides it. NESO Electricity Ten Year Statement 2025, appendices B and D, via Ventusltd/data-grid-gb. Published parameters. Not a statement about whether any project can connect here.
+
+Nearest 400 kV substation: Cowley Substation · 15.76 km straight · ~19.6 km corridor estimate (×1.245, 73% of GB transmission cable circuits within 15% of published length, 59 distinct site pairs). Indicative highway-corridor screening only. Not a connection offer, not a constructability assessment and not a consenting design. Calibrated on cable circuits, which follow the highway network. Overhead line crosses open country and measures 1.13; this factor is not applied to an overhead-line question.
+
+Scope: nearest of the 278 mapped substations at 400 kV or above that this search could see; the operator publishes 355 connection points at that class and 214 of them carry coordinates, so 141 cannot be measured to at all. A nearer one may exist that nothing here can see.
+
+COWLEY
+ETYS TOPOLOGY
+
+Joined by name from Cowley Substation to NESO site COWL (NGET); declared voltages 400, 132 kV.
+
+At the site: 6 circuits and 5 transformers, counted as units. The per-voltage lines below count landings, one for each end held here, so a transformer with both windings at this site appears under both of its voltages.
+
+At 400 kV: 6 circuits, 5 transformers, 14 published changes (2026, 2028, 2030).
+
+At 132 kV: 0 circuits, 5 transformers.
+
+Circuit ratings: winter 1180-2779 MVA, summer 877-2219 MVA, across 6 circuits. Each figure is one circuit's rating in that season. They are not added together: the sum of the circuits at a site is not a quantity that exists in the network, and a rating is not what is free on the circuit.
+
+Transmission owner: NGET. Ownership is a published fact about an asset. It is not a statement about who a project would contract with, which depends on connection agreements and commercial terms no appendix contains.
+
+Published as planned: 2026 2 addition, 2 change, 2 removed; 2028 1 addition, 2 change, 1 removed; 2030 2 addition, 2 removed. These are rows NESO publishes for a future year. None of them is a circuit today, a commitment, a consent, or a connection date, and none is counted among the circuits above.
+
+On the published network: 6 sites one circuit away, 9 more at two. A hop is a published circuit, not a distance - a site one hop away may be a hundred kilometres away.
+
+Circuits reach: CULHAM JET (1), DIDCOT (1), EAST CLAYDON (1), LEIGHTON BUZZARD (1), MINETY (1), WALHAM (1).
+
+Counts, lengths, ratings and impedances are what the network operator publishes about this site. None of them states whether any project can connect here, which depends on queue position, committed connections, consent and commercial terms that no published appendix contains. Counts are branches landing on this site's nodes at the stated voltage, from ETYS Appendix B via Ventusltd/data-grid-gb.
+
+Explore route corridors ›
+NEAREST SUBSTATIONS ≥33 KV
+BETA
+3.43 km
+Yarnton Substation
+132 kV
+3.81 km
+Eynsham
+33 kV
+4.56 km
+Green Lane Electricity Substation
+33 kV
+6.00 km
+Lovelace Road
+33 kV
+8.61 km
+West Oxford Substation
+132 kV
+
+132 kV distribution in England and Wales, transmission in Scotland. 33 kV primary distribution; the usual class for a utility-scale solar or storage connection. Descriptions of the network, not advice about this scheme.
+
+HIDE THE PROJECT RING
+LAY OUT A SCHEME HERE ▸
+Beta analytics, not an actual grid connection. Straight-line distance to mapped geometry — not a cable route, not a connection length, and no route has been walked. A real connection depends on factors that must be studied: network impedance and fault level, thermal headroom, existing committed connections and queue position, right of way, wayleaves and easements, crossings, terrain, land control and consent. None of those can be inferred from a distance. A mapped substation does not confirm capacity, voltage suitability or acceptance by any network party, and absence from a mapped layer is not absence on the ground.
