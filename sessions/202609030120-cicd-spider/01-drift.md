@@ -23,34 +23,52 @@ Two repositories have written an integration plan and not executed it:
 `uses: Ventusltd/cvaa/.github/workflows/202608301446-inoculate.yml@d2ebc01f`.
 Correctly pinned, in a plan, unadopted.
 
-Measured state if the estate were inoculated today — 18 repos, 28 vaccines,
-`disk-is-not-what-ships` excluded as a proven false positive (RH1):
+**Coverage completed 2026-09-03T02:02Z: 32 of the 33 repositories.** The 14
+that had no local clone were cloned to scratch and measured. Only `pandapower`
+is unmeasured — an upstream fork, last pushed 2026-04-25, cold.
 
-| vaccine | repos not immune |
-|---|---:|
-| `monotonic-utc-generations` | **14 / 18** |
-| `chaining-token` | **10 / 18** |
-| `pinned-actions` | **10 / 18** |
-| `no-per-release-workflows` | 6 |
-| `least-permissions` | 6 |
-| `self-terminating-loops` | 6 |
-| `no-time-based-gates` | 4 |
-| `pointer-verifies` | 2 |
-| `derived-state-not-authored`, `rollback-exists`, `rollback-exercised`, `executor-declared`, `loop-exists` | 1 each |
-| the remaining 14 vaccines | 0 |
+**354 workflow files across the estate. 546 findings. Zero repositories immune,
+cvaa included.**
 
-Findings by repo: pipelinenews 172, globalgrid2050 93, gridatlas 83,
+`disk-is-not-what-ships` is excluded from every row below as a proven false
+positive (RH1); it reports 32/32 and means nothing.
+
+| vaccine | all 32 | the 18 active | the 14 cold |
+|---|---|---|---|
+| `pinned-actions` | **16/32** | 10/18 | 6/14 |
+| `monotonic-utc-generations` | **14/32** | **14/18** | **0/14** |
+| `chaining-token` | **12/32** | 10/18 | 2/14 |
+| `least-permissions` | 11/32 | 6/18 | 5/14 |
+| `self-terminating-loops` | 7/32 | 6/18 | 1/14 |
+| `no-per-release-workflows` | 6/32 | 6/18 | 0/14 |
+| `no-time-based-gates` | 4/32 | 4/18 | 0/14 |
+| `pointer-verifies` | 2/32 | 2/18 | 0/14 |
+| `rollback-exists`, `rollback-exercised`, `executor-declared`, `loop-exists`, `derived-state-not-authored` | 1/32 each | 1/18 | 0/14 |
+| the remaining 13 vaccines | 0 | 0 | 0 |
+
+**The three that would fail most widely are `pinned-actions`, `monotonic-utc-generations`
+and `chaining-token`** — two of the three are the CI supply chain going unpinned,
+and the third is the estate misreporting its own time.
+
+Splitting active from cold is the finding the totals hide.
+`monotonic-utc-generations` is **14 of 18 in the repositories agents work in and
+0 of 14 everywhere else**. It is not an estate-wide hygiene problem; it is a
+disease of agent-driven development specifically, because only agent-driven
+repositories stamp generations at all — and the ones that stamp them, choose
+them. I committed one myself within the hour (RH4), which is the cleanest
+possible corroboration.
+
+`pinned-actions` and `least-permissions` run the other way: 6/14 and 5/14 in
+cold repositories nobody has touched in months. Those are old workflows that
+predate the discipline, and they will not fix themselves because nothing
+triggers them.
+
+Findings by repo, active: pipelinenews 172, globalgrid2050 93, gridatlas 83,
 chatgpt-audits 72, companies 31, data-gridatlas 21, data-centres-gb 13,
 data-federation-map 9, data-grid-gb 8, data-gb-electricity 6, cvaa 5, claude 4,
 spiders 3, data-interconnectors 3, grid-distance-maths 2, gb-electricity-ui 1,
-gemini 1, codex-chatgpt 1. **Zero repositories are immune, including cvaa.**
-
-The three that would fail most widely are worth reading as one sentence each:
-`monotonic-utc-generations` says generations were chosen rather than read from
-`date -u` at commit time; `chaining-token` and `pinned-actions` say the CI
-supply chain is not pinned. Two of the three are about the estate lying to
-itself about time and provenance, which is the same failure the spider exists
-to catch.
+gemini 1, codex-chatgpt 1. Cold repos carry 1-3 findings each, most of which is
+the false positive.
 
 ---
 
@@ -199,16 +217,45 @@ and a Windows working copy holds CRLF where the blob holds LF. gridatlas has a
 correct `.gitattributes` now, so that exact cause should be closed; something
 else is producing the same signature.
 
-`/actions/runs/<id>/logs` returns 403 unauthenticated, so I cannot read the
-runner's output. What can be measured without it: whether the workflow checks
-out with `fetch-depth: 0`, whether it composes from `atlas/parts` or from a
-release directory, and whether the proof reads a sibling repository path that
-exists locally and not on a runner — the last is a known shape here, because a
-clean checkout of 52ebabc taken outside the working directory failed exactly one
-check, "the published node/branch product is on disk for a real-data check", for
-want of a neighbouring `data-grid-gb`. **That is the leading hypothesis: the
-proof depends on a sibling checkout the runner does not have.** Queued for the
-next pass.
+**CAUSE FOUND AND PROVED, 2026-09-03T01:57Z.** Reproduced in a clean
+runner-like checkout in scratch, never in anyone's working tree:
+
+    gridatlas + grid-distance-maths                 rc=1   59/60    59 PASS  1 FAIL
+    gridatlas + grid-distance-maths + data-grid-gb  rc=0   667/667  735 PASS 0 FAIL
+
+The one failing check is
+`tools/proofs/202609030137-substation-intelligence.proof.mjs:302-311`, which
+resolves `../data-grid-gb/derived/gb-transmission-network.v1.json` or
+`../../`. `.github/workflows/202608312212-cartridge-proof.yml` checks out
+`gridatlas` and `Ventusltd/grid-distance-maths` side by side and nothing else.
+The workflow's own header explains why grid-distance-maths is there --
+*"the first run of this workflow failed for exactly that reason and was right
+to"* -- and the same reasoning applies to a second sibling nobody added.
+
+**The red light is the smaller half.** `run-current` exits at the first failing
+proof, so the runner stops after proof 1 of 4: **59 checks execute and 675 do
+not**. Inside that proof the eight real-data checks sit behind
+`if (topologyModule && PRODUCT_FILE)`, so an absent product skips them in
+silence rather than failing them. Those are the checks carrying the actual
+measurements -- Cowley publishes ten transformer landings, Cowley reports FIVE
+transformers not ten, at 400 kV five and at 132 kV five.
+
+So the transformer-identity correction that v9.82 asserts and that data-grid-gb
+b91e45b implements has never been verified by CI. It has only ever been verified
+on a machine where the estate repositories happen to share a parent folder.
+"A skip is not a pass" is standing estate discipline, and this is that failure
+inside the guard rail rather than inside a release.
+
+**The cut:** add a third checkout to the workflow, `Ventusltd/data-grid-gb` at
+`path: data-grid-gb`, pinned with `ref:` to the same commit
+`atlas/modules/202609030137-pinned-products.js` names (1c9909d today) --
+otherwise CI validates against a moving product while the shipped app reads a
+pinned one, which is F5 reappearing inside the guard rail. Then make a null
+`PRODUCT_FILE` fail those eight checks rather than skip them.
+
+`/actions/runs/<id>/logs` returns 403 unauthenticated, so the runner's own
+output was never available; the cause was found by reproducing the environment
+instead, which is better evidence than a log.
 
 ---
 

@@ -1,9 +1,9 @@
 {
  "schema": "cicd-spider.state.v1",
  "session_dir": "claude/sessions/202609030120-cicd-spider",
- "pass": 2,
+ "pass": 3,
  "pass_started_utc": "2026-09-03T01:19:00Z",
- "pass_completed_utc": "2026-09-03T01:35:42Z",
+ "pass_completed_utc": "2026-09-03T01:46:50Z",
  "next_pass_due_utc": "2026-09-03T02:55:00Z",
  "run_until_utc": "2026-09-03T09:00:00Z",
  "read_only_except": "claude/sessions/202609030120-cicd-spider",
@@ -40,7 +40,8 @@
   "authenticated": false,
   "limit_per_hour": 60,
   "calls_used_pass1": 3,
-  "note": "no gh CLI and no GH_TOKEN on this machine. Actions API must be sampled sparingly; git answers every HEAD question locally for free."
+  "note": "no gh CLI and no GH_TOKEN on this machine. Actions API must be sampled sparingly; git answers every HEAD question locally for free.",
+  "calls_used_last_pass": 7
  },
  "heads": {
   "chatgpt-audits": {
@@ -53,21 +54,21 @@
    "workflows": 0
   },
   "claude": {
-   "head": "f23d76c55afaea118d1b93fcddbf60cb478c8591",
+   "head": "1707a98d4993c852dfd73a72947f49872ea41d29",
    "branch": "main",
-   "committed_at": "2026-09-03T02:30:44+01:00",
-   "subject": "202609030220: cicd-spider pass 1 baseline, estate crosslink graph, three self-corrections",
+   "committed_at": "2026-09-03T02:42:40+01:00",
+   "subject": "202609030143: overnight lane - v9.82, v9.83 and the --stdout fix",
    "dirty_files": 2,
-   "commit_count": 8,
+   "commit_count": 14,
    "workflows": 0
   },
   "codex-chatgpt": {
-   "head": "e4583247bf43c6dbd488a0ae6fde6ba1347df7b7",
+   "head": "9bc0a5feaa81fb7181cfe86c42955c9f84b8671f",
    "branch": "main",
-   "committed_at": "2026-09-03T01:39:18+01:00",
-   "subject": "Archive GridAtlas routing support thread",
-   "dirty_files": 1,
-   "commit_count": 2,
+   "committed_at": "2026-09-03T02:42:07+01:00",
+   "subject": "20260903: snapshot Phase 0 coordination state",
+   "dirty_files": 0,
+   "commit_count": 5,
    "workflows": 0
   },
   "companies": {
@@ -179,21 +180,21 @@
    "workflows": 0
   },
   "gridatlas": {
-   "head": "52ebabc231bde9f03899b18059b9b7c6b1522414",
+   "head": "4b1641e0b0443765f559ea98325d6317d3e7fe73",
    "branch": "main",
-   "committed_at": "2026-09-03T02:28:26+01:00",
-   "subject": "202609030128-gridatlas-v9.82: an unknown technology costs one layer, not the arrival",
-   "dirty_files": 4,
-   "commit_count": 294,
+   "committed_at": "2026-09-03T02:40:54+01:00",
+   "subject": "202609030143: `loop.mjs state --stdout` renders without writing, so the handover check can fail",
+   "dirty_files": 1,
+   "commit_count": 296,
    "workflows": 5
   },
   "pipelinenews": {
-   "head": "1a9868e76f970f20590a4110acc337e92d360f94",
+   "head": "cdb8fe99f2b0e70b4c8afde13e2d92123bf7df42",
    "branch": "main",
-   "committed_at": "2026-09-03T02:34:03+01:00",
-   "subject": "202609030133: board - the deep-link allow-set, and what Pipeline News actually emits",
+   "committed_at": "2026-09-03T02:41:28+01:00",
+   "subject": "20260903: stop unsafe live-worktree spider scans",
    "dirty_files": 7,
-   "commit_count": 391,
+   "commit_count": 392,
    "workflows": 51
   },
   "spiders": {
@@ -211,23 +212,24 @@
    "repo": "gridatlas",
    "cmd": "node tools/proofs/run-current.mjs",
    "state": "FAIL",
-   "detail": "  and where there is no crypto it says so, and still reads the product",
-   "last_run": "2026-09-03T01:35:14Z",
-   "first_seen": "2026-09-03T01:35:14Z"
+   "detail": "gridatlas has 1 uncommitted path(s); another agent is mid-write",
+   "last_run": "2026-09-03T01:46:21Z",
+   "first_seen": "2026-09-03T01:35:14Z",
+   "last_unmeasurable": "2026-09-03T01:46:21Z"
   },
   "datagridgb__verify-connection-points": {
    "repo": "data-grid-gb",
    "cmd": "python derived/verify_connection_points.py",
    "state": "pass",
    "detail": "both products are clean: parameters as published, join reported, and neither claims to assess a connection.",
-   "last_run": "2026-09-03T01:35:14Z"
+   "last_run": "2026-09-03T01:46:21Z"
   },
   "datagridgb__verify-phase0-acceptance": {
    "repo": "data-grid-gb",
    "cmd": "python derived/verify_phase0_acceptance.py",
    "state": "pass",
    "detail": "}",
-   "last_run": "2026-09-03T01:35:14Z"
+   "last_run": "2026-09-03T01:46:21Z"
   },
   "datagridgb__verify-product": {
    "repo": "data-grid-gb",
@@ -235,57 +237,60 @@
    "state": "pass",
    "detail": "PASS chatgpt\\derived\\etys-2025.normalized.json 40f0aa1cbdcb35d9f62e9c87e89d8230b93faa4e45d0e08e6ecd18cf287010d0 counts={'circuit_changes': 1520, 'circuits': 1392, 'fault_scenarios': 7316, 's",
    "note": "REQUIRES a product path argument",
-   "last_run": "2026-09-03T01:35:14Z"
+   "last_run": "2026-09-03T01:46:21Z"
   },
   "pipelinenews__render_proof": {
    "repo": "pipelinenews",
    "cmd": "node tools/intelligence/render_proof.mjs <release-id>",
    "state": "pass",
-   "detail": "  26 checks, 0 failed",
+   "detail": "pipelinenews has 7 uncommitted path(s); another agent is mid-write",
    "note": "REQUIRES a release-id argument",
-   "last_run": "2026-09-03T01:35:14Z"
+   "last_run": "2026-09-03T01:46:21Z",
+   "last_unmeasurable": "2026-09-03T01:46:21Z"
   },
   "pipelinenews__sector_render_proof": {
    "repo": "pipelinenews",
    "cmd": "node tools/intelligence/sector_render_proof.mjs <release-id>",
    "state": "pass",
-   "detail": "  11 checks, 0 failed",
-   "last_run": "2026-09-03T01:35:14Z"
+   "detail": "pipelinenews has 7 uncommitted path(s); another agent is mid-write",
+   "last_run": "2026-09-03T01:46:21Z",
+   "last_unmeasurable": "2026-09-03T01:46:21Z"
   },
   "pipelinenews__surface_truth_proof": {
    "repo": "pipelinenews",
    "cmd": "node tools/intelligence/surface_truth_proof.mjs <release-id>",
    "state": "pass",
-   "detail": "  8 checks, 0 failed",
-   "last_run": "2026-09-03T01:35:14Z"
+   "detail": "pipelinenews has 7 uncommitted path(s); another agent is mid-write",
+   "last_run": "2026-09-03T01:46:21Z",
+   "last_unmeasurable": "2026-09-03T01:46:21Z"
   },
   "gdm__verify": {
    "repo": "grid-distance-maths",
    "cmd": "node test/verify.mjs",
    "state": "pass",
    "detail": "34/34 checks passed",
-   "last_run": "2026-09-03T01:35:14Z"
+   "last_run": "2026-09-03T01:46:21Z"
   },
   "gdm__verify_nearest": {
    "repo": "grid-distance-maths",
    "cmd": "node test/verify_nearest.mjs",
    "state": "pass",
    "detail": "54/54 checks passed",
-   "last_run": "2026-09-03T01:35:15Z"
+   "last_run": "2026-09-03T01:46:22Z"
   },
   "gdm__verify_parity": {
    "repo": "grid-distance-maths",
    "cmd": "python test/verify_parity.py",
    "state": "pass",
    "detail": "446/446 parity checks passed - geodesy.py and geodesy.mjs agree",
-   "last_run": "2026-09-03T01:35:15Z"
+   "last_run": "2026-09-03T01:46:22Z"
   },
   "dgbe__price_decade_rollup": {
    "repo": "data-gb-electricity",
    "cmd": "python derived/verify_price_decade_rollup.py",
    "state": "pass",
    "detail": "PASS: price rollup v2 states inclusion, coverage, shares and exact extremes",
-   "last_run": "2026-09-03T01:35:15Z"
+   "last_run": "2026-09-03T01:46:22Z"
   },
   "dgbe__bounded_growth": {
    "repo": "data-gb-electricity",
@@ -298,9 +303,9 @@
    "repo": "globalgrid2050",
    "cmd": "python scripts/verify_published_versions.py",
    "state": "FAIL",
-   "detail": "  - the homepage names Grid Atlas v9.77 / 202609020018 as the current verified release while the live composition is v9.82 / 202609030128",
+   "detail": "  - the homepage names Grid Atlas v9.77 / 202609020018 as the current verified release while the live composition is v9.83 / 202609030137",
    "first_seen": "2026-09-03T01:27:48Z",
-   "last_run": "2026-09-03T01:35:15Z"
+   "last_run": "2026-09-03T01:46:22Z"
   }
  },
  "gate_discovery": {
@@ -333,7 +338,7 @@
    },
    "claude": {
     "status": "not-immune",
-    "findings": 5
+    "findings": 4
    },
    "codex-chatgpt": {
     "status": "not-immune",
@@ -393,11 +398,67 @@
    },
    "pipelinenews": {
     "status": "not-immune",
-    "findings": 169
+    "findings": 172
    },
    "spiders": {
     "status": "not-immune",
     "findings": 3
+   },
+   "Mahabharata": {
+    "status": "not-immune",
+    "findings": 1
+   },
+   "Solar-PV-Hybrid-and-off-grid": {
+    "status": "not-immune",
+    "findings": 1
+   },
+   "architecture": {
+    "status": "not-immune",
+    "findings": 1
+   },
+   "data_uk_dno_and_tso": {
+    "status": "not-immune",
+    "findings": 1
+   },
+   "globalgrid2050-hompage": {
+    "status": "not-immune",
+    "findings": 2
+   },
+   "pv-arc-protection-circuit": {
+    "status": "not-immune",
+    "findings": 1
+   },
+   "registry_of_all_content_in_repos_and_dependencies": {
+    "status": "not-immune",
+    "findings": 2
+   },
+   "reports": {
+    "status": "not-immune",
+    "findings": 1
+   },
+   "seed-data": {
+    "status": "not-immune",
+    "findings": 1
+   },
+   "solar-electrical-topology-analysis-engine-text-based": {
+    "status": "not-immune",
+    "findings": 3
+   },
+   "solar-repowering-whitepaper": {
+    "status": "not-immune",
+    "findings": 1
+   },
+   "uk-dno-data": {
+    "status": "not-immune",
+    "findings": 1
+   },
+   "v11": {
+    "status": "not-immune",
+    "findings": 1
+   },
+   "youengineer-code-review": {
+    "status": "not-immune",
+    "findings": 1
    }
   },
   "incidence": {
@@ -411,19 +472,31 @@
    "self-terminating-loops": 6,
    "pointer-verifies": 2,
    "rollback-exercised": 1,
-   "derived-state-not-authored": 1,
    "rollback-exists": 1,
    "executor-declared": 1,
    "loop-exists": 1
   },
   "distrusted_vaccines": {
    "disk-is-not-what-ships": "FALSE POSITIVE on 18 of 18 repos; see 02-runner-health.md. Do not count it."
+  },
+  "estate": {
+   "repos": 32,
+   "of": 33,
+   "unscanned": [
+    "pandapower"
+   ],
+   "workflow_files_total": 354,
+   "findings_total": 546,
+   "immune_repos": 0,
+   "cold_clones_at": "scratchpad/estate (14 repos cloned 2026-09-03T01:41Z)"
   }
  },
  "crosslink": {
   "artefact": "crosslink.json",
-  "edges": 524,
-  "shipped_edges": 274,
+  "repos_scanned": 32,
+  "edges_total": 6854,
+  "edges_shipped": 336,
+  "tier_rule": "only evidenceTier=shipped is a dependency; catalogue/record/doc/archive/superseded/declared are mentions",
   "mutable_shipped_runtime_edges": [
    {
     "from": "globalgrid2050",
@@ -433,34 +506,31 @@
     "evidence": "scripts/verify_published_versions.py:54"
    },
    {
-    "from": "gridatlas",
-    "to": "data-gb-electricity",
-    "ref": "main",
-    "path": "derived/price-decade-rollup.json",
-    "evidence": "atlas/current.json:292"
-   },
-   {
-    "from": "gridatlas",
-    "to": "data-grid-gb",
-    "ref": "main",
-    "path": "derived/connection-points.v3.json",
-    "evidence": "atlas/cartridges/202609012045-substation-intelligence-v9-63.js:1474"
-   },
-   {
-    "from": "gridatlas",
-    "to": "data-grid-gb",
-    "ref": "main",
-    "path": "derived/gb-transmission-network.v1.json",
-    "evidence": "atlas/cartridges/202609012141-sld-sandbox-v9-8.js:1415"
-   },
-   {
     "from": "pipelinenews",
     "to": "globalgrid2050",
     "ref": "main",
     "path": "dist/major_project_news_v9_5_1.json",
     "evidence": "index/202608261927-compile-index.mjs:128"
    }
-  ]
+  ],
+  "in_degree_top": [
+   [
+    "globalgrid2050",
+    152,
+    14
+   ],
+   [
+    "pipelinenews",
+    80,
+    5
+   ],
+   [
+    "gridatlas",
+    56,
+    7
+   ]
+  ],
+  "regenerate": "scratchpad/crosslink.py . then scratchpad/analyse.py"
  },
  "known_flaky": [],
  "open_drift": [
@@ -503,12 +573,314 @@
  ],
  "pipelinenews_release": "202609030009-pipelinenews",
  "last_pass_drift": [
-  "[HEAD] claude 3e9aaa0 -> f23d76c [main] 202609030220: cicd-spider pass 1 baseline, estate crosslink graph, three self-corrections",
-  "[HEAD] gridatlas f1f430d -> 52ebabc [main] 202609030128-gridatlas-v9.82: an unknown technology costs one layer, not the arrival",
-  "[HEAD] pipelinenews 78fbd42 -> 1a9868e [main] 202609030133: board - the deep-link allow-set, and what Pipeline News actually emits",
-  "[REL] pipelinenews release None -> 202609030009-pipelinenews",
-  "[RED] gridatlas__run-current: pass -> FAIL ::   and where there is no crypto it says so, and still reads the product",
-  "[CVAA] claude findings 4 -> 5",
-  "[CVAA] pipelinenews findings 172 -> 169"
+  "[HEAD] claude f23d76c -> 1707a98 [main] 202609030143: overnight lane - v9.82, v9.83 and the --stdout fix",
+  "[HEAD] codex-chatgpt e458324 -> 9bc0a5f [main] 20260903: snapshot Phase 0 coordination state",
+  "[HEAD] gridatlas 52ebabc -> 4b1641e [main] 202609030143: `loop.mjs state --stdout` renders without writing, so the handover check can fail",
+  "[HEAD] pipelinenews 1a9868e -> cdb8fe9 [main] 20260903: stop unsafe live-worktree spider scans",
+  "[CVAA] claude findings 5 -> 10",
+  "[CVAA] gridatlas findings 83 -> 81",
+  "[CVAA] pipelinenews findings 169 -> 168",
+  "[VACCINE] derived-state-not-authored incidence 1 -> 0 of 18",
+  "[CI-RED] gridatlas :: 202608312212 GridAtlas cartridge proof -> failure @4b1641e 2026-09-03T01:41:08Z",
+  "[CI-RED] pipelinenews :: Deploy PipelineNews Pages -> failure @47a99b0 2026-09-03T00:11:03Z",
+  "[CI-RED] pipelinenews :: Claude-Codex board continuity -> failure @3861fb9 2026-09-01T22:50:19Z",
+  "[CI-RED] pipelinenews :: Build PipelineNews Sector Intelligence Candidate 20260901014 -> failure @80e49bd 2026-09-01T01:47:38Z",
+  "[CI-RED] pipelinenews :: Build PipelineNews Sector Intelligence Candidate 20260901014 -> failure @a539bb9 2026-09-01T01:44:07Z",
+  "[CI-RED] pipelinenews :: Build PipelineNews Sector Intelligence Candidate 20260901014 -> failure @825e4b2 2026-09-01T01:41:02Z",
+  "[CI-RED] pipelinenews :: Build PipelineNews Sector Intelligence Candidate 20260901013 -> failure @f16d6b5 2026-09-01T01:37:31Z",
+  "[CI-RED] globalgrid2050 :: V9.7 Exact Commit Validation -> failure @87e6da8 2026-09-03T01:12:01Z",
+  "[CI-RED] globalgrid2050 :: Verify published versions are reachable -> failure @87e6da8 2026-09-03T01:11:31Z",
+  "[CI-RED] cvaa :: 202608301447 Self-test and full-history fleet audit -> failure @b725155 2026-09-01T22:49:44Z",
+  "[CI-RED] companies :: .github/workflows/202608300430-bootstrap-five-hour-key-only- -> failure @2106c67 2026-08-30T03:35:20Z",
+  "[CI-RED] companies :: Build compact Companies REPD Atlas V9 relations from 2f1e1ce -> failure @2f1e1ce 2026-08-30T03:22:28Z",
+  "[CI-RED] companies :: 202608300327 Bound hourly Companies Atlas V9 mission -> failure @9c80a2c 2026-08-30T02:33:56Z",
+  "[CI-RED] companies :: 202608281112 Compact Company REPD Relationship Candidate -> failure @9d8e459 2026-08-28T13:34:06Z",
+  "[CI-RED] companies :: 202608280744 Resume Compressed Companies House Candidate -> failure @49fa8de 2026-08-28T10:03:13Z",
+  "[CI-RED] companies :: 202608280327 Resume Bounded Companies House Candidate -> failure @b3904e2 2026-08-28T05:03:34Z",
+  "[CI-RED] companies :: 202608272120 Bounded Companies House Candidate -> failure @edc8d5d 2026-08-27T22:55:40Z",
+  "[CI-RED] companies :: 202608272035 Bounded Companies House Candidate -> failure @cd870ff 2026-08-27T20:15:01Z",
+  "[CI-RED] companies :: 202608272016 Bounded Companies House Candidate -> failure @1f91f8e 2026-08-27T21:33:49Z",
+  "[CI-RED] companies :: 202608271547 Bounded Companies House Candidate -> failure @4012964 2026-08-27T17:01:48Z",
+  "[CI-RED] companies :: 202608271507 Bounded Companies House Candidate -> failure @625101e 2026-08-27T15:22:54Z",
+  "[CI-RED] data-gridatlas :: Hourly watchdog 5484218a99a1cfde60c84daaa5aba001ebfcd697 -> failure @5484218 2026-09-03T00:13:59Z",
+  "[CI-RED] data-gridatlas :: 202608301931 Layer fidelity, V8 origin vs V9 delivery -> failure @5484218 2026-09-02T08:19:42Z",
+  "[CI-RED] data-gridatlas :: Hourly watchdog b335aca6c9c6b028b358c419410e4cf5b2035c2e -> failure @b335aca 2026-08-31T20:02:38Z"
+ ],
+ "ci": {
+  "gridatlas": {
+   "202608312212 GridAtlas cartridge proof": {
+    "conclusion": "failure",
+    "head_sha": "4b1641e",
+    "at": "2026-09-03T01:41:08Z"
+   },
+   "pages build and deployment": {
+    "conclusion": "success",
+    "head_sha": "4b1641e",
+    "at": "2026-09-03T01:41:42Z"
+   },
+   "202608310050 GridAtlas next-version builders": {
+    "conclusion": "success",
+    "head_sha": "4a17fa3",
+    "at": "2026-09-03T01:38:27Z"
+   }
+  },
+  "pipelinenews": {
+   "Deploy PipelineNews Pages": {
+    "conclusion": "failure",
+    "head_sha": "47a99b0",
+    "at": "2026-09-03T00:11:03Z"
+   },
+   "Claude-Codex board continuity": {
+    "conclusion": "failure",
+    "head_sha": "3861fb9",
+    "at": "2026-09-01T22:50:19Z"
+   },
+   "Build PipelineNews Sector Intelligence Candidate 202609010719": {
+    "conclusion": "success",
+    "head_sha": "2f5e476",
+    "at": "2026-09-01T07:21:04Z"
+   },
+   "Build PipelineNews Sector Intelligence Candidate 202609010200": {
+    "conclusion": "success",
+    "head_sha": "e741ceb",
+    "at": "2026-09-01T02:01:40Z"
+   },
+   "Build PipelineNews Sector Intelligence Candidate 202609010145": {
+    "conclusion": "failure",
+    "head_sha": "80e49bd",
+    "at": "2026-09-01T01:47:38Z"
+   },
+   "Build PipelineNews Sector Intelligence Candidate 202609010143": {
+    "conclusion": "failure",
+    "head_sha": "a539bb9",
+    "at": "2026-09-01T01:44:07Z"
+   },
+   "Build PipelineNews Sector Intelligence Candidate 202609010140": {
+    "conclusion": "failure",
+    "head_sha": "825e4b2",
+    "at": "2026-09-01T01:41:02Z"
+   },
+   "Build PipelineNews Sector Intelligence Candidate 202609010134": {
+    "conclusion": "failure",
+    "head_sha": "f16d6b5",
+    "at": "2026-09-01T01:37:31Z"
+   }
+  },
+  "globalgrid2050": {
+   "V9.6.2 Exact Commit Validation": {
+    "conclusion": "success",
+    "head_sha": "87e6da8",
+    "at": "2026-09-03T01:12:42Z"
+   },
+   "Deploy Jekyll with GitHub Pages dependencies preinstalled": {
+    "conclusion": "success",
+    "head_sha": "87e6da8",
+    "at": "2026-09-03T01:17:09Z"
+   },
+   "V9.6.1 Exact Commit Validation": {
+    "conclusion": "success",
+    "head_sha": "87e6da8",
+    "at": "2026-09-03T01:13:16Z"
+   },
+   "V9.7 Exact Commit Validation": {
+    "conclusion": "failure",
+    "head_sha": "87e6da8",
+    "at": "2026-09-03T01:12:01Z"
+   },
+   "V9.5 Exact Commit Validation": {
+    "conclusion": "success",
+    "head_sha": "87e6da8",
+    "at": "2026-09-03T01:12:44Z"
+   },
+   "Verify published versions are reachable": {
+    "conclusion": "failure",
+    "head_sha": "87e6da8",
+    "at": "2026-09-03T01:11:31Z"
+   },
+   "Deploy GlobalGrid2050 Pages": {
+    "conclusion": "success",
+    "head_sha": "87e6da8",
+    "at": "2026-09-03T01:15:00Z"
+   },
+   "V9.3 Exact Commit Validation": {
+    "conclusion": "success",
+    "head_sha": "87e6da8",
+    "at": "2026-09-03T01:12:33Z"
+   },
+   "V9.5.1 Exact Commit Validation": {
+    "conclusion": "success",
+    "head_sha": "87e6da8",
+    "at": "2026-09-03T01:13:02Z"
+   },
+   "V9.4 Exact Commit Validation": {
+    "conclusion": "success",
+    "head_sha": "87e6da8",
+    "at": "2026-09-03T01:12:53Z"
+   }
+  },
+  "data-grid-gb": {
+   "pages build and deployment": {
+    "conclusion": "success",
+    "head_sha": "1c9909d",
+    "at": "2026-09-01T17:29:45Z"
+   },
+   "Refresh the GB network products": {
+    "conclusion": "success",
+    "head_sha": "7656dbf",
+    "at": "2026-09-01T17:23:56Z"
+   }
+  },
+  "cvaa": {
+   "202608301447 Self-test and full-history fleet audit": {
+    "conclusion": "failure",
+    "head_sha": "b725155",
+    "at": "2026-09-01T22:49:44Z"
+   },
+   "pages build and deployment": {
+    "conclusion": "success",
+    "head_sha": "d2893fa",
+    "at": "2026-08-31T22:53:55Z"
+   },
+   "202608301447 Self-test, fleet adoption and full-history audit": {
+    "conclusion": "success",
+    "head_sha": "16e39b9",
+    "at": "2026-08-30T17:25:10Z"
+   },
+   "202608301447 Self-test and lock": {
+    "conclusion": "success",
+    "head_sha": "66a6270",
+    "at": "2026-08-30T16:53:40Z"
+   }
+  },
+  "companies": {
+   "Companies key-only Atlas check 3 from 200e9b3a5c2f687a12109aee7a5cf7635016b0fb": {
+    "conclusion": "success",
+    "head_sha": "200e9b3",
+    "at": "2026-08-30T10:02:14Z"
+   },
+   "202608300312 Sync verified Grid Atlas V9 link contract": {
+    "conclusion": "success",
+    "head_sha": "200e9b3",
+    "at": "2026-08-30T10:00:23Z"
+   },
+   "Dispatch Companies exact-Atlas contract from 200e9b3a5c2f687a12109aee7a5cf7635016b0fb": {
+    "conclusion": "success",
+    "head_sha": "200e9b3",
+    "at": "2026-08-30T04:16:02Z"
+   },
+   "Companies key-only Atlas check 2 from c95517f3340e9b71014d94ac6f4994e261c74cac": {
+    "conclusion": "success",
+    "head_sha": "c95517f",
+    "at": "2026-08-30T03:48:34Z"
+   },
+   "Companies key-only Atlas check 1": {
+    "conclusion": "success",
+    "head_sha": "235b15d",
+    "at": "2026-08-30T03:36:04Z"
+   },
+   ".github/workflows/202608300430-bootstrap-five-hour-key-only-atlas-mission.yml": {
+    "conclusion": "failure",
+    "head_sha": "2106c67",
+    "at": "2026-08-30T03:35:20Z"
+   },
+   "Build compact Companies REPD Atlas V9 relations from 2f1e1ceb871fea99dd80bed49abdc17538e9c1b7": {
+    "conclusion": "failure",
+    "head_sha": "2f1e1ce",
+    "at": "2026-08-30T03:22:28Z"
+   },
+   "202608300327 Bound hourly Companies Atlas V9 mission": {
+    "conclusion": "failure",
+    "head_sha": "9c80a2c",
+    "at": "2026-08-30T02:33:56Z"
+   },
+   "202608281337 Key-Only Company REPD Relationship Candidate": {
+    "conclusion": "success",
+    "head_sha": "cb2a834",
+    "at": "2026-08-28T14:27:34Z"
+   },
+   "202608281112 Compact Company REPD Relationship Candidate": {
+    "conclusion": "failure",
+    "head_sha": "9d8e459",
+    "at": "2026-08-28T13:34:06Z"
+   },
+   "202608280744 Resume Compressed Companies House Candidate": {
+    "conclusion": "failure",
+    "head_sha": "49fa8de",
+    "at": "2026-08-28T10:03:13Z"
+   },
+   "202608280630 Resume Compressed Companies House Candidate": {
+    "conclusion": "cancelled",
+    "head_sha": "76f51e7",
+    "at": "2026-08-28T06:45:35Z"
+   },
+   "202608280327 Resume Bounded Companies House Candidate": {
+    "conclusion": "failure",
+    "head_sha": "b3904e2",
+    "at": "2026-08-28T05:03:34Z"
+   },
+   "202608272155 Bounded Companies House Candidate": {
+    "conclusion": "cancelled",
+    "head_sha": "72c4e03",
+    "at": "2026-08-28T02:16:51Z"
+   },
+   "202608272120 Bounded Companies House Candidate": {
+    "conclusion": "failure",
+    "head_sha": "edc8d5d",
+    "at": "2026-08-27T22:55:40Z"
+   },
+   "202608272035 Bounded Companies House Candidate": {
+    "conclusion": "failure",
+    "head_sha": "cd870ff",
+    "at": "2026-08-27T20:15:01Z"
+   },
+   "202608272016 Bounded Companies House Candidate": {
+    "conclusion": "failure",
+    "head_sha": "1f91f8e",
+    "at": "2026-08-27T21:33:49Z"
+   },
+   "202608271547 Bounded Companies House Candidate": {
+    "conclusion": "failure",
+    "head_sha": "4012964",
+    "at": "2026-08-27T17:01:48Z"
+   },
+   "202608271507 Bounded Companies House Candidate": {
+    "conclusion": "failure",
+    "head_sha": "625101e",
+    "at": "2026-08-27T15:22:54Z"
+   }
+  },
+  "data-gridatlas": {
+   "Hourly watchdog 5484218a99a1cfde60c84daaa5aba001ebfcd697": {
+    "conclusion": "failure",
+    "head_sha": "5484218",
+    "at": "2026-09-03T00:13:59Z"
+   },
+   "202608301931 Layer fidelity, V8 origin vs V9 delivery": {
+    "conclusion": "failure",
+    "head_sha": "5484218",
+    "at": "2026-09-02T08:19:42Z"
+   },
+   "pages build and deployment": {
+    "conclusion": "success",
+    "head_sha": "5484218",
+    "at": "2026-08-31T23:26:35Z"
+   },
+   "Hourly watchdog b335aca6c9c6b028b358c419410e4cf5b2035c2e": {
+    "conclusion": "failure",
+    "head_sha": "b335aca",
+    "at": "2026-08-31T20:02:38Z"
+   },
+   "Automation contract guard b335aca6c9c6b028b358c419410e4cf5b2035c2e": {
+    "conclusion": "success",
+    "head_sha": "b335aca",
+    "at": "2026-08-30T18:02:42Z"
+   }
+  }
+ },
+ "repos_scanned_cvaa": 32,
+ "runner_health_open": [
+  "disk-is-not-what-ships is a false positive on every repo (RH1)",
+  "never run a gate against a dirty tree (RH6) - pass.py guards before and after",
+  "only shipped-tier edges are dependencies (RH7-RH9)"
  ]
 }

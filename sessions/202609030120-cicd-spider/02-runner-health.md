@@ -249,3 +249,63 @@ there yet.
 The general rule, which I should have started from: on this machine a
 repository is not a state, it is a state plus three agents writing to it. Any
 measurement that does not name the commit it measured is not a measurement.
+
+---
+
+## RH7–RH9 — 2026-09-03T02:12Z — three ways my graph counted things that are
+## not dependencies
+
+Extending the scan from 18 repositories to 32 turned 671 raw edges into 7,057
+and made every count in `03-crosslink.md` wrong at once. Three distinct causes,
+all the same mistake: **treating a string that looks like a dependency as one.**
+
+**RH7 — a catalogue repository is not a consumer.**
+`registry_of_all_content_in_repos_and_dependencies` emitted **6,124 of the
+6,153** runtime-data edges, 2,601 from `registry/registry_v0001.json` alone. Its
+entire purpose is to inventory every URL in the estate. Each row is a *record
+that a URL exists*, not a fetch any program performs. Tiered `catalogue` and
+excluded. Without this, the graph would have reported that repository as the
+most dependent thing in the estate by two orders of magnitude, which is exactly
+backwards — it depends on nothing and describes everything.
+
+**RH8 — gridatlas keeps every cartridge generation on disk.** Only the four
+named in `atlas/current.json` are composed into what is served; the rest are
+retired code that still contains the pre-v9.83 unpinned URLs. I counted them
+and reported five mutable edges when three had already been pinned 30 minutes
+earlier. **A dependency graph must read the pointer, not the directory.** Fixed
+by tiering any `atlas/cartridges/*` file not in the composed set, plus all of
+`atlas/releases/` and `atlas/parts/`, as `superseded`. 5 → 3.
+
+**RH9 — a URL inside a `.json` is a declaration, not a fetch.**
+`gridatlas/atlas/current.json:292` carries
+`"reads": "…/data-gb-electricity/main/derived/price-decade-rollup.json"` as
+prose describing a panel, while the composed cartridge reads that product
+through the pin table at `d310e3c`. I counted the prose as a mutable runtime
+edge. Only an executable file can perform a fetch. 3 → 2.
+
+**The result converged with the coordinator's independent count of 2.** That
+agreement is the only reason to believe either number. Every one of these three
+errors inflated the graph, and inflation is the dangerous direction: a
+dependency graph that over-reports makes everything look load-bearing, which is
+the same as marking nothing load-bearing.
+
+**The generalisable rule**, and the one worth carrying forward: *a dependency is
+something a program does, not something a file says.* Four tiers of evidence
+separate the two — `shipped` is code that runs; `catalogue`, `record`, `doc` and
+`declared` are text about code. 6,854 raw edges, 336 real ones. The ratio is
+20:1, so a graph built without this distinction is 95% noise and will be
+believed anyway, because it is bigger.
+
+---
+
+## RH10 — 2026-09-03T02:05Z — my first CI sample reported 24 failures as new
+
+`pass.py` diffs the Actions API against the previous pass. On the pass that
+introduced CI sampling there was no previous state, so every long-standing
+failure — some dating to 2026-08-27 — was emitted as `[CI-RED] … -> failure`,
+as though 24 workflows had just broken.
+
+Nothing was wrong with the data; the *framing* was wrong, and framing is most of
+what a drift report is. A first observation is a baseline, not a transition.
+Fixed: when a repository has no previous CI state, the sample is recorded
+silently and the drift line is one summary count instead of 24 alarms.

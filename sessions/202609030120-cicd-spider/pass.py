@@ -201,6 +201,12 @@ with cf.ThreadPoolExecutor(max_workers=4) as ex:
             continue
         new_ci[repo] = res
         old = prev_ci.get(repo, {})
+        # RH10: a first observation is a baseline, not a transition. Without
+        # this, every long-standing failure is announced as though it just broke.
+        if not old:
+            n = sum(1 for c in res.values() if c['conclusion'] == 'failure')
+            if n: D('CI-BASE', f'{repo}: {n} workflow(s) already failing at first observation')
+            continue
         for wf, cur in res.items():
             was = old.get(wf, {}).get('conclusion')
             if was == cur['conclusion']: continue
