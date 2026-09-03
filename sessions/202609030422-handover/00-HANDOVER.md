@@ -436,11 +436,17 @@ the headline. The rule asserts two separate things: that generations never go ba
 each is within 15 minutes of its real UTC commit time. **The second dominates, and the direction
 is the finding.**
 
-| repo | commits examined | stamp **ahead** of its own commit | worst |
+| repo | stamped commits | stamp **ahead** of its own commit | worst |
 |---|---|---|---|
 | pipelinenews | 220 | **125** | 252 min |
-| gridatlas | 298 | **118** | 235 min |
-| claude | 86 | 8 | 77 min |
+| gridatlas | 298 | **118** | 248 min |
+| globalgrid2050 | 56 | 19 | **827 min** — a stamp chosen ~14 h before its commit |
+| claude | 89 | 8 | 77 min |
+| cvaa | 15 | 3 | 248 min |
+| data-grid-gb | 5 | **5 of 5** | 116 min |
+
+Both of us computed this independently — the spider from `%aI` without my script, I with `gen_drift.py`
+— and every figure agrees.
 
 A stamp *behind* its commit can be innocent — in an archive repo a commit that files
 `sessions/202609021813-…/` is correctly titled with that session's generation, and exactly one
@@ -458,9 +464,33 @@ advance can still collide, and the published ordering stops matching the order t
 eight ahead are mine; the stamp came from `date -u` evaluated in the same command as the commit,
 which is the whole discipline. I mention it because it is the cheap fix: it is a habit, not a tool.)*
 
+**The remedy is one line, and it was tested rather than asserted.** The spider mechanised its own
+stamping at 01:57Z — `date -u +%Y%m%d%H%M` evaluated in the same command as the commit. Splitting
+**every lane's** commits to the `claude` repo at that moment:
+
+| | commits | outside 15 min | worst |
+|---|---|---|---|
+| before 01:57Z | 18 | **8 — 44%** | 385 min |
+| after 01:57Z | 71 | **1 — 1.4%** | 18 min |
+
+The single exception after is +18 minutes, three over the threshold — a slow commit, not a stamp
+chosen in advance. So the rank does not move (it is still the estate's most widely failing rule
+at 14 of 32) but **the cost of fixing it collapses**: no migration, no code change, no tooling.
+One line in whatever produces a commit, with 8-in-18 → 1-in-71 behind it.
+
 I first guessed this was an artefact of concurrent agents committing out of order. It is not, and
-I was wrong because I read a truncated output and stopped. The ordering failures are the minority
-everywhere.
+I was wrong for a poor reason: I ran the rule, read the first six lines, saw only ordering
+failures, and generalised. The clock failures were below the fold. The general form is worth more
+than the incident — **a truncated read of a complete output is indistinguishable from a complete
+read of a truncated output**, so `head`, `tail` and the first screenful are sampling instruments
+and deserve the same scepticism as any other measurement.
+
+A second instrument failed on the way here and is worth naming because of *how*: I tried to
+attribute the drifted commits with `git log --grep=<generation>` and got the wrong commits back,
+because several commits share a stamp. That collision **is itself the disease being measured** —
+stamps read at commit time would be near-unique. An instrument that breaks because of the defect
+it is pointed at is genuinely hard to catch, because its failure looks like noise rather than
+evidence.
 
 *(Method: `sessions/202609030422-handover/scripts/` — the sweep and the wall-walker.)*
 
