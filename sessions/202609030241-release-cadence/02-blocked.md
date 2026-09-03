@@ -256,3 +256,81 @@ covers — both are already in `state/live-set.json` — rather than the orderin
 two regex hits over commit subjects.
 
 Until then, every green from these four should be treated as unmeasured.
+
+## B5 — UPDATE, and the conclusion is reversed: this is not a cut
+
+I built the fix, ran it three times against the live surface, and **it must not
+ship.** The reason is worth more than the fix would have been.
+
+### What the harness actually gets wrong
+
+The original judges each layer on its label, a 400 MB heap ceiling, and a
+feature count. All three are session state wearing a per-layer label:
+
+- **The label.** 17 of 60 layers end in a statistic — `Solar PV [2819 | 52.3GW]`
+  — not a status marker, so `/\[(OK|EMPTY|FAIL)\]/` never matches and each burns
+  its full 60 s timeout. **1,049 s of a 40-minute job.**
+- **The heap.** `Runtime.getHeapUsage()` is process-wide and monotone. It
+  crosses 400 MB at `trunk_roads` and never returns, so `motorway_services` —
+  1,574 features, 0.5 s — is recorded at 513 MB.
+- **The features.** `querySourceFeatures` returns what is in the loaded tiles.
+  **`src-repd` is shared by 16 layers and `src-metros` by three**, so `tram`
+  reports 0 only because `dlr` and `metro` were unchecked before it was reached.
+
+### The real bug, which I did find
+
+    if (state.sourceId && state.label.includes('[OK]')) {
+      await page.waitForFunction(sourceId => map?.isSourceLoaded(sourceId) === true, …)
+    }
+
+**The explicit wait for the source to load is gated on `[OK]`.** The 17
+statistic layers never enter it; in the original they get 60 s of *accidental*
+waiting from the settle timeout instead. Fixing the settle predicate without
+also making that wait unconditional removes the accident and leaves nothing.
+
+Measured exactly that way, three versions against the same live surface:
+
+    v1  original                          26 failures   1,049 s
+    v2  settle predicate fixed             9 failures      34 s   <- 21 of 60
+                                                                     verdicts
+                                                                     changed
+    v3  + unconditional source-load wait   4 failures      ~40 s
+
+### Why it still must not ship
+
+**v3 run twice, minutes apart, same commit, same live surface:**
+
+    run A   4 layer failures   empty sources: 11kv, 132, 275, air, subs
+    run B   2 layer failures   empty sources: 11kv, 132, 66
+    verdict disagreements between the two runs: 4  (66, subs, tram, wind)
+
+A gate that returns a different answer each time it runs is not a gate, and
+tightening its predicates does not fix that — it moves the flake around. The
+cause is structural: **per-layer verdicts cannot be deterministic while sixteen
+layers share one source whose load state is racing the previous layer's
+uncheck.** A correct design groups layers by source and measures once per
+source; that is a redesign for the owner to choose, not a repair I should make
+unilaterally in another lane's gate at 03:45.
+
+Shipping v3 would have replaced 26 wrong failures with 2-4 different wrong
+failures and looked like progress. That is the trap this session was warned
+about, arriving from the direction of a genuine improvement.
+
+### What IS stable across all four runs, and worth taking
+
+    console errors                     0, every run
+    src-11kv and src-132               no features in ANY run
+    settle-predicate fix               1,049 s -> ~35 s, no downside when the
+                                       source wait is made unconditional
+
+So there are two real signals under the noise: the page throws nothing, and two
+sources never produce a feature under any camera or toggle order. Both are
+currently invisible because 26 meaningless per-layer failures are printed over
+them.
+
+**Recommended, in this order:** (1) make the source-load wait unconditional and
+fix the settle predicate — that alone returns thirty-five minutes a day and is
+not contentious; (2) move the verdict from per layer to per source; (3) keep the
+400 MB ceiling as a named session observation rather than a per-layer test;
+(4) assert `console_errors === 0`, which the harness already collects and does
+not check.
