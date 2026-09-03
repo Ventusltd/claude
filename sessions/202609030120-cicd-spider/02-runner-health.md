@@ -189,3 +189,63 @@ is not a summary; it is whatever happened to be printed last.
 only the last non-empty line as a hint. When a gate goes red I now read the
 `FAILURES` block explicitly rather than quoting the tail — which is how the
 three real gridatlas failures were found.
+
+---
+
+## RH6 — 2026-09-03T01:45Z — I reported a FALSE RED off a dirty tree, and sent
+## it to main. This is the worst error I have made tonight.
+
+**What I reported.** "gridatlas run-current went green to red on v9.82, 664/667,
+three failures", messaged to main at 01:41Z.
+
+**What was true.** v9.82 as committed is green. The coordinator measured a clean
+checkout of 52ebabc taken outside the working directory and got 44/45, with the
+one failure an artefact of the copy having no sibling `data-grid-gb` beside it.
+
+**What I actually measured.** The gridatlas working tree at that moment:
+
+    M  atlas/parts/202609012045-sld-sandbox-body.js
+    M  atlas/parts/202609012350-substation-intelligence-body.js
+    M  tools/proofs/202609030109-substation-intelligence.proof.mjs
+    M  tools/proofs/202609030128-sld-sandbox.proof.mjs
+    ?? atlas/modules/202609030137-pinned-products.js     <- new, untracked
+
+The agent was implementing the pinning fix **test-first**: the proofs asserted
+pinned-products behaviour before the module satisfying it was finished. Red is
+the correct state mid-implementation. My three failures and the coordinator's
+six were both snapshots of a moving target, which is why the counts disagreed
+(664/667 against 62/68) and why neither matched the committed state.
+
+**Confirmed at 01:44Z.** gridatlas reached 4a17fa3 (v9.83, "the runtime data is
+pinned to a commit and checked by its digest"), tree clean, and I re-ran with a
+before-and-after guard:
+
+    clean run at 4a17fa3  rc=0
+    667/667 checks passed
+
+My brief said this in as many words — *"If a repo is mid-write by another agent,
+note it and move on. Never wait on a lock and never assume a dirty tree is a
+defect."* — and I read it, and then did not check `git status` before running a
+gate. A false red spends attention a real red then cannot get. There were four
+real reds sitting in the Actions API at the same moment, and I had not looked
+there yet.
+
+**What I changed, in `pass.py`:**
+
+1. `tree_state(repo)` is called BEFORE every gate. A dirty tree returns
+   `unmeasurable-dirty-tree` — a third state, never `FAIL`.
+2. It is called AGAIN after the run. If HEAD moved or the tree went dirty
+   mid-run, the result is discarded. My 664/667 and the coordinator's 62/68 were
+   both produced by a tree that changed underneath the runner; only an
+   after-check catches that.
+3. An unmeasurable pass is not a transition in either direction. The previous
+   verdict is carried forward, so a dirty tree can never manufacture a red OR a
+   green.
+4. Gate detail is now parsed from the `FAILURES` block, not from `tail`.
+5. **CI state now comes from the Actions API, keyed by commit.** It is the only
+   CI signal in this estate that a live working tree cannot corrupt. Local gate
+   runs are corroboration; the API is the measurement.
+
+The general rule, which I should have started from: on this machine a
+repository is not a state, it is a state plus three agents writing to it. Any
+measurement that does not name the commit it measured is not a measurement.

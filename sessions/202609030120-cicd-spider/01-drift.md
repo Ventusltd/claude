@@ -115,8 +115,24 @@ Full working in `03-crosslink.md`. In one paragraph: `b91e45b` on
 that file at `@main` and validate only the schema string. On merge the map
 silently states different numbers at the same generation stamp.
 
-Highest consequence item on this list, and the only one with a deadline —
-it resolves the moment someone merges.
+**RESOLVED 2026-09-03T01:44Z** in gridatlas v9.83 (4a17fa3), 39 minutes after
+it was reported. `atlas/modules/202609030137-pinned-products.js` pins all three
+runtime fetches to a commit with a SHA-256 and a byte count, and its own header
+records the reasoning: *"a schema string defends SHAPE and is blind to VALUES"*,
+with COWLEY 10→5 and ABHAM 4→2 transformers cited as the measured case. Neither
+composed cartridge fetches a branch any more.
+
+**Still open on the data side:** `data-grid-gb` b91e45b remains on
+`codex/20260903-phase0-integrity`; `origin/main` is 1c9909d, which is exactly
+what the new pin names. Moving the pin is now a deliberate, visible cut, which
+is the point. The sequencing question stands: the merge and the pin move should
+be one event.
+
+**Estate mutable runtime edges: 5 → 2.** Remaining:
+`pipelinenews → globalgrid2050@main/dist/major_project_news_v9_5_1.json`
+(`index/202608261927-compile-index.mjs:128`) and
+`globalgrid2050 → gridatlas@main/atlas/current.json`
+(`scripts/verify_published_versions.py:54`).
 
 ---
 
@@ -160,3 +176,76 @@ the dead URL today — which is the only reason this ranks below D1 and D2.
 Consequence is moderate and rising: `pipelinenews` committed
 "the deep-link allow-set" at 01:33Z, so deep links are being worked on right
 now against a contract artefact whose golden URL does not resolve.
+
+---
+
+## D7 — gridatlas CI has failed on four consecutive commits while the same
+## proof passes locally
+**First seen** 2026-09-03T01:43Z, from the Actions API. **Touched since:** no.
+
+    202608312212 GridAtlas cartridge proof
+      failure  e9491b6  01:17Z   (v9.80)
+      failure  f1f430d  01:20Z   (v9.81)
+      failure  52ebabc  01:28Z   (v9.82)
+      failure  4a17fa3  01:38Z   (v9.83)
+
+At 4a17fa3, with a clean tree, `node tools/proofs/run-current.mjs` exits 0 with
+667/667. So the developer machine and the runner disagree about the same commit.
+
+In this repository that disagreement has a history: `disk-is-not-what-ships`
+was written after the cartridge proof "passed on Windows and failed on CI —
+where it was right to fail", because it compared the shell adapter's bytes raw
+and a Windows working copy holds CRLF where the blob holds LF. gridatlas has a
+correct `.gitattributes` now, so that exact cause should be closed; something
+else is producing the same signature.
+
+`/actions/runs/<id>/logs` returns 403 unauthenticated, so I cannot read the
+runner's output. What can be measured without it: whether the workflow checks
+out with `fetch-depth: 0`, whether it composes from `atlas/parts` or from a
+release directory, and whether the proof reads a sibling repository path that
+exists locally and not on a runner — the last is a known shape here, because a
+clean checkout of 52ebabc taken outside the working directory failed exactly one
+check, "the published node/branch product is on disk for a real-data check", for
+want of a neighbouring `data-grid-gb`. **That is the leading hypothesis: the
+proof depends on a sibling checkout the runner does not have.** Queued for the
+next pass.
+
+---
+
+## D8 — pipelinenews has not deployed for two days
+**First seen** 2026-09-03T01:43Z, from the Actions API. **Touched since:** no.
+
+`Deploy PipelineNews Pages` has failed on nine consecutive heads since
+2026-09-01, most recently 47a99b0 at 00:11Z. Meanwhile every local proof passes
+(`render_proof` 26 checks, `sector_render_proof` 11, `surface_truth_proof` 8).
+
+So what is being proven is not what is being published. The release directory
+`202609030009-pipelinenews` verifies on disk and has never reached the surface.
+`Claude-Codex board continuity` is also failing, since 2026-09-01T22:50Z.
+
+---
+
+## D9 — the data-gridatlas hourly watchdog has been red for two days
+**First seen** 2026-09-03T01:43Z, from the Actions API. **Touched since:** no.
+
+`Hourly watchdog 5484218a99a1cfde60c84daaa5aba001ebfcd697` has failed every
+roughly three hours since at least 2026-09-01T10:04Z, always at head 5484218,
+most recently 2026-09-03T00:13Z. `202608301931 Layer fidelity, V8 origin vs V9
+delivery` also failed at 2026-09-02T08:19Z.
+
+A watchdog that has barked continuously for two days is indistinguishable from
+one that is not barking. Consequence is low today and rises the longer it runs,
+because it is the alarm that would tell the estate a data layer had drifted.
+
+---
+
+## D10 — cvaa's own CI is red
+**First seen** 2026-09-03T01:43Z, from the Actions API. **Touched since:** no.
+
+`202608301447 Self-test and full-history fleet audit` has failed since
+2026-08-31, most recently at b725155 on 2026-09-01T22:49Z.
+
+This compounds D3 and D4. The estate is being asked to adopt cvaa into 32 more
+repositories; cvaa is not immune to its own vaccines (5 findings), one of its
+vaccines is structurally broken (D4), and its self-test does not pass. Fix the
+immune system before injecting it.

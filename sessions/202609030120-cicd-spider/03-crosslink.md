@@ -169,3 +169,47 @@ exception, `registry_of_all_content_in_repos_and_dependencies` (pushed
 2026-08-31), overlaps this artefact's purpose and should be read before this
 graph is adopted. In-degree for the unscanned set is therefore a floor, not a
 count.
+
+## Environmental hazard for anyone rebuilding this graph
+
+`git clone` of `gridatlas` fails on Windows for 12 files under
+`nightly/202608310015-gridatlas-overnight-next-versions/runs/` with
+"Filename too long". The clone reports success at the top level and leaves an
+incomplete tree, and nothing announces it. Any scan of a fresh gridatlas clone
+on this platform under-reports by those paths. `core.longpaths=true` plus a
+Windows registry `LongPathsEnabled` are both required; neither is set here.
+
+This graph was built from the canonical working copies under
+`OneDrive/Documents/GitHub/`, which are complete, so it is unaffected — but a
+later instance that clones to scratch to avoid dirty trees will hit it.
+
+## Correction, 2026-09-03T01:45Z — the mutable edge count is now 2, not 5
+
+gridatlas v9.83 (4a17fa3) added `atlas/modules/202609030137-pinned-products.js`
+and pinned all three of its runtime fetches to a commit with a SHA-256 and a
+byte count:
+
+    data-grid-gb        1c9909d  derived/connection-points.v3.json        11e28859   2,896,561 B
+    data-grid-gb        1c9909d  derived/gb-transmission-network.v1.json  fc331cc2  10,069,966 B
+    data-gb-electricity d310e3c  derived/price-decade-rollup.json         18da5059       6,873 B
+
+Neither composed cartridge (`202609030137-sld-sandbox-v9-8.js`,
+`202609030137-substation-intelligence-v9-63.js`) fetches a branch. Older
+cartridge generations in `atlas/cartridges/` still contain `main/` URLs, but
+they are historical generations and are not in `atlas/current.json`'s composed
+set — a scan that counts them counts retired code.
+
+**Remaining mutable runtime edges, estate-wide: 2.**
+
+    pipelinenews   -> globalgrid2050@main  dist/major_project_news_v9_5_1.json
+                      index/202608261927-compile-index.mjs:128
+    globalgrid2050 -> gridatlas@main       atlas/current.json
+                      scripts/verify_published_versions.py:54
+
+The second is the more interesting of the two: it is the publication-truth gate,
+so it reads its own subject's branch to decide whether the homepage is honest.
+It cannot distinguish "the homepage is stale" from "gridatlas moved", and it is
+currently red in CI (D1). Pinning it would defeat its purpose — it is *supposed*
+to follow the live pointer — which makes it a legitimate mutable edge rather
+than a defect. Recording the distinction matters: F5 is about edges that should
+be pinned and are not, and this one should not be.

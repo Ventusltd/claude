@@ -69,7 +69,8 @@ All three in `02-runner-health.md`.
 
 ## Pass 2 — 2026-09-03T01:35Z — one gate went red, one new defect
 
-**RED.** `gridatlas tools/proofs/run-current.mjs` pass → FAIL. Green at 01:20Z
+**RETRACTED — see the pass 2 correction below.** `gridatlas
+tools/proofs/run-current.mjs` pass → FAIL. Green at 01:20Z
 on f1f430d (v9.81, exit 0); red at 01:35Z on 52ebabc (v9.82, committed 01:28Z),
 664/667 checks, three failures:
 
@@ -98,3 +99,42 @@ BST — `202609030220` for an 01:22Z commit, 58 minutes ahead — which is the e
 disease of `monotonic-utc-generations`, the vaccine I had just called the
 estate's most widely failing rule. RH5: I summarised a gate from `tail -4` and
 recorded "4 proofs" for a suite that runs 667 checks.
+
+### Pass 2 correction — 2026-09-03T01:45Z
+
+**The pass 2 red was false.** I ran the gate against a tree another agent was
+mid-write in, which my brief explicitly told me not to treat as a defect. Full
+account in `02-runner-health.md` RH6. Measured again once the tree was clean:
+
+    gridatlas 4a17fa3 (v9.83), tree clean, run-current rc=0, 667/667
+
+**D2 is remediated, and I can confirm it from the bytes.** v9.83 added
+`atlas/modules/202609030137-pinned-products.js`, which pins all three runtime
+fetches to a commit with a SHA-256 and a byte count
+(`data-grid-gb@1c9909d` ×2, `data-gb-electricity@d310e3c`). Neither composed
+cartridge fetches a branch. **Estate mutable runtime edges: 5 → 2.** The two
+that remain are `pipelinenews → globalgrid2050@main` and
+`globalgrid2050 → gridatlas@main`.
+
+**The real reds were in the Actions API, which I had not yet queried.** Keyed by
+commit, so no working tree can corrupt them:
+
+| repo | workflow | failing since | heads |
+|---|---|---|---|
+| `gridatlas` | 202608312212 GridAtlas cartridge proof | 01:17Z | e9491b6, f1f430d, 52ebabc, 4a17fa3 — four in a row |
+| `pipelinenews` | Deploy PipelineNews Pages | 2026-09-01 | nine consecutive heads |
+| `data-gridatlas` | Hourly watchdog 5484218 | 2026-09-01 | every ~3h, same head |
+| `cvaa` | 202608301447 Self-test and full-history fleet audit | 2026-08-31 | b725155 |
+| `globalgrid2050` | Verify published versions are reachable | 00:11Z | 864b92e, 87e6da8 — corroborates D1 |
+| `companies` | 13 of 19 workflows | 2026-08-27..30 | dormant since |
+
+The first is the sharpest: gridatlas CI is red on four consecutive commits while
+the same proof passes 667/667 locally at the newest of them. Local and CI
+disagree, which in this repository has meant `disk-is-not-what-ships` four times
+before.
+
+**Lesson, and it is the pass's real output.** On this machine a repository is
+not a state — it is a state plus three agents writing to it. A measurement that
+does not name the commit it measured is not a measurement. `pass.py` now guards
+before and after every gate, and takes CI state from the API rather than from a
+local run.

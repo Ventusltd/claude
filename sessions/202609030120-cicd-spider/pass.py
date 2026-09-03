@@ -86,21 +86,47 @@ RELEASE = rel[-1] if rel else None
 if RELEASE and RELEASE != st.get('pipelinenews_release'):
     D('REL', f"pipelinenews release {st.get('pipelinenews_release')} -> {RELEASE}")
 
+def tree_state(repo):
+    """RH6. Three other agents are writing to these repositories continuously.
+    A gate run against a dirty tree measures a half-written edit, not a repo,
+    and reporting it as a failure spends attention a real failure then cannot
+    get. Dirty is UNMEASURABLE, which is a third state, not a failure."""
+    return git(repo,'rev-parse','HEAD'), len([l for l in (git(repo,'status','--porcelain') or '').split('\n') if l.strip()])
+
 def one_gate(item):
     gid,(repo,argv) = item
     argv = [RELEASE if a=='@RELEASE@' else a for a in argv]
     if '@RELEASE@' in argv or (RELEASE is None and any('proof' in a for a in argv)):
         return gid, 'not-runnable-locally', 'no pipelinenews release directory'
+    head0, dirty0 = tree_state(repo)
+    if dirty0:
+        return gid, 'unmeasurable-dirty-tree', f'{repo} has {dirty0} uncommitted path(s); another agent is mid-write'
     rc,out = run(repo, argv)
-    tail = [l for l in out.strip().split('\n') if l.strip()][-1:] or ['']
-    return gid, ('pass' if rc==0 else 'FAIL'), tail[0][:190]
+    # and re-check AFTER: a commit or an edit landing mid-run is equally fatal
+    head1, dirty1 = tree_state(repo)
+    if head1 != head0 or dirty1:
+        return gid, 'unmeasurable-dirty-tree', f'{repo} moved during the run ({head0[:7]}->{head1[:7]}, dirty {dirty1})'
+    fails = []
+    seen = False
+    for line in out.split('\n'):
+        if line.strip() == 'FAILURES': seen = True; continue
+        if seen and line.strip(): fails.append(line.strip())
+    detail = ('; '.join(fails)[:190] if fails
+              else ([l for l in out.strip().split('\n') if l.strip()][-1:] or [''])[0][:190])
+    return gid, ('pass' if rc==0 else 'FAIL'), detail
 
 gates = dict(st['gates'])
 with cf.ThreadPoolExecutor(max_workers=8) as ex:
     for gid, state_now, detail in ex.map(one_gate, GATE_ARGV.items()):
         prev = gates.get(gid,{}).get('state')
         gates.setdefault(gid,{}).update(state=state_now, detail=detail, last_run=now())
-        if prev != state_now:
+        # An unmeasurable pass is not a transition in either direction. Never
+        # report red or green across one; carry the previous verdict forward.
+        if state_now == 'unmeasurable-dirty-tree':
+            gates[gid]['state'] = prev or state_now
+            gates[gid]['last_unmeasurable'] = now()
+            continue
+        if prev != state_now and prev != 'unmeasurable-dirty-tree':
             if state_now == 'FAIL':
                 gates[gid]['first_seen'] = now()
                 D('RED',   f"{gid}: {prev} -> FAIL :: {detail}")
@@ -146,7 +172,46 @@ if not QUICK:
         new_heads[d]['workflows'] = wf
         new_heads[d]['commit_count'] = obj['context']['commit_count']
 
-# ------------------------------------------------------------- 4. write out
+# ------------------------------------------------- 4. CI state, from the API
+# RH6 again: the Actions API reports what CI ran against a COMMIT. It is the
+# only CI signal here that a live working tree cannot corrupt. 7 calls a pass
+# against a 60/hour unauthenticated budget.
+import urllib.request
+CI_REPOS = ['gridatlas','pipelinenews','globalgrid2050','data-grid-gb','cvaa','companies','data-gridatlas']
+def ci(repo):
+    try:
+        req = urllib.request.Request(
+            f'https://api.github.com/repos/Ventusltd/{repo}/actions/runs?per_page=25',
+            headers={'Accept':'application/vnd.github+json','User-Agent':'cicd-spider'})
+        with urllib.request.urlopen(req, timeout=45) as r:
+            d = json.loads(r.read())
+    except Exception as e:
+        return repo, None, str(e)[:80]
+    latest = {}
+    for x in d.get('workflow_runs',[]): latest.setdefault(x['name'], x)
+    return repo, {n:{'conclusion':x['conclusion'],'head_sha':x['head_sha'][:7],
+                     'at':x['updated_at']} for n,x in latest.items()}, None
+prev_ci = st.get('ci', {})
+new_ci = {}
+with cf.ThreadPoolExecutor(max_workers=4) as ex:
+    for repo, res, err in ex.map(ci, CI_REPOS):
+        if res is None:
+            D('API', f'{repo} actions API unreachable: {err}')
+            new_ci[repo] = prev_ci.get(repo, {})
+            continue
+        new_ci[repo] = res
+        old = prev_ci.get(repo, {})
+        for wf, cur in res.items():
+            was = old.get(wf, {}).get('conclusion')
+            if was == cur['conclusion']: continue
+            if cur['conclusion'] == 'failure':
+                D('CI-RED',   f"{repo} :: {wf[:60]} -> failure @{cur['head_sha']} {cur['at']}")
+            elif was == 'failure' and cur['conclusion'] == 'success':
+                D('CI-GREEN', f"{repo} :: {wf[:60]} failure -> success @{cur['head_sha']}")
+st['ci'] = new_ci
+st['github_api']['calls_used_last_pass'] = len(CI_REPOS)
+
+# ------------------------------------------------------------- 5. write out
 st['heads'] = new_heads
 st['gates'] = gates
 st['pass']  = st['pass'] + 1
