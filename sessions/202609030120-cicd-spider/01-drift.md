@@ -1040,3 +1040,73 @@ commits, which is the useful finding: **the estate's remaining CVAA exposure is
 almost entirely CI supply-chain pinning and generation stamping, and neither
 moves on its own.** Both are one-off mechanical fixes rather than ongoing
 discipline problems.
+
+---
+
+## D8 — WITHDRAWN as framed, and replaced. Not an authorisation freeze; not a
+## constant edit either.
+**2026-09-03T04:38Z.** Read from the CI log within two minutes of gaining log
+access (RH24), then corrected by the coordinator's deeper measurement.
+
+**What the log said** — run 33698385910, head 47a99b0:
+
+    PAGES BUILD GATE FAILED: timestamp release schema changed
+    atman/202608262014-build-pages.py:664 in validate_timestamp_folder_release
+    AssertionError: timestamp release schema changed
+
+**Name the file, not just the value** (RH26). The gate reads two manifests by
+exact filename — `build-pages.py:641-642`:
+
+    releases/<release_id>/release-manifest.json
+    releases/<release_id>/build-manifest.json
+
+and **both** diverge, which my first report missed:
+
+| file | expected (`build-pages.py:52-53`) | carried, last 3 releases |
+|---|---|---|
+| `release-manifest.json` | `pipelinenews.timestamp-folder-successor.v1` | `pipelinenews.additive-cartridge-release.v1` |
+| `build-manifest.json` | `pipelinenews.timestamp-folder-build-manifest.v1` | `pipelinenews.current-atlas-link-build-manifest.v2` |
+
+Grepping `releases/*/` for *any* manifest schema returns
+`atlas-current-link-manifest.v1` and `current-atlas-link-build-manifest.v2` too,
+which sends a reader to the wrong file. The gate reads those two names and no
+others.
+
+**Dated.** Consumer constant last moved `db9f758`, 2026-08-29. Producer switched
+`9937d1e`, 2026-08-31T14:25Z. 30 consecutive releases since carry the new format.
+
+**Why my proposed fix was wrong.** I suggested updating line 52 and its sibling.
+The coordinator replaced the gate's `require()` with a collector in a throwaway
+clone so one run walks as far as the code physically can, and found **thirteen**
+failing assertions for `202609030009-pipelinenews`, then a `TypeError` — so
+everything past the thirteenth is *unmeasured*, not passing:
+
+    1 release schema      6 release classification   11 identity-routing contract
+    2 build schema        7 entrypoint not folder-local index.html
+    3 generation mismatch 8 public URL              12 functional output list missing
+    4 release ID mismatch 9 pointer state in immutable bytes
+    5 not immutable      10 immutable release encodes transient pointer state
+                                                    13 output list missing
+
+Editing the constant clears wall 1 and exposes eleven more.
+
+**The control is what makes it evidence.** The same harness, same run, against
+`202608300309-pipelinenews` — the one release carrying
+`current-atlas-link-release.v2` — fails no assertion and runs to completion. So
+the thirteen are properties of the newer format, not of the instrument. That is
+the discriminator the estate's own `.gitattributes` sweep failure needed and
+lacked: **a sweep that returns the same answer for everything is a broken
+instrument; a sweep that returns a different answer for a known-good control is
+a finding.**
+
+**Conclusion:** `additive-cartridge-release.v1` is not a renamed
+`timestamp-folder-successor.v1`. It differs in generation, release_id,
+immutability, classification, entrypoint, public URL, pointer state,
+identity-routing and both output lists. It needs its own validator branch, the
+way `current-atlas-link-release.v2` already has `validate_current_atlas_link_v2`
+at `build-pages.py:399` — a new function, not a constant edit.
+
+**Not to be written before 10:00 by either of us.** Each of the thirteen is a
+deliberate guarantee about an immutable release. Deciding which still hold for
+the new format is a design judgement, and writing it means loosening a
+fail-closed deploy gate on our own authority.
