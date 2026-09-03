@@ -1,20 +1,21 @@
 {
  "schema": "cicd-spider.state.v1",
  "session_dir": "claude/sessions/202609030120-cicd-spider",
- "pass": 11,
+ "pass": 14,
  "pass_started_utc": "2026-09-03T01:19:00Z",
- "pass_completed_utc": "2026-09-03T04:35:23Z",
+ "pass_completed_utc": "2026-09-03T04:55:50Z",
  "next_pass_due_utc": "2026-09-03T02:55:00Z",
  "run_until_utc": "2026-09-03T09:00:00Z",
  "read_only_except": "claude/sessions/202609030120-cicd-spider",
  "how_to_resume": [
-  "1. cd to the scratchpad or any temp dir; the three drivers are reproducible from this file alone.",
-  "2. Enumerate: curl -s 'https://api.github.com/users/Ventusltd/repos?per_page=100' (1 API call).",
-  "3. CVAA: for each local repo D, node cvaa/inoculate.mjs <GH>/D --json --no-write. ALWAYS --no-write (cvaa is not your lane; without it the run writes vaccines/last-fired.json). The JSON is ONE line among log lines - select the line containing '\"schema\"'.",
-  "4. Gates: see the gates map below; three of them take arguments and silently 'fail' without them.",
-  "5. Crosslink: re-extract edges and diff against crosslink.json.",
-  "6. Diff heads{} below against git rev-parse HEAD; report only moves.",
-  "7. Commit ONLY claude/sessions/202609030120-cicd-spider by explicit path. Never git add -A."
+  "1. Read 02-runner-health.md before trusting any number here. Thirty-one entries; none is about the estate, all are about the instrument.",
+  "2. API: use claude/scripts/gh-api.sh <path>. 5000/hour, NOT the 60 CLAUDE.md claims. /actions/runs/<id>/logs returns 200 - read logs with ./ci-log.sh <owner/repo> <run_id> [grep].",
+  "3. Drift loop: python pass.py. Measures the 18 local clones, prints drift only, updates this file. Guards: dirty trees are unmeasurable not failed (before AND after each run), CI is read only for head_branch==main, CRLF drift suppresses byte-dependent vaccines, fail/warn/skipped are counted separately, and the ruler is the active vaccine SET not the cvaa commit.",
+  "4. Full census: bash census.sh. Self-healing - clones the 14 cold repos if absent. Emits MEMBERS not counts, with a control column per rule.",
+  "5. Generation drift: python gen-drift.py. AHEAD of its own commit is the defect; behind can be an archive commit. Remedy is one line: date -u +%Y%m%d%H%M in the same command as the commit.",
+  "6. Crosslink: crosslink-shipped.json is the graph to adopt (335 edges). crosslink.json is the full scan (6,854) kept for audit; only evidenceTier==shipped is a dependency.",
+  "7. Commit ONLY this directory by explicit path. Never git add -A: other sessions have uncommitted work in claude.",
+  "8. Two denominators, always stated: pass.py measures 18 local clones; census.sh measures 32 of 33 (pandapower is an uncloned upstream fork)."
  ],
  "org": "Ventusltd",
  "repos_in_org": 33,
@@ -40,7 +41,7 @@
   "authenticated": true,
   "via": "claude/scripts/gh-api.sh",
   "limit": 5000,
-  "remaining_at_pass": 4990,
+  "remaining_at_pass": 4925,
   "ci_repos_sampled": [
    "gridatlas",
    "pipelinenews",
@@ -65,11 +66,11 @@
    "workflows": 0
   },
   "claude": {
-   "head": "4c7e4c50776268bacb4f3d52232bad8c5bc0cb7b",
+   "head": "2c3668aabde915fe4b6a01f24af73f918a0f5b8e",
    "branch": "main",
-   "committed_at": "2026-09-03T05:33:41+01:00",
-   "subject": "202609030433: RH24 - I never measured my own instrument and then entrenched the false limit",
-   "dirty_files": 4,
+   "committed_at": "2026-09-03T05:54:28+01:00",
+   "subject": "202609030454: RH30 - the coordinator two corrections are my own entries in different clothes",
+   "dirty_files": 2,
    "commit_count": 27,
    "workflows": 0
   },
@@ -224,7 +225,7 @@
    "cmd": "node tools/proofs/run-current.mjs",
    "state": "pass",
    "detail": "every composed cartridge passed its generation-matched proof",
-   "last_run": "2026-09-03T04:34:27Z",
+   "last_run": "2026-09-03T04:55:03Z",
    "first_seen": "2026-09-03T01:35:14Z",
    "last_unmeasurable": "2026-09-03T02:29:30Z"
   },
@@ -233,14 +234,14 @@
    "cmd": "python derived/verify_connection_points.py",
    "state": "pass",
    "detail": "both products are clean: parameters as published, join reported, and neither claims to assess a connection.",
-   "last_run": "2026-09-03T04:34:27Z"
+   "last_run": "2026-09-03T04:55:03Z"
   },
   "datagridgb__verify-phase0-acceptance": {
    "repo": "data-grid-gb",
    "cmd": "python derived/verify_phase0_acceptance.py",
    "state": "pass",
    "detail": "}",
-   "last_run": "2026-09-03T04:34:27Z"
+   "last_run": "2026-09-03T04:55:03Z"
   },
   "datagridgb__verify-product": {
    "repo": "data-grid-gb",
@@ -248,7 +249,7 @@
    "state": "pass",
    "detail": "PASS chatgpt\\derived\\etys-2025.normalized.json 40f0aa1cbdcb35d9f62e9c87e89d8230b93faa4e45d0e08e6ecd18cf287010d0 counts={'circuit_changes': 1520, 'circuits': 1392, 'fault_scenarios': 7316, 's",
    "note": "REQUIRES a product path argument",
-   "last_run": "2026-09-03T04:34:27Z"
+   "last_run": "2026-09-03T04:55:03Z"
   },
   "pipelinenews__render_proof": {
    "repo": "pipelinenews",
@@ -256,52 +257,52 @@
    "state": "pass",
    "detail": "pipelinenews has 7 uncommitted path(s); another agent is mid-write",
    "note": "REQUIRES a release-id argument",
-   "last_run": "2026-09-03T04:34:27Z",
-   "last_unmeasurable": "2026-09-03T04:34:27Z"
+   "last_run": "2026-09-03T04:55:03Z",
+   "last_unmeasurable": "2026-09-03T04:55:03Z"
   },
   "pipelinenews__sector_render_proof": {
    "repo": "pipelinenews",
    "cmd": "node tools/intelligence/sector_render_proof.mjs <release-id>",
    "state": "pass",
    "detail": "pipelinenews has 7 uncommitted path(s); another agent is mid-write",
-   "last_run": "2026-09-03T04:34:27Z",
-   "last_unmeasurable": "2026-09-03T04:34:27Z"
+   "last_run": "2026-09-03T04:55:03Z",
+   "last_unmeasurable": "2026-09-03T04:55:03Z"
   },
   "pipelinenews__surface_truth_proof": {
    "repo": "pipelinenews",
    "cmd": "node tools/intelligence/surface_truth_proof.mjs <release-id>",
    "state": "pass",
    "detail": "pipelinenews has 7 uncommitted path(s); another agent is mid-write",
-   "last_run": "2026-09-03T04:34:27Z",
-   "last_unmeasurable": "2026-09-03T04:34:27Z"
+   "last_run": "2026-09-03T04:55:03Z",
+   "last_unmeasurable": "2026-09-03T04:55:03Z"
   },
   "gdm__verify": {
    "repo": "grid-distance-maths",
    "cmd": "node test/verify.mjs",
    "state": "pass",
    "detail": "34/34 checks passed",
-   "last_run": "2026-09-03T04:34:27Z"
+   "last_run": "2026-09-03T04:55:03Z"
   },
   "gdm__verify_nearest": {
    "repo": "grid-distance-maths",
    "cmd": "node test/verify_nearest.mjs",
    "state": "pass",
    "detail": "54/54 checks passed",
-   "last_run": "2026-09-03T04:34:27Z"
+   "last_run": "2026-09-03T04:55:03Z"
   },
   "gdm__verify_parity": {
    "repo": "grid-distance-maths",
    "cmd": "python test/verify_parity.py",
    "state": "pass",
    "detail": "446/446 parity checks passed - geodesy.py and geodesy.mjs agree",
-   "last_run": "2026-09-03T04:34:27Z"
+   "last_run": "2026-09-03T04:55:03Z"
   },
   "dgbe__price_decade_rollup": {
    "repo": "data-gb-electricity",
    "cmd": "python derived/verify_price_decade_rollup.py",
    "state": "pass",
    "detail": "PASS: price rollup v2 states inclusion, coverage, shares and exact extremes",
-   "last_run": "2026-09-03T04:34:27Z"
+   "last_run": "2026-09-03T04:55:03Z"
   },
   "dgbe__bounded_growth": {
    "repo": "data-gb-electricity",
@@ -316,7 +317,7 @@
    "state": "FAIL",
    "detail": "  - the homepage names Grid Atlas v9.86 / 202609030200 as the current verified release while the live composition is v9.88 / 202609030234",
    "first_seen": "2026-09-03T01:27:48Z",
-   "last_run": "2026-09-03T04:34:27Z",
+   "last_run": "2026-09-03T04:55:03Z",
    "last_unmeasurable": "2026-09-03T02:29:31Z"
   }
  },
@@ -474,17 +475,14 @@
    }
   },
   "incidence": {
-   "monotonic-utc-generations": 11,
-   "chaining-token": 9,
-   "least-permissions": 5,
    "no-per-release-workflows": 5,
-   "no-time-based-gates": 2,
-   "pinned-actions": 7,
    "self-terminating-loops": 5,
-   "rollback-exercised": 2,
-   "derived-state-not-authored": 1,
+   "chaining-token": 9,
+   "pointer-verifies": 2,
+   "monotonic-utc-generations": 11,
    "executor-declared": 1,
-   "loop-exists": 1
+   "loop-exists": 1,
+   "no-time-based-gates": 2
   },
   "distrusted_vaccines": {
    "disk-is-not-what-ships": "FALSE POSITIVE on 18 of 18 repos; see 02-runner-health.md. Do not count it."
@@ -554,7 +552,6 @@
    "codex-chatgpt": [],
    "companies": [
     "chaining-token",
-    "least-permissions",
     "monotonic-utc-generations",
     "no-per-release-workflows",
     "no-time-based-gates"
@@ -566,45 +563,34 @@
    ],
    "data-federation-map-for-globalgrid2050-all-repos": [
     "chaining-token",
-    "least-permissions",
     "monotonic-utc-generations",
-    "pinned-actions",
     "self-terminating-loops"
    ],
    "data-gb-electricity": [
     "chaining-token",
-    "monotonic-utc-generations",
-    "pinned-actions"
+    "monotonic-utc-generations"
    ],
    "data-grid-gb": [
     "chaining-token",
-    "monotonic-utc-generations",
-    "pinned-actions"
+    "monotonic-utc-generations"
    ],
    "data-gridatlas": [
     "chaining-token",
     "monotonic-utc-generations",
     "no-per-release-workflows",
-    "rollback-exercised",
     "self-terminating-loops"
    ],
    "data-interconnectors": [
     "monotonic-utc-generations",
-    "pinned-actions",
     "self-terminating-loops"
    ],
-   "gb-electricity-ui": [
-    "least-permissions",
-    "pinned-actions"
-   ],
+   "gb-electricity-ui": [],
    "gemini": [],
    "globalgrid2050": [
     "chaining-token",
-    "least-permissions",
     "monotonic-utc-generations",
     "no-per-release-workflows",
     "no-time-based-gates",
-    "pinned-actions",
     "self-terminating-loops"
    ],
    "grid-distance-maths": [
@@ -619,12 +605,122 @@
    ],
    "spiders": [
     "chaining-token",
-    "least-permissions",
-    "pinned-actions",
     "self-terminating-loops"
    ]
   },
-  "incidence_denominator": 15
+  "incidence_denominator": 15,
+  "skipped": {
+   "chatgpt-audits": [],
+   "codex-chatgpt": [],
+   "companies": [],
+   "data-centres-gb": [],
+   "data-federation-map-for-globalgrid2050-all-repos": [],
+   "data-gb-electricity": [],
+   "data-grid-gb": [],
+   "data-gridatlas": [
+    "rollback-exercised"
+   ],
+   "data-interconnectors": [],
+   "gb-electricity-ui": [],
+   "gemini": [],
+   "globalgrid2050": [],
+   "grid-distance-maths": [],
+   "gridatlas": [
+    "derived-state-not-authored",
+    "rollback-exercised"
+   ],
+   "spiders": []
+  },
+  "by_state": {
+   "agent-quarantine": {
+    "immune": 15
+   },
+   "attestation-freshness": {
+    "immune": 15
+   },
+   "chaining-token": {
+    "immune": 6,
+    "fail": 9
+   },
+   "context-diet": {
+    "immune": 15
+   },
+   "derived-state-not-authored": {
+    "immune": 14,
+    "skipped": 1
+   },
+   "executor-declared": {
+    "immune": 14,
+    "fail": 1
+   },
+   "full-history-checkout": {
+    "immune": 15
+   },
+   "least-permissions": {
+    "immune": 10,
+    "warn": 5
+   },
+   "loop-exists": {
+    "immune": 14,
+    "fail": 1
+   },
+   "monotonic-utc-generations": {
+    "fail": 11,
+    "immune": 4
+   },
+   "no-app-copies": {
+    "immune": 15
+   },
+   "no-dangerous-apis": {
+    "immune": 15
+   },
+   "no-per-release-workflows": {
+    "immune": 10,
+    "fail": 5
+   },
+   "no-time-based-gates": {
+    "immune": 13,
+    "fail": 2
+   },
+   "on-ledger-commits": {
+    "immune": 15
+   },
+   "one-active-scope": {
+    "immune": 15
+   },
+   "page-data-block-parses": {
+    "immune": 15
+   },
+   "pinned-actions": {
+    "immune": 8,
+    "warn": 7
+   },
+   "pointer-verifies": {
+    "immune": 13,
+    "fail": 2
+   },
+   "registry-integrity": {
+    "immune": 15
+   },
+   "release-name-convention": {
+    "immune": 15
+   },
+   "rollback-exercised": {
+    "immune": 13,
+    "skipped": 2
+   },
+   "rollback-exists": {
+    "immune": 15
+   },
+   "self-terminating-loops": {
+    "immune": 10,
+    "fail": 5
+   },
+   "vocabulary": {
+    "immune": 15
+   }
+  },
+  "incidence_counts": "state == fail only; warnings and skips are in by_state"
  },
  "crosslink": {
   "artefact": "crosslink.json",
@@ -747,14 +843,9 @@
  ],
  "pipelinenews_release": "202609030009-pipelinenews",
  "last_pass_drift": [
-  "[HEAD] claude 3ab4f42 -> 4c7e4c5 [main] 202609030433: RH24 - I never measured my own instrument and then entrenched the false limit",
-  "[CVAA-RULER] active vaccine set changed (25 -> 25): +[] -[] ~['202608301328-derived-state-not-authored.md', '202608301705-rollback-exercised.md']; a findings delta this pass may be the ruler, not the repo",
+  "[HEAD] claude 75ef88b -> 2c3668a [main] 202609030454: RH30 - the coordinator two corrections are my own entries in different clothes",
   "[CVAA-SKIP] 3 repo(s) mid-write, not measured: claude, cvaa, pipelinenews",
-  "[CVAA] data-gridatlas findings 20 -> 19",
-  "[BYTE-UNSAFE] 2 repo(s) have CRLF drift, so byte-dependent vaccines are not reportable from the workspace: data-gridatlas, gridatlas - re-measure in a clean clone",
-  "[VACCINE-RED] gridatlas now fails derived-state-not-authored",
-  "[VACCINE-RED] gridatlas now fails rollback-exercised",
-  "[CI-GREEN] cvaa :: 202608301447 Self-test and full-history fleet audit failure -> success @93e568e"
+  "[BYTE-UNSAFE] 2 repo(s) have CRLF drift, so byte-dependent vaccines are not reportable from the workspace: data-gridatlas, gridatlas - re-measure in a clean clone"
  ],
  "ci": {
   "gridatlas": {
@@ -1097,5 +1188,5 @@
  ],
  "f5_status": "no remaining instances. 5 mutable shipped runtime edges at 01:05Z, 2 after gridatlas v9.83, 1 after RH17. The remaining one is the publication-truth gate following the live pointer, which should stay mutable.",
  "runner_health_entries": 21,
- "last_updated": "2026-09-03T04:09:35Z"
+ "last_updated": "2026-09-03T05:14:29Z"
 }

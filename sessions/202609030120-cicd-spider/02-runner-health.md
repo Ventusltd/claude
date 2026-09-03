@@ -1321,3 +1321,38 @@ families, now that there are enough to count:
 | concluded from a partial view | RH5, and the coordinator's first hypothesis |
 
 Nothing in that table is about the estate. Every one is about the instrument.
+
+---
+
+## RH31 — 2026-09-03T05:13Z — I tested my own resume contract and it had a
+## hidden dependency on state a fresh agent cannot have
+
+`spider-state.json` is the brief's stated contract: *"write it so that a
+completely fresh agent, given only that file and this brief, resumes exactly
+where you left off."* I had asserted that for fourteen passes and never tested
+it.
+
+Tested by asking what each committed script needs that is not committed:
+
+    census.sh depends on  $SC/estate  — the 14 cold repository clones, which
+    live only in this session's scratchpad and are not in git.
+
+A fresh instance running `census.sh` would have measured **18 repositories and
+reported it as the estate**, with no error and no gap — the loop simply finds
+nothing to iterate. Every "of 32" in the handover would silently have become
+"of 18", and the immune count would have dropped from 14 to 0, because all
+fourteen immune repositories are the cold ones.
+
+That is the RH28 category error dressed as an infrastructure gap: a denominator
+that changes without saying so.
+
+**Fixed rather than documented.** `census.sh` now clones the fourteen if absent
+— `git clone` costs no API budget — and prints `cold clones present: N of 14`
+so the denominator is asserted before the measurement rather than inferred
+after it. `how_to_resume` is rewritten as eight steps covering the real API
+ceiling, the log reader, both denominators, and the guard list.
+
+**The general form**, and it is the fifth family in RH30 pointed at myself:
+**a contract you have never executed is a description, not a contract.** I
+verified other people's fixes all night by running them in clean clones, and
+verified my own resume path by reading it.
