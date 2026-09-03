@@ -98,13 +98,44 @@ so the gate can fail. That check is permanent now, not a one-off.
 
 ## 4. Corrections to the record
 
-**D5 — closed, and both earlier statements about it were wrong.** All **18** local repositories
-already carry `* text=auto eol=lf`. The spider filed "four repositories lack it"; I then filed
-"all 18 lack it". Neither was a measurement — my sweep was silently broken. Git on Windows
-rewrote `origin/main:.gitattributes` into `origin\main;.gitattributes`, so every lookup failed
-and every repo reported "no file". `MSYS_NO_PATHCONV=1` fixes that, but it must be set
-per-command: with it set globally the *next* command handed git a `/c/Users/...` path and git
-resolved it against the MSYS root instead. It is a per-command flag, not an environment.
+**D5 — NOT closed. The spider was right all along and I was wrong twice.** Its original filing —
+*four repositories lack the rule* — was correct: **`chatgpt-audits`, `claude`, `codex-chatgpt`,
+`gemini`.** All four carry GitHub's default template, bare `* text=auto`, with no `eol=lf`.
+
+I got here through two different instrument failures, and they are worth separating because only
+the first is the kind this document has been celebrating catching.
+
+**First, a broken instrument.** Git on Windows rewrote `origin/main:.gitattributes` into
+`origin\main;.gitattributes` — the colon became a semicolon — so every lookup failed identically
+and every repo reported "no file". I filed "all 18 lack it". `MSYS_NO_PATHCONV=1` fixes that call
+and breaks the next one: with it set globally, git resolves `/c/Users/...` against the MSYS root,
+so a clone lands somewhere else and reports "already exists" for a directory `[ -d ]` says is
+absent. **It is a per-command flag, not an environment.**
+
+**Second — and this is the one I did not catch — the wrong predicate.** Having fixed the
+instrument, I swept with `grep "text=auto"` and got a clean 0 of 18, then published "D5 closed",
+then *re-verified* it ten minutes later with the same loose test, then told the spider to drop it
+from its board. But bare `text=auto` matches that grep, and bare `text=auto` **is the defect** —
+cvaa's own `disk-is-not-what-ships` names it: *it normalises the blob and still hands Windows
+CRLF.* The vaccine's predicate is the anchored `* text=auto eol=lf`. Mine was looser, so it
+answered a question nobody asked.
+
+**This is a harder failure than a broken instrument and deserves its own line.** A broken
+instrument gives the same answer for every subject — that is the tell, and it is what caught the
+first one. A *correct instrument pointed at the wrong predicate* gives a discriminating,
+plausible answer, and looks exactly like a finding. The spider's sweep returned 4 and 14; mine
+returned 0 and 18. **The discriminating answer was the right one, and mine was the flat one — the
+tell was there and I read past it because the flat answer was the one I wanted.**
+
+**Fixed here, in this repo, now:** `claude/.gitattributes` carries the anchored rule with the
+reason written into it, and the tree is renormalised. The remaining three —
+`chatgpt-audits`, `codex-chatgpt`, `gemini` — are one line each. I have not touched them: they are
+other lanes' note repositories and may be mid-write, and none is a shipping surface.
+
+**One trap if you re-check this yourself:** do not rank by CRLF count. `cvaa` carries 45 and
+`gridatlas` 238 *with the correct rule*, because those working copies predate the rule and were
+never renormalised. Ranking by CRLF count puts the two most correct repositories at the top. The
+rule is the measurement; the CRLF count is a symptom with a second cause.
 
 The only CRLF blobs in the estate are **223 CSVs in globalgrid2050**, deliberately exempt under
 `*.csv -text` with the reasoning written into `.gitattributes`: RFC 4180 specifies CRLF for

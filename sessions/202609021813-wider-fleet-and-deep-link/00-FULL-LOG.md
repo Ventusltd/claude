@@ -489,17 +489,17 @@ ventusltd.github.io/gridatlas/202608291239-atlas-v9/
 
 **← tool result**
 ```
-streaming-parquet-bridge v9.5 202608301825
-  path: ./cartridges/202608301825-streaming-parquet-bridge-v9-5.js
-  caps: ['response-before-body-reconstruction', 'duckdb-runtime-prewarm-after-400kv', 'metro-partition-alias', 'parquet-on-demand-preserved', 'payload-cache-release-after-serialisation']
-uk-gazetteer-flyto v9.5 202609011141
-  path: ./cartridges/202609011141-place-global-search-v9-5.js
-  caps: ['exact-repd-first', 'uk-postcode', 'uk-place', 'global-address', 'global-place', 'deep-link-publishes-resolved-technology-and-capacity']
-sld-sandbox v9.77 202609020018
-  path: ./cartridges/202609020018-sld-sandbox-v9-8.js
-  caps: ['pre-snapped-config-adapter-carried-forward', 'project-or-substation-selection', 'nearest-substations-33kv-and-above', 'nearest-projects-from-a-substation', 'distances-on-the-project-card', 'beta-scope-and-limits-stated-on-card', 'animated-scada-link-layer', 'reduced-motion-honoured', 'sld-layout-ported-from-gis-sld-financial-sandbox', 'string-and-central-sizing', 'bess-compound', '33kv-collector-trunk-and-branches', 'export-cable-with-editable-route', 'drag-array-and-rotate-handle', 'electron-flow-on-collectors-and-cable', 'single-earth-radius-throughout', 'panel-clear-of-the-atlas-toolbar', 'deep-link-runs-the-same-measurement-as-a-click', 'substation-layer-auto-enabled-on-arrival', 'layout-opens-from-the-project-card', 'denser-electron-flow-two-layers', 'fit-array-to-the-registers-stated-capacity', 'ac-dc-basis-declared-not-assumed', 'ratio-mismatch-descriptive-not-graded', 'own-ui-clicks-do-not-reach-the-map', 'unloaded-layer-reported-as-unloaded', 'cards-drag-minimise-and-close', 'minimised-cards-stay-identifiable', 'card-bounded-to-the-map', 'layers-survive-fullscreen', 'project-pin-drawn-by-the-cartridge-not-a-layer', 'project-layer-enabled-on-arrival', 'pin-toggles-on-and-off-from-the-card', 'central-ac-is-the-limiting-nameplate-not-a-product', 'inverter-and-transformer-nameplates-reported-separately', 'mv-block-overload-detected-against-its-skid', 'project-marked-by-a-ring-not-a-second-dot', 'layer-control-found-by-data-layer-id', 'installs-without-a-painted-basemap', 'deep-link-waits-for-the-controls-it-ticks', 'boot-trigger-and-control-latency-published', 'says-what-it-is-waiting-for', 'retry-without-rebooting-the-engine', 'status-sized-for-a-phone-first', 'labels-take-their-font-from-the-style', 'no-glyphs-means-no-labels-not-an-exception-per-frame', 'glyph-range-pre-flighted-before-any-symbol-layer', 'card-geometry-is-per-selection', 'gb-decade-prices-beside-the-map', 'late-layer-controls-are-switched-on-not-abandoned', 'every-technology-the-register-uses', 'unknown-technology-asks-the-engine', 'offshore-opens-a-card-and-withholds-the-measurement', 'voltage-class-context-on-the-card', 'whole-generation-and-storage-dashboard-accepted', 'fit-moves-two-variables', 'dc-inverter-ac-and-export-kept-apart', 'dash-atlas-bounded-at-24-patterns', 'three-named-capacity-ratios', 'dash-written-only-when-it-changes', 'voltage-unit-from-the-property-not-the-magnitude', 'no-source-dereferenced-unchecked', 'pointer-events-for-card-and-panel', 'touch-drag-array-rotation-and-route', 'phone-portrait-and-landscape-bounded', '44px-primary-touch-controls', 'array-inverter-and-export-ratios-rendered-separately', 'original-finance-oracle-parity', 'separate-string-central-finance', 'corrected-central-finance-divergence', 'mobile-collapsed-finance', 'visible-finance-assumptions', 'development-stage-updates-cost-and-success', 'separate-string-central-physical-state', 'mounting-preset-updates-bifacial-per-topology', 'original-central-input-defaults', 'one-bess-value-for-layout-and-finance', 'fractional-topology-counts-rejected', 'original-electrical-input-bounds', 'version-ledger-on-the-page', 'owner-v2-coverage-and-negative-share-verified', 'mobile-tray-tools-collapsed-on-touch', 'grid-and-subs-one-tap-on-the-map', 'arrival-by-identity-repd-ref-only', 'null-island-guard-on-deep-link-coordinates', 'arrival-enters-fullscreen-on-touch', 'identity-wait-until-terminal-not-budgeted', 'arrival-stages-surfaced-with-retry', 'measurement-block-kept-not-written-once', 'arrival-card-from-link-fields-when-register-absent', 'arrival-card-precedes-the-lines', 'declared-connections-bound-to-public-record', 'new-customer-substations-in-the-declared-chain', 'substation-works-noted-from-public-record', 'nearest-400kv-measured-for-every-project', 'recovered-failures-ledgered-separately', 'consented-works-quoted-on-the-declared-card', 'nearest-named-400kv-companion-measurement', 'measurement-independent-of-layer-controls', 'substation-payload-warmed-at-install', 'declared-connection-shown-before-measurement', 'project-ring-drawn-on-arrival-not-after-the-payload', 'pink-for-a-point-of-connection-not-yet-built', 'declared-circuit-connections-draw-no-line', 'little-crow-distribution-loop-archetype', 'published-network-parameters-on-the-card', 'subs-control-found-by-attribute-not-label-text', 'active-failures-recorded-once', 'network-sentence-scope-labelled', 'grid-finding-scope-on-a-blank-click', 'scope-never-implies-capacity', 'assembled-from-modules-and-a-body-part', 'connection-voltage-passed-to-the-network-query']
-substation-intelligence v9.77 202609020018
-  path: ./cartridges/202609020018-substation-intelligence-v9-63.js
+streaming-parquet-bridge v9.5 202608301825
+  path: ./cartridges/202608301825-streaming-parquet-bridge-v9-5.js
+  caps: ['response-before-body-reconstruction', 'duckdb-runtime-prewarm-after-400kv', 'metro-partition-alias', 'parquet-on-demand-preserved', 'payload-cache-release-after-serialisation']
+uk-gazetteer-flyto v9.5 202609011141
+  path: ./cartridges/202609011141-place-global-search-v9-5.js
+  caps: ['exact-repd-first', 'uk-postcode', 'uk-place', 'global-address', 'global-place', 'deep-link-publishes-resolved-technology-and-capacity']
+sld-sandbox v9.77 202609020018
+  path: ./cartridges/202609020018-sld-sandbox-v9-8.js
+  caps: ['pre-snapped-config-adapter-carried-forward', 'project-or-substation-selection', 'nearest-substations-33kv-and-above', 'nearest-projects-from-a-substation', 'distances-on-the-project-card', 'beta-scope-and-limits-stated-on-card', 'animated-scada-link-layer', 'reduced-motion-honoured', 'sld-layout-ported-from-gis-sld-financial-sandbox', 'string-and-central-sizing', 'bess-compound', '33kv-collector-trunk-and-branches', 'export-cable-with-editable-route', 'drag-array-and-rotate-handle', 'electron-flow-on-collectors-and-cable', 'single-earth-radius-throughout', 'panel-clear-of-the-atlas-toolbar', 'deep-link-runs-the-same-measurement-as-a-click', 'substation-layer-auto-enabled-on-arrival', 'layout-opens-from-the-project-card', 'denser-electron-flow-two-layers', 'fit-array-to-the-registers-stated-capacity', 'ac-dc-basis-declared-not-assumed', 'ratio-mismatch-descriptive-not-graded', 'own-ui-clicks-do-not-reach-the-map', 'unloaded-layer-reported-as-unloaded', 'cards-drag-minimise-and-close', 'minimised-cards-stay-identifiable', 'card-bounded-to-the-map', 'layers-survive-fullscreen', 'project-pin-drawn-by-the-cartridge-not-a-layer', 'project-layer-enabled-on-arrival', 'pin-toggles-on-and-off-from-the-card', 'central-ac-is-the-limiting-nameplate-not-a-product', 'inverter-and-transformer-nameplates-reported-separately', 'mv-block-overload-detected-against-its-skid', 'project-marked-by-a-ring-not-a-second-dot', 'layer-control-found-by-data-layer-id', 'installs-without-a-painted-basemap', 'deep-link-waits-for-the-controls-it-ticks', 'boot-trigger-and-control-latency-published', 'says-what-it-is-waiting-for', 'retry-without-rebooting-the-engine', 'status-sized-for-a-phone-first', 'labels-take-their-font-from-the-style', 'no-glyphs-means-no-labels-not-an-exception-per-frame', 'glyph-range-pre-flighted-before-any-symbol-layer', 'card-geometry-is-per-selection', 'gb-decade-prices-beside-the-map', 'late-layer-controls-are-switched-on-not-abandoned', 'every-technology-the-register-uses', 'unknown-technology-asks-the-engine', 'offshore-opens-a-card-and-withholds-the-measurement', 'voltage-class-context-on-the-card', 'whole-generation-and-storage-dashboard-accepted', 'fit-moves-two-variables', 'dc-inverter-ac-and-export-kept-apart', 'dash-atlas-bounded-at-24-patterns', 'three-named-capacity-ratios', 'dash-written-only-when-it-changes', 'voltage-unit-from-the-property-not-the-magnitude', 'no-source-dereferenced-unchecked', 'pointer-events-for-card-and-panel', 'touch-drag-array-rotation-and-route', 'phone-portrait-and-landscape-bounded', '44px-primary-touch-controls', 'array-inverter-and-export-ratios-rendered-separately', 'original-finance-oracle-parity', 'separate-string-central-finance', 'corrected-central-finance-divergence', 'mobile-collapsed-finance', 'visible-finance-assumptions', 'development-stage-updates-cost-and-success', 'separate-string-central-physical-state', 'mounting-preset-updates-bifacial-per-topology', 'original-central-input-defaults', 'one-bess-value-for-layout-and-finance', 'fractional-topology-counts-rejected', 'original-electrical-input-bounds', 'version-ledger-on-the-page', 'owner-v2-coverage-and-negative-share-verified', 'mobile-tray-tools-collapsed-on-touch', 'grid-and-subs-one-tap-on-the-map', 'arrival-by-identity-repd-ref-only', 'null-island-guard-on-deep-link-coordinates', 'arrival-enters-fullscreen-on-touch', 'identity-wait-until-terminal-not-budgeted', 'arrival-stages-surfaced-with-retry', 'measurement-block-kept-not-written-once', 'arrival-card-from-link-fields-when-register-absent', 'arrival-card-precedes-the-lines', 'declared-connections-bound-to-public-record', 'new-customer-substations-in-the-declared-chain', 'substation-works-noted-from-public-record', 'nearest-400kv-measured-for-every-project', 'recovered-failures-ledgered-separately', 'consented-works-quoted-on-the-declared-card', 'nearest-named-400kv-companion-measurement', 'measurement-independent-of-layer-controls', 'substation-payload-warmed-at-install', 'declared-connection-shown-before-measurement', 'project-ring-drawn-on-arrival-not-after-the-payload', 'pink-for-a-point-of-connection-not-yet-built', 'declared-circuit-connections-draw-no-line', 'little-crow-distribution-loop-archetype', 'published-network-parameters-on-the-card', 'subs-control-found-by-attribute-not-label-text', 'active-failures-recorded-once', 'network-sentence-scope-labelled', 'grid-finding-scope-on-a-blank-click', 'scope-never-implies-capacity', 'assembled-from-modules-and-a-body-part', 'connection-voltage-passed-to-the-network-query']
+substation-intelligence v9.77 202609020018
+  path: ./cartridges/202609020018-substation-intelligence-v9-63.js
   caps: ['v8-engine-carried-forward-verbatim', 'eight-fault-current-metrics-never-conflated', 'rms-break-current-quoted-by-name', 'substation-lookup-by-name-and-by-position', 'published-parameters-never-a-connection-assessment', 'fails-closed-on-an-unknown-product-schema', 'revalidated-never-pinned-to-first-sight', 'site-wide-envelope-named-not-implied-as-a-bus-value', 'breaker-duty-metric-one-of-several-ratings', 'owner-product-coordinates-never-shown-as-a-distance', 'connection-points-v3-consumed', 'fault-current-quoted-at-the-connection-voltage', 'site-wide-quantities-named-as-site-wide']
 ```
 
@@ -3003,7 +3003,7 @@ intelligence
 
 **← tool result**
 ```
-file releases/data\202608270055-8ab1807551bc-v8-fast-projects.json type <class 'list'> n 7680
+file releases/data\202608270055-8ab1807551bc-v8-fast-projects.json type <class 'list'> n 7680
 sample keys ['9873', 'GG2050-REPD-9873', 'Berwick Bank Offshore Wind Farm', 2, 7, 4100, 105, 7, 2688, '2026-01-19', 2, 56.4431397, -1.4664021]
 ```
 
@@ -3024,8 +3024,8 @@ sample keys ['9873', 'GG2050-REPD-9873', 'Berwick Bank Offshore Wind Farm', 2, 7
 
 **← tool result**
 ```
-/cache_contract/project_index/dictionary_fields => ["technology", "status", "county", "region", "operator", "geometry_status"]
-/cache_contract/atlas_deep_link/project_field_by_parameter/technology => "technology"
+/cache_contract/project_index/dictionary_fields => ["technology", "status", "county", "region", "operator", "geometry_status"]
+/cache_contract/atlas_deep_link/project_field_by_parameter/technology => "technology"
 TOPKEYS ['schema', 'generation', 'name', 'compiler_method', 'cache_identity', 'cache_contract', 'lifecycle', 'totals', 'news_counts', 'signals', 'assets', 'detail_schema', 'detail_partition_size', 'detail_partitions', 'source', 'performance', 'discovery', 'deployment', 'cartridges', 'chronology', 'project_posture', 'supplemental_assets']
 ```
 
@@ -3043,12 +3043,12 @@ TOPKEYS ['schema', 'generation', 'name', 'compiler_method', 'cache_identity', 'c
 
 **← tool result**
 ```
-['releases/data\\202608270055-8ab1807551bc-v8-fast-search.json']
-['schema', 'generation', 'cache_identity', 'row_alignment', 'rows']
-schema => "pipelinenews.v8.fast-search-index.v1"
-generation => "202608270055"
-cache_identity => "8ab1807551bc77066e46e01cb0690dfaa41d473d8433644046f56b6984579b06"
-row_alignment => "global_project_row_index"
+['releases/data\\202608270055-8ab1807551bc-v8-fast-search.json']
+['schema', 'generation', 'cache_identity', 'row_alignment', 'rows']
+schema => "pipelinenews.v8.fast-search-index.v1"
+generation => "202608270055"
+cache_identity => "8ab1807551bc77066e46e01cb0690dfaa41d473d8433644046f56b6984579b06"
+row_alignment => "global_project_row_index"
 rows => ["berwick bank offshore wind farm scottish southern energy renewables 9873 gg2050-repd-9873 gg2050-dev-repd-9873 wind offshore wind offshore awaiting construction live pre construction 4100 offshore offshore scotland marine scotland 2026-01-19 valid 9873", "ossian scottish power renewables 13429 gg2
 ```
 
@@ -3070,8 +3070,8 @@ rows => ["berwick bank offshore wind farm scottish southern energy renewables 98
 **← tool result (error)**
 ```
 Exit code 1
-Traceback (most recent call last):
-  File "<stdin>", line 9, in <module>
+Traceback (most recent call last):
+  File "<stdin>", line 9, in <module>
 KeyError: 77
 ```
 
@@ -3106,12 +3106,12 @@ rows 7680 proj 6 projtype <class 'dict'>
 
 **← tool result**
 ```
-['schema', 'generation', 'cache_identity', 'fields', 'dictionaries', 'rows']
-schema <class 'str'> 37 "pipelinenews.v8.fast-project-index.v1"
-generation <class 'str'> 12 "202608270055"
-cache_identity <class 'str'> 64 "8ab1807551bc77066e46e01cb0690dfaa41d473d8433644046f56b6984579b06"
-fields <class 'list'> 13 ["repd_ref"]
-dictionaries <class 'dict'> 6 {"technology": ["bess", "solar", "wind_offshore", "wind_onshore"], "status": ["Abandoned", "Appeal Lodged", "Appeal Refused", "Appeal Withdrawn", "Application Refused", "Application Submitted", "Appli
+['schema', 'generation', 'cache_identity', 'fields', 'dictionaries', 'rows']
+schema <class 'str'> 37 "pipelinenews.v8.fast-project-index.v1"
+generation <class 'str'> 12 "202608270055"
+cache_identity <class 'str'> 64 "8ab1807551bc77066e46e01cb0690dfaa41d473d8433644046f56b6984579b06"
+fields <class 'list'> 13 ["repd_ref"]
+dictionaries <class 'dict'> 6 {"technology": ["bess", "solar", "wind_offshore", "wind_onshore"], "status": ["Abandoned", "Appeal Lodged", "Appeal Refused", "Appeal Withdrawn", "Application Refused", "Application Submitted", "Appli
 rows <class 'list'> 7680 [["9873", "GG2050-REPD-9873", "Berwick Bank Offshore Wind Farm", 2, 7, 4100, 105, 7, 2688, "2026-01-19", 2, 56.4431397, -1.4664021]]
 ```
 
@@ -3132,11 +3132,11 @@ rows <class 'list'> 7680 [["9873", "GG2050-REPD-9873", "Berwick Bank Offshore Wi
 
 **← tool result**
 ```
-['repd_ref', 'gg_project_id', 'name', 'technology', 'status', 'capacity_mw', 'county', 'region', 'operator', 'repd_record_updated', 'geometry_status', 'latitude', 'longitude']
-3139 Lewis Wind Farm (Barvas Moor) 652 MW Application Refused 58.2193992 -6.3833336
-14535 Dorenell Extension Wind Farm 476.6 MW Application Submitted 57.3221131 -3.2525194
-6828 Viking Wind Farm 443 MW Operational 60.3393257 -1.2084287
-7454 Scoop Hill Wind Farm 432 MW Application Refused 55.2733719 -3.3315678
+['repd_ref', 'gg_project_id', 'name', 'technology', 'status', 'capacity_mw', 'county', 'region', 'operator', 'repd_record_updated', 'geometry_status', 'latitude', 'longitude']
+3139 Lewis Wind Farm (Barvas Moor) 652 MW Application Refused 58.2193992 -6.3833336
+14535 Dorenell Extension Wind Farm 476.6 MW Application Submitted 57.3221131 -3.2525194
+6828 Viking Wind Farm 443 MW Operational 60.3393257 -1.2084287
+7454 Scoop Hill Wind Farm 432 MW Application Refused 55.2733719 -3.3315678
 4622 Viking Wind Farm 370 MW Revised 60.3393257 -1.2084287
 ```
 
@@ -3986,66 +3986,66 @@ globalgrid2050/uk_renewables_pipeline/V6_BUILD_PLAN_2026-08-22.md
 **← tool result**
 ```
 === v8 updater head ===
-import pandas as pd
-import json
-import yaml
-import os
-import requests
-from datetime import datetime
-from math import isfinite
-from pyproj import Transformer
-from bs4 import BeautifulSoup
-
-class REPDUpdater:
-    """
-    VENTUS REPD UPDATER v5.10 | MASTER UNIFIED GEOJSON
-    Fixed: substring matching for all tech types — no encoding collisions.
-    """
-
-    REPD_PAGE = "https://www.gov.uk/government/publications/renewable-energy-planning-database-monthly-extract"
-
-    UK_LON_MIN, UK_LON_MAX = -9.0,  2.5
-    UK_LAT_MIN, UK_LAT_MAX = 49.0, 61.0
-
-    VIABLE_STATUSES = {
-        'operational',
-        'under construction',
-        'awaiting construction',
-        'consented',
-        'planning permission granted',
-        'planning approved',
-        'application submitted',
-        'pre-construction'
-    }
-
-    REQUIRED_COLUMNS = [
-        'Site Name',
-        'Technology Type',
-        'Development Status (short)',
-        'Installed Capacity (MWelec)',
-        'X-coordinate',
-        'Y-coordinate',
-        'Operator (or Applicant)'
-    ]
-
-    OPTIONAL_COLUMNS = [
-        'Mounting Type for Solar'
-    ]
-
-    def __init__(self, registry_path="config/registry.yaml"):
-        print("📡 VENTUS REPD UPDATER v5.10 | BOOTING SYSTEM...")
-        try:
-            with open(registry_path, 'r') as f:
-                self.config = yaml.safe_load(f)
-        except FileNotFoundError:
-            print(f"❌ ERROR: {registry_path} not found.")
-            exit(1)
-        self.output_dir   = "dist"
-        self.raw_data_dir = "data"
-        os.makedirs(self.output_dir,   exist_ok=True)
-        os.makedirs(self.raw_data_dir, exist_ok=True)
-        self.transformer = Transformer.from_crs("epsg:27700", "epsg:4326", always_xy=True)
-
+import pandas as pd
+import json
+import yaml
+import os
+import requests
+from datetime import datetime
+from math import isfinite
+from pyproj import Transformer
+from bs4 import BeautifulSoup
+
+class REPDUpdater:
+    """
+    VENTUS REPD UPDATER v5.10 | MASTER UNIFIED GEOJSON
+    Fixed: substring matching for all tech types — no encoding collisions.
+    """
+
+    REPD_PAGE = "https://www.gov.uk/government/publications/renewable-energy-planning-database-monthly-extract"
+
+    UK_LON_MIN, UK_LON_MAX = -9.0,  2.5
+    UK_LAT_MIN, UK_LAT_MAX = 49.0, 61.0
+
+    VIABLE_STATUSES = {
+        'operational',
+        'under construction',
+        'awaiting construction',
+        'consented',
+        'planning permission granted',
+        'planning approved',
+        'application submitted',
+        'pre-construction'
+    }
+
+    REQUIRED_COLUMNS = [
+        'Site Name',
+        'Technology Type',
+        'Development Status (short)',
+        'Installed Capacity (MWelec)',
+        'X-coordinate',
+        'Y-coordinate',
+        'Operator (or Applicant)'
+    ]
+
+    OPTIONAL_COLUMNS = [
+        'Mounting Type for Solar'
+    ]
+
+    def __init__(self, registry_path="config/registry.yaml"):
+        print("📡 VENTUS REPD UPDATER v5.10 | BOOTING SYSTEM...")
+        try:
+            with open(registry_path, 'r') as f:
+                self.config = yaml.safe_load(f)
+        except FileNotFoundError:
+            print(f"❌ ERROR: {registry_path} not found.")
+            exit(1)
+        self.output_dir   = "dist"
+        self.raw_data_dir = "data"
+        os.makedirs(self.output_dir,   exist_ok=True)
+        os.makedirs(self.raw_data_dir, exist_ok=True)
+        self.transformer = Transformer.from_crs("epsg:27700", "epsg:4326", always_xy=True)
+
 
 === yaml/config alongside ===
 repd_grid_atlasv8/:
@@ -4221,46 +4221,46 @@ Exit code 1
 **← tool result**
 ```
 === registry.yaml ===
-version: "4.3"
-description: "Ventus Industrial Data Registry"
-global_compliance: "EDTF_2019_PRESUMED_OPEN"
-
-layers:
-
-  - id: "repd_master"
-    name: "REPD Renewable Inventory"
-    url: "https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/1114586/repd-october-2022.csv"
-    type: "csv"
-    tags: ["generation", "renewables"]
-    refresh: "monthly"
-    output: "dist/repd_master.json"
-    script: "scripts/repd_updater.py"
-
-  - id: "substations_core"
-    name: "National Grid Substations"
-    url: "https://raw.githubusercontent.com/Ventusltd/globalgrid2050/main/grid_substations.geojson"
-    type: "geojson"
-    tags: ["transmission", "nodes"]
-    refresh: "manual"
-    output: "grid_substations.geojson"
-    script: "scripts/fetch_substations.py"
-
-  # ⚡ NEW — 11kV DNO LAYER (UKPN ONLY)
-  - id: "grid_11kv_ukpn"
-    name: "11kV Distribution Substations (UKPN)"
-    url: "https://overpass-api.de/api/interpreter"
-    type: "osm"
-    tags: ["distribution", "11kv", "substations", "dno", "ukpn"]
-    refresh: "monthly"
-    output: "grid_11kv_ukpn.geojson"
-    script: "scripts/fetch_11kv_ukpn.py"
-    dno: "UKPN"
-    voltage: "11000"
-    geometry: "point"
-    zoom_min: 11          # 👈 critical for frontend logic
-    zoom_max: 18
-    discipline:
-      filter: "power=substation AND NOT line"
+version: "4.3"
+description: "Ventus Industrial Data Registry"
+global_compliance: "EDTF_2019_PRESUMED_OPEN"
+
+layers:
+
+  - id: "repd_master"
+    name: "REPD Renewable Inventory"
+    url: "https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/1114586/repd-october-2022.csv"
+    type: "csv"
+    tags: ["generation", "renewables"]
+    refresh: "monthly"
+    output: "dist/repd_master.json"
+    script: "scripts/repd_updater.py"
+
+  - id: "substations_core"
+    name: "National Grid Substations"
+    url: "https://raw.githubusercontent.com/Ventusltd/globalgrid2050/main/grid_substations.geojson"
+    type: "geojson"
+    tags: ["transmission", "nodes"]
+    refresh: "manual"
+    output: "grid_substations.geojson"
+    script: "scripts/fetch_substations.py"
+
+  # ⚡ NEW — 11kV DNO LAYER (UKPN ONLY)
+  - id: "grid_11kv_ukpn"
+    name: "11kV Distribution Substations (UKPN)"
+    url: "https://overpass-api.de/api/interpreter"
+    type: "osm"
+    tags: ["distribution", "11kv", "substations", "dno", "ukpn"]
+    refresh: "monthly"
+    output: "grid_11kv_ukpn.geojson"
+    script: "scripts/fetch_11kv_ukpn.py"
+    dno: "UKPN"
+    voltage: "11000"
+    geometry: "point"
+    zoom_min: 11          # 👈 critical for frontend logic
+    zoom_max: 18
+    discipline:
+      filter: "power=substation AND NOT line"
 
 === output filename in v8 updater ===
 55:        self.output_dir   = "dist"
@@ -6417,7 +6417,7 @@ Tab Context:
 **← tool result**
 ```
 -rw-r--r-- 1 vikra 197610 4256963 Aug 31 18:59 ./.codex-worktrees/globalgrid2050-202608311848/dist/repd_master.json
-total 10784
+total 10784
 {'biomass': 823, 'act': 37, 'hydro': 151, 'solar': 2819, 'solar_roof': 3241, 'tidal': 18, 'wind': 1550, 'geothermal': 7, 'caes': 4, 'bess': 2070, 'flywheel': 1, 'hydrogen': 62, 'other': 1}
 ```
 
@@ -6438,7 +6438,7 @@ total 10784
 
 **← tool result**
 ```
-rows 1104 GW 22.76
+rows 1104 GW 22.76
 -rw-r--r-- 1 vikra 197610 175527 Sep  2 19:36 wider-fleet.json
 ```
 
@@ -6456,7 +6456,7 @@ rows 1104 GW 22.76
 
 **← tool result**
 ```
-patched
+patched
 json=200
 ```
 
@@ -6737,7 +6737,7 @@ Include the saved path(s) in your response so they can be attached for the user.
 
 **← tool result**
 ```
-gauges trimmed to three cards, as PipelineNews has
+gauges trimmed to three cards, as PipelineNews has
 200
 ```
 
@@ -6887,32 +6887,32 @@ Understood — one tab per REPD technology type, not my merged groups. Let me ta
 
 **← tool result**
 ```
-REPD TECHNOLOGY TYPE                            N           MW
-Solar Photovoltaics                          6060     53,927.6
-Battery                                      2070    127,030.0
-Wind Onshore                                 1470     36,175.8
-Landfill Gas                                  275        787.9
-Anaerobic Digestion                           253        483.1
-Biomass (dedicated)                           159      1,288.2
-EfW Incineration                              122      3,088.8
-Small Hydro                                   108        173.4
-Wind Offshore                                  80     46,463.4
-Hydrogen                                       60      4,242.1
-Advanced Conversion Technologies               37        507.4
-Large Hydro                                    28        521.2
-Pumped Storage Hydroelectricity                15     10,418.2
-Tidal Stream                                   14        660.1
-Sewage Sludge Digestion                        12         50.2
-Geothermal                                      5          0.0
-Shoreline Wave                                  4         51.0
-Biomass (co-firing)                             2         18.6
-Hot Dry Rocks (HDR)                             2         10.0
-Liquid Air Energy Storage                       2         54.9
-Compressed Air Energy Storage                   2          5.0
-Fuel Cell (Hydrogen)                            2          0.1
-Flywheels                                       1        400.0
-Unknown                                         1          0.0
-
+REPD TECHNOLOGY TYPE                            N           MW
+Solar Photovoltaics                          6060     53,927.6
+Battery                                      2070    127,030.0
+Wind Onshore                                 1470     36,175.8
+Landfill Gas                                  275        787.9
+Anaerobic Digestion                           253        483.1
+Biomass (dedicated)                           159      1,288.2
+EfW Incineration                              122      3,088.8
+Small Hydro                                   108        173.4
+Wind Offshore                                  80     46,463.4
+Hydrogen                                       60      4,242.1
+Advanced Conversion Technologies               37        507.4
+Large Hydro                                    28        521.2
+Pumped Storage Hydroelectricity                15     10,418.2
+Tidal Stream                                   14        660.1
+Sewage Sludge Digestion                        12         50.2
+Geothermal                                      5          0.0
+Shoreline Wave                                  4         51.0
+Biomass (co-firing)                             2         18.6
+Hot Dry Rocks (HDR)                             2         10.0
+Liquid Air Energy Storage                       2         54.9
+Compressed Air Energy Storage                   2          5.0
+Fuel Cell (Hydrogen)                            2          0.1
+Flywheels                                       1        400.0
+Unknown                                         1          0.0
+
 TOTAL 10784
 ```
 
@@ -7341,34 +7341,34 @@ withdraw-nonanswers
 
 **← tool result**
 ```
-WIDER FLEET BUILD
-
-REPD TECHNOLOGY TYPE                            N            MW  FAMILY
-Landfill Gas                                  275         787.9  biomass
-Anaerobic Digestion                           253         483.1  biomass
-Biomass (dedicated)                           159       1,288.2  biomass
-EfW Incineration                              122       3,088.8  biomass
-Small Hydro                                   108         173.4  hydro
-Hydrogen                                       60       4,242.1  hydrogen
-Advanced Conversion Technologies               37         507.4  act
-Large Hydro                                    28         521.2  hydro
-Pumped Storage Hydroelectricity                15      10,418.2  hydro
-Tidal Stream                                   14         660.1  tidal
-Sewage Sludge Digestion                        12          50.2  biomass
-Geothermal                                      5           0.0  geothermal
-Shoreline Wave                                  4          51.0  tidal
-Liquid Air Energy Storage                       2          54.9  caes
-Biomass (co-firing)                             2          18.6  biomass
-Hot Dry Rocks (HDR)                             2          10.0  geothermal
-Compressed Air Energy Storage                   2           5.0  caes
-Fuel Cell (Hydrogen)                            2           0.1  hydrogen
-Flywheels                                       1         400.0  flywheel
-Unknown                                         1           0.0  other
-
-tabs (REPD technology types) : 20
-projects                     : 1104
-capacity                     : 22.76 GW
-dropped, no coordinates      : 0
+WIDER FLEET BUILD
+
+REPD TECHNOLOGY TYPE                            N            MW  FAMILY
+Landfill Gas                                  275         787.9  biomass
+Anaerobic Digestion                           253         483.1  biomass
+Biomass (dedicated)                           159       1,288.2  biomass
+EfW Incineration                              122       3,088.8  biomass
+Small Hydro                                   108         173.4  hydro
+Hydrogen                                       60       4,242.1  hydrogen
+Advanced Conversion Technologies               37         507.4  act
+Large Hydro                                    28         521.2  hydro
+Pumped Storage Hydroelectricity                15      10,418.2  hydro
+Tidal Stream                                   14         660.1  tidal
+Sewage Sludge Digestion                        12          50.2  biomass
+Geothermal                                      5           0.0  geothermal
+Shoreline Wave                                  4          51.0  tidal
+Liquid Air Energy Storage                       2          54.9  caes
+Biomass (co-firing)                             2          18.6  biomass
+Hot Dry Rocks (HDR)                             2          10.0  geothermal
+Compressed Air Energy Storage                   2           5.0  caes
+Fuel Cell (Hydrogen)                            2           0.1  hydrogen
+Flywheels                                       1         400.0  flywheel
+Unknown                                         1           0.0  other
+
+tabs (REPD technology types) : 20
+projects                     : 1104
+capacity                     : 22.76 GW
+dropped, no coordinates      : 0
 spine types excluded         : Battery, Solar Photovoltaics, Wind Offshore, Wind Onshore
 ```
 
@@ -7549,23 +7549,23 @@ tools/intelligence/cartridges/gb-electricity-context/data/{GEN}-price-decade-rol
 tools/intelligence/cartridges/gb-electricity-context/proof.mjs
 tools/intelligence/cartridges/gb-electricity-context/sync_payload.py
 === keys ===
-intelligence                   ['hash_fields', 'key', 'modification_note', 'modifies_existing_dashboard', 'registry_entry', 'repairs', 'summary']
-intelligence                   ['key', 'modification_note', 'modifies_existing_dashboard', 'registry_entry', 'repairs', 'summary']
-intelligence                   ['bind_call', 'hash_fields', 'key', 'loader', 'registry_entry', 'repairs', 'section', 'summary']
-intelligence                   ['hash_fields', 'key', 'modification_note', 'modifies_existing_dashboard', 'registry_entry', 'repairs', 'summary']
-intelligence                   ['hash_fields', 'key', 'modification_note', 'modifies_existing_dashboard', 'registry_entry', 'repairs', 'summary']
-intelligence                   ['bind_call', 'hash_fields', 'key', 'loader', 'registry_entry', 'repairs', 'section', 'summary']
-intelligence                   ['key', 'modification_note', 'modifies_existing_dashboard', 'registry_entry', 'repairs', 'summary']
-intelligence                   ['key', 'modification_note', 'modifies_existing_dashboard', 'registry_entry', 'repairs', 'summary']
-intelligence                   ['hash_fields', 'key', 'modification_note', 'modifies_existing_dashboard', 'registry_entry', 'repairs', 'summary']
-intelligence                   ['key', 'modification_note', 'modifies_existing_dashboard', 'repairs', 'summary']
-intelligence                   ['key', 'modification_note', 'modifies_existing_dashboard', 'repairs', 'summary']
-intelligence                   ['bind_call', 'hash_fields', 'key', 'loader', 'registry_entry', 'repairs', 'section', 'summary']
-intelligence                   ['key', 'modification_note', 'modifies_existing_dashboard', 'registry_entry', 'repairs', 'summary']
-intelligence                   ['key', 'modification_note', 'modifies_existing_dashboard', 'repairs', 'summary']
-intelligence                   ['hash_fields', 'key', 'modification_note', 'modifies_existing_dashboard', 'registry_entry', 'repairs', 'summary']
-intelligence                   ['key', 'modification_note', 'modifies_existing_dashboard', 'registry_entry', 'repairs', 'summary']
-intelligence                   ['key', 'modification_note', 'modifies_existing_dashboard', 'registry_entry', 'repairs', 'summary']
+intelligence                   ['hash_fields', 'key', 'modification_note', 'modifies_existing_dashboard', 'registry_entry', 'repairs', 'summary']
+intelligence                   ['key', 'modification_note', 'modifies_existing_dashboard', 'registry_entry', 'repairs', 'summary']
+intelligence                   ['bind_call', 'hash_fields', 'key', 'loader', 'registry_entry', 'repairs', 'section', 'summary']
+intelligence                   ['hash_fields', 'key', 'modification_note', 'modifies_existing_dashboard', 'registry_entry', 'repairs', 'summary']
+intelligence                   ['hash_fields', 'key', 'modification_note', 'modifies_existing_dashboard', 'registry_entry', 'repairs', 'summary']
+intelligence                   ['bind_call', 'hash_fields', 'key', 'loader', 'registry_entry', 'repairs', 'section', 'summary']
+intelligence                   ['key', 'modification_note', 'modifies_existing_dashboard', 'registry_entry', 'repairs', 'summary']
+intelligence                   ['key', 'modification_note', 'modifies_existing_dashboard', 'registry_entry', 'repairs', 'summary']
+intelligence                   ['hash_fields', 'key', 'modification_note', 'modifies_existing_dashboard', 'registry_entry', 'repairs', 'summary']
+intelligence                   ['key', 'modification_note', 'modifies_existing_dashboard', 'repairs', 'summary']
+intelligence                   ['key', 'modification_note', 'modifies_existing_dashboard', 'repairs', 'summary']
+intelligence                   ['bind_call', 'hash_fields', 'key', 'loader', 'registry_entry', 'repairs', 'section', 'summary']
+intelligence                   ['key', 'modification_note', 'modifies_existing_dashboard', 'registry_entry', 'repairs', 'summary']
+intelligence                   ['key', 'modification_note', 'modifies_existing_dashboard', 'repairs', 'summary']
+intelligence                   ['hash_fields', 'key', 'modification_note', 'modifies_existing_dashboard', 'registry_entry', 'repairs', 'summary']
+intelligence                   ['key', 'modification_note', 'modifies_existing_dashboard', 'registry_entry', 'repairs', 'summary']
+intelligence                   ['key', 'modification_note', 'modifies_existing_dashboard', 'registry_entry', 'repairs', 'summary']
 intelligence                   ['key', 'modification_note', 'modifies_existing_dashboard', 'registry_repairs', 'repairs', 'summary']
 ```
 
@@ -7586,42 +7586,42 @@ intelligence                   ['key', 'modification_note', 'modifies_existing_d
 
 **← tool result**
 ```
---- key ---
-"gb_electricity_context"
---- summary ---
-"Attested, browser-sized historic GB system-price context from data-gb-electricity; no forecast and no project binding."
---- section ---
-"    <section class=\"meta gb-electricity-launch\" aria-labelledby=\"gbElectricityHeading\">\n      <strong id=\"gbElectricityHeading\">GB ELECTRICITY CONTEXT</strong>\n      <span>Historic Elexon system sell price, year by year. Context for storage, renewable build-out and network reinforcement; not a forecast and not a statement about any project.</span>\n      <span>The 4 kB rollup is owned by data-gb-electricity. Pipeline News does not download the settlement-period history or calculate a second definition.</span>\n      <button class=\"btn\" id=\"gbElectricityOpen\" type=\"button\" aria-controls=\"gbElectricityHost\" aria-expanded=\"false\">OPEN GB ELECTRICITY CONTEXT</button>\n      <span id=\"gbElectricityMeta\">WAIT \u00b7 attested snapshot not requested at startup</span>\n      <div id=\"gbElectricityHost\" hidden></div>\n    </section>\n\n"
---- loader ---
-"async function openGbElectricityContext() {\n  const button = document.getElementById(\"gbElectricityOpen\");\n  const host = document.getElementById(\"gbElectricityHost\");\n  const meta = document.getElementById(\"gbElectricityMeta\");\n  invariant(button && host && meta, \"GB electricity context controls are missing\");\n  if (host.dataset.gbElectricityState === \"ready\") {\n    host.hidden = !host.hidden;\n    button.setAttribute(\"aria-expanded\", String(!host.hidden));\n    return;\n  }\n  if (host.dataset.gbElectricityState === \"loading\") return;\n  const entry = registry.supplemental_assets?.gb_electricity_context;\n  invariant(entry?.activation === \"dynamic-import-and-attested-payload-fetch-on-user-open\", \"GB electricity activation changed\");\n  invariant(entry.project_bindings === 0 && entry.eligible_for_news_signal === false, \"GB electricity project boundary changed\"
---- bind_call ---
-"bindGbElectricityContext();"
---- hash_fields ---
-[
- {
-  "at": [
-   "cartridge",
-   "sha256"
-  ],
-  "path": "assets/{GEN}-gb-electricity-context.mjs"
- },
- {
-  "at": [
-   "payload",
-   "sha256"
-  ],
-  "path": "data/{GEN}-price-decade-rollup.json"
- }
-]
---- repairs ---
-{
- "app": [
-  {
-   "label": "GB electricity runtime evidence counters",
-   "from": "  gridProximityPayloadRequests: 0,",
-   "to": "  gridProximityPayloadRequests: 0,\n  gbElectricityImports: 0,\n  gbElectricityPayloadRequests: 0,"
-  }
- ]
+--- key ---
+"gb_electricity_context"
+--- summary ---
+"Attested, browser-sized historic GB system-price context from data-gb-electricity; no forecast and no project binding."
+--- section ---
+"    <section class=\"meta gb-electricity-launch\" aria-labelledby=\"gbElectricityHeading\">\n      <strong id=\"gbElectricityHeading\">GB ELECTRICITY CONTEXT</strong>\n      <span>Historic Elexon system sell price, year by year. Context for storage, renewable build-out and network reinforcement; not a forecast and not a statement about any project.</span>\n      <span>The 4 kB rollup is owned by data-gb-electricity. Pipeline News does not download the settlement-period history or calculate a second definition.</span>\n      <button class=\"btn\" id=\"gbElectricityOpen\" type=\"button\" aria-controls=\"gbElectricityHost\" aria-expanded=\"false\">OPEN GB ELECTRICITY CONTEXT</button>\n      <span id=\"gbElectricityMeta\">WAIT \u00b7 attested snapshot not requested at startup</span>\n      <div id=\"gbElectricityHost\" hidden></div>\n    </section>\n\n"
+--- loader ---
+"async function openGbElectricityContext() {\n  const button = document.getElementById(\"gbElectricityOpen\");\n  const host = document.getElementById(\"gbElectricityHost\");\n  const meta = document.getElementById(\"gbElectricityMeta\");\n  invariant(button && host && meta, \"GB electricity context controls are missing\");\n  if (host.dataset.gbElectricityState === \"ready\") {\n    host.hidden = !host.hidden;\n    button.setAttribute(\"aria-expanded\", String(!host.hidden));\n    return;\n  }\n  if (host.dataset.gbElectricityState === \"loading\") return;\n  const entry = registry.supplemental_assets?.gb_electricity_context;\n  invariant(entry?.activation === \"dynamic-import-and-attested-payload-fetch-on-user-open\", \"GB electricity activation changed\");\n  invariant(entry.project_bindings === 0 && entry.eligible_for_news_signal === false, \"GB electricity project boundary changed\"
+--- bind_call ---
+"bindGbElectricityContext();"
+--- hash_fields ---
+[
+ {
+  "at": [
+   "cartridge",
+   "sha256"
+  ],
+  "path": "assets/{GEN}-gb-electricity-context.mjs"
+ },
+ {
+  "at": [
+   "payload",
+   "sha256"
+  ],
+  "path": "data/{GEN}-price-decade-rollup.json"
+ }
+]
+--- repairs ---
+{
+ "app": [
+  {
+   "label": "GB electricity runtime evidence counters",
+   "from": "  gridProximityPayloadRequests: 0,",
+   "to": "  gridProximityPayloadRequests: 0,\n  gbElectricityImports: 0,\n  gbElectricityPayloadRequests: 0,"
+  }
+ ]
 }
 ```
 
@@ -7642,84 +7642,84 @@ intelligence                   ['key', 'modification_note', 'modifies_existing_d
 
 **← tool result**
 ```
-async function openGbElectricityContext() {
-  const button = document.getElementById("gbElectricityOpen");
-  const host = document.getElementById("gbElectricityHost");
-  const meta = document.getElementById("gbElectricityMeta");
-  invariant(button && host && meta, "GB electricity context controls are missing");
-  if (host.dataset.gbElectricityState === "ready") {
-    host.hidden = !host.hidden;
-    button.setAttribute("aria-expanded", String(!host.hidden));
-    return;
-  }
-  if (host.dataset.gbElectricityState === "loading") return;
-  const entry = registry.supplemental_assets?.gb_electricity_context;
-  invariant(entry?.activation === "dynamic-import-and-attested-payload-fetch-on-user-open", "GB electricity activation changed");
-  invariant(entry.project_bindings === 0 && entry.eligible_for_news_signal === false, "GB electricity project boundary changed");
-  host.hidden = false;
-  host.dataset.gbElectricityState = "loading";
-  button.setAttribute("aria-expanded", "true");
-  meta.textContent = "LOAD � reading the attested 4 kB historic rollup";
-  runtimeEvidence.gbElectricityImports += 1;
-  invariant(runtimeEvidence.gbElectricityImports === 1, "GB electricity cartridge imported more than once");
-  const cartridge = await import(`./${entry.cartridge.filename}`);
-  invariant(cartridge.GB_ELECTRICITY_CONTEXT_CONTRACT.generation === entry.generation, "GB electricity cartridge identity changed");
-  invariant(cartridge.GB_ELECTRICITY_CONTEXT_CONTRACT.additive_only === true, "GB electricity cartridge is no longer additive-only");
-  const result = await cartridge.mountGbElectricityContext({
-    host,
-    payloadAsset: { ...entry.payload, url: entry.payload.path },
-  });
-  runtimeEvidence.gbElectricityPayloadRequests = result.payloadRequests;
-  invariant(result.payloadRequests === 1 && result.projectBindings === 0, "GB electricity request or project boundary changed");
-  meta.textContent = `OK � ${result.years} calendar years � ${result.completeDays.toLocaleString("en-GB")} complete days`;
-}
-
-function bindGbElectricityContext() {
-  const button = document.getElementById("gbElectricityOpen");
-  invariant(button, "GB electricity context opener is missing");
-  button.addEventListener("click", () => openGbElectricityContext().catch((error) => {
-    console.error("GB electricity context", error);
-    document.getElementById("gbElectricityMeta").textContent = "FAIL � historic GB context unavailable; core product unchanged";
-    document.getElementById("gbElectricityHost").dataset.gbElectricityState = "failed";
-  }));
-}
-
-
-=== REGISTRY ENTRY ===
-{
- "schema": "pipelinenews.gb-electricity-context-supplemental-asset.v1",
- "generation": "{GEN}",
- "usage_context": "NON_COMMERCIAL_OPEN_SOURCE",
- "usage_context_establishes_upstream_rights": false,
- "activation": "dynamic-import-and-attested-payload-fetch-on-user-open",
- "additive_only": true,
- "mutates_existing_dom": false,
- "project_bindings": 0,
- "eligible_for_news_signal": false,
- "forecast": false,
- "host_id": "gbElectricityHost",
- "bind_call": "bindGbElectricityContext();",
- "source": {
-  "repository": "Ventusltd/data-gb-electricity",
-  "path": "derived/price-decade-rollup.json",
-  "upstream": "Elexon",
-  "role": "browser-sized historic derived product; sole calculation remains in the data repository"
- },
- "cartridge": {
-  "schema": "pipelinenews.gb-electricity-context-cartridge.v1",
-  "generation": "{GEN}",
-  "filename": "{GEN}-gb-electricity-context.mjs",
-  "path": "assets/{GEN}-gb-electricity-context.mjs",
-  "bytes": 0,
-  "sha256": ""
- },
- "payload": {
-  "path": "data/{GEN}-price-decade-rollup.json",
-  "schema": "data-gb-electricity.price-decade-rollup.v1",
-  "bytes": 0,
-  "sha256": ""
- },
- "scope": "historic GB system sell price context only; no project binding, forecast, recommendation or inferred news signal"
+async function openGbElectricityContext() {
+  const button = document.getElementById("gbElectricityOpen");
+  const host = document.getElementById("gbElectricityHost");
+  const meta = document.getElementById("gbElectricityMeta");
+  invariant(button && host && meta, "GB electricity context controls are missing");
+  if (host.dataset.gbElectricityState === "ready") {
+    host.hidden = !host.hidden;
+    button.setAttribute("aria-expanded", String(!host.hidden));
+    return;
+  }
+  if (host.dataset.gbElectricityState === "loading") return;
+  const entry = registry.supplemental_assets?.gb_electricity_context;
+  invariant(entry?.activation === "dynamic-import-and-attested-payload-fetch-on-user-open", "GB electricity activation changed");
+  invariant(entry.project_bindings === 0 && entry.eligible_for_news_signal === false, "GB electricity project boundary changed");
+  host.hidden = false;
+  host.dataset.gbElectricityState = "loading";
+  button.setAttribute("aria-expanded", "true");
+  meta.textContent = "LOAD � reading the attested 4 kB historic rollup";
+  runtimeEvidence.gbElectricityImports += 1;
+  invariant(runtimeEvidence.gbElectricityImports === 1, "GB electricity cartridge imported more than once");
+  const cartridge = await import(`./${entry.cartridge.filename}`);
+  invariant(cartridge.GB_ELECTRICITY_CONTEXT_CONTRACT.generation === entry.generation, "GB electricity cartridge identity changed");
+  invariant(cartridge.GB_ELECTRICITY_CONTEXT_CONTRACT.additive_only === true, "GB electricity cartridge is no longer additive-only");
+  const result = await cartridge.mountGbElectricityContext({
+    host,
+    payloadAsset: { ...entry.payload, url: entry.payload.path },
+  });
+  runtimeEvidence.gbElectricityPayloadRequests = result.payloadRequests;
+  invariant(result.payloadRequests === 1 && result.projectBindings === 0, "GB electricity request or project boundary changed");
+  meta.textContent = `OK � ${result.years} calendar years � ${result.completeDays.toLocaleString("en-GB")} complete days`;
+}
+
+function bindGbElectricityContext() {
+  const button = document.getElementById("gbElectricityOpen");
+  invariant(button, "GB electricity context opener is missing");
+  button.addEventListener("click", () => openGbElectricityContext().catch((error) => {
+    console.error("GB electricity context", error);
+    document.getElementById("gbElectricityMeta").textContent = "FAIL � historic GB context unavailable; core product unchanged";
+    document.getElementById("gbElectricityHost").dataset.gbElectricityState = "failed";
+  }));
+}
+
+
+=== REGISTRY ENTRY ===
+{
+ "schema": "pipelinenews.gb-electricity-context-supplemental-asset.v1",
+ "generation": "{GEN}",
+ "usage_context": "NON_COMMERCIAL_OPEN_SOURCE",
+ "usage_context_establishes_upstream_rights": false,
+ "activation": "dynamic-import-and-attested-payload-fetch-on-user-open",
+ "additive_only": true,
+ "mutates_existing_dom": false,
+ "project_bindings": 0,
+ "eligible_for_news_signal": false,
+ "forecast": false,
+ "host_id": "gbElectricityHost",
+ "bind_call": "bindGbElectricityContext();",
+ "source": {
+  "repository": "Ventusltd/data-gb-electricity",
+  "path": "derived/price-decade-rollup.json",
+  "upstream": "Elexon",
+  "role": "browser-sized historic derived product; sole calculation remains in the data repository"
+ },
+ "cartridge": {
+  "schema": "pipelinenews.gb-electricity-context-cartridge.v1",
+  "generation": "{GEN}",
+  "filename": "{GEN}-gb-electricity-context.mjs",
+  "path": "assets/{GEN}-gb-electricity-context.mjs",
+  "bytes": 0,
+  "sha256": ""
+ },
+ "payload": {
+  "path": "data/{GEN}-price-decade-rollup.json",
+  "schema": "data-gb-electricity.price-decade-rollup.v1",
+  "bytes": 0,
+  "sha256": ""
+ },
+ "scope": "historic GB system sell price context only; no project binding, forecast, recommendation or inferred news signal"
 }
 ```
 
@@ -7839,38 +7839,38 @@ Now cutting the release with the builder — your stamp, as instructed.
 
 **← tool result**
 ```
-Building 202609021945-pipelinenews
-  from    202609020611-pipelinenews
-  adding  wider-fleet
-
-  59 files carried forward
-
-  new files
-    assets/202609021945-wider-fleet.mjs  (text build inputs applied)
-    data/202609021945-wider-fleet.json
-
-  index.html
-    UI section for wider_fleet                           1
-    title tag present                                    1
-
-  assets/202608291447-app.mjs
-    wider fleet runtime evidence counters                1
-    loader for wider_fleet                               1
-    bind call in boot()                                  1
-
-  data/202608291447-registry.json
-    re-deriving inherited digests after LF normalisation
-    supplemental_assets.wider_fleet
-
-  manifests
-    release-manifest.json
-  0 sha256 sidecar(s) rewritten
-  refreshed 39 records in build-manifest.json
-    sha256sums.txt (60 files)
-
-  202609020611-pipelinenews unchanged (59 files, byte-for-byte)
-
-Built 202609021945-pipelinenews
+Building 202609021945-pipelinenews
+  from    202609020611-pipelinenews
+  adding  wider-fleet
+
+  59 files carried forward
+
+  new files
+    assets/202609021945-wider-fleet.mjs  (text build inputs applied)
+    data/202609021945-wider-fleet.json
+
+  index.html
+    UI section for wider_fleet                           1
+    title tag present                                    1
+
+  assets/202608291447-app.mjs
+    wider fleet runtime evidence counters                1
+    loader for wider_fleet                               1
+    bind call in boot()                                  1
+
+  data/202608291447-registry.json
+    re-deriving inherited digests after LF normalisation
+    supplemental_assets.wider_fleet
+
+  manifests
+    release-manifest.json
+  0 sha256 sidecar(s) rewritten
+  refreshed 39 records in build-manifest.json
+    sha256sums.txt (60 files)
+
+  202609020611-pipelinenews unchanged (59 files, byte-for-byte)
+
+Built 202609021945-pipelinenews
   unhappy with it? python release_builder.py --from 202609020611-pipelinenews --cartridge <other>
 ```
 
@@ -7891,36 +7891,36 @@ Built 202609021945-pipelinenews
 
 **← tool result**
 ```
-Checking 202609021945-pipelinenews
-
-  [PASS] unlisted files       none
-  [PASS] listed but absent    none
-  [PASS] digest mismatch      none
-  [PASS] atlas_live_handoff.cartridge digest
-  [PASS] gb_electricity_context.cartridge digest
-  [PASS] gb_electricity_context.payload digest
-  [PASS] gb_electricity_context host present in UI
-  [PASS] gb_electricity_context loader wired in boot()
-  [PASS] grid_actions_inline.payload digest
-  [PASS] grid_distance_column.payload digest
-  [PASS] grid_proximity.cartridge digest
-  [PASS] grid_proximity.payload digest
-  [PASS] grid_proximity host present in UI
-  [PASS] grid_proximity loader wired in boot()
-  [PASS] project_intelligence.cartridge digest
-  [PASS] project_intelligence.payload digest
-  [PASS] project_intelligence host absent after withdrawal
-  [PASS] project_intelligence loader absent after withdrawal
-  [PASS] relationship_governance_status.cartridge digest
-  [PASS] relationship_governance_status.payload digest
-  [PASS] sector_intelligence.cartridge digest
-  [PASS] sector_intelligence.payload digest
-  [PASS] sector_intelligence_clean.cartridge digest
-  [PASS] sector_intelligence_clean.payload digest
-  [PASS] table_locality_sort.payload digest
-  [PASS] wider_fleet.cartridge digest
-  [PASS] wider_fleet.payload digest
-  [PASS] wider_fleet host present in UI
+Checking 202609021945-pipelinenews
+
+  [PASS] unlisted files       none
+  [PASS] listed but absent    none
+  [PASS] digest mismatch      none
+  [PASS] atlas_live_handoff.cartridge digest
+  [PASS] gb_electricity_context.cartridge digest
+  [PASS] gb_electricity_context.payload digest
+  [PASS] gb_electricity_context host present in UI
+  [PASS] gb_electricity_context loader wired in boot()
+  [PASS] grid_actions_inline.payload digest
+  [PASS] grid_distance_column.payload digest
+  [PASS] grid_proximity.cartridge digest
+  [PASS] grid_proximity.payload digest
+  [PASS] grid_proximity host present in UI
+  [PASS] grid_proximity loader wired in boot()
+  [PASS] project_intelligence.cartridge digest
+  [PASS] project_intelligence.payload digest
+  [PASS] project_intelligence host absent after withdrawal
+  [PASS] project_intelligence loader absent after withdrawal
+  [PASS] relationship_governance_status.cartridge digest
+  [PASS] relationship_governance_status.payload digest
+  [PASS] sector_intelligence.cartridge digest
+  [PASS] sector_intelligence.payload digest
+  [PASS] sector_intelligence_clean.cartridge digest
+  [PASS] sector_intelligence_clean.payload digest
+  [PASS] table_locality_sort.payload digest
+  [PASS] wider_fleet.cartridge digest
+  [PASS] wider_fleet.payload digest
+  [PASS] wider_fleet host present in UI
   [PASS] wider_fleet loader wired in boot()
 ```
 
@@ -8338,7 +8338,7 @@ provide test link
 **← tool result**
 ```
 === local ===
-127.0.0.1:8792 -> 200
+127.0.0.1:8792 -> 200
 === github pages ===
 404  https://ventusltd.github.io/pipelinenews/releases/202609021945-pipelinenews/
 404  https://ventusltd.github.io/pipelinenews/releases/202609020611-pipelinenews/
@@ -8523,7 +8523,7 @@ gh not on PATH
 **← tool result**
 ```
 === on origin? ===
-raw index.html -> 200
+raw index.html -> 200
 === live yet? ===
 poll 1 -> 200
 ```
@@ -8566,9 +8566,9 @@ Browser extension is not connected. Please ensure the Claude browser extension i
 
 **← tool result**
 ```
-index          -> 200
-wider-fleet.js -> 200
-payload        -> 200
+index          -> 200
+wider-fleet.js -> 200
+payload        -> 200
 --- section + spine present in served html ---
 2
 --- payload row count + GW (served) ---
@@ -9075,30 +9075,30 @@ The file C:\Users\vikra\OneDrive\Documents\GitHub\pipelinenews\tools\intelligenc
 **← tool result**
 ```
 UTC: 202609022305
-    data/202609022305-wider-fleet.json
-
-  index.html
-    UI section for wider_fleet                           1
-    title tag present                                    1
-
-  assets/202608291447-app.mjs
-    wider fleet runtime evidence counters                1
-    loader for wider_fleet                               1
-    bind call in boot()                                  1
-
-  data/202608291447-registry.json
-    re-deriving inherited digests after LF normalisation
-    supplemental_assets.wider_fleet
-
-  manifests
-    release-manifest.json
-  0 sha256 sidecar(s) rewritten
-  refreshed 39 records in build-manifest.json
-    sha256sums.txt (60 files)
-
-  202609020611-pipelinenews unchanged (59 files, byte-for-byte)
-
-Built 202609022305-pipelinenews
+    data/202609022305-wider-fleet.json
+
+  index.html
+    UI section for wider_fleet                           1
+    title tag present                                    1
+
+  assets/202608291447-app.mjs
+    wider fleet runtime evidence counters                1
+    loader for wider_fleet                               1
+    bind call in boot()                                  1
+
+  data/202608291447-registry.json
+    re-deriving inherited digests after LF normalisation
+    supplemental_assets.wider_fleet
+
+  manifests
+    release-manifest.json
+  0 sha256 sidecar(s) rewritten
+  refreshed 39 records in build-manifest.json
+    sha256sums.txt (60 files)
+
+  202609020611-pipelinenews unchanged (59 files, byte-for-byte)
+
+Built 202609022305-pipelinenews
   unhappy with it? python release_builder.py --from 202609020611-pipelinenews --cartridge <other>
 ```
 
@@ -9439,7 +9439,7 @@ The file C:\Users\vikra\OneDrive\Documents\GitHub\pipelinenews\tools\intelligenc
 **← tool result (error)**
 ```
 Exit code 1
-gauges handle removed: True
+gauges handle removed: True
 rm: cannot remove 'releases/202609022305-pipelinenews/assets': Device or resource busy
 ```
 
@@ -9496,19 +9496,19 @@ rm: cannot remove 'releases/202609022305-pipelinenews/assets': Device or resourc
 **← tool result (error)**
 ```
 Exit code 1
-   Id Path                                                             
-   -- ----                                                             
- 6764 C:\Users\vikra\AppData\Local\Programs\Python\Python312\python.exe
-23832 C:\Users\vikra\AppData\Local\Programs\Python\Python312\python.exe
-33464 C:\Users\vikra\AppData\Local\Programs\Python\Python312\python.exe
-33980 C:\Users\vikra\AppData\Local\Programs\Python\Python312\python.exe
-34108 C:\Users\vikra\AppData\Local\Programs\Python\Python312\python.exe
-37496 C:\Users\vikra\AppData\Local\Programs\Python\Python312\python.exe
-41924 C:\Users\vikra\AppData\Local\Programs\Python\Python312\python.exe
-42080 C:\Users\vikra\AppData\Local\Programs\Python\Python312\python.exe
-
-
-port 8791 held by pid 34108
+   Id Path                                                             
+   -- ----                                                             
+ 6764 C:\Users\vikra\AppData\Local\Programs\Python\Python312\python.exe
+23832 C:\Users\vikra\AppData\Local\Programs\Python\Python312\python.exe
+33464 C:\Users\vikra\AppData\Local\Programs\Python\Python312\python.exe
+33980 C:\Users\vikra\AppData\Local\Programs\Python\Python312\python.exe
+34108 C:\Users\vikra\AppData\Local\Programs\Python\Python312\python.exe
+37496 C:\Users\vikra\AppData\Local\Programs\Python\Python312\python.exe
+41924 C:\Users\vikra\AppData\Local\Programs\Python\Python312\python.exe
+42080 C:\Users\vikra\AppData\Local\Programs\Python\Python312\python.exe
+
+
+port 8791 held by pid 34108
 port 8792 held by pid 23832
 ```
 
@@ -9529,8 +9529,8 @@ port 8792 held by pid 23832
 
 **← tool result**
 ```
-stopped 6764 on 8791
-stopped 23832 on 8792
+stopped 6764 on 8791
+stopped 23832 on 8792
 still busy: Cannot remove the item at 'C:\Users\vikra\OneDrive\Documents\GitHub\pipelinenews\releases\202609022305-pipelinenews' because it is in use.
 ```
 
@@ -9592,10 +9592,10 @@ removed
 **← tool result**
 ```
 UTC: 202609022308
-  202609020611-pipelinenews unchanged (59 files, byte-for-byte)
-
-Built 202609022308-pipelinenews
-  unhappy with it? python release_builder.py --from 202609020611-pipelinenews --cartridge <other>
+  202609020611-pipelinenews unchanged (59 files, byte-for-byte)
+
+Built 202609022308-pipelinenews
+  unhappy with it? python release_builder.py --from 202609020611-pipelinenews --cartridge <other>
 === CHECK ===
   [PASS] wider_fleet.cartridge digest
   [PASS] wider_fleet.payload digest
@@ -10221,18 +10221,18 @@ Browser extension is not connected. Please ensure the Claude browser extension i
 
 **← tool result**
 ```
-landfill gas rows: 275
-
-Caledon Green - Gas Powered Electricity Generation Facility | 22.5 MW | awaiting construction
-family tech sent = biomass
-https://ventusltd.github.io/gridatlas/atlas/?project=Caledon+Green+-+Gas+Powered+Electricity+Generation+Facility&technology=biomass&capacity_mw=22.5&latitude=56.01013&longitude=-3.74061&zoom=12
-
-Rainham Phase II | 17.0 MW | operational
-family tech sent = biomass
-https://ventusltd.github.io/gridatlas/atlas/?project=Rainham+Phase+II&technology=biomass&capacity_mw=17.0&latitude=51.49031&longitude=0.19376&zoom=12
-
-Pitsea Tipp | 14.0 MW | operational
-family tech sent = biomass
+landfill gas rows: 275
+
+Caledon Green - Gas Powered Electricity Generation Facility | 22.5 MW | awaiting construction
+family tech sent = biomass
+https://ventusltd.github.io/gridatlas/atlas/?project=Caledon+Green+-+Gas+Powered+Electricity+Generation+Facility&technology=biomass&capacity_mw=22.5&latitude=56.01013&longitude=-3.74061&zoom=12
+
+Rainham Phase II | 17.0 MW | operational
+family tech sent = biomass
+https://ventusltd.github.io/gridatlas/atlas/?project=Rainham+Phase+II&technology=biomass&capacity_mw=17.0&latitude=51.49031&longitude=0.19376&zoom=12
+
+Pitsea Tipp | 14.0 MW | operational
+family tech sent = biomass
 https://ventusltd.github.io/gridatlas/atlas/?project=Pitsea+Tipp&technology=biomass&capacity_mw=14.0&latitude=51.53705&longitude=0.50894&zoom=12
 ```
 
@@ -10269,7 +10269,7 @@ Browser extension is not connected. Please ensure the Claude browser extension i
 
 **← tool result**
 ```
-chrome processes: 0
+chrome processes: 0
 virtual screen: {X=-1707,Y=0,Width=4267,Height=1440}
 ```
 
@@ -10294,7 +10294,7 @@ Chrome isn't running at all — 0 processes. That's why the extension dropped an
 
 **← tool result**
 ```
-chrome processes: 9
+chrome processes: 9
   pid 39300 'PipelineNews | Current verified Atlas V9 deep-link successor 202608300309 - Google Chrome'
 ```
 
@@ -10347,8 +10347,8 @@ Browser extension is not connected. Please ensure the Claude browser extension i
 
 **← tool result**
 ```
-Rainham Phase II | tech= biomass | raw= Landfill Gas | cap= 17.0 | coords= [0.193761, 51.490314]
-Pitsea Tipp | tech= biomass | raw= Landfill Gas | cap= 14.0 | coords= [0.508935, 51.537053]
+Rainham Phase II | tech= biomass | raw= Landfill Gas | cap= 17.0 | coords= [0.193761, 51.490314]
+Pitsea Tipp | tech= biomass | raw= Landfill Gas | cap= 14.0 | coords= [0.508935, 51.537053]
 Caledon Green - Gas Powered Electricity Generation Facility | tech= biomass | raw= Landfill Gas | cap= 22.5 | coords= [-3.740608, 56.010131]
 ```
 
@@ -10981,30 +10981,30 @@ yes
 **← tool result**
 ```
 -rw-r--r-- 1 vikra 197610 4865094 Aug 30 20:43 globalgrid2050/repd.csv
-53 columns
-  0 'Old Ref ID'
-  1 'Ref ID'
-  3 'Operator (or Applicant)'
-  4 'Site Name'
-  5 'Technology Type'
-  7 'Storage Co-location REPD Ref ID'
-  8 'Installed Capacity (MWelec)'
-  14 'CfD Capacity (MW)'
-  15 'Turbine Capacity (MW)'
-  19 'Development Status'
-  20 'Development Status (short)'
-  21 'Are they re-applying (New REPD Ref)'
-  22 'Are they re-applying (Old REPD Ref) '
-  24 'County'
-  27 'Post Code'
-  28 'X-coordinate'
-  29 'Y-coordinate'
-  31 'Planning Application Reference'
-  32 'Appeal Reference'
-  33 'Secretary of State Reference'
-  39 'Planning Permission Refused'
-  42 'Appeal Refused'
-  46 'Secretary of State - Refusal'
+53 columns
+  0 'Old Ref ID'
+  1 'Ref ID'
+  3 'Operator (or Applicant)'
+  4 'Site Name'
+  5 'Technology Type'
+  7 'Storage Co-location REPD Ref ID'
+  8 'Installed Capacity (MWelec)'
+  14 'CfD Capacity (MW)'
+  15 'Turbine Capacity (MW)'
+  19 'Development Status'
+  20 'Development Status (short)'
+  21 'Are they re-applying (New REPD Ref)'
+  22 'Are they re-applying (Old REPD Ref) '
+  24 'County'
+  27 'Post Code'
+  28 'X-coordinate'
+  29 'Y-coordinate'
+  31 'Planning Application Reference'
+  32 'Appeal Reference'
+  33 'Secretary of State Reference'
+  39 'Planning Permission Refused'
+  42 'Appeal Refused'
+  46 'Secretary of State - Refusal'
   51 'Heat Network Ref'
 ```
 
@@ -11025,9 +11025,9 @@ yes
 
 **← tool result**
 ```
-Traceback (most recent call last):
-  File "<string>", line 1, in <module>
-Traceback (most recent call last):
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+Traceback (most recent call last):
   File "<string>", line 1, in <module>
 ```
 
@@ -11052,13 +11052,13 @@ No pyproj or pandas, so I won't re-implement OSGB36→WGS84 — one geodesy stay
 
 **← tool result**
 ```
-csv rows 13995
-wider rows 1104
-unique on name+tech+capacity : 945
-unique on name+tech          : 120
-unique on name               : 0
-ambiguous (>1 candidate)     : 28
-no candidate at all          : 11
+csv rows 13995
+wider rows 1104
+unique on name+tech+capacity : 945
+unique on name+tech          : 120
+unique on name               : 0
+ambiguous (>1 candidate)     : 28
+no candidate at all          : 11
 TOTAL RESOLVED               : 1065 / 1104
 ```
 
@@ -11083,9 +11083,9 @@ TOTAL RESOLVED               : 1065 / 1104
 
 **← tool result**
 ```
-ambiguous at name+tech+capacity: 21
-  resolved by operator : 4
-  then by status       : 15
+ambiguous at name+tech+capacity: 21
+  resolved by operator : 4
+  then by status       : 15
   still ambiguous      : 2
 ```
 
@@ -11167,44 +11167,44 @@ The file C:\Users\vikra\OneDrive\Documents\GitHub\pipelinenews\tools\intelligenc
 
 **← tool result**
 ```
-REPD TECHNOLOGY TYPE                            N            MW  WITH REF
-Landfill Gas                                  275         787.9  275
-Anaerobic Digestion                           253         483.1  249
-Biomass (dedicated)                           159       1,288.2  158
-EfW Incineration                              122       3,088.8  119
-Small Hydro                                   108         173.4  108
-Hydrogen                                       60       4,242.1  56
-Advanced Conversion Technologies               37         507.4  37
-Large Hydro                                    28         521.2  27
-Pumped Storage Hydroelectricity                15      10,418.2  15
-Tidal Stream                                   14         660.1  14
-Sewage Sludge Digestion                        12          50.2  12
-Geothermal                                      5           0.0  5
-Shoreline Wave                                  4          51.0  4
-Liquid Air Energy Storage                       2          54.9  2
-Biomass (co-firing)                             2          18.6  2
-Hot Dry Rocks (HDR)                             2          10.0  2
-Compressed Air Energy Storage                   2           5.0  2
-Fuel Cell (Hydrogen)                            2           0.1  2
-Flywheels                                       1         400.0  1
-Unknown                                         1           0.0  1
-
-identity resolution against the REPD extract
-  name+technology+capacity           945
-  name+technology, capacity differs  120
-  narrowed by status                 22
-  absent                             11
-  narrowed by operator               4
-  ambiguous                          2
-
-tabs (REPD technology types) : 20
-projects                     : 1104
-capacity                     : 22.76 GW
-with a REPD reference        : 1091 of 1104 (98.8%)
-without one, MAP unresolved  : 13
-with county                  : 1091
-with postcode                : 631
-dropped, no coordinates      : 0
+REPD TECHNOLOGY TYPE                            N            MW  WITH REF
+Landfill Gas                                  275         787.9  275
+Anaerobic Digestion                           253         483.1  249
+Biomass (dedicated)                           159       1,288.2  158
+EfW Incineration                              122       3,088.8  119
+Small Hydro                                   108         173.4  108
+Hydrogen                                       60       4,242.1  56
+Advanced Conversion Technologies               37         507.4  37
+Large Hydro                                    28         521.2  27
+Pumped Storage Hydroelectricity                15      10,418.2  15
+Tidal Stream                                   14         660.1  14
+Sewage Sludge Digestion                        12          50.2  12
+Geothermal                                      5           0.0  5
+Shoreline Wave                                  4          51.0  4
+Liquid Air Energy Storage                       2          54.9  2
+Biomass (co-firing)                             2          18.6  2
+Hot Dry Rocks (HDR)                             2          10.0  2
+Compressed Air Energy Storage                   2           5.0  2
+Fuel Cell (Hydrogen)                            2           0.1  2
+Flywheels                                       1         400.0  1
+Unknown                                         1           0.0  1
+
+identity resolution against the REPD extract
+  name+technology+capacity           945
+  name+technology, capacity differs  120
+  narrowed by status                 22
+  absent                             11
+  narrowed by operator               4
+  ambiguous                          2
+
+tabs (REPD technology types) : 20
+projects                     : 1104
+capacity                     : 22.76 GW
+with a REPD reference        : 1091 of 1104 (98.8%)
+without one, MAP unresolved  : 13
+with county                  : 1091
+with postcode                : 631
+dropped, no coordinates      : 0
 spine types excluded         : Battery, Solar Photovoltaics, Wind Offshore, Wind Onshore
 ```
 
@@ -11265,9 +11265,9 @@ module updated: repd_ref in link, county/postcode/ref in columns
 ```
 -rw-r--r-- 1 vikra 197610 220400 Sep  3 01:09 tools/intelligence/cartridges/wider-fleet/data/{GEN}-wider-fleet.json
 UTC: 202609030009
-  202609020611-pipelinenews unchanged (59 files, byte-for-byte)
-
-Built 202609030009-pipelinenews
+  202609020611-pipelinenews unchanged (59 files, byte-for-byte)
+
+Built 202609030009-pipelinenews
   unhappy with it? python release_builder.py --from 202609020611-pipelinenews --cartridge <other>
 ```
 
@@ -12020,8 +12020,8 @@ Pipeline News — 202609020611
 === P0 cited file exists? ===
 atlas/cartridges/202609012211-sld-sandbox-v9-8.js
 --- current sld-sandbox cartridge per current.json ---
-sld-sandbox v9.77 ./cartridges/202609020018-sld-sandbox-v9-8.js
-substation-intelligence v9.77 ./cartridges/202609020018-substation-intelligence-v9-63.js
+sld-sandbox v9.77 ./cartridges/202609020018-sld-sandbox-v9-8.js
+substation-intelligence v9.77 ./cartridges/202609020018-substation-intelligence-v9-63.js
 === transformer aggregation in the substation body ===
 134:    if (point.transformers) parts.push(point.transformers + ' transformers');
 208:           + 'transformers and planned changes remain site-wide across the '
@@ -12277,9 +12277,9 @@ Repo is **public** — I'll scan the transcript before anything leaves the machi
 **← tool result**
 ```
 1577 /c/Users/vikra/.claude/projects/C--Users-vikra/bbe4731a-0373-47dc-b753-0b5977329b78.jsonl
-records 1577
-types {'mode': 70, 'permission-mode': 70, 'atis-latch': 70, 'bridge-session': 70, 'file-history-snapshot': 14, 'user': 295, 'attachment': 309, 'ai-title': 70, 'assistant': 506, 'last-prompt': 69, 'queue-operation': 8, 'system': 21, 'file-history-delta': 5}
-roles {'user': 295, 'assistant': 506}
+records 1577
+types {'mode': 70, 'permission-mode': 70, 'atis-latch': 70, 'bridge-session': 70, 'file-history-snapshot': 14, 'user': 295, 'attachment': 309, 'ai-title': 70, 'assistant': 506, 'last-prompt': 69, 'queue-operation': 8, 'system': 21, 'file-history-delta': 5}
+roles {'user': 295, 'assistant': 506}
 top keys ['type', 'sessionId', 'timestamp', 'parentUuid', 'isSidechain', 'uuid', 'userType', 'entrypoint', 'cwd', 'version', 'gitBranch', 'session_id', 'message', 'apiBlockIndex']
 ```
 
