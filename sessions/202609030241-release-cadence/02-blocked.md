@@ -192,3 +192,67 @@ used. Expect `atlas/current.json`, `atlas/state/live-set.json`, one new
 `atlas/manifests/<stamp>-composition.json` and `STATE.md` to change and nothing
 else — the workflow enforces exactly that allowlist and fails if anything else
 moves.
+
+## B8 — cvaa `loop-exists` demands exactly what gridatlas's own lint forbids
+
+Not a cut in either repository. A disagreement, and it needs an owner.
+
+cvaa `202608301704-loop-exists.md`:
+
+    loops.filter(w => !/schedule:/.test(w.text))
+      .map(w => `${w.file} has no schedule; the loop is not perpetual`)
+
+gridatlas `tools/scope/loop.mjs:113-115`:
+
+    if (master.data.status === 'done') {
+      invariant(loopWorkflow.includes('scope-loop-mode: retired'), …);
+      invariant(!/^\s*schedule:/m.test(loopWorkflow), 'retired scope loop must not retain a schedule');
+    }
+
+`STATE.md` records `Master: done`. So gridatlas's gate **fails the build** if
+`202608301321-scope-loop.yml` carries a schedule, and cvaa **reports a finding**
+if it does not. There is no state of that file that satisfies both.
+
+The vaccine's own Symptom section names this exact situation — *"gridatlas scope
+6 removed the schedule; scope-loop now runs only on manual dispatch"* — so cvaa
+knows about the retirement and considers it the disease. gridatlas considers a
+closed scope-of-works a reason to retire the loop. Both positions are coherent;
+they cannot both hold.
+
+**Deliberately not resolved by me.** Either answer changes a rule rather than a
+file: relax cvaa to accept a retired loop when the master is closed, or reopen
+gridatlas's loop and change what `done` means. And it is trivially gameable in
+the wrong direction — the antibody matches `schedule:` anywhere in the text,
+including in a comment, so gridatlas could go green by writing the word. That
+would be gaming it, and I have not.
+
+## B9 — cvaa: three antibodies decide from text they have not parsed, and I tripped all three
+
+One finding, three instances, all measured tonight. Grouped because the cure is
+the same shape.
+
+| antibody | reads | what tripped it |
+|---|---|---|
+| `attestation-freshness` | commit **subjects** by regex | one subject containing both "verif" and "compos" flipped it FAIL → immune with the file untouched (B6) |
+| `rollback-exercised` | commit **subjects** by regex | `32bc3bb`, a commit about an assembler boundary that happens to contain the word "rollback", has passed it since 2026-09-01 (B6) |
+| `no-time-based-gates` | raw workflow **text** | quoting a *removed* cron in the comment that replaced it kept the finding standing; fixed in `a9247f1` by keeping the record and dropping the shape |
+| `full-history-checkout` | raw workflow **text**, gated on `/cvaa\|inoculate/i` | writing the word "cvaa" in a comment in `202608312212-cartridge-proof.yml` brought that workflow into scope and produced *"runs cvaa with 2 checkout(s) lacking fetch-depth: 0"* — that workflow does not run cvaa |
+
+The last one is the sharpest, because the sentence it produces is **false**. The
+cartridge proof's checkouts are shallow, deliberately — its own header says
+*"node, no browser, no history"* and nothing in it reads the past. It became
+in-scope because of a word in a comment about the vaccine that reported it.
+
+So in one night, three of these produced a verdict that had nothing to do with
+the state of the repository: two false greens and one false red, all from text
+matching. **The failure mode is symmetric and that is what makes it dangerous** —
+it is not conservative in either direction, so neither a red nor a green from
+these three can be taken at face value.
+
+The cure is in the antibodies. Parse the workflow and read `on.schedule`, not
+the file text. Recognise a drill by an artefact it left, not by a word someone
+chose. Compare an attestation's own recorded timestamp against the pointer it
+covers — both are already in `state/live-set.json` — rather than the ordering of
+two regex hits over commit subjects.
+
+Until then, every green from these four should be treated as unmeasured.

@@ -527,3 +527,92 @@ goes:"* with the word missing, and the shell printed `cron:: command not found`.
 The commit is otherwise correct and is **not amended** — a shipped generation is
 not rewritten for a cosmetic fault. Backticks inside `-m "…"` are command
 substitution; use a heredoc or single quotes.
+
+---
+
+## Cycles 8-10 — 03:27Z–03:36Z — the gate's own actions, and two commits arguing with a scanner
+
+### Cycle 8 — `a9f2f76` — the gate pins the actions it runs
+
+    WARN  pinned-actions
+      202608312212-cartridge-proof.yml: actions/checkout@v4  is not pinned   (x2)
+      202608312212-cartridge-proof.yml: actions/setup-node@v4 is not pinned
+
+Three findings, all in one file, none anywhere else — the other four workflows
+were already pinned by full SHA. **So the only unpinned actions in gridatlas
+were in its guard rail.** That is the wrong file for them: this is the run I
+poll before starting the next generation, so whatever it trusts, the whole
+composition trusts, and `@v4` is a tag anyone who can move it can point at their
+own code inside the job that decides whether a generation ships.
+
+Both commits were chosen from what is already proven in the estate and then
+verified upstream by git rather than by looking up a version number:
+
+    actions/checkout   11bd71901bbe5b1630ceea73d27597364c9af683
+                       -> "Prepare 4.2.2 Release (#1953)", and the same commit
+                          tools/scope/loop.mjs already asserts for the scope loop
+    actions/setup-node 820762786026740c76f36085b0efc47a31fe5020
+                       -> "Migrate to ESM and upgrade dependencies (#1574)",
+                          19 uses across the estate, ran on a runner 2026-09-02
+
+    runner  33711451292  cartridge proof  success   <- the pins resolve
+
+### Cycles 9 and 10 — `efa0102`, `ed2135f` — two commits I would rather not have needed
+
+The pinning commit mentioned in a comment which tool had reported the findings.
+Re-measured immediately after:
+
+    pinned-actions          3 findings -> 0        (real)
+    full-history-checkout   immune -> FAIL         (entirely my doing)
+      - 202608312212-cartridge-proof.yml runs cvaa with 2 checkout(s)
+        lacking fetch-depth: 0
+
+That antibody inspects only workflows whose raw text matches `/cvaa|inoculate/i`.
+Writing the word in a comment *about the report* put the workflow in scope, and
+the sentence it then produced is false twice: this workflow runs no scanner, and
+its checkouts are shallow deliberately — its own header says *"node, no browser,
+no history"* and nothing in the job reads the past. Adding `fetch-depth: 0` to
+satisfy it would slow the gate every cut passes through to buy history nothing
+uses.
+
+`efa0102` rewrote the comment to stop naming the tool — **and explained why by
+quoting the regex, `/cvaa|inoculate/i`, which matches.** The finding went from
+two to one rather than to zero, because the same comment's quotation of
+`fetch-depth: 0` was counted as a real one.
+
+`ed2135f` removed the argument from the file altogether. Measured against the
+original at `8fb95a2`: it contained no occurrence of either token and no
+`fetch-depth` at all, so **the whole finding was created by my own comments**.
+
+    full-history-checkout  FAIL -> immune
+    runner  33711928267 (efa0102) · 33711995891 (ed2135f)  both success
+
+**The lesson is mine, not the tool's: do not write about a text scan inside a
+file that text scan reads.** Provenance belongs in the commit message and the
+session record; a workflow comment should tell the next reader what the workflow
+does. Two generations spent learning that, both green, neither amended.
+
+The criterion I applied when rewording, stated so it can be checked: **reword
+only when the finding's sentence is false of the file.** `a9247f1` — no schedule
+existed. `efa0102`/`ed2135f` — no scanner runs here. I did not reword anything
+to hide a finding that was true, and each instance is filed upstream in B9
+rather than only fixed locally.
+
+### Where gridatlas stands, measured
+
+Clean clone of `ed2135f`, published cvaa `791e24b`, 25 active vaccines:
+
+    85 findings at 8fb95a2  ->  74 findings at ed2135f
+
+    rollback-exists         FAIL -> immune    real
+    no-time-based-gates     FAIL -> immune    real, 3 findings
+    pinned-actions          WARN -> immune    real, 3 findings
+    full-history-checkout   immune -> FAIL -> immune   self-inflicted, closed
+    attestation-freshness   FAIL -> immune    FALSE, see B6 — the file is unchanged
+
+Still failing, and each recorded rather than touched:
+`no-per-release-workflows` (3), `chaining-token` (4, needs an App token this
+environment does not have), `monotonic-utc-generations` and `on-ledger-commits`
+(historical, not fixable without rewriting shipped history), `executor-declared`
+(7 ledger files), `loop-exists` (1 — and it demands what gridatlas's own lint
+forbids, B8).
