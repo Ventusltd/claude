@@ -54,6 +54,7 @@ import io
 import json
 import os
 import re
+import shutil
 import subprocess
 import sys
 import time
@@ -140,16 +141,25 @@ def _post(device, path, payload, timeout=600):
             % (device, DEVICES[device]['endpoint'], e))
 
 
-def generate(device, prompt, system=None, num_predict=320, temperature=0.0):
-    """One completion. Returns the text and the metrics Ollama measured for it."""
+def generate(device, prompt, system=None, num_predict=320, temperature=0.0, stop=None):
+    """One completion. Returns the text and the metrics Ollama measured for it.
+
+    `stop` matters more than it looks. Asking a 4B for "exactly two lines, no markdown" was
+    measured failing twice: it answered with headings, bold and an emoji regardless. Ending
+    the prompt mid-sentence so the model can only continue it, plus a stop sequence, is what
+    actually holds the shape - an instruction is a request, a stop token is a constraint.
+    """
     if device not in DEVICES:
         raise LocalAIError('unknown device %r; known: %s' % (device, ', '.join(DEVICES)))
+    opts = {'temperature': temperature, 'num_predict': num_predict}
+    if stop:
+        opts['stop'] = list(stop)
     payload = {
         'model': DEVICES[device]['model'],
         'prompt': prompt,
         'stream': False,
         'keep_alive': '30m',
-        'options': {'temperature': temperature, 'num_predict': num_predict},
+        'options': opts,
     }
     if system:
         payload['system'] = system
@@ -182,6 +192,42 @@ def generate(device, prompt, system=None, num_predict=320, temperature=0.0):
         'load_s': round((r.get('load_duration') or 0) / 1e9, 3),
         'wall_s': round(wall, 2),
     }
+
+
+def chat(device, messages, num_predict=320, temperature=0.0, stop=None):
+    """Same as generate(), but multi-turn - which is what actually constrains output shape.
+
+    Measured 2026-09-03 on classify-ci-failure: three escalating instructions and then a
+    worked example inside a single prompt all failed to stop this 4B answering in markdown
+    prose. Putting the example in as a real assistant TURN worked first time. The model
+    imitates the conversation it is in far more reliably than it obeys a description of one.
+    """
+    if device not in DEVICES:
+        raise LocalAIError('unknown device %r; known: %s' % (device, ', '.join(DEVICES)))
+    opts = {'temperature': temperature, 'num_predict': num_predict}
+    if stop:
+        opts['stop'] = list(stop)
+    payload = {'model': DEVICES[device]['model'], 'messages': messages, 'stream': False,
+               'keep_alive': '30m', 'options': opts}
+    if DEVICES[device].get('thinking'):
+        payload['think'] = False
+    t0 = time.time()
+    r = _post(device, '/api/chat', payload)
+    wall = time.time() - t0
+    ev, ed = r.get('eval_count') or 0, r.get('eval_duration') or 0
+    pe, pd = r.get('prompt_eval_count') or 0, r.get('prompt_eval_duration') or 0
+    text = ((r.get('message') or {}).get('content') or '').strip()
+    if not text:
+        raise LocalAIError(
+            'device %r returned an EMPTY chat completion (done_reason=%r, %d tokens). '
+            'The budget was spent without an answer.' % (device, r.get('done_reason'), ev))
+    return {'device': device, 'model': DEVICES[device]['model'], 'text': text,
+            'eval_tokens': ev, 'eval_s': round(ed / 1e9, 3) if ed else 0.0,
+            'tok_s': round(ev / (ed / 1e9), 1) if ed else None,
+            'prompt_tokens': pe,
+            'prefill_tok_s': round(pe / (pd / 1e9), 1) if pd else None,
+            'load_s': round((r.get('load_duration') or 0) / 1e9, 3),
+            'wall_s': round(wall, 2)}
 
 
 # --------------------------------------------------------------------------- hardware
@@ -244,6 +290,35 @@ def git(cwd, *args, **kw):
     return out.stdout
 
 
+def git_bash():
+    """Locate Git Bash, never the WSL stub.
+
+    `bash` on this machine's PATH resolves to C:\\Users\\...\\AppData\\Local\\Microsoft\\
+    WindowsApps\\bash.exe - the Windows Store WSL launcher, the same trap as the python3 stub
+    CLAUDE.md records. It is worse than python3's, because it does not error: it HANGS.
+    Measured 2026-09-03, gh-api.sh through it timed out at 180 s and again at 25 s with
+    stdin=DEVNULL, while the identical command in Git Bash returned 30,442 bytes in 1.345 s.
+    A hang reads as a slow network, so this resolves the real shell explicitly and says so.
+    """
+    for cand in (r'C:\Program Files\Git\bin\bash.exe',
+                 r'C:\Program Files\Git\usr\bin\bash.exe',
+                 r'C:\Program Files (x86)\Git\bin\bash.exe'):
+        if os.path.exists(cand):
+            return cand
+    git_exe = shutil.which('git')
+    if git_exe:  # ...\Git\cmd\git.exe -> ...\Git\bin\bash.exe
+        cand = os.path.join(os.path.dirname(os.path.dirname(git_exe)), 'bin', 'bash.exe')
+        if os.path.exists(cand):
+            return cand
+    found = shutil.which('bash')
+    if found and 'WindowsApps' not in found:
+        return found
+    raise LocalAIError(
+        'Git Bash not found. The only bash on PATH is %r, which is the WSL Store stub and '
+        'hangs instead of running the script. Install Git for Windows or set the path here.'
+        % found)
+
+
 def fetch_run_log(full_repo, run_id):
     """Pull a failing run's logs through scripts/gh-api.sh, which holds the credential."""
     if not os.path.exists(os.path.join(REPO_ROOT, 'scripts', 'gh-api.sh')):
@@ -253,8 +328,8 @@ def fetch_run_log(full_repo, run_id):
     # "No such file or directory". The script is invoked by a RELATIVE posix path with
     # cwd set instead, which needs no conversion and no MSYS_NO_PATHCONV.
     path = 'repos/%s/actions/runs/%s/logs' % (full_repo, run_id)
-    out = subprocess.run(['bash', 'scripts/gh-api.sh', path, '--raw'], cwd=REPO_ROOT,
-                         capture_output=True, timeout=180)
+    out = subprocess.run([git_bash(), 'scripts/gh-api.sh', path, '--raw'], cwd=REPO_ROOT,
+                         capture_output=True, timeout=180, stdin=subprocess.DEVNULL)
     if out.returncode != 0 or not out.stdout:
         raise LocalAIError('gh-api.sh could not fetch %s: %s'
                            % (path, (out.stderr or b'')[:300].decode('utf-8', 'replace')))
@@ -263,13 +338,101 @@ def fetch_run_log(full_repo, run_id):
     except zipfile.BadZipFile:
         raise LocalAIError('run %s logs were not a zip; API said: %s'
                            % (run_id, out.stdout[:300].decode('utf-8', 'replace')))
-    chunks = []
-    for n in zf.namelist():
-        if n.endswith('.txt'):
-            chunks.append('===== %s =====\n%s' % (n, zf.read(n).decode('utf-8', 'replace')))
-    if not chunks:
+    names = [n for n in zf.namelist() if n.endswith('.txt')]
+    if not names:
         raise LocalAIError('run %s logs contained no .txt entries' % run_id)
-    return '\n'.join(chunks)
+
+    # Concatenating every job's log and reading the tail was measured picking up the wrong
+    # thing: on gridatlas run 33800308935 the tail was a Node 20 deprecation WARNING from a
+    # passing job, and the classifier dutifully reported it as the failure. A warning at the
+    # end of the file is not the cause of the run being red. So the failing job is identified
+    # from the API first, and only its log is read.
+    failing = failing_jobs(full_repo, run_id)
+    wanted = names
+    if failing:
+        picked = [n for n in names
+                  if any(_slug(j['name']) in _slug(n) for j in failing)]
+        if picked:
+            wanted = picked
+    chunks = ['===== %s =====\n%s' % (n, zf.read(n).decode('utf-8', 'replace'))
+              for n in wanted]
+    return '\n'.join(chunks), failing
+
+
+def fetch_job_log(full_repo, job_id):
+    """One JOB's log as plain text. The run-level endpoint above returns a zip of every job
+    and costs a redirect plus an unzip; the job-level one returns the single log that matters.
+
+    Measured 2026-09-03 on globalgrid2050 job 100839327538: 1.3s, 57 kB, HTTP 200, no zip.
+    That is the difference between a 44-job estate sweep costing a minute and costing ten,
+    which is why triage.py uses this one and not fetch_run_log.
+
+    The job id is in audit_estate.py's JSON already, on each failed job's `url`.
+    """
+    if not os.path.exists(os.path.join(REPO_ROOT, 'scripts', 'gh-api.sh')):
+        raise LocalAIError('scripts/gh-api.sh not found under %s' % REPO_ROOT)
+    path = 'repos/%s/actions/jobs/%s/logs' % (full_repo, job_id)
+    out = subprocess.run([git_bash(), 'scripts/gh-api.sh', path, '--raw'], cwd=REPO_ROOT,
+                         capture_output=True, timeout=180, stdin=subprocess.DEVNULL)
+    if out.returncode != 0 or not out.stdout:
+        raise LocalAIError('gh-api.sh could not fetch %s: %s'
+                           % (path, (out.stderr or b'')[:300].decode('utf-8', 'replace')))
+    text = out.stdout.decode('utf-8', 'replace').lstrip('﻿')
+    # A 404/410 comes back as JSON with HTTP 200 semantics through curl -sSL; it is not a log.
+    if text.lstrip().startswith('{') and '"message"' in text[:400]:
+        raise LocalAIError('job %s log unavailable: %s' % (job_id, text[:200]))
+    return text
+
+
+def _slug(s):
+    return re.sub(r'[^a-z0-9]+', '', str(s).lower())
+
+
+def gh_json(path):
+    """One authenticated GitHub API call through gh-api.sh."""
+    out = subprocess.run([git_bash(), 'scripts/gh-api.sh', path], cwd=REPO_ROOT,
+                         capture_output=True, timeout=120, stdin=subprocess.DEVNULL)
+    if out.returncode != 0:
+        raise LocalAIError('gh-api.sh failed for %s: %s'
+                           % (path, (out.stderr or b'')[:300].decode('utf-8', 'replace')))
+    try:
+        return json.loads(out.stdout.decode('utf-8', 'replace'))
+    except ValueError as e:
+        raise LocalAIError('gh-api.sh returned non-JSON for %s (%s)' % (path, e))
+
+
+def failing_jobs(full_repo, run_id):
+    """The API's own record of which job and which step failed - the cross-check the model's
+    answer is measured against, so a confident wrong answer is visible rather than trusted."""
+    d = gh_json('repos/%s/actions/runs/%s/jobs' % (full_repo, run_id))
+    out = []
+    for j in d.get('jobs') or []:
+        if j.get('conclusion') in ('failure', 'timed_out'):
+            out.append({'name': j.get('name'),
+                        'steps': [s.get('name') for s in (j.get('steps') or [])
+                                  if s.get('conclusion') in ('failure', 'timed_out')]})
+    return out
+
+
+def focus_errors(log, keep_lines=160):
+    """Keep the lines that carry the failure. A runner log is mostly progress chatter; the
+    decisive lines are marked ##[error] or report a non-zero exit."""
+    lines = log.splitlines()
+    hits = [i for i, ln in enumerate(lines)
+            if '##[error]' in ln or 'Process completed with exit code' in ln
+            or re.search(r'\b(FAIL|FAILED|Traceback|AssertionError)\b', ln)]
+    if not hits:
+        return None
+    keep, span = set(), max(6, keep_lines // max(1, len(hits)))
+    for i in hits:
+        keep.update(range(max(0, i - span), min(len(lines), i + 6)))
+    picked, last = [], -2
+    for i in sorted(keep):
+        if i != last + 1:
+            picked.append('   ... [%d lines omitted] ...' % (i - last - 1))
+        picked.append(lines[i])
+        last = i
+    return '\n'.join(picked)
 
 
 def _tail(text, limit=MAX_CHARS):
@@ -295,8 +458,10 @@ SYS_TERSE = ('You are a terse build engineer. Answer in plain text only. '
 def job_classify_ci_failure(target):
     """Name the failing step and the one-line cause of a failing Actions run."""
     m = re.match(r'^([\w.-]+/[\w.-]+)#(\d+)$', str(target).strip())
+    api_failing = []
     if m:
-        log, source = fetch_run_log(m.group(1), m.group(2)), '%s run %s' % (m.group(1), m.group(2))
+        log, api_failing = fetch_run_log(m.group(1), m.group(2))
+        source = '%s run %s' % (m.group(1), m.group(2))
     else:
         if not os.path.isfile(target):
             raise LocalAIError(
@@ -308,17 +473,32 @@ def job_classify_ci_failure(target):
     if not log.strip():
         raise LocalAIError('log %r is empty; nothing to classify' % source)
 
-    prompt = (
-        'Below is the log of a failing GitHub Actions job.\n\n'
-        'Reply in exactly this shape, two lines:\n'
-        'STEP: <the name of the step that failed>\n'
-        'CAUSE: <one sentence, the actual cause, quoting the decisive error text>\n\n'
-        'If the log does not show which step failed, write STEP: unknown and say why '
-        'in CAUSE. Do not guess a plausible step name.\n\n'
-        '--- LOG (%s) ---\n%s' % (source, _tail(log)))
-    r = generate(JOB_DEVICE['classify-ci-failure'], prompt, system=SYS_TERSE, num_predict=200)
+    focused = focus_errors(log)
+    excerpt = _tail(focused if focused else log)
+
+    ask = ('Name the failure in this GitHub Actions log. A deprecation warning is NOT a '
+           'failure. If the log does not show which step failed, write "STEP: unknown" - '
+           'never invent a plausible step name.\n\n--- LOG ---\n%s')
+    messages = [
+        {'role': 'system', 'content':
+            'You answer in exactly two lines, "STEP:" then "CAUSE:", and write nothing else. '
+            'No markdown, no headings, no bold, no bullets, no preamble, no closing remark.'},
+        {'role': 'user', 'content': ask % (
+            '##[group]Run pytest -q\n'
+            'FAILED tests/test_distance.py::test_ring - AssertionError: expected 12.4, got 18.9\n'
+            '##[error]Process completed with exit code 1.')},
+        {'role': 'assistant', 'content':
+            'STEP: Run pytest -q\n'
+            'CAUSE: test_ring failed its assertion, "expected 12.4, got 18.9", so pytest '
+            'exited 1.'},
+        {'role': 'user', 'content': ask % excerpt},
+    ]
+    r = chat(JOB_DEVICE['classify-ci-failure'], messages, num_predict=160,
+             stop=['\n\n', '\n---'])
     r['source'] = source
     r['log_chars'] = len(log)
+    r['focused'] = focused is not None
+    r['api_failing_jobs'] = api_failing
     return r
 
 
@@ -400,7 +580,13 @@ def job_triage_untracked(repo, device=None):
             continue
         results.append({'file': rel, 'bytes': size, 'verdict': g['text'],
                         'tok_s': g['tok_s'], 'device': g['device']})
-    return {'repo': path, 'untracked': len(files), 'files': results}
+    # A per-file error must reach the exit code. Measured 2026-09-03: with the iGPU server
+    # stopped, every one of cvaa's untracked files came back "endpoint DOWN" and the command
+    # still exited 0 - a listing that described nothing, presented as a completed triage.
+    # That is the estate's "green light that measured nothing", so the count is carried out
+    # and main() fails on it.
+    errors = sum(1 for f in results if f.get('error'))
+    return {'repo': path, 'untracked': len(files), 'files': results, 'errors': errors}
 
 
 # --------------------------------------------------------------------------- health
@@ -625,11 +811,20 @@ def main():
                     print('  %-52s %s' % (f['file'], f.get('verdict') or f.get('error')))
                 if not r.get('files'):
                     print('  %s' % r.get('note', ''))
+                if r.get('errors'):
+                    sys.stderr.write('\nFAIL: %d of %d untracked files could not be described. '
+                                     'This listing is INCOMPLETE.\n'
+                                     % (r['errors'], r['untracked']))
+                    return 2
             else:
                 print(r['text'])
-                print('\n[%s on %s: %s tok/s, %d tokens]'
+                for j in r.get('api_failing_jobs') or []:
+                    print('\n[cross-check, GitHub jobs API] failing job %r, failing step(s): %s'
+                          % (j['name'], ', '.join(repr(s) for s in j['steps']) or 'none recorded'))
+                print('\n[%s on %s: %s tok/s, %d tokens%s]'
                       % (r['model'], DEVICES[r['device']]['adapter'],
-                         r['tok_s'], r['eval_tokens']))
+                         r['tok_s'], r['eval_tokens'],
+                         ', error-focused log' if r.get('focused') else ''))
     except LocalAIError as e:
         sys.stderr.write('FAIL: %s\n' % e)
         return 2
