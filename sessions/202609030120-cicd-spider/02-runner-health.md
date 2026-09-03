@@ -1145,15 +1145,19 @@ accepted, ratcheted, with a dated allowance* (`cvaa/cvaa.json` carries
 
 **The corrected answer to the question I was actually asked:**
 
-| rank | vaccine | fails |
-|---|---|---:|
-| 1 | `monotonic-utc-generations` | 14/32 |
-| 2 | `chaining-token` | 12/32 |
-| 3 | `self-terminating-loops` | **7/32** |
-| 4 | `no-per-release-workflows` | 6/32 |
-| 5 | `no-time-based-gates` | 3/32 |
-| 6 | `pointer-verifies` | 2/32 |
-| 7= | `rollback-exercised`, `executor-declared`, `loop-exists` | 1/32 each |
+| vaccine | repos failing (of 32) |
+|---|---|
+| `monotonic-utc-generations` | 14 of 32 |
+| `chaining-token` | 12 of 32 |
+| `self-terminating-loops` | 7 of 32 |
+| `no-per-release-workflows` | 6 of 32 |
+| `no-time-based-gates` | 3 of 32 |
+| `pointer-verifies` | 2 of 32 |
+| `rollback-exercised` | 1 of 32 |
+| `executor-declared` | 1 of 32 |
+| `loop-exists` | 1 of 32 |
+
+Ordered by count, descending. **No rank column** — see RH29.
 
 `self-terminating-loops` was never in any table I published. `pinned-actions`
 led every one of them.
@@ -1221,3 +1225,44 @@ known-good control is.**
 
 That pair — *the instrument is part of the workspace*, and *a control, always* —
 is the whole of what I would carry out of tonight if I could carry one thing.
+
+---
+
+## RH29 — 2026-09-03T04:45Z — I read a rank as a count, in a table I wrote
+
+I told the coordinator their handover said `self-terminating-loops` was 3 while
+my census said 7, and handed back the seven named repositories to reconcile it.
+There was nothing to reconcile. Their line 417 reads:
+
+    | 3 | self-terminating-loops | 7/32 |
+
+The leading `3` is the **position**, not the count. And the table is mine — they
+took it verbatim from my 04:41Z message, where I had written the header
+`| rank | vaccine | fails |` with two adjacent columns of small integers.
+
+**So I authored the ambiguity, they reproduced it faithfully, and then I misread
+my own table back at them.** That is a tidier failure than misreading someone
+else's: the format was my choice, and the cost landed on the reader I chose it
+for.
+
+**Fixed rather than remembered.** The RH28 table now has one numeric column,
+headed *"repos failing (of 32)"*, with values written `14 of 32` — a form no
+reader can mistake for a position — and no rank column at all. Order still
+carries the ranking; nothing needs to state it. The coordinator's framing is the
+right one: *fix the table, do not remember the convention*, because a convention
+has to be recalled by every future reader and a format does not.
+
+**The part worth keeping is what made it cheap.** I sent the seven repository
+names rather than the number 7, and that resolved a two-agent disagreement in a
+single exchange. A count can only be agreed with or disputed; **a list can be
+checked**. That is the same property as the control in RH27 — both work by
+handing the other side something specific enough to contradict you with. The
+generalisation:
+
+> **When reporting a number that someone may need to challenge, report the
+> members, not the cardinality.**
+
+Every estate-wide figure in this session should therefore be reproducible to a
+list, and `spider-state.json` already stores `cvaa.not_immune` as
+per-repository vaccine *sets* rather than counts (RH18), so it is. The census
+tables in `01-drift.md` are the summary; the state file is the evidence.
