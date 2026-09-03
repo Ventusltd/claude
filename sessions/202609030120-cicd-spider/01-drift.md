@@ -1189,3 +1189,53 @@ are accepted, ratcheted allowances with expiry dates (RH28):
   instead of reading a commit subject. This is D15's dangerous half converted
   from a false negative into an honest abstention.
 - `derived-state-not-authored` — gridatlas.
+
+---
+
+## D3 — the #1 rule refined: the rank is unchanged, the REMEDY changes
+**2026-09-03T04:54Z.** `monotonic-utc-generations` asserts two things —
+ordering, and that a stamp sits within 15 minutes of its real UTC commit time.
+Splitting the failures by kind and by **sign** identifies the mechanism, and
+only one direction is a defect. Verified independently with `gen-drift.py`
+(committed here); the AHEAD counts match the coordinator's exactly.
+
+| repo | stamped commits | **AHEAD** | behind | worst ahead |
+|---|---|---|---|---|
+| `pipelinenews` | 220 | **125** | 9 | 253 min |
+| `gridatlas` | 298 | **118** | 19 | 249 min |
+| `globalgrid2050` | 56 | **19** | 9 | **827 min** |
+| `claude` | 87 | **8** | 1 | 78 min |
+| `cvaa` | 15 | **3** | 0 | 248 min |
+| `data-grid-gb` | 5 | **5** | 0 | 117 min |
+
+**Ordering failures are the minority everywhere.** The bulk is drift, and the
+sign settles the cause:
+
+- **BEHIND can be innocent.** An archive commit filing
+  `sessions/202609021813-…/` is correctly titled with that session's generation.
+  Exactly one commit in `claude` is that case, at −385 minutes.
+- **AHEAD cannot be innocent**, because `date -u` does not return the future. A
+  stamp ahead of its own commit means the generation was **chosen when the work
+  began** and the commit landed hours later — verbatim what the rule's own
+  message forbids: *"generations are read from `date -u` at commit time, never
+  chosen."*
+
+**It is not a clock or timezone fault.** BST-vs-UTC would produce a constant
+60-minute offset; the observed spread is 16 to 827 minutes. No tool fixes this.
+
+**The remedy is a habit, and I ran the controlled test on myself.** RH4 named my
+own version of this error, RH12 mechanised it — the stamp now comes from
+`date -u +%Y%m%d%H%M` evaluated in the same command as the commit. Splitting my
+commits to `claude` at that moment:
+
+    before mechanising    4 commits,  2 outside 15 min, worst +49 min
+    after  mechanising   51 commits,  0 outside 15 min, worst  -1 min
+
+Fifty-one consecutive clean commits, zero exceptions, from a one-line change in
+how the stamp is produced. That is the whole remedy, and it is available to
+every lane tonight.
+
+**For adoption sequencing:** the rank does not move — `monotonic-utc-generations`
+is still the most widely failing rule at 14 of 32. What moves is the cost of
+fixing it. It is not a code change or a migration; it is one line in whatever
+produces a commit, and the evidence that it works is 51 to 0.
