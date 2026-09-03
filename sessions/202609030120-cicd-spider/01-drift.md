@@ -798,3 +798,54 @@ I found the same defect independently a few minutes later and did not report it,
 because they had already written it down. Noting that here rather than in a
 message: **a HEAD move I have not read is not evidence of anything, and neither
 is one I have.**
+
+---
+
+## D15 — four of CVAA's twenty-five active rules decide from prose, and one of
+## them is provably contradicted by another
+**First seen** 2026-09-03T04:02Z. Bears directly on D3 (adoption).
+
+Read every active antibody. Three branch on **commit subject text**; a fourth
+reads workflow text with no notion of a comment:
+
+| vaccine | what it actually tests |
+|---|---|
+| `rollback-exercised` | any commit subject matching `/roll ?back\|rollback drill/i` |
+| `attestation-freshness` | relative position of two subject regexes in the log |
+| `on-ledger-commits` | exempts subjects matching `/verify\|roll ?back\|inoculate\|drill/i` |
+| `no-time-based-gates` | `cron:` + quoted string in raw text, comments included |
+
+**The proof, on gridatlas.** `rollback-exercised` says: *"no rollback has ever
+been exercised; dispatch a rollback drill and commit its record."* gridatlas
+measures **immune** to it. The single commit in 200 that satisfies it is
+
+    32bc3bb  202609012105: carry Codex's assembler boundary — staged,
+             exclusive, and owned rollback
+
+which describes a *property of a design*. Commits mentioning a drill: **zero**.
+
+And until `1762170` at 03:31Z, gridatlas failed `rollback-exists` — *"something
+writes atlas/current.json but no workflow can roll it back"* (D13). **For that
+entire period the repository could not roll back at all, so no rollback can
+possibly have been exercised, and the rule asserting one had been reported
+immune throughout.** Two rules in the same registry contradicted each other, and
+the one that was wrong was the one decided by a word.
+
+`no-time-based-gates` fails the same way inverted, and gridatlas hit it first:
+it kept reporting three dead crons that had been removed, because the removal
+was documented in a YAML comment quoting them. It punished the repository for
+explaining the fix.
+
+**Consequence for adoption.** `rollback-exercised` and `attestation-freshness`
+are false *negatives* — they report health that has not been measured, and a
+false negative is never investigated because nothing looks wrong. Adopting cvaa
+across 32 repositories today would install two rules that certify a safety
+property from a word in a commit message. That is worse than not having them,
+because a green light is load-bearing in a way that no light is not.
+
+The fix for all four is the same and is small: read the artefact. Both files
+`attestation-freshness` needs are already in its context object; a rollback
+drill leaves a workflow run and a record; `no-time-based-gates` needs to parse
+YAML rather than grep text.
+
+**Sequence: fix these four before D3's adoption, not after.**
