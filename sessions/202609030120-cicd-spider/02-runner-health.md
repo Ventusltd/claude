@@ -429,3 +429,69 @@ this pass is real.
 This one cost nothing because it was caught before it ran. That is the whole
 argument for writing corrections into the driver rather than into prose: a
 mechanism can be inspected before the next pass, and a resolution cannot.
+
+---
+
+## RH14 — 2026-09-03T02:10Z — I reproduced a failure with the exact disease I
+## had spent the night reporting, and was one step from publishing the wrong
+## cause
+
+Investigating D9, I ran the data-gridatlas watchdog in the OneDrive working copy.
+It failed at `atman/202608291507-current-integrity.py:163` with
+`stable pointer SHA-256 mismatch`, and I was about to report that as the cause.
+
+    state/live-set.json     blob 08664a2f… 3336 B   disk 77b755de… 3408 B   DIFFER
+    releases/current.json   blob 08664a2f… 3336 B   disk 77b755de… 3408 B   DIFFER
+    contract baseline       08664a2fab1f2a6442a866b43abe3748fe4418e6bf0892630850a6edfd3f2283
+
+**The blob matches the baseline exactly.** The 72-byte difference is 72 line
+endings. `data-gridatlas` has a correct `.gitattributes` with
+`* text=auto eol=lf`, but this working copy was checked out before that file
+existed and has never been renormalised, so the disk holds CRLF and the blob
+holds LF. The check is right; my copy of the file was not the file.
+
+That is `disk-is-not-what-ships` — in my own investigation, on the night I
+reported that vaccine as structurally broken. It is aimed at exactly the right
+target and cannot see it.
+
+Run in a clean LF clone, the same steps give: resolve `rc=0`, probe
+`data-pointer` `rc=0`, probe `data-release` `rc=0`, probe `consumer` `rc=1` on a
+404 — which is the real cause, and is D6.
+
+**How widespread this is on this machine.** Tracked files whose working copy is
+CRLF, from `git ls-files --eol`:
+
+| repo | CRLF | tracked |
+|---|---:|---:|
+| `globalgrid2050` | **3,597** | 5,281 |
+| `gridatlas` | 239 | 486 |
+| `data-federation-map…` | 133 | 152 |
+| `companies` | **75** | 76 |
+| `data-gridatlas` | 67 | 133 |
+| `spiders` | 50 | 52 |
+| `cvaa` | **46** | 51 |
+| `chatgpt-audits` | 38 | 3,266 |
+| `data-centres-gb` | 32 | 33 |
+| `claude` | 22 | 80 |
+| `data-interconnectors` | 10 | 11 |
+| `data-gb-electricity`, `gb-electricity-ui` | 8 | |
+| `pipelinenews` | 2 | 3,045 |
+| `grid-distance-maths` | 1 | 10 |
+
+Only `codex-chatgpt`, `data-grid-gb` and `gemini` are clean. Fifteen of eighteen
+working copies on this machine hold bytes that are not the bytes that ship, and
+`.gitattributes` is correct in almost all of them — it was added after the
+checkout and nothing renormalised.
+
+**The operational consequence, for every agent on this machine:** any check that
+hashes or byte-compares a file read off disk gives a wrong answer here and a
+right answer on the runner, and the wrong answer looks like a defect in the
+repository. Before believing a local digest result: run it in a clean clone, or
+compare `git show HEAD:<path>` bytes, or check
+`git ls-files --eol | grep w/crlf` first.
+
+**What I changed.** Every reproduction I publish from here is done in a clean
+clone of the published HEAD, which is the same rule RH6 established for dirty
+trees and RH11 established for cvaa. Three separate corrections have now
+converged on one sentence: *the working copy beside me is not the thing I am
+being asked about.*

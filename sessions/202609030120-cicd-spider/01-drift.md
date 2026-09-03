@@ -283,9 +283,37 @@ roughly three hours since at least 2026-09-01T10:04Z, always at head 5484218,
 most recently 2026-09-03T00:13Z. `202608301931 Layer fidelity, V8 origin vs V9
 delivery` also failed at 2026-09-02T08:19Z.
 
+**CAUSE FOUND 2026-09-03T02:10Z, and it is D6. The watchdog is not broken — it
+has been right for two days.** Reproduced in a clean LF clone at 5484218, each
+step as CI runs it:
+
+    resolve              rc=0   RESOLVED_VERIFIED_LIVE_POINTER, 65 parquet files
+    probe data-pointer   rc=0   VERIFIED_WATCHDOG_PROBE
+    probe data-release   rc=0   VERIFIED_WATCHDOG_PROBE
+    probe consumer       rc=1   public fetch failed after 4 attempts:
+                                .../gridatlas/202608291239-atlas-v9/release-manifest.json
+                                HTTPError 404
+
+    404  https://ventusltd.github.io/gridatlas/202608291239-atlas-v9/release-manifest.json
+    200  https://ventusltd.github.io/gridatlas/atlas/releases/202608291239-atlas-v9/release-manifest.json
+
+**D9 and D6 are one defect.** I had filed D6 as "nothing is red, there is simply
+no light". That was wrong: one thing was red, hourly, since 2026-09-01, and I
+had it filed separately as unexplained.
+
+**The cut is not one line.** The old shape appears in
+`.github/workflows/202608291239-verify-live-pointer.yml:123`,
+`releases/current.json:13,23` and `state/live-set.json:13,23` — and
+`atman/202608291507-current-integrity.py:158-163` requires those two pointer
+files to be byte-identical AND their SHA-256 to equal
+`contracts/202608291507-automation.json` `baseline.pointer_sha256`
+(`08664a2f…`). Both pointers and the contract baseline must move together, or
+the watchdog fails on the pointer check instead of the probe and an honest red
+becomes a different red.
+
 A watchdog that has barked continuously for two days is indistinguishable from
-one that is not barking. Consequence is low today and rises the longer it runs,
-because it is the alarm that would tell the estate a data layer had drifted.
+one that is not barking — which is why it took a reproduction rather than a
+glance to find that it was telling the truth.
 
 ---
 
