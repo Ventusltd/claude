@@ -7,14 +7,15 @@ CI log to find which step died, describing what an untracked file appears to be,
 a diff into two lines - none of that needs a frontier model. It needs a competent reader
 that is already resident in VRAM and answers in under a second.
 
-So it runs here. Two adapters on this laptop, both working:
+So it runs here. Two adapters on this laptop were measured working:
 
     gpu   RTX 5070 Laptop, CUDA 13.1, sm_120   qwen3:4b-instruct-2507-q4_K_M   :11434
     igpu  Intel(R) Graphics, Vulkan            qwen3:0.6b                      :11435
 
-The discrete card carries the model that needs to be right. The integrated GPU - which
-Ollama drops by default, and which cost nothing because it is soldered to the CPU - carries
-the short classifications. Measured together they do more work than either alone.
+The eight-hour governor routes every job through one serialized discrete-card slot. The
+integrated adapter uses shared system RAM; it is drained and disabled while the governor is
+present. Historical two-adapter measurements remain useful evidence, but they are not the
+overnight operating mode on a 16 GB host.
 
     python familiars/localai.py --health
     python familiars/localai.py --bench
@@ -61,11 +62,14 @@ import time
 import urllib.error
 import urllib.request
 import zipfile
+from contextlib import contextmanager
 from concurrent.futures import ThreadPoolExecutor
 
 GITHUB = r'C:\Users\vikra\OneDrive\Documents\GitHub'
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OLLAMA_EXE = os.path.join(os.environ.get('LOCALAPPDATA', ''), 'Programs', 'Ollama', 'ollama.exe')
+GOVERNOR_ADMISSION = os.path.join(REPO_ROOT, 'logs', 'governor', 'admission.json')
+GOVERNOR_SLOT = os.path.join(REPO_ROOT, 'logs', 'governor', 'dgpu-inference.slot')
 
 DEVICES = {
     'gpu': {
@@ -90,12 +94,12 @@ DEVICES = {
     },
 }
 
-# Jobs are routed to the device that suits them. The 0.6B on the iGPU is competent at
-# "name this file" and is not trusted with a diff.
+# The bounded overnight run is one serialized RTX lane. The 0.6B iGPU model was
+# fluent but materially less reliable and consumes ordinary shared system RAM.
 JOB_DEVICE = {
     'classify-ci-failure': 'gpu',
     'summarise-commit': 'gpu',
-    'triage-untracked': 'igpu',
+    'triage-untracked': 'gpu',
 }
 
 MAX_CHARS = 12000  # ~3k tokens, comfortably inside the 8192 context with room to answer
@@ -103,6 +107,89 @@ MAX_CHARS = 12000  # ~3k tokens, comfortably inside the 8192 context with room t
 
 class LocalAIError(RuntimeError):
     """Raised when the local stack cannot be measured. Never caught to produce a default."""
+
+
+def _pid_alive(pid):
+    try:
+        os.kill(int(pid), 0)
+        return True
+    except (OSError, ValueError):
+        return False
+
+
+def _governor_policy(device):
+    if not os.path.isfile(GOVERNOR_ADMISSION):
+        return None
+    try:
+        with open(GOVERNOR_ADMISSION, encoding='utf-8') as stream:
+            policy = json.load(stream)
+    except Exception as exc:
+        raise LocalAIError('governor admission unreadable: %s: %s' %
+                           (type(exc).__name__, exc))
+    key = 'allow_dgpu' if device == 'gpu' else 'allow_igpu'
+    if policy.get(key) is not True:
+        reason = '; '.join(str(item) for item in policy.get('reason') or [])
+        raise LocalAIError('governor denied %s inference: %s' %
+                           (device, reason or 'no reason recorded'))
+    return policy
+
+
+@contextmanager
+def _inference_slot(device, timeout=900):
+    """One cross-process dGPU request at a time while the governor is installed."""
+    policy = _governor_policy(device)
+    if policy is None:
+        yield
+        return
+    if device != 'gpu':
+        # The current overnight contract uses the RTX only. The iGPU is shared
+        # system RAM and is deliberately unavailable even when idle.
+        raise LocalAIError('governor permits only the discrete-GPU lane')
+    os.makedirs(os.path.dirname(GOVERNOR_SLOT), exist_ok=True)
+    owner_path = os.path.join(GOVERNOR_SLOT, 'owner.json')
+    deadline = time.time() + timeout
+    while True:
+        _governor_policy(device)
+        try:
+            os.mkdir(GOVERNOR_SLOT)
+            with open(owner_path, 'w', encoding='utf-8') as stream:
+                json.dump({'pid': os.getpid(), 'started': time.time()}, stream)
+            break
+        except FileExistsError:
+            owner = None
+            try:
+                with open(owner_path, encoding='utf-8') as stream:
+                    owner = json.load(stream)
+            except Exception:
+                pass
+            age = time.time() - os.path.getmtime(GOVERNOR_SLOT)
+            if owner and not _pid_alive(owner.get('pid')):
+                try:
+                    os.remove(owner_path)
+                    os.rmdir(GOVERNOR_SLOT)
+                    continue
+                except OSError:
+                    pass
+            elif owner is None and age > 30:
+                try:
+                    os.rmdir(GOVERNOR_SLOT)
+                    continue
+                except OSError:
+                    pass
+            if time.time() >= deadline:
+                raise LocalAIError('timed out waiting for the serialized dGPU inference slot')
+            time.sleep(1)
+    try:
+        yield
+    finally:
+        try:
+            with open(owner_path, encoding='utf-8') as stream:
+                owner = json.load(stream)
+            if int(owner.get('pid', -1)) == os.getpid():
+                os.remove(owner_path)
+                os.rmdir(GOVERNOR_SLOT)
+        except (OSError, ValueError, json.JSONDecodeError):
+            pass
 
 
 # --------------------------------------------------------------------------- transport
@@ -166,7 +253,8 @@ def generate(device, prompt, system=None, num_predict=320, temperature=0.0, stop
     if DEVICES[device].get('thinking'):
         payload['think'] = False
     t0 = time.time()
-    r = _post(device, '/api/generate', payload)
+    with _inference_slot(device):
+        r = _post(device, '/api/generate', payload)
     wall = time.time() - t0
     ev, ed = r.get('eval_count') or 0, r.get('eval_duration') or 0
     pe, pd = r.get('prompt_eval_count') or 0, r.get('prompt_eval_duration') or 0
@@ -212,7 +300,8 @@ def chat(device, messages, num_predict=320, temperature=0.0, stop=None):
     if DEVICES[device].get('thinking'):
         payload['think'] = False
     t0 = time.time()
-    r = _post(device, '/api/chat', payload)
+    with _inference_slot(device):
+        r = _post(device, '/api/chat', payload)
     wall = time.time() - t0
     ev, ed = r.get('eval_count') or 0, r.get('eval_duration') or 0
     pe, pd = r.get('prompt_eval_count') or 0, r.get('prompt_eval_duration') or 0
@@ -731,6 +820,7 @@ def serve_igpu():
     """Start an Ollama pinned to the Intel adapter. Ollama drops iGPUs unless told twice:
     OLLAMA_IGPU_ENABLE=1 admits it, GGML_VK_VISIBLE_DEVICES=1 hides the NVIDIA card from
     the Vulkan backend, and CUDA_VISIBLE_DEVICES=-1 stops it being picked up as CUDA."""
+    _governor_policy('igpu')
     if not os.path.exists(OLLAMA_EXE):
         raise LocalAIError('ollama.exe not found at %s' % OLLAMA_EXE)
     env = dict(os.environ)

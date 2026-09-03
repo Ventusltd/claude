@@ -27,7 +27,7 @@ Usage:
     python familiars/reap.py              # report only
     python familiars/reap.py --reap       # report, then kill the orphans
 """
-import subprocess, sys, json
+import subprocess, sys, json, time
 
 PS = ["powershell.exe", "-NoProfile", "-Command"]
 
@@ -46,7 +46,46 @@ def gpu():
 
 def ram_free_gb():
     out = ps("(Get-CimInstance Win32_OperatingSystem).FreePhysicalMemory")
-    return int(out) / 1048576 if out.isdigit() else None
+    if out.isdigit():
+        return int(out) / 1048576
+    out = ps("[int]((Get-Counter '\\Memory\\Available MBytes').CounterSamples[0].CookedValue)")
+    return int(out) / 1024 if out.isdigit() else None
+
+
+def _counter_runners():
+    """Parentage fallback for hosts where CIM is denied but PDH is readable."""
+    script = r'''
+$ErrorActionPreference = 'SilentlyContinue'
+$set = Get-Counter '\Process(llama-server*)\ID Process','\Process(llama-server*)\Creating Process ID' -MaxSamples 1
+$rows = @{}
+foreach ($c in $set.CounterSamples) {
+  $instance = $c.Path -replace '^.*\\process\(([^)]*)\).*$','$1'
+  if (-not $rows.ContainsKey($instance)) {
+    $rows[$instance] = [ordered]@{pid=$null; ppid=$null}
+  }
+  if ($c.Path -match '\\creating process id$') { $rows[$instance].ppid = [int]$c.CookedValue }
+  elseif ($c.Path -match '\\id process$') { $rows[$instance].pid = [int]$c.CookedValue }
+}
+$out = @()
+foreach ($row in $rows.Values) {
+  if (-not $row.pid) { continue }
+  $proc = Get-Process -Id $row.pid -ErrorAction SilentlyContinue
+  if (-not $proc) { continue }
+  $parent = Get-Process -Id $row.ppid -ErrorAction SilentlyContinue
+  $out += [pscustomobject]@{
+    pid=$row.pid; ppid=$row.ppid; mb=[int]($proc.WorkingSet64/1MB); alive=[bool]$parent
+  }
+}
+$out | ConvertTo-Json -Compress
+'''
+    out = ps(script)
+    if not out:
+        return []
+    try:
+        data = json.loads(out)
+    except json.JSONDecodeError:
+        return []
+    return data if isinstance(data, list) else [data]
 
 def runners():
     """Every llama-server, with its parent and whether that parent still exists."""
@@ -57,10 +96,13 @@ def runners():
         "[pscustomobject]@{pid=$p.ProcessId; ppid=$p.ParentProcessId; "
         "mb=[int]($p.WorkingSetSize/1MB); alive=$alive} } | ConvertTo-Json -Compress"
     )
-    if not out:
-        return []
-    d = json.loads(out)
-    return d if isinstance(d, list) else [d]
+    if out:
+        try:
+            d = json.loads(out)
+            return d if isinstance(d, list) else [d]
+        except json.JSONDecodeError:
+            pass
+    return _counter_runners()
 
 def main():
     do_reap = "--reap" in sys.argv
@@ -85,7 +127,14 @@ def main():
         print("dry run - pass --reap to release them")
         return 0
 
+    # Parent absence is checked twice. This avoids reaping across a transient
+    # counter failure or a PID-reuse race while Ollama is starting a runner.
+    time.sleep(2)
+    confirmed = {(r['pid'], r['ppid']) for r in runners() if not r['alive']}
     for r in orphans:
+        if (r['pid'], r['ppid']) not in confirmed:
+            print(f"  spared pid {r['pid']}: orphan state did not repeat")
+            continue
         ps(f"Stop-Process -Id {r['pid']} -Force -ErrorAction SilentlyContinue")
         print(f"  reaped pid {r['pid']}")
 
