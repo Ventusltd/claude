@@ -1,0 +1,595 @@
+<title>Grid Corridor Engine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  color-scheme: dark;
+  --bg:#07090c;
+  --panel:#0c1014;
+  --panel-2:#10161c;
+  --rule:#1b232c;
+  --rule-2:#2a3540;
+  --ink:#c2ced9;
+  --hi:#e6eef5;
+  --dim:#6b7885;
+  --key:#4a5a66;
+  --cy:#35c9d9;
+  --am:#e8a33d;
+  --ok:#3fbf5f;
+  --bad:#e2564d;
+  --vi:#b98ae0;
+}
+*{box-sizing:border-box}
+html,body{background:var(--bg)}
+body{
+  margin:0;color:var(--ink);
+  font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:15px;line-height:1.62;-webkit-font-smoothing:antialiased;
+}
+.mono,code,pre,table{font-family:"IBM Plex Mono",ui-monospace,Consolas,monospace}
+.wrap{max-width:1080px;margin:0 auto;padding:40px 22px 80px;display:flex;flex-direction:column;gap:38px}
+
+header{border-bottom:1px solid var(--rule-2);padding-bottom:22px;display:flex;flex-direction:column;gap:10px}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
+h1{margin:0;font-size:30px;line-height:1.15;font-weight:600;letter-spacing:-.015em;color:var(--hi);text-wrap:balance}
+header p{margin:0;max-width:74ch;color:var(--ink)}
+.stamp{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--dim);display:flex;flex-wrap:wrap;gap:6px 20px}
+
+section{display:flex;flex-direction:column;gap:14px}
+h2{margin:0;font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;letter-spacing:.16em;
+   text-transform:uppercase;color:var(--am);display:flex;align-items:baseline;gap:14px}
+h2 .n{color:var(--key)}
+h2::after{content:"";flex:1;height:1px;background:var(--rule-2)}
+h3{margin:16px 0 0;font-size:16px;font-weight:600;color:var(--hi);letter-spacing:-.01em}
+p{margin:0;max-width:80ch}
+ul,ol{margin:0;padding-left:22px;max-width:80ch;display:flex;flex-direction:column;gap:7px}
+li::marker{color:var(--key)}
+strong{color:var(--hi);font-weight:600}
+em{color:var(--ink);font-style:italic}
+code{background:var(--panel-2);border:1px solid var(--rule);border-radius:2px;padding:1px 5px;font-size:12.5px;color:var(--cy)}
+
+pre{margin:0;background:var(--panel);border:1px solid var(--rule);border-left:2px solid var(--rule-2);
+    border-radius:2px;padding:14px 16px;overflow-x:auto;font-size:12.5px;line-height:1.65;color:var(--ink);white-space:pre}
+pre .c{color:var(--key)}
+
+.measured{background:var(--panel);border:1px solid var(--rule);border-left:2px solid var(--cy);
+  border-radius:2px;padding:13px 16px;display:flex;flex-direction:column;gap:5px}
+.measured .lbl{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--cy)}
+.measured p{font-size:14px;max-width:78ch}
+
+.scroll{overflow-x:auto;border:1px solid var(--rule);background:var(--panel);border-radius:2px}
+table{border-collapse:collapse;width:100%;font-size:12.5px;white-space:nowrap}
+th{text-align:left;color:var(--dim);font-weight:500;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+   padding:9px 14px;border-bottom:1px solid var(--rule-2)}
+td{padding:6px 14px;border-bottom:1px solid var(--rule);color:var(--ink);font-variant-numeric:tabular-nums}
+tr:last-child td{border-bottom:0}
+td.k{color:var(--hi)}
+td.d{color:var(--dim);white-space:normal;min-width:260px}
+.r{text-align:right}
+.ok{color:var(--ok)} .bad{color:var(--bad)} .am{color:var(--am)} .cy{color:var(--cy)} .vi{color:var(--vi)}
+
+.phase{border:1px solid var(--rule);background:var(--panel);border-radius:2px;padding:16px 18px;
+  display:flex;flex-direction:column;gap:9px}
+.phase .top{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.phase .id{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;color:var(--cy)}
+.phase .ttl{font-weight:600;color:var(--hi);font-size:15px}
+.phase .gate{margin-left:auto;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--am);border:1px solid currentColor;border-radius:2px;padding:1px 7px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:860px){.grid2{grid-template-columns:1fr}}
+footer{border-top:1px solid var(--rule-2);padding-top:20px;color:var(--dim);font-size:13px;
+  display:flex;flex-direction:column;gap:8px}
+</style>
+
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Ventus &middot; scope</div>
+  <h1>Grid Corridor Engine</h1>
+  <p>A maths kernel, a stress harness, and a routed-corridor service for GridAtlas. It replaces the
+    straight line between a project and a substation with a route a cable could actually take, and it
+    makes every geometric claim the Atlas renders falsifiable by test. The routing gate has since been run: see 00.</p>
+  <div class="stamp">
+    <span>scoped <b class="cy">2026-09-03</b></span>
+    <span>every figure below measured from the estate, not assumed</span>
+  </div>
+</header>
+
+<section>
+  <h2><span class="n">00</span> Verdict &mdash; the gate was run, and it failed</h2>
+  <p>Sections 03&ndash;07 below were written <em>before</em> the feasibility gate was tested. It has since been
+    run against the 95 published cable circuits, and independently recomputed. <strong>Road routing does not
+    earn its complexity.</strong> The sections are left standing because the architecture, the stress harness
+    and the phasing remain right; only the routing recommendation is overturned. What replaces it is simpler
+    and measurably better.</p>
+
+  <div class="scroll"><table>
+    <thead><tr><th>method</th><th class="r">median abs error vs published</th><th class="r">beats straight line</th><th>gate</th></tr></thead>
+    <tbody>
+      <tr><td class="k">straight line, raw</td><td class="r">25.4%</td><td class="r">&mdash;</td><td class="dim">baseline</td></tr>
+      <tr><td class="k">road-routed, primary + trunk + motorway</td><td class="r bad">20.3%</td><td class="r bad">52.6% of 95</td><td class="bad">FAIL &middot; needed &lt;15% and &ge;80%</td></tr>
+      <tr><td class="k">straight line &times; a single constant</td><td class="r ok">8.4%</td><td class="r ok">&mdash;</td><td class="ok">PASS &middot; 8.6% leave-one-out</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="measured">
+    <div class="lbl">What replaces the router</div>
+    <p>One number. <strong>k = 1.245</strong>, fitted to 95 published cable circuits across 59 distinct site
+      pairs, bootstrap range 1.22&ndash;1.33. It puts <strong>73% of circuits inside 15%</strong> of their real built
+      length, needs no graph, no snapping, and cannot fail. Routing managed 20.3% and failed outright on
+      14 circuits whose endpoints were more than 5 km from any road in the dataset.</p>
+  </div>
+
+  <h3>Why routing lost</h3>
+  <ul>
+    <li><strong>It breaks worst where it is needed most.</strong> Circuits whose route stayed within 2&times; the
+      straight line scored 14.2% error &mdash; but 14 circuits above 2&times; scored <strong>199.3%</strong>, against
+      25.7% for the straight line on those same circuits. All urban. Dewar Place to Whitehouse: published
+      2.48 km, straight 1.83 km, <strong>routed 18.67 km</strong>.</li>
+    <li><strong>Crossing penalties made it worse, monotonically.</strong> Sweeping a rail penalty from 0 to 20 km
+      moved median error from 20.26% to 33.32%. <strong>The best penalty is zero.</strong> Crossing count
+      correlates with routing error at Spearman &minus;0.12 &mdash; no signal. The &ldquo;avoid railways&rdquo;
+      weighting in &sect;05 is not supported by evidence at this resolution.</li>
+    <li><strong>Snapping is a real cost, not a rounding term.</strong> 41 of 190 endpoints sat more than 1 km from
+      any routable road; the worst was 15.19 km. Remote Scottish and offshore sites cannot be reached by a
+      road graph at all &mdash; one validation circuit is a 39 km subsea cable.</li>
+  </ul>
+
+  <div class="measured">
+    <div class="lbl">The bound on this negative result</div>
+    <p>Only primary, trunk and motorway roads exist in the estate. <strong>No secondary, tertiary or residential
+      roads were available</strong>, and the observed failure mode &mdash; urban detours where the real link uses
+      minor streets &mdash; points directly at that gap. Adding motorways moved median error by nothing
+      (20.26% &rarr; 20.26%), so the missing coverage is minor roads, not major ones. A dense OSM network is
+      therefore <em>untested</em>, not disproven. But the bar it must now clear is <strong>8.4%</strong>, not 15%,
+      because the constant already passes. That is a much harder target for far more machinery.</p>
+  </div>
+
+  <h3>Two corrections this forced on the scope</h3>
+  <ul>
+    <li><strong>The sample is 59, not 95.</strong> Parallel circuits duplicate the same geometry between the same
+      two sites. Every confidence statement must use the pair count.</li>
+    <li><strong>Five circuits are geometrically impossible</strong> &mdash; the straight line exceeds the published
+      built length. The worst publishes <strong>0.33 km against a 24.78 km straight line</strong>. That is the
+      name-join defect of &sect;01 surfacing independently in a second dataset: the join has bound a circuit to
+      the wrong substation. It corroborates the 34 colliding keys and raises their priority again.</li>
+  </ul>
+</section>
+
+<section>
+  <h2><span class="n">01</span> What the measurements say</h2>
+  <p>Four numbers shape every decision in this scope. All were measured this session against
+    <code>data-grid-gb</code> and the committed OSM extracts.</p>
+
+  <div class="scroll"><table>
+    <thead><tr><th>measured</th><th class="r">value</th><th>consequence for the build</th></tr></thead>
+    <tbody>
+      <tr><td class="k">route factor, built &divide; straight</td><td class="r cy">median 1.16 &middot; p10 1.03 &middot; p90 1.48</td>
+          <td class="d">The straight line is wrong by +3% to +48%. This is the dominant error term.</td></tr>
+      <tr><td class="k">route factor, cable circuits only</td><td class="r cy">1.34 (n=95)</td>
+          <td class="d">Cables follow made ground. This is the number a routed engine must reproduce.</td></tr>
+      <tr><td class="k">route factor, overhead only</td><td class="r cy">1.13 (n=503)</td>
+          <td class="d">Lines go more directly. Road routing must <em>not</em> be applied to OHL.</td></tr>
+      <tr><td class="k">connection points with coordinates</td><td class="r bad">502 of 886 &middot; 57%</td>
+          <td class="d">Any &ldquo;nearest&rdquo; claim today is nearest-among-57%. Routing cannot fix an absent point.</td></tr>
+      <tr><td class="k">400 kV sites unlocatable</td><td class="r bad">141 of 355 &middot; 40%</td>
+          <td class="d">Geocoding is a prerequisite, not a nice-to-have.</td></tr>
+      <tr><td class="k">colliding normalised site names</td><td class="r bad">34 keys &middot; 69 sites</td>
+          <td class="d">7.5% of sites may bind to the wrong asset. Fix before adding geometry on top.</td></tr>
+      <tr><td class="k">road graph available</td><td class="r">294,018 ways &middot; 1,953,165 segments</td>
+          <td class="d">Primary + trunk, already committed. Big enough to route, too big to ship raw.</td></tr>
+      <tr><td class="k">railway graph available</td><td class="r">89,933 ways &middot; 607,762 segments</td>
+          <td class="d">Enough to detect and price every crossing.</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="measured">
+    <div class="lbl">The finding that sets the priority</div>
+    <p>Choosing between a spherical and an ellipsoidal earth model moves a 15 km answer by roughly
+      <strong>0.1&ndash;0.3%</strong>. The route factor moves it by <strong>3&ndash;48%</strong>. Refining the
+      earth model while quoting a straight line is polishing a rounding error inside a much larger one.
+      The corridor is where the accuracy is.</p>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">02</span> Where each piece lives</h2>
+  <p>The estate already has a working shape: a maths repo with no data, data repos that pin their
+    sources and publish verified products, and consumers that read products and never sources. This
+    scope keeps that shape rather than inventing one.</p>
+
+<pre><span class="c">  source                          derivation                      consumer</span>
+  NESO ETYS 2025      ─────►  data-grid-gb            ─────►  Atlas cartridge
+  (SHA-256 pinned)            connection-points.v3            substation-intelligence
+                              gb-transmission-network
+
+  OSM roads, rail     ─────►  <span class="cy">data-grid-routes</span>        ─────►  <span class="cy">Atlas cartridge</span>
+  (to be pinned)              <span class="cy">corridor-graph.v1</span>              <span class="cy">corridor-intelligence</span>
+                              <span class="cy">routed-distances.v1</span>
+                                     ▲
+                                     │ uses
+                              <span class="cy">grid-distance-maths</span>
+                              geodesy + <span class="cy">routing kernel</span>
+                              no data, dual implementation</pre>
+
+  <ul>
+    <li><strong>grid-distance-maths</strong> stays the pure kernel &mdash; no network access, no data files,
+      two independent implementations, parity-tested. Gains a routing module and the stress harness.</li>
+    <li><strong>data-grid-routes</strong> is new and follows the <code>data-*</code> convention exactly: fetch
+      OSM extracts, pin by SHA-256, derive products, verify, publish.</li>
+    <li><strong>corridor-intelligence</strong> is a new Atlas cartridge that reads products and computes nothing
+      it can read. It pins a schema and refuses on mismatch, the way substation-intelligence does.</li>
+  </ul>
+  <p>Nothing in <code>data-grid-gb</code> changes. The corridor engine is additive.</p>
+</section>
+
+<section>
+  <h2><span class="n">03</span> Module A &mdash; the maths kernel</h2>
+  <p>Pure functions over coordinates. No fetching, no globals, no knowledge of substations. Everything
+    here is testable without a network and runs identically in Node and Python.</p>
+
+  <div class="grid2">
+    <div>
+      <h3>Already present</h3>
+      <ul>
+        <li><code>distanceKm</code>, <code>distanceEllipsoidalKm</code>, <code>pathLengthKm</code></li>
+        <li><code>initialBearingDeg</code>, <code>destinationPoint</code></li>
+        <li><code>distanceToSegmentKm</code>, <code>distanceToLineKm</code></li>
+        <li><code>geodesicCircle</code>, <code>circleApproximationError</code></li>
+        <li><code>polygonAreaKm2</code>, <code>SpatialIndex</code></li>
+      </ul>
+    </div>
+    <div>
+      <h3>To add</h3>
+      <ul>
+        <li><code>snapToGraph(point, graph, maxKm)</code> &mdash; nearest routable node with the snap distance returned, never hidden</li>
+        <li><code>route(a, b, graph, weights)</code> &mdash; A* with an admissible great-circle heuristic</li>
+        <li><code>crossings(path, barriers)</code> &mdash; segment-intersection counts by barrier class</li>
+        <li><code>corridorLength(path)</code> &mdash; geodesic polyline length, not planar</li>
+        <li><code>routeFactor(path, straight)</code> &mdash; the ratio, reported not applied</li>
+        <li><code>simplify(path, toleranceM)</code> &mdash; geodesic-aware Douglas-Peucker</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="measured">
+    <div class="lbl">Design rule</div>
+    <p>A snap distance is part of the answer. If a substation is 900 m from the nearest routable road,
+      the route is 900 m short at one end and the card must say so. Silently snapping is how a
+      routing engine starts lying.</p>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">04</span> Module B &mdash; the stress harness</h2>
+  <p>Four independent layers. A geometry bug that survives all four is a bug nobody on this estate
+    could have found by reading.</p>
+
+  <h3>1. Invariants &mdash; property-based, thousands of random cases</h3>
+<pre>identity        d(a,a) = 0
+symmetry        d(a,b) = d(b,a)                     to 1e-9 relative
+triangle        d(a,c) &le; d(a,b) + d(b,c)
+bearing round   destination(a, bearing(a,b), d(a,b)) = b
+route &ge; line    routeKm &ge; straightKm                 always, no exceptions
+route factor    1.0 &le; factor &le; 10.0                  outside this, fail loudly
+path length     sum of leg lengths = corridorLength(path)
+determinism     same input, same output, across both implementations</pre>
+
+  <h3>2. Adversarial cases &mdash; a fixed corpus, not random</h3>
+  <ul>
+    <li>Coincident and near-coincident points (1 mm, 1 cm, 1 m apart)</li>
+    <li>Antipodal and near-antipodal pairs &mdash; where iterative inverse solutions fail to converge</li>
+    <li>The poles, and paths crossing them</li>
+    <li>The antimeridian, in both directions</li>
+    <li>Points either side of the Greenwich meridian and the equator, for sign handling</li>
+    <li>Degenerate graphs: an isolated node, a disconnected component, a zero-length edge</li>
+    <li>A substation with no road within 50 km &mdash; the engine must return <em>no route</em>, not a wrong one</li>
+  </ul>
+
+  <h3>3. Oracles &mdash; independent, external, authoritative</h3>
+  <div class="scroll"><table>
+    <thead><tr><th>oracle</th><th>what it proves</th><th>tolerance</th></tr></thead>
+    <tbody>
+      <tr><td class="k">Karney GeodTest</td><td class="d">Geodesic inverse solutions against 500,000 published high-precision cases</td><td>&lt; 1 mm</td></tr>
+      <tr><td class="k">the second implementation</td><td class="d">JS against Python on identical inputs, neither knowing the other's answers</td><td>1e-9 relative</td></tr>
+      <tr><td class="k">published cable circuits</td><td class="d">Routed distance against NESO's own <code>cable_km</code>, n=95</td><td>see below</td></tr>
+      <tr><td class="k">pandapower</td><td class="d">Electrical quantities only, once the engine computes any. BSD-3, cited not bundled.</td><td>per quantity</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>4. The acceptance test that matters</h3>
+  <div class="measured">
+    <div class="lbl">Self-validating, using data you already publish</div>
+    <p>NESO publishes <code>cable_km</code> for 95 circuits whose endpoints both have coordinates. Those
+      are real buried cable routes with a known built length. <strong>Route between the two substations
+      along the road graph and compare.</strong> The straight line is wrong by a median of 34% on this set.
+      A routed engine that does not beat that is not earning its complexity.</p>
+    <p><strong>Gate:</strong> median absolute error against published <code>cable_km</code> must fall below
+      <strong>15%</strong>, and the routed estimate must beat the straight line on at least
+      <strong>80%</strong> of the 95 circuits. Published as a report, not asserted.</p>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">05</span> Module C &mdash; routing, as originally scoped (overturned by 00)</h2>
+
+  <h3>Following roads already solves most of it</h3>
+  <p>A cable route follows made ground because the wayleave, the trenching and the crossings are all
+    cheaper there. Where a road crosses a railway it does so at an existing bridge or culvert &mdash;
+    infrastructure that already has the crossing solved. So <em>route along roads</em> delivers most of
+    <em>avoid railways</em> for free, and it is why the measured cable factor is 1.34 rather than 1.0.</p>
+
+  <h3>Avoidance is the wrong model; cost is the right one</h3>
+  <p>A hard prohibition makes some routes impossible and others absurd &mdash; a project on the far side
+    of a main line has no route at all. Every crossing is a consent event with a cost and a duration, so
+    the correct structure is a weighted graph where a crossing is expensive rather than forbidden. Set the
+    weight high enough and avoidance falls out; set it to infinity and you get a broken engine.</p>
+
+<pre>weight(edge) = lengthKm
+             + <span class="cy">RAIL_PENALTY_KM</span>     &times; railwayCrossings(edge)
+             + <span class="cy">MOTORWAY_PENALTY_KM</span> &times; motorwayCrossings(edge)
+             + <span class="cy">WATER_PENALTY_KM</span>    &times; watercourseCrossings(edge)
+
+<span class="c">penalties are km-equivalents, published in the product and tunable,
+never hardcoded in the cartridge. the card reports the crossing COUNT
+as a measurement and the penalty as an assumption, separately.</span></pre>
+
+  <p>Defaults to start from, to be calibrated against the 95 cable circuits rather than believed:
+    rail 3.0 km, motorway 2.0 km, watercourse 1.0 km. If calibration says rail should be 8 km, that is
+    a finding about GB consenting, and worth publishing on its own.</p>
+
+  <h3>Graph size, and why it is precomputed</h3>
+  <div class="scroll"><table>
+    <thead><tr><th>layer</th><th class="r">ways</th><th class="r">vertices</th><th class="r">segments</th><th class="r">raw</th></tr></thead>
+    <tbody>
+      <tr><td class="k">uk_primary_roads</td><td class="r">163,790</td><td class="r">1,268,704</td><td class="r">1,104,914</td><td class="r">76.0 MB</td></tr>
+      <tr><td class="k">uk_trunk_roads</td><td class="r">130,228</td><td class="r">978,479</td><td class="r">848,251</td><td class="r">64.4 MB</td></tr>
+      <tr><td class="k">uk_mainline_railways</td><td class="r">89,933</td><td class="r">697,695</td><td class="r">607,762</td><td class="r">52.5 MB</td></tr>
+    </tbody>
+  </table></div>
+  <p>193 MB of GeoJSON is not fetchable per session. Two products solve it, and the first is enough
+    for v2:</p>
+  <ul>
+    <li><strong><code>routed-distances.v1</code></strong> &mdash; precomputed offline. For every REPD project,
+      the routed corridor to its nearest N connection points. Roughly 7,680 projects &times; 5 &asymp;
+      <strong>38,400 routes</strong>, minutes of CI, a few MB published. The Atlas reads a routed distance
+      the same way it reads a rating. <em>This is v2.</em></li>
+    <li><strong><code>corridor-graph.v1</code></strong> &mdash; the graph itself, junction-contracted and
+      spatially tiled, typed-array encoded, fetched by tile so an arbitrary click can be routed in the
+      browser. <em>This is v3, and only if v2 proves the value.</em></li>
+  </ul>
+</section>
+
+<section>
+  <h2><span class="n">06</span> What the card says afterwards</h2>
+  <p>The claim changes from a superlative over a subset to a measurement with its uncertainty attached.</p>
+<pre><span class="c">today</span>
+  Nearest 400 kV substation: Cowley Substation &middot; 15.76 km
+
+<span class="c">after</span>
+  Cowley Substation &middot; 15.76 km straight line &middot; <span class="cy">18.9 km routed</span>
+  Route follows classified road for 17.4 km; 1.5 km is unrouted, being
+  the snap at each end. Crosses 1 railway, 0 motorways, 3 watercourses.
+  Route factor 1.20, against a measured 1.08-1.28 for GB circuits of
+  this class (median 1.16, n=290 at 400 kV).
+  Nearest among the 214 of 355 published 400 kV sites that carry
+  coordinates. A route is not a wayleave and not a consent.</pre>
+  <p>Every clause is either a measurement or a stated limit. Nothing asserts connectability, which stays
+    outside what any published appendix can support.</p>
+</section>
+
+<section>
+  <h2><span class="n">07</span> Phasing</h2>
+
+  <div class="phase">
+    <div class="top"><span class="id">P0</span><span class="ttl">Make today's claims true</span>
+      <span class="gate">gate &middot; no new geometry until green</span></div>
+    <ul>
+      <li>Dedupe transformer counts by record, not winding-end &mdash; 92% of sites currently overstate, 1.90&times; network-wide</li>
+      <li>Split the 34 colliding name keys &mdash; stop stripping <code>ONSHORE</code>, <code>OFFSHORE</code>, <code>EXTENSION</code>, which are the words that distinguish the assets</li>
+      <li>State the coordinate coverage wherever the word <em>nearest</em> appears</li>
+      <li>Pin the cartridge's product fetch to a commit, not <code>main</code></li>
+    </ul>
+  </div>
+
+  <div class="phase">
+    <div class="top"><span class="id">P1</span><span class="ttl">Geocode the missing 384</span>
+      <span class="gate">gate &middot; 400 kV coverage &ge; 95%</span></div>
+    <ul>
+      <li>384 connection points have no coordinates; 141 of them are 400 kV</li>
+      <li>Sources in order of preference: OSM by improved name join, then the TO's own published asset lists, then manual for the residue</li>
+      <li>Every coordinate carries its provenance and a confidence class. A guessed point is labelled a guess or it is not published</li>
+    </ul>
+  </div>
+
+  <div class="phase">
+    <div class="top"><span class="id">P2</span><span class="ttl">Kernel and stress harness</span>
+      <span class="gate">gate &middot; GeodTest &lt; 1 mm, parity 1e-9</span></div>
+    <ul>
+      <li>Routing functions land in <code>grid-distance-maths</code>, both implementations</li>
+      <li>Invariants, adversarial corpus, GeodTest, cross-implementation parity</li>
+      <li>CI fails the build on any divergence &mdash; the existing parity-driver pattern, extended</li>
+    </ul>
+  </div>
+
+  <div class="phase">
+    <div class="top"><span class="id">P3</span><span class="ttl">data-grid-routes and the graph build</span>
+      <span class="gate">superseded &middot; gate ran and failed</span></div>
+    <ul>
+      <li>Pin the OSM extracts by SHA-256, the way the NESO appendices are pinned</li>
+      <li>Build the junction-contracted graph; detect and classify every crossing</li>
+      <li>Calibrate the four penalties against the 95 published cable circuits</li>
+      <li>Publish the calibration report whether or not it flatters the model</li>
+    </ul>
+  </div>
+
+  <div class="phase">
+    <div class="top"><span class="id">P4</span><span class="ttl">routed-distances.v1 and the cartridge</span>
+      <span class="gate">gate &middot; every route reproducible from the product</span></div>
+    <ul>
+      <li>Precompute project &times; nearest-N corridors in CI, publish with schema and hash</li>
+      <li><code>corridor-intelligence</code> cartridge reads it, pins the schema, refuses on mismatch</li>
+      <li>Card renders routed distance, crossings, snap distance and coverage together</li>
+    </ul>
+  </div>
+
+  <div class="phase">
+    <div class="top"><span class="id">P5</span><span class="ttl">In-browser routing</span>
+      <span class="gate">only if P4 proves the value</span></div>
+    <ul>
+      <li>Tiled <code>corridor-graph.v1</code>, typed arrays, A* in a worker</li>
+      <li>Routes from an arbitrary click, not only from catalogued projects</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">08</span> Where this could go wrong</h2>
+  <ul>
+    <li><strong>OSM road coverage is not uniform.</strong> Primary and trunk only; a substation reached by an
+      unclassified lane will snap badly. The snap distance makes this visible rather than silent, and adding
+      <code>highway=unclassified</code> is a data decision with a size cost, not a code change.</li>
+    <li><strong>A routed distance will be read as a route.</strong> It is a corridor length, not a wayleave, not a
+      consent, not a cost. The card language must carry that as firmly as it already carries
+      <em>&ldquo;a rating is not what is free on the circuit&rdquo;</em>.</li>
+    <li><strong>Calibration on 95 circuits is a small sample.</strong> Report the confidence interval, and expect
+      it to widen for regions with few cable circuits.</li>
+    <li><strong>Overhead lines must never be road-routed.</strong> Their measured factor is 1.13 and they cross
+      open country. Applying the road engine to an OHL question would be a worse answer than the straight line.</li>
+    <li><strong>OSM is ODbL.</strong> Unlike BSD-3 on code, the share-alike obligation reaches derived <em>data</em>.
+      A published derived graph needs its licence position settled before it ships.</li>
+  </ul>
+</section>
+
+<section>
+  <h2><span class="n">09</span> Literature &mdash; and what belongs in data-grid-gb</h2>
+  <p>Four sources, verified this session by fetching them rather than by recall. The National Grid document
+    was downloaded and its text extracted directly; the CIGRE and IET references were confirmed against
+    their publishers.</p>
+
+  <div class="scroll"><table>
+    <thead><tr><th>source</th><th>what it fixes for route computation</th></tr></thead>
+    <tbody>
+      <tr><td class="k">National Grid &mdash; <em>Undergrounding high voltage electricity transmission lines: the technical issues</em></td>
+        <td class="d"><strong>Working width 40&ndash;65 m</strong> for a 400 kV double circuit. Trench about 1.5 m wide and
+        1.2 m deep, four trenches of three cables. <strong>Joint bays every 500&ndash;1,000 m</strong>, concrete-lined and
+        wider than the trench. Deep tunnelling named as the technique that makes river and railway crossings possible.</td></tr>
+      <tr><td class="k">IET / Parsons Brinckerhoff (2012) &mdash; <em>Electricity Transmission Costing Study</em></td>
+        <td class="d">Prices trenchless crossings as discrete events and categorises watercourses by span &mdash;
+        large river about 150 m, medium about 70 m. This is what lets a crossing penalty be a cited number
+        rather than a guess.</td></tr>
+      <tr><td class="k">CIGRE TB 770, WG B1.48 &mdash; <em>Trenchless Technologies</em></td>
+        <td class="d">Horizontal directional drilling, microtunnelling, pipe ramming and ploughing for HV cable.
+        Defines which technique suits which obstacle and span &mdash; the basis for <em>classifying</em> a crossing
+        rather than merely counting it.</td></tr>
+      <tr><td class="k">CIGRE TB 889, WG B1.61 (2022) &mdash; <em>Installation of Underground HV Cable Systems</em></td>
+        <td class="d">Supersedes TB 194 (2001). Civil construction and installation practice: the reference for
+        bend radii, pulling tensions and drum section lengths, which constrain what a corridor may geometrically do.</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="measured">
+    <div class="lbl">The finding that changes the router</div>
+    <p>A 400 kV underground circuit needs a <strong>40&ndash;65 m working swathe</strong>. That is wider than most
+      B-road verges and many A-road corridors. So &ldquo;follow the road&rdquo; is necessary but not sufficient &mdash;
+      the router needs a <em>corridor width feasibility</em> term, not only a length. A route down a hedgerowed
+      lane is not a route for a 400 kV double circuit, and an engine that returns one is confidently wrong.</p>
+  </div>
+
+  <h3>Should you write literature into data-grid-gb? Yes &mdash; but not as prose</h3>
+  <p>That repository&rsquo;s discipline is that sources are pinned and products are derived and verified. An essay
+    cannot be verified. A <strong>parameter</strong> extracted from a cited source can be. So the literature should
+    arrive in the same shape as everything else there:</p>
+
+<pre><span class="c">sources/literature-manifest.json    pinned by SHA-256, exactly like the NESO appendices</span>
+<span class="c">derived/civil-parameters.v1.json    the numbers, each carrying its citation</span>
+
+{
+  "schema": "data-grid-gb.civil-parameters.v1",
+  "not_a_design": "published typical values, not a design for any route",
+  "parameters": [
+    { "id": "swathe_width_m_400kv_double",
+      "value": [40, 65], "unit": "m",
+      "source": "national-grid-undergrounding-technical-issues",
+      "note": "construction working width, not permanent easement" },
+    { "id": "joint_bay_interval_m",
+      "value": [500, 1000], "unit": "m",
+      "source": "national-grid-undergrounding-technical-issues" },
+    { "id": "watercourse_span_large_m",
+      "value": 150, "unit": "m",
+      "source": "iet-parsons-brinckerhoff-2012" },
+    { "id": "trench_section_m",
+      "value": [1.5, 1.2], "unit": "m",
+      "note": "width, depth, per cable trench" }
+  ]
+}</pre>
+
+  <p>Three things that buys you. The router reads penalties and widths from a product instead of hardcoding
+    them. Every civil number on a card can cite a source the way the fault currents already cite a sheet and a
+    row. And when a parameter is challenged, the answer is a document and a page rather than an argument.</p>
+  <p>What <em>not</em> to write: anything reading as design advice, sizing, or a route recommendation. The
+    repository&rsquo;s <code>not_a_connection_assessment</code> line is the boundary, and civil parameters sit on
+    the same side of it &mdash; published typical values, never a proposal.</p>
+</section>
+
+<section>
+  <h2><span class="n">10</span> The corridor tracer &mdash; a second feature, not a replacement</h2>
+  <p>The straight line stays exactly as it is. The tracer is additive, behind a deliberate action, and drawn
+    only when asked for.</p>
+
+  <h3>The gesture</h3>
+  <p>The v8 engine binds <code>click</code>, <code>dblclick</code>, <code>mousemove</code>, <code>mousedown</code>,
+    <code>mouseup</code> and <code>keydown</code>. It binds <strong>no <code>contextmenu</code> and no long-press</strong>
+    &mdash; both slots are free, on desktop and on touch.</p>
+  <div class="scroll"><table>
+    <thead><tr><th>surface</th><th>gesture</th><th>why it is safe</th></tr></thead>
+    <tbody>
+      <tr><td class="k">desktop</td><td>right-click on the map or on a substation</td>
+        <td class="d">Nothing binds <code>contextmenu</code> today, so no existing behaviour is displaced.</td></tr>
+      <tr><td class="k">touch</td><td>long-press, about 500 ms, with a movement threshold so a pan never fires it</td>
+        <td class="d">No <code>touchstart</code> handler exists; pan and pinch stay untouched.</td></tr>
+      <tr><td class="k">both</td><td>a <span class="cy">&#10230; TRACE</span> tile beside Zone Draw and the radius tool</td>
+        <td class="d">Follows the collapsible-panel pattern already in the engine, so it is discoverable without a gesture.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>What it draws</h3>
+  <p>A stream of neon corridors from the chosen point to the nearest connection points, <strong>coloured by the
+    voltage class of the target</strong>, reusing the palette already carrying the 400 / 275 / 132 / 66 / 33 kV layers.
+    Anyone who knows the map knows instantly that a blue corridor lands at 400 kV.</p>
+  <ul>
+    <li>Animated dash offset flowing toward the substation &mdash; direction carried by motion, not an arrowhead</li>
+    <li>Each corridor labelled: routed km, straight km, factor, crossings by class</li>
+    <li>Corridors failing the swathe-width test drawn dashed and dimmed, with the reason on hover</li>
+    <li>Snap distance drawn as a distinct stub at each end, never silently absorbed into the route</li>
+    <li>Click a corridor to open the substation card that already exists</li>
+    <li><code>prefers-reduced-motion</code> stops the flow and leaves the corridors static</li>
+  </ul>
+
+  <h3>Exploration mode &mdash; where this gets interesting</h3>
+  <p>The card already names the sites a circuit reaches: <em>CULHAM JET, DIDCOT, EAST CLAYDON, LEIGHTON
+    BUZZARD, MINETY, WALHAM</em>. Trace from a substation rather than from a project and those become traceable
+    onward &mdash; a second press walks the published network one hop further, each circuit drawn in its own
+    voltage colour. The result is a user pulling the grid graph outward by hand, which is the thing no other
+    public tool lets anyone do.</p>
+
+  <div class="measured">
+    <div class="lbl">The line this feature must not cross</div>
+    <p>A drawn corridor will be read as a route someone could build. It is a <strong>corridor length along public
+      road geometry</strong> &mdash; not a wayleave, not a consent, not a design, not a cost. The label has to carry
+      that as firmly as the panel already carries <em>a rating is not what is free on the circuit</em>. Drawing it
+      beautifully raises that risk rather than lowering it.</p>
+  </div>
+</section>
+
+<footer>
+  <p><strong>Provenance.</strong> Route factors from 815 ETYS circuits with coordinates at both ends, built length
+    from <code>ohl_km + cable_km</code>. Coverage and collision counts from <code>connection-points.v3.json</code> and
+    <code>gb-transmission-network.v1.json</code>. Graph sizes counted from the committed GeoJSON. NESO sources
+    re-downloaded and confirmed against their pinned SHA-256 on 2026-09-03.</p>
+  <p><strong>Not measured here.</strong> Consenting durations, wayleave costs, land ownership, and anything about
+    whether a project can connect &mdash; none of which any published appendix contains.</p>
+</footer>
+</div>

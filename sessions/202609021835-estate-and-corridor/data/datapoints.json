@@ -1,0 +1,32 @@
+{
+ "generated_utc": "2026-09-02T21:30:44Z",
+ "total_datapoints": 98164271,
+ "unique_blobs": 1246,
+ "file_copies": 3775,
+ "by_type": {
+  ".csv": {
+   "dp": 75768433,
+   "rows": 12978903,
+   "files": 227,
+   "bytes": 1306815758
+  },
+  ".json": {
+   "dp": 6974052,
+   "rows": 0,
+   "files": 913,
+   "bytes": 221678093
+  },
+  ".geojson": {
+   "dp": 14817542,
+   "rows": 0,
+   "files": 90,
+   "bytes": 287047261
+  },
+  ".tsv": {
+   "dp": 604244,
+   "rows": 92529,
+   "files": 16,
+   "bytes": 6581748
+  }
+ }
+}

@@ -1,0 +1,1117 @@
+{
+ "generated_utc": "2026-09-02T19:50:47Z",
+ "elapsed_s": 5.2,
+ "workers": 20,
+ "repos": [
+  {
+   "name": "chatgpt-audits",
+   "text_files": 3264,
+   "lines_total": 493136,
+   "lines_codeish": 6117,
+   "files_codeish": 22,
+   "by_class": [
+    {
+     "c": "docs",
+     "n": 386655,
+     "f": 3209
+    },
+    {
+     "c": "data",
+     "n": 100356,
+     "f": 25
+    },
+    {
+     "c": "code",
+     "n": 5959,
+     "f": 20
+    },
+    {
+     "c": "config",
+     "n": 158,
+     "f": 2
+    },
+    {
+     "c": "other",
+     "n": 8,
+     "f": 8
+    }
+   ],
+   "by_lang": [
+    {
+     "l": "Markdown",
+     "n": 367112,
+     "f": 3203
+    },
+    {
+     "l": "TSV",
+     "n": 92545,
+     "f": 16
+    },
+    {
+     "l": "Text",
+     "n": 19543,
+     "f": 6
+    },
+    {
+     "l": "GeoJSON",
+     "n": 7047,
+     "f": 1
+    },
+    {
+     "l": "Python",
+     "n": 5644,
+     "f": 18
+    },
+    {
+     "l": "JSON",
+     "n": 764,
+     "f": 8
+    },
+    {
+     "l": "Awk",
+     "n": 315,
+     "f": 2
+    },
+    {
+     "l": "YAML",
+     "n": 156,
+     "f": 1
+    },
+    {
+     "l": "Other",
+     "n": 8,
+     "f": 8
+    },
+    {
+     "l": "Git",
+     "n": 2,
+     "f": 1
+    }
+   ]
+  },
+  {
+   "name": "companies",
+   "text_files": 76,
+   "lines_total": 20863,
+   "lines_codeish": 18738,
+   "files_codeish": 63,
+   "by_class": [
+    {
+     "c": "code",
+     "n": 13608,
+     "f": 42
+    },
+    {
+     "c": "config",
+     "n": 5130,
+     "f": 21
+    },
+    {
+     "c": "data",
+     "n": 2092,
+     "f": 12
+    },
+    {
+     "c": "docs",
+     "n": 33,
+     "f": 1
+    }
+   ],
+   "by_lang": [
+    {
+     "l": "Python",
+     "n": 13608,
+     "f": 42
+    },
+    {
+     "l": "YAML",
+     "n": 5056,
+     "f": 19
+    },
+    {
+     "l": "JSON",
+     "n": 2092,
+     "f": 12
+    },
+    {
+     "l": "Git",
+     "n": 74,
+     "f": 2
+    },
+    {
+     "l": "Markdown",
+     "n": 33,
+     "f": 1
+    }
+   ]
+  },
+  {
+   "name": "cvaa",
+   "text_files": 50,
+   "lines_total": 3412,
+   "lines_codeish": 666,
+   "files_codeish": 10,
+   "by_class": [
+    {
+     "c": "docs",
+     "n": 2378,
+     "f": 36
+    },
+    {
+     "c": "code",
+     "n": 447,
+     "f": 6
+    },
+    {
+     "c": "other",
+     "n": 336,
+     "f": 2
+    },
+    {
+     "c": "config",
+     "n": 219,
+     "f": 4
+    },
+    {
+     "c": "data",
+     "n": 32,
+     "f": 2
+    }
+   ],
+   "by_lang": [
+    {
+     "l": "Markdown",
+     "n": 1870,
+     "f": 34
+    },
+    {
+     "l": "Text",
+     "n": 508,
+     "f": 2
+    },
+    {
+     "l": "JavaScript",
+     "n": 447,
+     "f": 6
+    },
+    {
+     "l": "Other",
+     "n": 336,
+     "f": 2
+    },
+    {
+     "l": "YAML",
+     "n": 147,
+     "f": 3
+    },
+    {
+     "l": "Git",
+     "n": 72,
+     "f": 1
+    },
+    {
+     "l": "JSON",
+     "n": 32,
+     "f": 2
+    }
+   ]
+  },
+  {
+   "name": "data-centres-gb",
+   "text_files": 33,
+   "lines_total": 5286,
+   "lines_codeish": 4327,
+   "files_codeish": 17,
+   "by_class": [
+    {
+     "c": "code",
+     "n": 3327,
+     "f": 10
+    },
+    {
+     "c": "config",
+     "n": 897,
+     "f": 6
+    },
+    {
+     "c": "data",
+     "n": 781,
+     "f": 11
+    },
+    {
+     "c": "docs",
+     "n": 120,
+     "f": 3
+    },
+    {
+     "c": "markup",
+     "n": 103,
+     "f": 1
+    },
+    {
+     "c": "other",
+     "n": 58,
+     "f": 2
+    }
+   ],
+   "by_lang": [
+    {
+     "l": "Python",
+     "n": 3327,
+     "f": 10
+    },
+    {
+     "l": "YAML",
+     "n": 825,
+     "f": 5
+    },
+    {
+     "l": "JSON",
+     "n": 760,
+     "f": 10
+    },
+    {
+     "l": "Markdown",
+     "n": 115,
+     "f": 2
+    },
+    {
+     "l": "HTML",
+     "n": 103,
+     "f": 1
+    },
+    {
+     "l": "Other",
+     "n": 79,
+     "f": 3
+    },
+    {
+     "l": "Git",
+     "n": 72,
+     "f": 1
+    },
+    {
+     "l": "Text",
+     "n": 5,
+     "f": 1
+    }
+   ]
+  },
+  {
+   "name": "data-federation-map-for-globalgrid2050-all-repos",
+   "text_files": 134,
+   "lines_total": 13307,
+   "lines_codeish": 4140,
+   "files_codeish": 26,
+   "by_class": [
+    {
+     "c": "docs",
+     "n": 8296,
+     "f": 75
+    },
+    {
+     "c": "code",
+     "n": 2018,
+     "f": 7
+    },
+    {
+     "c": "config",
+     "n": 1151,
+     "f": 10
+    },
+    {
+     "c": "markup",
+     "n": 971,
+     "f": 9
+    },
+    {
+     "c": "data",
+     "n": 871,
+     "f": 33
+    }
+   ],
+   "by_lang": [
+    {
+     "l": "Markdown",
+     "n": 7778,
+     "f": 72
+    },
+    {
+     "l": "Python",
+     "n": 1781,
+     "f": 5
+    },
+    {
+     "l": "YAML",
+     "n": 1079,
+     "f": 9
+    },
+    {
+     "l": "HTML",
+     "n": 875,
+     "f": 6
+    },
+    {
+     "l": "JSON",
+     "n": 871,
+     "f": 33
+    },
+    {
+     "l": "Text",
+     "n": 518,
+     "f": 3
+    },
+    {
+     "l": "JavaScript",
+     "n": 237,
+     "f": 2
+    },
+    {
+     "l": "CSS",
+     "n": 96,
+     "f": 3
+    },
+    {
+     "l": "Git",
+     "n": 72,
+     "f": 1
+    }
+   ]
+  },
+  {
+   "name": "data-gb-electricity",
+   "text_files": 29,
+   "lines_total": 5183,
+   "lines_codeish": 2426,
+   "files_codeish": 16,
+   "by_class": [
+    {
+     "c": "code",
+     "n": 1993,
+     "f": 11
+    },
+    {
+     "c": "docs",
+     "n": 1595,
+     "f": 8
+    },
+    {
+     "c": "data",
+     "n": 1162,
+     "f": 5
+    },
+    {
+     "c": "config",
+     "n": 433,
+     "f": 5
+    }
+   ],
+   "by_lang": [
+    {
+     "l": "Python",
+     "n": 1993,
+     "f": 11
+    },
+    {
+     "l": "Markdown",
+     "n": 1595,
+     "f": 8
+    },
+    {
+     "l": "JSON",
+     "n": 1162,
+     "f": 5
+    },
+    {
+     "l": "YAML",
+     "n": 338,
+     "f": 3
+    },
+    {
+     "l": "Git",
+     "n": 95,
+     "f": 2
+    }
+   ]
+  },
+  {
+   "name": "data-grid-gb",
+   "text_files": 22,
+   "lines_total": 320541,
+   "lines_codeish": 1389,
+   "files_codeish": 11,
+   "by_class": [
+    {
+     "c": "data",
+     "n": 318994,
+     "f": 6
+    },
+    {
+     "c": "code",
+     "n": 1297,
+     "f": 7
+    },
+    {
+     "c": "docs",
+     "n": 157,
+     "f": 4
+    },
+    {
+     "c": "config",
+     "n": 92,
+     "f": 4
+    },
+    {
+     "c": "other",
+     "n": 1,
+     "f": 1
+    }
+   ],
+   "by_lang": [
+    {
+     "l": "JSON",
+     "n": 318994,
+     "f": 6
+    },
+    {
+     "l": "Python",
+     "n": 1297,
+     "f": 7
+    },
+    {
+     "l": "Markdown",
+     "n": 156,
+     "f": 3
+    },
+    {
+     "l": "YAML",
+     "n": 83,
+     "f": 1
+    },
+    {
+     "l": "Git",
+     "n": 9,
+     "f": 3
+    },
+    {
+     "l": "Other",
+     "n": 1,
+     "f": 1
+    },
+    {
+     "l": "Text",
+     "n": 1,
+     "f": 1
+    }
+   ]
+  },
+  {
+   "name": "data-gridatlas",
+   "text_files": 68,
+   "lines_total": 24118,
+   "lines_codeish": 7818,
+   "files_codeish": 26,
+   "by_class": [
+    {
+     "c": "data",
+     "n": 16083,
+     "f": 36
+    },
+    {
+     "c": "code",
+     "n": 4470,
+     "f": 11
+    },
+    {
+     "c": "config",
+     "n": 3307,
+     "f": 13
+    },
+    {
+     "c": "docs",
+     "n": 215,
+     "f": 5
+    },
+    {
+     "c": "markup",
+     "n": 41,
+     "f": 2
+    },
+    {
+     "c": "other",
+     "n": 2,
+     "f": 1
+    }
+   ],
+   "by_lang": [
+    {
+     "l": "JSON",
+     "n": 16083,
+     "f": 36
+    },
+    {
+     "l": "Python",
+     "n": 4470,
+     "f": 11
+    },
+    {
+     "l": "YAML",
+     "n": 3222,
+     "f": 11
+    },
+    {
+     "l": "Markdown",
+     "n": 127,
+     "f": 3
+    },
+    {
+     "l": "Text",
+     "n": 88,
+     "f": 2
+    },
+    {
+     "l": "Git",
+     "n": 85,
+     "f": 2
+    },
+    {
+     "l": "HTML",
+     "n": 41,
+     "f": 2
+    },
+    {
+     "l": "Other",
+     "n": 2,
+     "f": 1
+    }
+   ]
+  },
+  {
+   "name": "data-interconnectors",
+   "text_files": 11,
+   "lines_total": 1401,
+   "lines_codeish": 944,
+   "files_codeish": 4,
+   "by_class": [
+    {
+     "c": "code",
+     "n": 738,
+     "f": 2
+    },
+    {
+     "c": "docs",
+     "n": 440,
+     "f": 6
+    },
+    {
+     "c": "config",
+     "n": 206,
+     "f": 2
+    },
+    {
+     "c": "data",
+     "n": 17,
+     "f": 1
+    }
+   ],
+   "by_lang": [
+    {
+     "l": "Python",
+     "n": 738,
+     "f": 2
+    },
+    {
+     "l": "Markdown",
+     "n": 440,
+     "f": 6
+    },
+    {
+     "l": "YAML",
+     "n": 134,
+     "f": 1
+    },
+    {
+     "l": "Git",
+     "n": 72,
+     "f": 1
+    },
+    {
+     "l": "CSV",
+     "n": 17,
+     "f": 1
+    }
+   ]
+  },
+  {
+   "name": "gb-electricity-ui",
+   "text_files": 14,
+   "lines_total": 925,
+   "lines_codeish": 211,
+   "files_codeish": 11,
+   "by_class": [
+    {
+     "c": "docs",
+     "n": 714,
+     "f": 3
+    },
+    {
+     "c": "config",
+     "n": 106,
+     "f": 2
+    },
+    {
+     "c": "markup",
+     "n": 104,
+     "f": 8
+    },
+    {
+     "c": "code",
+     "n": 1,
+     "f": 1
+    }
+   ],
+   "by_lang": [
+    {
+     "l": "Markdown",
+     "n": 714,
+     "f": 3
+    },
+    {
+     "l": "HTML",
+     "n": 103,
+     "f": 7
+    },
+    {
+     "l": "Git",
+     "n": 72,
+     "f": 1
+    },
+    {
+     "l": "YAML",
+     "n": 34,
+     "f": 1
+    },
+    {
+     "l": "CSS",
+     "n": 1,
+     "f": 1
+    },
+    {
+     "l": "JavaScript",
+     "n": 1,
+     "f": 1
+    }
+   ]
+  },
+  {
+   "name": "globalgrid2050",
+   "text_files": 4964,
+   "lines_total": 24394702,
+   "lines_codeish": 350314,
+   "files_codeish": 2065,
+   "by_class": [
+    {
+     "c": "data",
+     "n": 23961038,
+     "f": 2039
+    },
+    {
+     "c": "code",
+     "n": 254914,
+     "f": 1464
+    },
+    {
+     "c": "docs",
+     "n": 83254,
+     "f": 764
+    },
+    {
+     "c": "markup",
+     "n": 75418,
+     "f": 258
+    },
+    {
+     "c": "config",
+     "n": 19982,
+     "f": 343
+    },
+    {
+     "c": "other",
+     "n": 96,
+     "f": 96
+    }
+   ],
+   "by_lang": [
+    {
+     "l": "CSV",
+     "n": 13182545,
+     "f": 227
+    },
+    {
+     "l": "JSON",
+     "n": 10232516,
+     "f": 1449
+    },
+    {
+     "l": "GeoJSON",
+     "n": 545975,
+     "f": 361
+    },
+    {
+     "l": "JavaScript",
+     "n": 170700,
+     "f": 899
+    },
+    {
+     "l": "Python",
+     "n": 81311,
+     "f": 479
+    },
+    {
+     "l": "Markdown",
+     "n": 79561,
+     "f": 731
+    },
+    {
+     "l": "CSS",
+     "n": 38827,
+     "f": 140
+    },
+    {
+     "l": "HTML",
+     "n": 36591,
+     "f": 118
+    },
+    {
+     "l": "YAML",
+     "n": 19812,
+     "f": 340
+    },
+    {
+     "l": "Text",
+     "n": 3693,
+     "f": 33
+    },
+    {
+     "l": "Shell",
+     "n": 2903,
+     "f": 86
+    },
+    {
+     "l": "Git",
+     "n": 170,
+     "f": 3
+    }
+   ]
+  },
+  {
+   "name": "grid-distance-maths",
+   "text_files": 9,
+   "lines_total": 1926,
+   "lines_codeish": 1629,
+   "files_codeish": 7,
+   "by_class": [
+    {
+     "c": "code",
+     "n": 1557,
+     "f": 6
+    },
+    {
+     "c": "docs",
+     "n": 297,
+     "f": 2
+    },
+    {
+     "c": "config",
+     "n": 72,
+     "f": 1
+    }
+   ],
+   "by_lang": [
+    {
+     "l": "JavaScript",
+     "n": 850,
+     "f": 4
+    },
+    {
+     "l": "Python",
+     "n": 707,
+     "f": 2
+    },
+    {
+     "l": "Markdown",
+     "n": 297,
+     "f": 2
+    },
+    {
+     "l": "Git",
+     "n": 72,
+     "f": 1
+    }
+   ]
+  },
+  {
+   "name": "gridatlas",
+   "text_files": 445,
+   "lines_total": 239131,
+   "lines_codeish": 161445,
+   "files_codeish": 228,
+   "by_class": [
+    {
+     "c": "code",
+     "n": 152838,
+     "f": 177
+    },
+    {
+     "c": "data",
+     "n": 73306,
+     "f": 147
+    },
+    {
+     "c": "config",
+     "n": 6025,
+     "f": 28
+    },
+    {
+     "c": "docs",
+     "n": 3289,
+     "f": 43
+    },
+    {
+     "c": "markup",
+     "n": 2582,
+     "f": 23
+    },
+    {
+     "c": "other",
+     "n": 1091,
+     "f": 27
+    }
+   ],
+   "by_lang": [
+    {
+     "l": "JavaScript",
+     "n": 148494,
+     "f": 156
+    },
+    {
+     "l": "JSON",
+     "n": 73272,
+     "f": 113
+    },
+    {
+     "l": "YAML",
+     "n": 5942,
+     "f": 26
+    },
+    {
+     "l": "Python",
+     "n": 4344,
+     "f": 21
+    },
+    {
+     "l": "Markdown",
+     "n": 3226,
+     "f": 40
+    },
+    {
+     "l": "HTML",
+     "n": 1781,
+     "f": 13
+    },
+    {
+     "l": "Other",
+     "n": 1091,
+     "f": 27
+    },
+    {
+     "l": "CSS",
+     "n": 801,
+     "f": 10
+    },
+    {
+     "l": "Git",
+     "n": 83,
+     "f": 2
+    },
+    {
+     "l": "Text",
+     "n": 63,
+     "f": 3
+    },
+    {
+     "l": "GeoJSON",
+     "n": 34,
+     "f": 34
+    }
+   ]
+  },
+  {
+   "name": "pipelinenews",
+   "text_files": 2779,
+   "lines_total": 2378982,
+   "lines_codeish": 270152,
+   "files_codeish": 1033,
+   "by_class": [
+    {
+     "c": "data",
+     "n": 2094135,
+     "f": 1457
+    },
+    {
+     "c": "code",
+     "n": 207937,
+     "f": 782
+    },
+    {
+     "c": "markup",
+     "n": 38934,
+     "f": 183
+    },
+    {
+     "c": "config",
+     "n": 23281,
+     "f": 68
+    },
+    {
+     "c": "docs",
+     "n": 14573,
+     "f": 168
+    },
+    {
+     "c": "other",
+     "n": 122,
+     "f": 121
+    }
+   ],
+   "by_lang": [
+    {
+     "l": "JSON",
+     "n": 2094076,
+     "f": 1398
+    },
+    {
+     "l": "JavaScript",
+     "n": 189504,
+     "f": 685
+    },
+    {
+     "l": "CSS",
+     "n": 24286,
+     "f": 119
+    },
+    {
+     "l": "YAML",
+     "n": 23202,
+     "f": 65
+    },
+    {
+     "l": "Python",
+     "n": 17889,
+     "f": 71
+    },
+    {
+     "l": "HTML",
+     "n": 14648,
+     "f": 64
+    },
+    {
+     "l": "Markdown",
+     "n": 13020,
+     "f": 139
+    },
+    {
+     "l": "Text",
+     "n": 1553,
+     "f": 29
+    },
+    {
+     "l": "Shell",
+     "n": 492,
+     "f": 23
+    },
+    {
+     "l": "Other",
+     "n": 124,
+     "f": 123
+    },
+    {
+     "l": "Git",
+     "n": 79,
+     "f": 3
+    },
+    {
+     "l": "GeoJSON",
+     "n": 57,
+     "f": 57
+    }
+   ]
+  },
+  {
+   "name": "spiders",
+   "text_files": 51,
+   "lines_total": 4652,
+   "lines_codeish": 669,
+   "files_codeish": 11,
+   "by_class": [
+    {
+     "c": "data",
+     "n": 2116,
+     "f": 6
+    },
+    {
+     "c": "docs",
+     "n": 1867,
+     "f": 34
+    },
+    {
+     "c": "code",
+     "n": 338,
+     "f": 2
+    },
+    {
+     "c": "markup",
+     "n": 185,
+     "f": 6
+    },
+    {
+     "c": "config",
+     "n": 146,
+     "f": 3
+    }
+   ],
+   "by_lang": [
+    {
+     "l": "JSON",
+     "n": 2116,
+     "f": 6
+    },
+    {
+     "l": "Markdown",
+     "n": 1867,
+     "f": 34
+    },
+    {
+     "l": "Python",
+     "n": 338,
+     "f": 2
+    },
+    {
+     "l": "HTML",
+     "n": 185,
+     "f": 6
+    },
+    {
+     "l": "YAML",
+     "n": 74,
+     "f": 2
+    },
+    {
+     "l": "Git",
+     "n": 72,
+     "f": 1
+    }
+   ]
+  }
+ ]
+}

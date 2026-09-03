@@ -1,0 +1,19 @@
+{
+ "haversine_vs_law_of_cosines_max_rel": 1.2079915796629137e-08,
+ "haversine_vs_vincenty_max_rel": 3.7495113249173934e-13,
+ "haversine_vs_vincenty_max_rel_short_links": 3.226241402810289e-10,
+ "formula_agreement_1e-9": true,
+ "graph_load_seconds": 0.1,
+ "snap_cells": 20555,
+ "nodes": 275585,
+ "giant_frac": 0.9604006023549903,
+ "edge_weight_vs_geometry_max_rel": 0.0028746167327771623,
+ "edge_weight_vs_geometry_max_abs_km": 8.950568970687856e-05,
+ "edge_weight_checks": 319152,
+ "edge_weight_mismatches_over_1e-9": 4,
+ "identical_point_route_km": 0.0,
+ "identical_point_route_is_zero": true,
+ "route_vs_legsum_max_rel": 2.1617209987479955e-15,
+ "route_legsum_routes_tested": 25,
+ "route_legsum_routes_failed": 0
+}

@@ -1,0 +1,28 @@
+{
+ "all_scored_circuits": {
+  "tag": "81 scored circuits",
+  "n": 81,
+  "raw_median_ape_straight": 26.060109353885764,
+  "raw_median_ape_routed": 20.259068175464524,
+  "best_k_straight": 1.295,
+  "calibrated_median_ape_straight": 7.948785896866281,
+  "best_k_routed": 1.0470000000000002,
+  "calibrated_median_ape_routed": 17.910181470367686,
+  "loo_median_ape_straight": 8.575337362378244,
+  "loo_median_ape_routed": 26.24068225876337,
+  "calibrated_routed_beats_calibrated_straight_frac": 0.2962962962962963
+ },
+ "distinct_site_pairs": {
+  "tag": "49 distinct site pairs",
+  "n": 49,
+  "raw_median_ape_straight": 25.38274657922246,
+  "raw_median_ape_routed": 17.00153080303003,
+  "best_k_straight": 1.286,
+  "calibrated_median_ape_straight": 8.097362626475118,
+  "best_k_routed": 1.008,
+  "calibrated_median_ape_routed": 16.348254257110284,
+  "loo_median_ape_straight": 8.464084973427118,
+  "loo_median_ape_routed": 20.59132205806675,
+  "calibrated_routed_beats_calibrated_straight_frac": 0.3877551020408163
+ }
+}

@@ -1,0 +1,85 @@
+{
+ "results": [
+  {
+   "penalty_km_per_crossing": 0.0,
+   "n_scored": 81,
+   "median_ape_routed": 20.259068175464524,
+   "mean_ape_routed": 89.20140279596089,
+   "p75_ape_routed": 48.05843712657358,
+   "beats_straight_frac_scored": 0.6172839506172839,
+   "beats_straight_frac_all95": 0.5263157894736842
+  },
+  {
+   "penalty_km_per_crossing": 0.5,
+   "n_scored": 81,
+   "median_ape_routed": 21.434445220767504,
+   "mean_ape_routed": 91.02794515841622,
+   "p75_ape_routed": 49.74268039062898,
+   "beats_straight_frac_scored": 0.6172839506172839,
+   "beats_straight_frac_all95": 0.5263157894736842
+  },
+  {
+   "penalty_km_per_crossing": 1.0,
+   "n_scored": 81,
+   "median_ape_routed": 23.449162241526217,
+   "mean_ape_routed": 98.56710053611486,
+   "p75_ape_routed": 54.333573736768294,
+   "beats_straight_frac_scored": 0.5679012345679012,
+   "beats_straight_frac_all95": 0.4842105263157895
+  },
+  {
+   "penalty_km_per_crossing": 2.0,
+   "n_scored": 81,
+   "median_ape_routed": 23.449162241526217,
+   "mean_ape_routed": 98.4532264851475,
+   "p75_ape_routed": 54.333573736768294,
+   "beats_straight_frac_scored": 0.5679012345679012,
+   "beats_straight_frac_all95": 0.4842105263157895
+  },
+  {
+   "penalty_km_per_crossing": 3.0,
+   "n_scored": 81,
+   "median_ape_routed": 24.138176608273874,
+   "mean_ape_routed": 101.61497921465613,
+   "p75_ape_routed": 57.83358569432436,
+   "beats_straight_frac_scored": 0.5432098765432098,
+   "beats_straight_frac_all95": 0.4631578947368421
+  },
+  {
+   "penalty_km_per_crossing": 5.0,
+   "n_scored": 81,
+   "median_ape_routed": 24.138176608273874,
+   "mean_ape_routed": 102.32466960253174,
+   "p75_ape_routed": 60.09904392444979,
+   "beats_straight_frac_scored": 0.5308641975308642,
+   "beats_straight_frac_all95": 0.45263157894736844
+  },
+  {
+   "penalty_km_per_crossing": 8.0,
+   "n_scored": 81,
+   "median_ape_routed": 24.138176608273874,
+   "mean_ape_routed": 102.32466960253174,
+   "p75_ape_routed": 60.09904392444979,
+   "beats_straight_frac_scored": 0.5308641975308642,
+   "beats_straight_frac_all95": 0.45263157894736844
+  },
+  {
+   "penalty_km_per_crossing": 20.0,
+   "n_scored": 81,
+   "median_ape_routed": 33.31928995313794,
+   "mean_ape_routed": 116.04020059232778,
+   "p75_ape_routed": 110.60456904933899,
+   "beats_straight_frac_scored": 0.4567901234567901,
+   "beats_straight_frac_all95": 0.3894736842105263
+  }
+ ],
+ "best": {
+  "penalty_km_per_crossing": 0.0,
+  "n_scored": 81,
+  "median_ape_routed": 20.259068175464524,
+  "mean_ape_routed": 89.20140279596089,
+  "p75_ape_routed": 48.05843712657358,
+  "beats_straight_frac_scored": 0.6172839506172839,
+  "beats_straight_frac_all95": 0.5263157894736842
+ }
+}

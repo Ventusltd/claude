@@ -1,0 +1,242 @@
+<title>Ventus Estate Log</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  color-scheme: dark;
+  --bg:#04060a;
+  --ink:#7d8f9c;
+  --hi:#d7e3ec;
+  --key:#4a5a66;
+  --cy:#35c9d9;
+  --ok:#3fbf5f;
+  --bad:#e2564d;
+  --am:#e8a33d;
+}
+*{box-sizing:border-box}
+html,body{background:var(--bg)}
+body{
+  margin:0;
+  color:var(--ink);
+  font-family:"IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  font-size:12.5px;
+  line-height:1.5;
+  font-variant-ligatures:none;
+  -webkit-font-smoothing:antialiased;
+}
+#scan{
+  padding:26px 20px 64px;
+  max-width:1180px;
+  margin:0 auto;
+  white-space:pre;
+  overflow-x:auto;
+  tab-size:2;
+}
+.k{color:var(--key)}
+.v{color:var(--hi)}
+.c{color:var(--cy)}
+.o{color:var(--ok)}
+.b{color:var(--bad)}
+.a{color:var(--am)}
+.r{color:#2b3742}
+.hdr{color:var(--hi)}
+#cur{
+  display:inline-block;width:7px;height:13px;background:var(--cy);
+  vertical-align:-2px;animation:bl 1.05s steps(2,start) infinite
+}
+@keyframes bl{50%{opacity:0}}
+@media (prefers-reduced-motion: reduce){#cur{animation:none}}
+</style>
+
+<div id="scan"></div>
+
+<script>
+const D = /*__DATA__*/;
+
+/* ---------- formatting ---------- */
+const esc = s => String(s).replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const pad  = (s,n) => { s = String(s); return s.length >= n ? s : s + ' '.repeat(n - s.length); };
+const rpad = (s,n) => { s = String(s); return s.length >= n ? s : ' '.repeat(n - s.length) + s; };
+const num  = n => (n === undefined || n === null) ? '-' : Number(n).toLocaleString('en-GB');
+const BL   = ['·','▁','▂','▃','▅','▆','▇','█'];
+const bars = arr => { const m = Math.max(1, ...arr);
+  return arr.map(n => n ? BL[Math.min(7, 1 + Math.floor((n/m)*6))] : BL[0]).join(''); };
+const secs = s => s >= 3600 ? (s/3600).toFixed(1)+'h' : s >= 60 ? (s/60).toFixed(1)+'m' : s+'s';
+const ageD = iso => ((Date.now() - new Date(iso)) / 864e5).toFixed(1);
+
+const L = [];                                     // {h: html, pause?: n}
+const line = (h='', pause=0) => L.push({h, pause});
+const kv = (k, v, cls='v') =>
+  line('  <span class="k">' + pad(k,15) + '</span><span class="' + cls + '">' + v + '</span>');
+const RULE = '─'.repeat(96);
+
+/* ---------- header ---------- */
+line('<span class="r">' + RULE + '</span>');
+kv('scan', D.generated_utc.replace('T',' ').replace('Z','') + ' UTC', 'c');
+kv('workers', D.workers);
+kv('targets', D.repos.length + ' repositories');
+kv('elapsed', D.elapsed_s + ' s');
+line('', 260);
+
+/* ---------- per repository ---------- */
+let n = 0;
+for (const r of D.repos) {
+  n++;
+  const idx = String(n).padStart(2,'0') + '/' + D.repos.length;
+  line('');
+  line('<span class="r">' + RULE + '</span>');
+  line('<span class="c">' + idx + '</span>', 150);
+  line('<span class="r">' + RULE + '</span>');
+
+  if (r.error) { kv('error', esc(r.error), 'b'); continue; }
+
+  kv('ref', r.ref);
+  kv('head', r.head_iso.replace('T',' ').slice(0,19));
+  kv('first', r.first_iso.replace('T',' ').slice(0,19) + '   span ' + r.span_days + ' d');
+  kv('commits', num(r.commits) + '   merges ' + num(r.merges) + '   per day ' + r.per_day);
+  kv('recent', '24h ' + num(r.c1) + '   7d ' + num(r.c7) + '   30d ' + num(r.c30));
+  kv('lines', '+' + num(r.add_total) + '  −' + num(r.del_total));
+  kv('touched', num(r.files_touched) + ' file changes   median ' + r.files_median + '   max ' + r.files_max);
+  kv('interval', 'median ' + r.gap_med_h + ' h   longest ' + r.gap_max_h + ' h');
+  kv('authors', num(r.authors_total));
+  r.authors.slice(0,5).forEach((a,ai) =>
+    line('    <span class="k">' + pad('author ' + String(ai+1).padStart(2,'0'), 36) + '</span>' + rpad(num(a.c), 6)));
+  kv('tree', num(r.tracked_files) + ' files   ' + r.tracked_human +
+             '   depth avg ' + r.depth_avg + ' max ' + r.depth_max);
+  kv('types', r.exts.slice(0,6).map(e => e.e + ' ' + e.n).join('   '), 'k');
+  r.biggest.slice(0,3).forEach((b,bi) =>
+    line('    <span class="k">' + pad('object ' + String(bi+1).padStart(2,'0'), 60) + '</span>' + rpad(b.b, 9)));
+  if (r.loc) {
+    kv('text', num(r.loc.text_files) + ' files   ' + num(r.loc.lines_total) + ' lines');
+    kv('code', num(r.loc.files_codeish) + ' files   ' + num(r.loc.lines_codeish) + ' lines   ' +
+               (100 * r.loc.lines_codeish / Math.max(1, r.loc.lines_total)).toFixed(1) + '% of text');
+    kv('languages', r.loc.by_lang.slice(0,6).map(x => x.l + ' ' + num(x.n)).join('   '), 'k');
+  }
+  kv('branches', num(r.branches) + '   worktrees ' + num(r.worktrees) +
+                 '   workflow files ' + num(r.workflow_files));
+  (r.branch_rows||[]).slice(0,5).forEach((b,bi) =>
+    line('    <span class="k">' + pad('branch ' + String(bi+1).padStart(2,'0'), 48) + '</span>' + pad(b.d, 13) +
+         '<span class="' + (Number(b.ahead) ? 'a' : 'k') + '">+' + b.ahead + '</span>'));
+
+  const h = r.http || {};
+  const hc = h.status === 200 ? 'o' : (h.status ? 'b' : 'k');
+  kv('http', '<span class="' + hc + '">' + (h.status || 'ERR') + '</span>  ' +
+             num(h.bytes || 0) + ' B   ' + (h.ms || 0) + ' ms   ' + esc(h.last_modified || '-'), 'k');
+
+  const c = r.ci || {};
+  if (c.sampled) {
+    kv('runs', num(c.sampled) + ' sampled of ' + num(c.total_count) +
+               '   <span class="o">ok ' + c.success + '</span>   <span class="' +
+               (c.failure ? 'b' : 'k') + '">fail ' + c.failure + '</span>   cancel ' + c.cancelled);
+    kv('duration', 'median ' + secs(c.dur_med) + '   max ' + secs(c.dur_max) + '   total ' + secs(c.dur_sum));
+    kv('events', c.events.map(e => e.e + ' ' + e.n).join('   '), 'k');
+    kv('window', c.window[0].replace('T',' ').slice(0,16) + '  →  ' + c.window[1].replace('T',' ').slice(0,16), 'k');
+    if (c.deploy_consec_fail)
+      kv('deploy', '<span class="b">JAMMED  ' + c.deploy_consec_fail + ' consecutive</span>   last ok ' +
+                   (c.deploy_last_ok || '-').replace('T',' ').slice(0,16), 'k');
+    c.workflows.slice(0, 10).forEach((w, wi) => {
+      const st = w.lc === 'success' ? '<span class="o">OK  </span>'
+               : w.lc === 'failure' ? '<span class="b">FAIL</span>'
+               : '<span class="a">' + pad(String(w.lc || '?').slice(0,4),4) + '</span>';
+      line('    ' + st + ' <span class="k">' + pad('workflow ' + String(wi+1).padStart(2,'0'), 56) + '</span>' +
+           rpad(w.t,4) + ' run' + rpad(w.f,5) + ' fail' + rpad(secs(w.med),7) +
+           '  <span class="k">' + w.last.replace('T',' ').slice(0,16) + '</span>');
+    })
+  } else {
+    kv('runs', 'none sampled', 'k');
+  }
+  kv('hours', bars(r.hours) + '   00→23 UTC', 'c');
+  kv('weekday', bars(r.dow) + '   Mon→Sun', 'c');
+  kv('30 days', bars(r.days30.map(x => x.n)), 'c');
+  line('', 120);
+}
+
+/* ---------- estate totals ---------- */
+const T = k => D.repos.reduce((a,r) => a + (Number(r[k]) || 0), 0);
+const CT = k => D.repos.reduce((a,r) => a + (Number(r.ci && r.ci[k]) || 0), 0);
+line('');
+line('<span class="r">' + RULE + '</span>');
+line('<span class="hdr">E S T A T E   T O T A L S</span>', 260);
+line('<span class="r">' + RULE + '</span>');
+kv('commits', num(T('commits')) + '   merges ' + num(T('merges')));
+kv('lines', '+' + num(T('add_total')) + '  −' + num(T('del_total')));
+kv('file changes', num(T('files_touched')));
+kv('tracked', num(T('tracked_files')) + ' files   ' +
+              (T('tracked_bytes')/1073741824).toFixed(2) + ' GB');
+kv('branches', num(T('branches')) + '   worktrees ' + num(T('worktrees')));
+kv('workflows', num(T('workflow_files')) + ' files   ' + num(CT('total_count')) + ' lifetime runs');
+kv('sampled', num(CT('sampled')) + ' runs   <span class="o">ok ' + CT('success') +
+              '</span>   <span class="b">fail ' + CT('failure') + '</span>');
+kv('runner time', secs(CT('dur_sum')));
+const LT = k => D.repos.reduce((a,r) => a + (Number(r.loc && r.loc[k]) || 0), 0);
+kv('text', num(LT('text_files')) + ' files   ' + num(LT('lines_total')) + ' lines');
+kv('code', num(LT('files_codeish')) + ' files   ' + num(LT('lines_codeish')) + ' lines   ' +
+           (100 * LT('lines_codeish') / Math.max(1, LT('lines_total'))).toFixed(1) + '% of text');
+const AG = {}, AF = {};
+for (const r of D.repos) for (const x of (r.loc?.by_lang || [])) {
+  AG[x.l] = (AG[x.l] || 0) + x.n; AF[x.l] = (AF[x.l] || 0) + x.f;
+}
+line('');
+for (const [l, n] of Object.entries(AG).sort((a,b) => b[1]-a[1]).slice(0,14))
+  line('  <span class="k">' + pad(l, 15) + '</span>' + rpad(num(n), 13) + ' lines' +
+       rpad(num(AF[l]), 9) + ' files');
+const red = D.repos.flatMap(r => (r.ci?.workflows||[]).filter(w => w.lc === 'failure'));
+kv('red now', '<span class="b">' + red.length + ' workflows failing</span>', 'k');
+const ORD = r => String(D.repos.indexOf(r) + 1).padStart(2,'0');
+const jam = D.repos.filter(r => r.ci?.deploy_consec_fail);
+kv('jammed', jam.length ? '<span class="b">' + jam.map(r => ORD(r) + ' (' + r.ci.deploy_consec_fail + ')').join('   ') + '</span>' : 'none', 'k');
+const p404 = D.repos.filter(r => r.http && r.http.status !== 200);
+kv('http !200', p404.length ? '<span class="a">' + p404.map(r => ORD(r) + ' (' + r.http.status + ')').join('   ') + '</span>' : 'none', 'k');
+line('', 200);
+
+/* ---------- index ---------- */
+line('');
+line('<span class="r">' + RULE + '</span>');
+line('<span class="hdr">I N D E X</span>');
+line('<span class="r">' + RULE + '</span>');
+const CW = [['id',6],['cmt',9],['30d',7],['files',9],['size',11],['code',10],['wf',6],['br',6],['ok',6],['fail',7],['runs',9],['http',6]];
+
+line('  <span class="k">' + CW.map(([h,w]) => pad(h,w)).join('') + '</span>');
+let IDX = '# estate-index v3  ' + D.generated_utc + '\n';
+IDX += '# ' + CW.map(([h,w]) => pad(h,w)).join('') + '\n';
+for (const r of D.repos) {
+  const c = r.ci || {}, h = r.http || {};
+  const cells = [pad(String(D.repos.indexOf(r)+1).padStart(2,'0'),6), pad(num(r.commits),9),
+                 pad(num(r.c30),7), pad(num(r.tracked_files),9), pad(r.tracked_human||'-',11),
+                 pad(num(r.loc?.lines_codeish),10),
+                 pad(num(r.workflow_files),6), pad(num(r.branches),6), pad(num(c.success),6),
+                 pad(num(c.failure),7), pad(num(c.total_count),9), pad(h.status||'-',6)];
+  line('  ' + cells.join(''));
+  IDX += '  ' + cells.join('') + '\n';
+}
+line('');
+line('<span class="k">  EOF  ' + D.generated_utc + '</span>');
+line('<span id="cur"></span>');
+
+/* ---------- vertical reveal ---------- */
+const box = document.getElementById('scan');
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let i = 0, done = false;
+
+function all(){
+  if (done) return; done = true;
+  box.innerHTML = L.map(x => x.h).join('\n');
+}
+function step(){
+  if (done) return;
+  const t0 = performance.now();
+  let held = 0, chunk = '';
+  while (i < L.length && performance.now() - t0 < 7) {
+    chunk += (i ? '\n' : '') + L[i].h;
+    held = L[i].pause; i++;
+    if (held) break;
+  }
+  box.insertAdjacentHTML('beforeend', chunk);
+  if (i >= L.length) { done = true; return; }
+  held ? setTimeout(step, held) : requestAnimationFrame(step);
+}
+if (reduced) all(); else requestAnimationFrame(step);
+addEventListener('keydown', all);
+addEventListener('click', all);
+</script>
