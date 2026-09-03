@@ -1,3 +1,14 @@
 __pycache__/
 *.pyc
 .vs/
+
+# familiars/runners.py rewrites these every sweep. They are live machine state,
+# not learning: committing them would race every other lane on the index and put
+# a minute-old snapshot into the history as though it were a finding.
+logs/board.json
+logs/board.md
+logs/board.json.tmp
+logs/board.md.tmp
+logs/runners.log
+logs/runners-estate.json
+logs/runners-shots/
