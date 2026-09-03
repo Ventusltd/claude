@@ -357,3 +357,39 @@ Findings 74 → 66.
 
 **Open:** D1 D3 D5 D6 D8 D11 D15. **Closed:** D2 D7 D9 D10 D12 D13 D16 + dead
 schedules + gg2050 dead link. **Withdrawn:** D4 D14.
+
+---
+
+## Passes 11-13 — 2026-09-03T04:35-04:42Z — the instrument was the story
+
+**No estate drift.** The findings this hour were all about my own measuring.
+
+**RH24 — the ceiling was fictional.** `CLAUDE.md` said 60 req/hour and logs 403.
+Measured: `scripts/gh-api.sh` gives **5000/hour**, and
+`/actions/runs/<id>/logs` returns **200**. I had not only inherited the
+constraint but entrenched it — RH15 built a budget floor around it, so every
+later pass printed `API-BUDGET 24/60 left` and read as confirmation.
+
+**D8 withdrawn as framed.** Two minutes after gaining log access the deploy
+failure turned out to be `AssertionError: timestamp release schema changed`, not
+an authorisation freeze. Then corrected again: the coordinator's collector
+harness found **thirteen** failing assertions and a `TypeError` boundary, with a
+control run proving they are properties of the format rather than the
+instrument. My proposed one-line fix would have cleared wall 1 of 13.
+
+**RH25 — I counted a skip as a failure**, having invented that exact distinction
+for my own gates two hours earlier. cvaa now emits `immune | fail | skipped`.
+
+**RH28 — my headline answer was wrong all night.** `pinned-actions` and
+`least-permissions` declare `level: warning` and fail nowhere; I had been
+counting `state != immune`, merging accepted dated allowances with real
+failures. Corrected top three: `monotonic-utc-generations` 14/32,
+`chaining-token` 12/32, `self-terminating-loops` 7/32 — the third of which had
+never appeared in any table I published.
+
+**Adopted from the coordinator, as mechanism:** every count now carries a
+control, and a rule that fires everywhere and is quiet nowhere emits
+`NO-CONTROL` — suspect the rule before the estate.
+
+**Open:** D1 D3 D5 D6 D8 D11 D15. **Closed:** D2 D7 D9 D10 D12 D13 D16 + dead
+schedules + gg2050 dead link. **Withdrawn:** D4 D14.

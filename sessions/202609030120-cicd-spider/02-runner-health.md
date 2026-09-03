@@ -1174,3 +1174,16 @@ passes of a number I had defined wrongly, quoted three times.
 Same family as RH18's denominator: **the arithmetic was right and the category
 was wrong**, and a category error survives repetition because every recount
 reproduces it.
+
+### RH28 addendum — two denominators, kept apart
+
+`pass.py` measures the **18 local clones** and reports drift on them; its
+`incidence_denominator` is therefore whatever was measurable that pass (15 on
+pass 13, three being mid-write). The **32-repo census** in `01-drift.md` is a
+separate, periodic full-estate run including the 14 cold repositories cloned to
+scratch.
+
+Both are now stated with their denominator on every write, because RH18 was
+exactly this confusion and RH28 was the same confusion about categories rather
+than counts. A number in this session's files without a denominator beside it
+should be treated as unfinished.

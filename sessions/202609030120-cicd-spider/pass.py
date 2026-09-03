@@ -264,9 +264,27 @@ if not QUICK:
         for v in gained: D('VACCINE-RED',   f'{d} now fails {v}')
         for v in lost:   D('VACCINE-GREEN', f'{d} no longer fails {v}')
     st['cvaa']['not_immune'] = dict(was_fail, **now_fail)
-    st['cvaa']['incidence'] = dict(collections.Counter(
-        v for d in st['cvaa']['not_immune'] for v in st['cvaa']['not_immune'][d]))
-    st['cvaa']['incidence_denominator'] = len(st['cvaa']['not_immune'])
+    # RH27/RH28. Two rules, both learned the hard way, both mechanical now.
+    # (a) Every count carries its CONTROL: how many repositories the rule is
+    #     quiet on. A rule that fires everywhere is a broken instrument, not a
+    #     finding - that is what caught disk-is-not-what-ships at 18/18. A rule
+    #     that is quiet somewhere has demonstrated it can discriminate.
+    # (b) fail, warn and skip are counted SEPARATELY. Counting "not immune"
+    #     merged pinned-actions (level: warning, an accepted dated allowance)
+    #     with real failures, and put it top of a "worst failures" table all
+    #     night when it fails nowhere.
+    tally = collections.defaultdict(lambda: collections.Counter())
+    for d, o in cv.items():
+        for r in o['results']:
+            tally[r['vaccine']][r['state']] += 1
+    st['cvaa']['by_state'] = {v: dict(c) for v, c in sorted(tally.items())}
+    st['cvaa']['incidence'] = {v: c.get('fail', 0) for v, c in tally.items() if c.get('fail')}
+    st['cvaa']['incidence_denominator'] = len(cv)
+    st['cvaa']['incidence_counts'] = 'state == fail only; warnings and skips are in by_state'
+    for v, c in sorted(tally.items()):
+        if c.get('fail') and not c.get('immune'):
+            D('NO-CONTROL', f"{v} fails on all {c['fail']} repositories measured and is quiet on "
+                            "none - suspect the rule before the estate")
     if len(comparable) != len(now_fail):
         D('VACCINE-BASE', f'{len(now_fail)-len(comparable)} repo(s) had no prior vaccine '
                           'record; baselined silently, not reported as change')
