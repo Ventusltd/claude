@@ -420,3 +420,26 @@ only their own call site, definitions never read, and partial views. **None of
 the thirty is about the estate.**
 
 **Open:** D1 D3 D5 D6 D8 D11 D15.
+
+---
+
+## Pass 15 — 2026-09-03T05:28Z — no estate drift
+
+**Denominator corrected and the census re-measured**, not computed: 35 owned,
+1 fork excluded, **34 measured, 16 immune**, ruler cvaa `93e568e`. Membership
+committed as `census-members.json`.
+
+The two repositories missing from every earlier count were `cable_selection`
+and `crm`, both **private** — `users/Ventusltd/repos`, which I enumerated the
+estate from at 01:19Z, returns only public repositories. Both now measured:
+0 workflows, both immune. No rule count changed, which is luck rather than
+diligence.
+
+**RH31, RH32.** My resume contract had a dependency a fresh agent cannot have —
+`census.sh` needed 14 clones that live only in session scratch, so a fresh
+instance would have measured 18 and reported it as the estate, silently. And
+the false API ceiling cost me not just throughput but *visibility*: I re-derived
+the census three times after learning the ceiling was fictional and never
+re-derived the enumeration.
+
+**Open:** D1 D3 D5 D6 D8 D11 D15.
