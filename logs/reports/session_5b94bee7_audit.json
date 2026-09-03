@@ -1,7 +1,7 @@
 {
   "blank_lines_skipped": 0,
   "compression": "zstd level 9",
-  "compression_ratio": 9.198,
+  "compression_ratio": 9.943,
   "dictionary_encoded": [
     "entry_type",
     "subtype",
@@ -16,9 +16,9 @@
     "project",
     "sensitivity"
   ],
-  "distinct_source_lines": 6491,
+  "distinct_source_lines": 7288,
   "first_ts": "2026-09-02T18:29:52.377000+00:00",
-  "flagged_pct": 0.0462,
+  "flagged_pct": 0.0686,
   "flagged_rows": [
     {
       "reason": "judgement 'reckless' applied to person reference 'the owner'",
@@ -37,52 +37,65 @@
       "sensitivity": "opinion_about_person",
       "snippet": "Verified independently from my own DuckDB session, not theirs:  **30,684 rows \u00b7 11 sessions \u00b7 3 projects \u00b7 30 Aug \u2192 3 Sep \u00b7 85.4 MB \u2192 7.95 MB (10.73\u00d7)** \u2014 with 0 unparseable lines across 85 MB, and the readback done from a clean `git worktree` of the *committed* bytes rather than the working tree.  ",
       "source_line": 5351
+    },
+    {
+      "reason": "judgement 'reckless' applied to person reference 'the owner'",
+      "sensitivity": "opinion_about_person",
+      "snippet": "<task-notification> <task-id>a71a417107498eb69</task-id> <tool-use-id>toolu_014Ry6DeXAWU1qEBoUdG5hPm</tool-use-id> <output-file>C:\\Users\\vikra\\AppData\\Local\\Temp\\claude\\C--Users-vikra\\5b94bee7-197b-4cfd-944b-d4cf3aa02d18\\tasks\\a71a417107498eb69.output</output-file> <status>completed</status> <summar",
+      "source_line": 6594
+    },
+    {
+      "reason": "judgement 'reckless' applied to person reference 'the owner'",
+      "sensitivity": "opinion_about_person",
+      "snippet": "<task-notification> <task-id>a71a417107498eb69</task-id> <tool-use-id>toolu_014Ry6DeXAWU1qEBoUdG5hPm</tool-use-id> <output-file>C:\\Users\\vikra\\AppData\\Local\\Temp\\claude\\C--Users-vikra\\5b94bee7-197b-4cfd-944b-d4cf3aa02d18\\tasks\\a71a417107498eb69.output</output-file> <status>completed</status> <summar",
+      "source_line": 6596
     }
   ],
-  "jsonl_lines": 6491,
-  "last_ts": "2026-09-03T18:34:11.711000+00:00",
+  "jsonl_lines": 7288,
+  "last_ts": "2026-09-03T21:40:57.017000+00:00",
   "lines_by_entry_type": {
-    "ai-title": 301,
-    "artifact-autoreact-ledger": 18,
-    "artifact-comment-monitor": 7,
-    "assistant": 1770,
-    "atis-latch": 301,
-    "attachment": 950,
-    "bridge-session": 301,
-    "file-history-delta": 49,
-    "file-history-snapshot": 60,
-    "frame-link": 285,
-    "last-prompt": 300,
-    "mode": 301,
-    "permission-mode": 301,
-    "queue-operation": 541,
-    "system": 135,
-    "user": 871
+    "ai-title": 338,
+    "artifact-autoreact-ledger": 23,
+    "artifact-comment-monitor": 8,
+    "assistant": 2003,
+    "atis-latch": 338,
+    "attachment": 1067,
+    "bridge-session": 339,
+    "cost-state": 2,
+    "file-history-delta": 58,
+    "file-history-snapshot": 66,
+    "frame-link": 322,
+    "last-prompt": 338,
+    "mode": 338,
+    "permission-mode": 338,
+    "queue-operation": 596,
+    "system": 147,
+    "user": 967
   },
   "lines_reconciled": true,
   "output_parquet": "session_5b94bee7.parquet",
-  "parquet_bytes": 1674869,
-  "parquet_rows": 6493,
+  "parquet_bytes": 1792379,
+  "parquet_rows": 7290,
   "project": "C--Users-vikra",
   "redaction_total": 0,
   "redactions": {},
   "row_group_size": 8192,
   "rows_by_content_kind": {
-    "attachment": 950,
+    "attachment": 1067,
     "image": 2,
-    "meta": 2765,
-    "system": 135,
-    "text": 584,
-    "thinking": 569,
-    "tool_result": 744,
-    "tool_use": 744
+    "meta": 3104,
+    "system": 147,
+    "text": 665,
+    "thinking": 641,
+    "tool_result": 832,
+    "tool_use": 832
   },
   "rows_by_sensitivity": {
-    "ok": 6490,
-    "opinion_about_person": 3
+    "ok": 7285,
+    "opinion_about_person": 5
   },
   "session_id": "5b94bee7-197b-4cfd-944b-d4cf3aa02d18",
-  "source_bytes": 15405496,
-  "source_jsonl": "C--Users-vikra__5b94bee7-197b-4cfd-944b-d4cf3aa02d18.jsonl",
+  "source_bytes": 17821918,
+  "source_jsonl": "5b94bee7-197b-4cfd-944b-d4cf3aa02d18.jsonl",
   "unparseable_lines": []
 }
