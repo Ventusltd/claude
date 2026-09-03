@@ -1,0 +1,113 @@
+{
+  "adopt_now": [
+    "transformer identity fix",
+    "denominator terminology block",
+    "verify_connection_points.py",
+    "verify_phase0_acceptance.py",
+    "all three docs/routing documents with source-integrity caveats"
+  ],
+  "artefact_hashes_changed_since_baseline": [],
+  "baseline_corrections": [
+    "Baseline said all five retained ETYS *OFFSHORE* sites are on land. WRONG: only HUMW (0.00 km) and HOWW (0.22 km) are; WERO/WERW (14.56 km) and RAMW (15.83 km) are genuinely offshore.",
+    "Finding B softened: WERO/WERW share a real offshore platform coordinate, not a land/sea error."
+  ],
+  "branch": "codex/20260903-phase0-integrity",
+  "findings_still_open": {
+    "A": "open",
+    "B": "softened",
+    "C": "confirmed gain",
+    "D": "open",
+    "E": "open",
+    "F": "open"
+  },
+  "head_commit": "b91e45b231464c24339f5a58b81e6b1eb4c8b47f",
+  "head_subject": "20260903: correct transformer identity and fail-closed joins",
+  "hold": [
+    "the location join: apply asymmetric mapped-qualifier handling first"
+  ],
+  "new_measurement": {
+    "all_16_within_km": 0.12,
+    "method": "great-circle km to nearest vertex of globalgrid2050 grid_{400,275,132}kv.geojson (143689 vertices)",
+    "rejected_coordinates_km_to_ohl_network": {
+      "AREX": 0.03,
+      "BBWO": 0.02,
+      "BEAT": 0.04,
+      "BLEX": 0.03,
+      "BOSO": 0.02,
+      "BOSW": 0.02,
+      "EACO": 0.12,
+      "GREG": 0.07,
+      "HOWB": 0.11,
+      "LONO": 0.09,
+      "MOWE": 0.04,
+      "NNGO": 0.08,
+      "ORMW": 0.02,
+      "SGRX": 0.02,
+      "TKNO": 0.05,
+      "WDSO": 0.11
+    },
+    "retained_offshore_km_to_ohl_network": {
+      "HOWW": 0.22,
+      "HUMW": 0.0,
+      "RAMW": 15.83,
+      "WERO": 14.56,
+      "WERW": 14.56
+    }
+  },
+  "origin_main_still_at": "1c9909d1138704b29235c27fd769436dda8a0b18",
+  "overclaims_corrected_since_baseline": [],
+  "pushed": false,
+  "revised_rejection_scorecard": {
+    "defensible_sibling_retained_the_point": [
+      "AREX",
+      "BLEX",
+      "GREG",
+      "MOWE",
+      "ORMW"
+    ],
+    "of_which_noise_regex_collateral": [
+      "BEAT",
+      "EACO",
+      "LONO",
+      "NNGO",
+      "SGRX",
+      "TKNO",
+      "WDSO"
+    ],
+    "of_which_shore_heuristic_inverted": [
+      "BBWO",
+      "HOWB"
+    ],
+    "orphaned_features": 10,
+    "point_abandoned_by_both_claimants": [
+      "BOSO",
+      "BOSW"
+    ],
+    "supported_of_16": 5,
+    "true_location_removed_no_competing_claimant": [
+      "BBWO",
+      "BEAT",
+      "EACO",
+      "HOWB",
+      "LONO",
+      "NNGO",
+      "SGRX",
+      "TKNO",
+      "WDSO"
+    ],
+    "true_locations_released": 11
+  },
+  "schema": "claude.codex-audit-delta.v1",
+  "taken_utc": "2026-09-03T01:35:00Z",
+  "trigger": "codex committed at 01:25Z, 5 minutes after baseline",
+  "verdict": "ADOPT WITH CHANGES",
+  "verifiers_reproduce_from_commit": {
+    "verify_connection_points": "44/44",
+    "verify_phase0_acceptance": "22/22, 0 failures"
+  },
+  "working_tree_clean": true,
+  "wrong_bindings_retained": [
+    "HUMW",
+    "HOWW"
+  ]
+}
