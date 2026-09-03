@@ -919,3 +919,46 @@ an hour and answered both times by keeping the truth and changing the shape.
 0 WARN** at 04:14Z, with `pinned-actions`, `no-time-based-gates`,
 `rollback-exists`, `full-history-checkout` and the dead published paths all
 closed, and main-branch CI green across every workflow.
+
+---
+
+## THE MUTABLE EDGE FIRED — 2026-09-03T04:02:57Z, and the pin held
+`data-grid-gb` `origin/main` 1c9909d → 5181de3. Watched on a 90-second poll
+since 01:05Z. Verified against the live CDN, not a working copy:
+
+    .../data-grid-gb/1c9909d/derived/connection-points.v3.json  11e28859a6d1   2,896,561 B
+    .../data-grid-gb/main/derived/connection-points.v3.json     8db7171d9476   2,934,509 B
+    gridatlas pin at ed2135f expects                            11e28859a6d1
+
+The pinned URL still serves the pinned bytes. **The shipped map is unaffected.**
+
+**Two details that outrank the headline.**
+
+1. **The schema string is identical on both sides** —
+   `data-grid-gb.connection-points.v3` before and after — while `with_location`
+   moves 502 → 489 and 882 of 886 records change. The original diagnosis,
+   confirmed in production rather than argued: a fail-closed schema check would
+   have passed this through, and until v9.83 it was the only defence.
+
+2. **`gb-transmission-network.v1.json` changed content at identical byte
+   length** — 10,069,966 B on both sides, `fc331cc20b06` → `b26b324c3b66`. A
+   byte-length check passes it. Only the digest catches it. That is a
+   non-obvious vindication of carrying `sha256` rather than `bytes` alone.
+
+Two commits landed together: `b91e45b` (the transformer-identity correction
+flagged at 01:05Z) and `5181de3` ("Refresh the GB network products") — 10 files,
+1,508 insertions, including `verify_phase0_acceptance.py` at 661 lines.
+
+**What is now open is a decision, not a defect.** The pin is doing what its own
+header promised: *"the correction does NOT reach a reader until the pin moves
+here."* So the map currently shows transformer counts its owner has corrected,
+and thirteen sites whose coordinates the new product drops. Nobody is misled
+silently; somebody must choose. Moving the pin is a gridatlas cut — three
+entries in `atlas/modules/202609030137-pinned-products.js` to `5181de3` with new
+digests and lengths, and a version — which makes the data correction and the map
+correction one visible event. That was the entire point.
+
+**The sequencing question answered by events:** data-grid-gb merged without
+waiting for gridatlas, and because the pin existed that was safe. At 01:05Z it
+would not have been. F5 closed at 02:44Z; this is the first firing since, and it
+was uneventful, which is what a closed defect looks like.
