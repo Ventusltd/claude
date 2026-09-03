@@ -1,0 +1,33 @@
+Lane A: 16 measured findings, and the architect's Atlas screen reproduced
+
+The queue for tonight had to come from measurement rather than from a shelf, so
+this is what two Chromes found driving seven Pipeline News releases and the live
+Atlas side by side at 393x852 and 1400x900.
+
+The architect's case is answered. His URL, cold profile, sampled every 250 ms
+from the instant of navigation: on slow-3G the identity popup is alone on screen
+with no measurement for 9.37 seconds (t=21.62 to t=30.99); on slow-4G for 0.36 s;
+unthrottled the answer arrives at 4.03 s. It is a timing gap, not an ordering
+fault -- there is never more than one popup, and the one carrying the measurement
+is the same element re-rendered, so z-index and a hidden sheet are both ruled
+out. body.dataset.gridatlasRepdDeepLink reads "resolved" for the whole 9.4
+seconds in which no measurement exists, so any gate reading it passes in exactly
+the state he photographed.
+
+One regression: the first project row is 4.91 screens down on the newest release
+against 4.00 on 29 August, and the page grew 0.91 screens.
+
+Two receipts: the frozen record counter is fixed (counter, dataset and all three
+gauge arcs now move with a wider-fleet switch; on 202609031308 all four kept
+solar's answer while the gauge numbers showed landfill gas), and the export now
+declines instead of writing 3,563 solar rows under a landfill-gas heading.
+
+Also recorded: two anchors in familiars/clicker.py match nothing on this product
+and have been reporting zero rows and zero MAP cells on every release it was
+pointed at.
+
+Nothing under releases/, tools/ or the Atlas was touched. Downloads were denied
+at the browser level for every run, so no CSV this lane provoked reached disk.
+
+Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_013uW9p9yeJU75VqrjYJV1qE

@@ -1,0 +1,539 @@
+{
+ "generation": "202609032251",
+ "utc": "2026-09-03T23:23:13Z",
+ "cuts": [
+  {
+   "label": "SPINE ALL TECH",
+   "rows": 100,
+   "with_link": 86,
+   "mismatched": 77,
+   "shown_vs_link": [
+    "Offshore Wind -> wind_offshore",
+    "Battery Storage -> bess",
+    "Solar -> solar",
+    "Onshore Wind -> wind_onshore"
+   ],
+   "cap_mismatch": 9,
+   "example": {
+    "shown": "Offshore Wind",
+    "link": "wind_offshore",
+    "ref": "9873",
+    "cap_cell": "4,100 MW",
+    "cap_link": "4100",
+    "has_link": true
+   },
+   "pagination": [
+    "1\u2013100 of 7,680"
+   ],
+   "counter": "7,680 of 7,680 records \u00b7 356,474.09 MW \u00b7 largest 4,100 MW"
+  },
+  {
+   "label": "SPINE SOLAR",
+   "rows": 100,
+   "with_link": 100,
+   "mismatched": 0,
+   "shown_vs_link": [
+    "Solar -> solar"
+   ],
+   "cap_mismatch": 100,
+   "example": null,
+   "pagination": [
+    "1\u2013100 of 3,563"
+   ],
+   "counter": "3,563 of 7,680 records \u00b7 67,013.29 MW \u00b7 largest 840 MW"
+  },
+  {
+   "label": "SPINE BATTERY",
+   "rows": 100,
+   "with_link": 100,
+   "mismatched": 100,
+   "shown_vs_link": [
+    "Battery Storage -> bess"
+   ],
+   "cap_mismatch": 0,
+   "example": {
+    "shown": "Battery Storage",
+    "link": "bess",
+    "ref": "12453",
+    "cap_cell": "1,450 MW",
+    "cap_link": "1450",
+    "has_link": true
+   },
+   "pagination": [
+    "1\u2013100 of 1,609"
+   ],
+   "counter": "1,609 of 7,680 records \u00b7 147,681.94 MW \u00b7 largest 1,450 MW"
+  },
+  {
+   "label": "SPINE ONSHORE",
+   "rows": 100,
+   "with_link": 98,
+   "mismatched": 98,
+   "shown_vs_link": [
+    "Onshore Wind -> wind_onshore"
+   ],
+   "cap_mismatch": 0,
+   "example": {
+    "shown": "Onshore Wind",
+    "link": "wind_onshore",
+    "ref": "3139",
+    "cap_cell": "652 MW",
+    "cap_link": "652",
+    "has_link": true
+   },
+   "pagination": [
+    "1\u2013100 of 2,399"
+   ],
+   "counter": "2,399 of 7,680 records \u00b7 61,243.45 MW \u00b7 largest 652 MW"
+  },
+  {
+   "label": "SPINE OFFSHORE",
+   "rows": 100,
+   "with_link": 85,
+   "mismatched": 85,
+   "shown_vs_link": [
+    "Offshore Wind -> wind_offshore"
+   ],
+   "cap_mismatch": 0,
+   "example": {
+    "shown": "Offshore Wind",
+    "link": "wind_offshore",
+    "ref": "9873",
+    "cap_cell": "4,100 MW",
+    "cap_link": "4100",
+    "has_link": true
+   },
+   "pagination": [
+    "1\u2013100 of 109"
+   ],
+   "counter": "109 of 7,680 records \u00b7 80,535.4 MW \u00b7 largest 4,100 MW"
+  },
+  {
+   "label": "WIDER LANDFILL GAS \u00b7 275",
+   "rows": 50,
+   "with_link": 50,
+   "mismatched": 50,
+   "shown_vs_link": [
+    "Landfill Gas -> biomass"
+   ],
+   "cap_mismatch": 0,
+   "example": {
+    "shown": "Landfill Gas",
+    "link": "biomass",
+    "ref": "8795",
+    "cap_cell": "22.5 MW",
+    "cap_link": "22.5",
+    "has_link": true
+   },
+   "pagination": [
+    "1\u201350 of 275"
+   ],
+   "counter": "275 of 1,104 records \u00b7 787.87 MW \u00b7 largest 22.5 MW"
+  },
+  {
+   "label": "WIDER ANAEROBIC DIGESTION \u00b7 253",
+   "rows": 50,
+   "with_link": 50,
+   "mismatched": 50,
+   "shown_vs_link": [
+    "Anaerobic Digestion -> biomass"
+   ],
+   "cap_mismatch": 0,
+   "example": {
+    "shown": "Anaerobic Digestion",
+    "link": "biomass",
+    "ref": "6505",
+    "cap_cell": "19 MW",
+    "cap_link": "19",
+    "has_link": true
+   },
+   "pagination": [
+    "1\u201350 of 253"
+   ],
+   "counter": "253 of 1,104 records \u00b7 483.15 MW \u00b7 largest 19 MW"
+  },
+  {
+   "label": "WIDER BIOMASS (DEDICATED) \u00b7 159",
+   "rows": 50,
+   "with_link": 50,
+   "mismatched": 50,
+   "shown_vs_link": [
+    "Biomass (dedicated) -> biomass"
+   ],
+   "cap_mismatch": 0,
+   "example": {
+    "shown": "Biomass (dedicated)",
+    "link": "biomass",
+    "ref": "155",
+    "cap_cell": "65 MW",
+    "cap_link": "65",
+    "has_link": true
+   },
+   "pagination": [
+    "1\u201350 of 159"
+   ],
+   "counter": "159 of 1,104 records \u00b7 1,288.19 MW \u00b7 largest 65 MW"
+  },
+  {
+   "label": "WIDER EFW INCINERATION \u00b7 122",
+   "rows": 50,
+   "with_link": 50,
+   "mismatched": 50,
+   "shown_vs_link": [
+    "EfW Incineration -> biomass"
+   ],
+   "cap_mismatch": 0,
+   "example": {
+    "shown": "EfW Incineration",
+    "link": "biomass",
+    "ref": "932",
+    "cap_cell": "100 MW",
+    "cap_link": "100",
+    "has_link": true
+   },
+   "pagination": [
+    "1\u201350 of 122"
+   ],
+   "counter": "122 of 1,104 records \u00b7 3,088.78 MW \u00b7 largest 100 MW"
+  },
+  {
+   "label": "WIDER SMALL HYDRO \u00b7 108",
+   "rows": 50,
+   "with_link": 50,
+   "mismatched": 50,
+   "shown_vs_link": [
+    "Small Hydro -> hydro"
+   ],
+   "cap_mismatch": 0,
+   "example": {
+    "shown": "Small Hydro",
+    "link": "hydro",
+    "ref": "4909",
+    "cap_cell": "4.5 MW",
+    "cap_link": "4.5",
+    "has_link": true
+   },
+   "pagination": [
+    "1\u201350 of 108"
+   ],
+   "counter": "108 of 1,104 records \u00b7 173.36 MW \u00b7 largest 4.5 MW"
+  },
+  {
+   "label": "WIDER HYDROGEN \u00b7 60",
+   "rows": 50,
+   "with_link": 50,
+   "mismatched": 0,
+   "shown_vs_link": [
+    "Hydrogen -> hydrogen"
+   ],
+   "cap_mismatch": 0,
+   "example": null,
+   "pagination": [
+    "1\u201350 of 60"
+   ],
+   "counter": "60 of 1,104 records \u00b7 4,242.1 MW \u00b7 largest 3,000 MW"
+  },
+  {
+   "label": "WIDER ADVANCED CONVERSION TECHNOLOGIES \u00b7 37",
+   "rows": 37,
+   "with_link": 37,
+   "mismatched": 37,
+   "shown_vs_link": [
+    "Advanced Conversion Technologies -> act"
+   ],
+   "cap_mismatch": 0,
+   "example": {
+    "shown": "Advanced Conversion Technologies",
+    "link": "act",
+    "ref": "6277",
+    "cap_cell": "48 MW",
+    "cap_link": "48",
+    "has_link": true
+   },
+   "pagination": [
+    "1\u201337 of 37"
+   ],
+   "counter": "37 of 1,104 records \u00b7 507.4 MW \u00b7 largest 48 MW"
+  },
+  {
+   "label": "WIDER LARGE HYDRO \u00b7 28",
+   "rows": 28,
+   "with_link": 28,
+   "mismatched": 28,
+   "shown_vs_link": [
+    "Large Hydro -> hydro"
+   ],
+   "cap_mismatch": 0,
+   "example": {
+    "shown": "Large Hydro",
+    "link": "hydro",
+    "ref": "388",
+    "cap_cell": "100 MW",
+    "cap_link": "100",
+    "has_link": true
+   },
+   "pagination": [
+    "1\u201328 of 28"
+   ],
+   "counter": "28 of 1,104 records \u00b7 521.2 MW \u00b7 largest 100 MW"
+  },
+  {
+   "label": "WIDER PUMPED STORAGE HYDROELECTRICITY \u00b7 15",
+   "rows": 15,
+   "with_link": 15,
+   "mismatched": 15,
+   "shown_vs_link": [
+    "Pumped Storage Hydroelectricity -> hydro"
+   ],
+   "cap_mismatch": 0,
+   "example": {
+    "shown": "Pumped Storage Hydroelectricity",
+    "link": "hydro",
+    "ref": "16442",
+    "cap_cell": "2,000 MW",
+    "cap_link": "2000",
+    "has_link": true
+   },
+   "pagination": [
+    "1\u201315 of 15"
+   ],
+   "counter": "15 of 1,104 records \u00b7 10,418.2 MW \u00b7 largest 2,000 MW"
+  },
+  {
+   "label": "WIDER TIDAL STREAM \u00b7 14",
+   "rows": 14,
+   "with_link": 14,
+   "mismatched": 14,
+   "shown_vs_link": [
+    "Tidal Stream -> tidal"
+   ],
+   "cap_mismatch": 0,
+   "example": {
+    "shown": "Tidal Stream",
+    "link": "tidal",
+    "ref": "6611",
+    "cap_cell": "240 MW",
+    "cap_link": "240",
+    "has_link": true
+   },
+   "pagination": [
+    "1\u201314 of 14"
+   ],
+   "counter": "14 of 1,104 records \u00b7 660.1 MW \u00b7 largest 240 MW"
+  },
+  {
+   "label": "WIDER SEWAGE SLUDGE DIGESTION \u00b7 12",
+   "rows": 12,
+   "with_link": 12,
+   "mismatched": 12,
+   "shown_vs_link": [
+    "Sewage Sludge Digestion -> biomass"
+   ],
+   "cap_mismatch": 0,
+   "example": {
+    "shown": "Sewage Sludge Digestion",
+    "link": "biomass",
+    "ref": "6232",
+    "cap_cell": "9.7 MW",
+    "cap_link": "9.7",
+    "has_link": true
+   },
+   "pagination": [
+    "1\u201312 of 12"
+   ],
+   "counter": "12 of 1,104 records \u00b7 50.2 MW \u00b7 largest 9.7 MW"
+  },
+  {
+   "label": "WIDER GEOTHERMAL \u00b7 5",
+   "rows": 5,
+   "with_link": 5,
+   "mismatched": 0,
+   "shown_vs_link": [
+    "Geothermal -> geothermal"
+   ],
+   "cap_mismatch": 0,
+   "example": null,
+   "pagination": [
+    "1\u20135 of 5"
+   ],
+   "counter": "5 of 1,104 records \u00b7 0 MW \u00b7 largest 0 MW"
+  },
+  {
+   "label": "WIDER SHORELINE WAVE \u00b7 4",
+   "rows": 4,
+   "with_link": 4,
+   "mismatched": 4,
+   "shown_vs_link": [
+    "Shoreline Wave -> tidal"
+   ],
+   "cap_mismatch": 0,
+   "example": {
+    "shown": "Shoreline Wave",
+    "link": "tidal",
+    "ref": "2457",
+    "cap_cell": "23 MW",
+    "cap_link": "23",
+    "has_link": true
+   },
+   "pagination": [
+    "1\u20134 of 4"
+   ],
+   "counter": "4 of 1,104 records \u00b7 51 MW \u00b7 largest 23 MW"
+  },
+  {
+   "label": "WIDER LIQUID AIR ENERGY STORAGE \u00b7 2",
+   "rows": 2,
+   "with_link": 2,
+   "mismatched": 2,
+   "shown_vs_link": [
+    "Liquid Air Energy Storage -> caes"
+   ],
+   "cap_mismatch": 0,
+   "example": {
+    "shown": "Liquid Air Energy Storage",
+    "link": "caes",
+    "ref": "11288",
+    "cap_cell": "49.9 MW",
+    "cap_link": "49.9",
+    "has_link": true
+   },
+   "pagination": [
+    "1\u20132 of 2"
+   ],
+   "counter": "2 of 1,104 records \u00b7 54.9 MW \u00b7 largest 49.9 MW"
+  },
+  {
+   "label": "WIDER BIOMASS (CO-FIRING) \u00b7 2",
+   "rows": 2,
+   "with_link": 2,
+   "mismatched": 2,
+   "shown_vs_link": [
+    "Biomass (co-firing) -> biomass"
+   ],
+   "cap_mismatch": 1,
+   "example": {
+    "shown": "Biomass (co-firing)",
+    "link": "biomass",
+    "ref": "6089",
+    "cap_cell": "18 MW",
+    "cap_link": "18",
+    "has_link": true
+   },
+   "pagination": [
+    "1\u20132 of 2"
+   ],
+   "counter": "2 of 1,104 records \u00b7 18.64 MW \u00b7 largest 18 MW"
+  },
+  {
+   "label": "WIDER HOT DRY ROCKS (HDR) \u00b7 2",
+   "rows": 2,
+   "with_link": 2,
+   "mismatched": 2,
+   "shown_vs_link": [
+    "Hot Dry Rocks (HDR) -> geothermal"
+   ],
+   "cap_mismatch": 0,
+   "example": {
+    "shown": "Hot Dry Rocks (HDR)",
+    "link": "geothermal",
+    "ref": "4692",
+    "cap_cell": "7 MW",
+    "cap_link": "7",
+    "has_link": true
+   },
+   "pagination": [
+    "1\u20132 of 2"
+   ],
+   "counter": "2 of 1,104 records \u00b7 10 MW \u00b7 largest 7 MW"
+  },
+  {
+   "label": "WIDER COMPRESSED AIR ENERGY STORAGE \u00b7 2",
+   "rows": 2,
+   "with_link": 2,
+   "mismatched": 2,
+   "shown_vs_link": [
+    "Compressed Air Energy Storage -> caes"
+   ],
+   "cap_mismatch": 0,
+   "example": {
+    "shown": "Compressed Air Energy Storage",
+    "link": "caes",
+    "ref": "11454",
+    "cap_cell": "5 MW",
+    "cap_link": "5",
+    "has_link": true
+   },
+   "pagination": [
+    "1\u20132 of 2"
+   ],
+   "counter": "2 of 1,104 records \u00b7 5 MW \u00b7 largest 5 MW"
+  },
+  {
+   "label": "WIDER FUEL CELL (HYDROGEN) \u00b7 2",
+   "rows": 2,
+   "with_link": 2,
+   "mismatched": 2,
+   "shown_vs_link": [
+    "Fuel Cell (Hydrogen) -> hydrogen"
+   ],
+   "cap_mismatch": 0,
+   "example": {
+    "shown": "Fuel Cell (Hydrogen)",
+    "link": "hydrogen",
+    "ref": "16365",
+    "cap_cell": "0.11 MW",
+    "cap_link": "0.11",
+    "has_link": true
+   },
+   "pagination": [
+    "1\u20132 of 2"
+   ],
+   "counter": "2 of 1,104 records \u00b7 0.11 MW \u00b7 largest 0.11 MW"
+  },
+  {
+   "label": "WIDER FLYWHEELS \u00b7 1",
+   "rows": 1,
+   "with_link": 1,
+   "mismatched": 1,
+   "shown_vs_link": [
+    "Flywheels -> flywheel"
+   ],
+   "cap_mismatch": 0,
+   "example": {
+    "shown": "Flywheels",
+    "link": "flywheel",
+    "ref": "6865",
+    "cap_cell": "400 MW",
+    "cap_link": "400",
+    "has_link": true
+   },
+   "pagination": [
+    "1\u20131 of 1"
+   ],
+   "counter": "1 of 1,104 records \u00b7 400 MW \u00b7 largest 400 MW"
+  },
+  {
+   "label": "WIDER UNKNOWN \u00b7 1",
+   "rows": 1,
+   "with_link": 1,
+   "mismatched": 1,
+   "shown_vs_link": [
+    "Unknown -> other"
+   ],
+   "cap_mismatch": 0,
+   "example": {
+    "shown": "Unknown",
+    "link": "other",
+    "ref": "15205",
+    "cap_cell": "0 MW",
+    "cap_link": "0",
+    "has_link": true
+   },
+   "pagination": [
+    "1\u20131 of 1"
+   ],
+   "counter": "1 of 1,104 records \u00b7 0 MW \u00b7 largest 0 MW"
+  }
+ ],
+ "errs": []
+}

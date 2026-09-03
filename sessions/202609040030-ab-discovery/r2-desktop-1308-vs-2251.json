@@ -1,0 +1,1066 @@
+{
+ "viewport": "1400x900",
+ "utc": "2026-09-03T23:21:12Z",
+ "A": {
+  "generation": "202609031308",
+  "url": "http://127.0.0.1:8971/releases/202609031308-pipelinenews/index.html",
+  "shots": [
+   "shots\\d-202609031308-01-rest.png",
+   "shots\\d-202609031308-02-table.png",
+   "shots\\d-202609031308-03-spine.png",
+   "shots\\d-202609031308-04-wider.png",
+   "shots\\d-202609031308-05-export.png"
+  ],
+  "title": "PipelineNews | Current verified Atlas V9 deep-link successor 202608300309",
+  "at_rest": {
+   "hidden": false,
+   "viewport": "1400x900",
+   "doc_height": 1015,
+   "screens_tall": 1.13,
+   "counter": "7,680 of 7,680 records \u00b7 356,474.09 MW \u00b7 largest 4,100 MW",
+   "counter_dataset": {
+    "filteredCount": "7680",
+    "totalCount": "7680"
+   },
+   "v1": "356,474.09",
+   "v2": "7,680",
+   "v3": "4,100",
+   "g1": "314x120#761e34d0",
+   "g2": "314x120#13860a4e",
+   "g3": "314x120#c66953fa",
+   "exportMeta": "CSV contains the current filtered rows only",
+   "export_dataset": {},
+   "export_btn": {
+    "text": "EXPORT FILTERED CSV",
+    "disabled": false,
+    "w": 155,
+    "h": 32
+   },
+   "row_count": 100,
+   "first_rows": [
+    [
+     "Berwick Bank Offshore Wind",
+     "Offshore \u00b7 Offshore",
+     "Eyemouth",
+     "TD14",
+     "Scottish Southern Energy R",
+     "Offshore Wind",
+     "Awaiting Construction",
+     "4,100 MW",
+     "9873",
+     "GG2050-REPD-9873",
+     "19/01/2026",
+     "\u2014no exact canonical PRIMAR",
+     "MAP \u2197GRID -SUB -NEWS \u2197COPY"
+    ],
+    [
+     "OssianREPD 13429 \u00b7 GG2050-",
+     "Offshore \u00b7 Scotland",
+     "-",
+     "-",
+     "Scottish Power Renewables",
+     "Offshore Wind",
+     "Awaiting Construction",
+     "3,600 MW",
+     "13429",
+     "GG2050-REPD-13429",
+     "01/07/2025",
+     "\u2014no exact canonical PRIMAR",
+     "NO MAPGRID -SUB -NEWS \u2197COP"
+    ]
+   ],
+   "columns": [
+    "SITE NAME",
+    "COUNTY \u2195",
+    "TOWN \u2195",
+    "POSTCODE \u2195",
+    "OPERATOR",
+    "TECHNOLOGY",
+    "OFFICIAL REPD STATUS",
+    "OFFICIAL CAPACITY \u25bc",
+    "REPD REF",
+    "GLOBALGRID REF",
+    "REPD UPDATED \u2195",
+    "NEWS SIGNAL",
+    "ACTIONS"
+   ],
+   "map_hrefs": [
+    "https://ventusltd.github.io/gridatlas/atlas/?repd_ref=9873&project=Berwick+Bank+Offshore+Wind+Farm&technology=wind_offshore&capacity_mw=4100&latitude=56.4431397&longitude=-1.4664021&zoom=12",
+    "https://ventusltd.github.io/gridatlas/atlas/?repd_ref=2472&project=Hornsea+3&technology=wind_offshore&capacity_mw=2955&latitude=53.6815417&longitude=1.4207395&zoom=12",
+    "https://ventusltd.github.io/gridatlas/atlas/?repd_ref=2541&project=Dogger+Bank+A+%26+B+%28was+Creyke+Beck+A+%26+B%29&technology=wind_offshore&capacity_mw=2400&latitude=55.9673372&longitude=1.667921&zoom=12"
+   ],
+   "map_cells_total": 86,
+   "map_cell_rect": {
+    "w": 44,
+    "h": 25,
+    "left_px": 1936,
+    "target": "_blank"
+   },
+   "table_scroll": {
+    "client": 1063,
+    "scroll": 1805,
+    "overflow_px": 742,
+    "flicks": 1.8
+   },
+   "pagination": [
+    "301\u201330 of 132",
+    "501\u2013100 of 7,680"
+   ],
+   "gauge_canvas": [
+    "g1 attr=314x120 css=315x120",
+    "g2 attr=314x120 css=315x120",
+    "g3 attr=314x120 css=315x120"
+   ],
+   "no_map_cells": 14,
+   "tech_buttons": [
+    "ALL TECH 83x44 *",
+    "SOLAR 63x44",
+    "BATTERY 76x44",
+    "ONSHORE 76x44",
+    "OFFSHORE 83x44"
+   ],
+   "wider_options": 21,
+   "wider_selected": "+ 20 MORE REPD TYPES (1,104 PROJECTS)",
+   "wider_rect": "242x44",
+   "widerFleetMeta": "OK \u00b7 20 more REPD technology types in one control \u00b7 1,104 projects \u00b7 22.76 GW",
+   "depth": {
+    "technology_row": {
+     "px": 1938,
+     "screens": 2.15
+    },
+    "counter": {
+     "px": 2216,
+     "screens": 2.46
+    },
+    "export": {
+     "px": 2174,
+     "screens": 2.42
+    },
+    "first_row": {
+     "px": 2395,
+     "screens": 2.66
+    }
+   },
+   "evidence": {
+    "generation": "202608291447",
+    "detailConcurrency": 4,
+    "maximumDetailConcurrency": 0,
+    "detailRequests": 0,
+    "newsRequests": 1,
+    "searchRequests": 0,
+    "chartsReady": true,
+    "newsReady": true,
+    "searchReady": false,
+    "sectorIntelligenceImports": 0,
+    "sectorPayloadRequestsAtMount": 0,
+    "federatedRelationshipImports": 0,
+    "federatedRelationshipPayloadRequests": 0,
+    "projectIntelligenceImports": 0,
+    "projectIntelligencePayloadRequests": 0,
+    "localityRequests": 1,
+    "localityReady": true,
+    "gridDistanceRequests": 1,
+    "gridDistanceReady": true,
+    "substationRequests": 1,
+    "substationReady": true,
+    "gridProximityImports": 0,
+    "gridProximityPayloadRequests": 0,
+    "gbElectricityImports": 0,
+    "gbElectricityPayloadRequests": 0,
+    "widerFleetImports": 1,
+    "widerFleetPayloadRequests": 1,
+    "newsBound": 47,
+    "newsSector": 85,
+    "newsDropped": 4
+   },
+   "errs": [],
+   "log": []
+  },
+  "share_at_table": {
+   "table_percent": 48.6,
+   "chrome_percent": 51.4,
+   "nothing_percent": 0,
+   "owners": [
+    ".nav 13.6%",
+    "html 11.1%",
+    ".main 8.3%",
+    ".meta 5.1%",
+    "#projectWindowControls 5.1%",
+    ".tablewrap 2.6%",
+    ".active 2.2%",
+    "#export 0.8%"
+   ]
+  },
+  "spine_pick": "SOLAR",
+  "after_spine": {
+   "hidden": false,
+   "viewport": "1400x900",
+   "doc_height": 1015,
+   "screens_tall": 1.13,
+   "counter": "3,563 of 7,680 records \u00b7 67,013.29 MW \u00b7 largest 840 MW",
+   "counter_dataset": {
+    "filteredCount": "3563",
+    "totalCount": "7680"
+   },
+   "v1": "67,013.29",
+   "v2": "3,563",
+   "v3": "840",
+   "g1": "314x120#c556b635",
+   "g2": "314x120#3ca869a2",
+   "g3": "314x120#f910af75",
+   "exportMeta": "CSV contains the current filtered rows only",
+   "export_dataset": {},
+   "export_btn": {
+    "text": "EXPORT FILTERED CSV",
+    "disabled": false,
+    "w": 155,
+    "h": 32
+   },
+   "row_count": 100,
+   "first_rows": [
+    [
+     "Botley West, Botley - Botl",
+     "Oxfordshire \u00b7 South East",
+     "Cassington",
+     "OX29 4DZ",
+     "Photovolt Development Part",
+     "Solar",
+     "Application Submitted",
+     "840 MWp",
+     "12588",
+     "GG2050-REPD-12588",
+     "16/12/2024",
+     "\u2014no exact canonical PRIMAR",
+     "MAP \u2197GRID2.96km \u00b7 132kVSUB"
+    ],
+    [
+     "Great North Road Solar Par",
+     "Nottinghamshire \u00b7 East Mid",
+     "North Muskham",
+     "NG23 6HT",
+     "Elements Green",
+     "Solar",
+     "Application Submitted",
+     "800 MWp",
+     "15149",
+     "GG2050-REPD-15149",
+     "13/10/2025",
+     "\u2014no exact canonical PRIMAR",
+     "MAP \u2197GRID1.07km \u00b7 400kVSUB"
+    ]
+   ],
+   "columns": [
+    "SITE NAME",
+    "COUNTY \u2195",
+    "TOWN \u2195",
+    "POSTCODE \u2195",
+    "OPERATOR",
+    "TECHNOLOGY",
+    "OFFICIAL REPD STATUS",
+    "OFFICIAL CAPACITY \u25bc",
+    "REPD REF",
+    "GLOBALGRID REF",
+    "REPD UPDATED \u2195",
+    "NEWS SIGNAL",
+    "ACTIONS"
+   ],
+   "map_hrefs": [
+    "https://ventusltd.github.io/gridatlas/atlas/?repd_ref=12588&project=Botley+West%2C+Botley+-+Botley+West+Solar+Project&technology=solar&capacity_mw=840&latitude=51.8132088&longitude=-1.3489728&zoom=12",
+    "https://ventusltd.github.io/gridatlas/atlas/?repd_ref=15149&project=Great+North+Road+Solar+Park&technology=solar&capacity_mw=800&latitude=53.138419&longitude=-0.8134645&zoom=12",
+    "https://ventusltd.github.io/gridatlas/atlas/?repd_ref=13043&project=Springwell%2C+Lincoln+-+Springwell+Solar+Farm+%26+Battery+Storage&technology=solar&capacity_mw=800&latitude=53.2451474&longitude=-0.5198203&zoom=12"
+   ],
+   "map_cells_total": 100,
+   "map_cell_rect": {
+    "w": 44,
+    "h": 25,
+    "left_px": 1909,
+    "target": "_blank"
+   },
+   "table_scroll": {
+    "client": 1063,
+    "scroll": 1778,
+    "overflow_px": 715,
+    "flicks": 1.7
+   },
+   "pagination": [
+    "301\u201330 of 132",
+    "501\u2013100 of 3,563"
+   ],
+   "gauge_canvas": [
+    "g1 attr=314x120 css=315x120",
+    "g2 attr=314x120 css=315x120",
+    "g3 attr=314x120 css=315x120"
+   ],
+   "no_map_cells": 0,
+   "tech_buttons": [
+    "ALL TECH 83x44",
+    "SOLAR 63x44 *",
+    "BATTERY 76x44",
+    "ONSHORE 76x44",
+    "OFFSHORE 83x44"
+   ],
+   "wider_options": 21,
+   "wider_selected": "+ 20 MORE REPD TYPES (1,104 PROJECTS)",
+   "wider_rect": "242x44",
+   "widerFleetMeta": "OK \u00b7 20 more REPD technology types in one control \u00b7 1,104 projects \u00b7 22.76 GW",
+   "depth": {
+    "technology_row": {
+     "px": -216,
+     "screens": -0.24
+    },
+    "counter": {
+     "px": 62,
+     "screens": 0.07
+    },
+    "export": {
+     "px": 20,
+     "screens": 0.02
+    },
+    "first_row": {
+     "px": 187,
+     "screens": 0.21
+    }
+   },
+   "evidence": {
+    "generation": "202608291447",
+    "detailConcurrency": 4,
+    "maximumDetailConcurrency": 0,
+    "detailRequests": 0,
+    "newsRequests": 1,
+    "searchRequests": 0,
+    "chartsReady": true,
+    "newsReady": true,
+    "searchReady": false,
+    "sectorIntelligenceImports": 0,
+    "sectorPayloadRequestsAtMount": 0,
+    "federatedRelationshipImports": 0,
+    "federatedRelationshipPayloadRequests": 0,
+    "projectIntelligenceImports": 0,
+    "projectIntelligencePayloadRequests": 0,
+    "localityRequests": 1,
+    "localityReady": true,
+    "gridDistanceRequests": 1,
+    "gridDistanceReady": true,
+    "substationRequests": 1,
+    "substationReady": true,
+    "gridProximityImports": 0,
+    "gridProximityPayloadRequests": 0,
+    "gbElectricityImports": 0,
+    "gbElectricityPayloadRequests": 0,
+    "widerFleetImports": 1,
+    "widerFleetPayloadRequests": 1,
+    "newsBound": 47,
+    "newsSector": 85,
+    "newsDropped": 4
+   },
+   "errs": [],
+   "log": []
+  },
+  "wider_pick": "LANDFILL GAS \u00b7 275",
+  "after_wider": {
+   "hidden": false,
+   "viewport": "1400x900",
+   "doc_height": 1015,
+   "screens_tall": 1.13,
+   "counter": "3,563 of 7,680 records \u00b7 67,013.29 MW \u00b7 largest 840 MW",
+   "counter_dataset": {
+    "filteredCount": "3563",
+    "totalCount": "7680"
+   },
+   "v1": "787.87",
+   "v2": "275",
+   "v3": "22.5",
+   "g1": "314x120#c556b635",
+   "g2": "314x120#3ca869a2",
+   "g3": "314x120#f910af75",
+   "exportMeta": "CSV contains the current filtered rows only",
+   "export_dataset": {},
+   "export_btn": {
+    "text": "EXPORT FILTERED CSV",
+    "disabled": false,
+    "w": 155,
+    "h": 32
+   },
+   "row_count": 50,
+   "first_rows": [
+    [
+     "Caledon Green - Gas Powere",
+     "Stirling",
+     "\u2014",
+     "FK3 8TR",
+     "CLAVERHOUSE GENERATION LIM",
+     "Landfill Gas",
+     "awaiting construction",
+     "22.5 MW",
+     "8795",
+     "GG2050-REPD-8795",
+     "\u2014",
+     "\u2014no news binding on this t",
+     "MAP \u2197"
+    ],
+    [
+     "Rainham Phase IILandfill G",
+     "London",
+     "\u2014",
+     "\u2014",
+     "ENERGY DEVELOPMENTS (UK) L",
+     "Landfill Gas",
+     "operational",
+     "17 MW",
+     "520",
+     "GG2050-REPD-520",
+     "\u2014",
+     "\u2014no news binding on this t",
+     "MAP \u2197"
+    ]
+   ],
+   "columns": [
+    "SITE NAME",
+    "COUNTY \u2195",
+    "TOWN \u2195",
+    "POSTCODE \u2195",
+    "OPERATOR",
+    "TECHNOLOGY",
+    "OFFICIAL REPD STATUS",
+    "OFFICIAL CAPACITY \u25bc",
+    "REPD REF",
+    "GLOBALGRID REF",
+    "REPD UPDATED \u2195",
+    "NEWS SIGNAL",
+    "ACTIONS"
+   ],
+   "map_hrefs": [
+    "https://ventusltd.github.io/gridatlas/atlas/?repd_ref=8795&project=Caledon+Green+-+Gas+Powered+Electricity+Generation+Facility&technology=biomass&capacity_mw=22.5&latitude=56.01013&longitude=-3.74061&zoom=12",
+    "https://ventusltd.github.io/gridatlas/atlas/?repd_ref=520&project=Rainham+Phase+II&technology=biomass&capacity_mw=17&latitude=51.49031&longitude=0.19376&zoom=12",
+    "https://ventusltd.github.io/gridatlas/atlas/?repd_ref=626&project=Pitsea+Tipp&technology=biomass&capacity_mw=14&latitude=51.53705&longitude=0.50894&zoom=12"
+   ],
+   "map_cells_total": 50,
+   "map_cell_rect": {
+    "w": 44,
+    "h": 25,
+    "left_px": 1811,
+    "target": "_blank"
+   },
+   "table_scroll": {
+    "client": 1063,
+    "scroll": 1680,
+    "overflow_px": 617,
+    "flicks": 1.5
+   },
+   "pagination": [
+    "301\u201330 of 132",
+    "501\u201350 of 275"
+   ],
+   "gauge_canvas": [
+    "g1 attr=314x120 css=315x120",
+    "g2 attr=314x120 css=315x120",
+    "g3 attr=314x120 css=315x120"
+   ],
+   "no_map_cells": 0,
+   "tech_buttons": [
+    "ALL TECH 83x44",
+    "SOLAR 63x44",
+    "BATTERY 76x44",
+    "ONSHORE 76x44",
+    "OFFSHORE 83x44"
+   ],
+   "wider_options": 21,
+   "wider_selected": "LANDFILL GAS \u00b7 275",
+   "wider_rect": "242x44",
+   "widerFleetMeta": "OK \u00b7 20 more REPD technology types in one control \u00b7 1,104 projects \u00b7 22.76 GW",
+   "depth": {
+    "technology_row": {
+     "px": -216,
+     "screens": -0.24
+    },
+    "counter": {
+     "px": 62,
+     "screens": 0.07
+    },
+    "export": {
+     "px": 20,
+     "screens": 0.02
+    },
+    "first_row": {
+     "px": 187,
+     "screens": 0.21
+    }
+   },
+   "evidence": {
+    "generation": "202608291447",
+    "detailConcurrency": 4,
+    "maximumDetailConcurrency": 0,
+    "detailRequests": 0,
+    "newsRequests": 1,
+    "searchRequests": 0,
+    "chartsReady": true,
+    "newsReady": true,
+    "searchReady": false,
+    "sectorIntelligenceImports": 0,
+    "sectorPayloadRequestsAtMount": 0,
+    "federatedRelationshipImports": 0,
+    "federatedRelationshipPayloadRequests": 0,
+    "projectIntelligenceImports": 0,
+    "projectIntelligencePayloadRequests": 0,
+    "localityRequests": 1,
+    "localityReady": true,
+    "gridDistanceRequests": 1,
+    "gridDistanceReady": true,
+    "substationRequests": 1,
+    "substationReady": true,
+    "gridProximityImports": 0,
+    "gridProximityPayloadRequests": 0,
+    "gbElectricityImports": 0,
+    "gbElectricityPayloadRequests": 0,
+    "widerFleetImports": 1,
+    "widerFleetPayloadRequests": 1,
+    "newsBound": 47,
+    "newsSector": 85,
+    "newsDropped": 4
+   },
+   "errs": [],
+   "log": []
+  },
+  "export_click": {
+   "state": "after_wider",
+   "after": {
+    "text": "3,563 filtered records exported",
+    "declined": false,
+    "missing": null,
+    "counter": "3,563 of 7,680 records \u00b7 67,013.29 MW \u00b7 largest 840 MW"
+   },
+   "errs": []
+  }
+ },
+ "B": {
+  "generation": "202609032251",
+  "url": "http://127.0.0.1:8971/releases/202609032251-pipelinenews/index.html",
+  "shots": [
+   "shots\\d-202609032251-01-rest.png",
+   "shots\\d-202609032251-02-table.png",
+   "shots\\d-202609032251-03-spine.png",
+   "shots\\d-202609032251-04-wider.png",
+   "shots\\d-202609032251-05-export.png"
+  ],
+  "title": "PipelineNews | Current verified Atlas V9 deep-link successor 202608300309",
+  "at_rest": {
+   "hidden": false,
+   "viewport": "1400x900",
+   "doc_height": 1015,
+   "screens_tall": 1.13,
+   "counter": "7,680 of 7,680 records \u00b7 356,474.09 MW \u00b7 largest 4,100 MW",
+   "counter_dataset": {
+    "filteredCount": "7680",
+    "totalCount": "7680"
+   },
+   "v1": "356,474.09",
+   "v2": "7,680",
+   "v3": "4,100",
+   "g1": "314x120#761e34d0",
+   "g2": "314x120#13860a4e",
+   "g3": "314x120#c66953fa",
+   "exportMeta": "CSV contains the current filtered rows only",
+   "export_dataset": {},
+   "export_btn": {
+    "text": "EXPORT FILTERED CSV",
+    "disabled": false,
+    "w": 155,
+    "h": 32
+   },
+   "row_count": 100,
+   "first_rows": [
+    [
+     "Berwick Bank Offshore Wind",
+     "Offshore \u00b7 Offshore",
+     "Eyemouth",
+     "TD14",
+     "Scottish Southern Energy R",
+     "Offshore Wind",
+     "Awaiting Construction",
+     "4,100 MW",
+     "9873",
+     "GG2050-REPD-9873",
+     "19/01/2026",
+     "\u2014no exact canonical PRIMAR",
+     "MAP \u2197GRID -SUB -NEWS \u2197COPY"
+    ],
+    [
+     "OssianREPD 13429 \u00b7 GG2050-",
+     "Offshore \u00b7 Scotland",
+     "-",
+     "-",
+     "Scottish Power Renewables",
+     "Offshore Wind",
+     "Awaiting Construction",
+     "3,600 MW",
+     "13429",
+     "GG2050-REPD-13429",
+     "01/07/2025",
+     "\u2014no exact canonical PRIMAR",
+     "NO MAPGRID -SUB -NEWS \u2197COP"
+    ]
+   ],
+   "columns": [
+    "SITE NAME",
+    "COUNTY \u2195",
+    "TOWN \u2195",
+    "POSTCODE \u2195",
+    "OPERATOR",
+    "TECHNOLOGY",
+    "OFFICIAL REPD STATUS",
+    "OFFICIAL CAPACITY \u25bc",
+    "REPD REF",
+    "GLOBALGRID REF",
+    "REPD UPDATED \u2195",
+    "NEWS SIGNAL",
+    "ACTIONS"
+   ],
+   "map_hrefs": [
+    "https://ventusltd.github.io/gridatlas/atlas/?repd_ref=9873&project=Berwick+Bank+Offshore+Wind+Farm&technology=wind_offshore&capacity_mw=4100&latitude=56.4431397&longitude=-1.4664021&zoom=12",
+    "https://ventusltd.github.io/gridatlas/atlas/?repd_ref=2472&project=Hornsea+3&technology=wind_offshore&capacity_mw=2955&latitude=53.6815417&longitude=1.4207395&zoom=12",
+    "https://ventusltd.github.io/gridatlas/atlas/?repd_ref=2541&project=Dogger+Bank+A+%26+B+%28was+Creyke+Beck+A+%26+B%29&technology=wind_offshore&capacity_mw=2400&latitude=55.9673372&longitude=1.667921&zoom=12"
+   ],
+   "map_cells_total": 86,
+   "map_cell_rect": {
+    "w": 44,
+    "h": 25,
+    "left_px": 1936,
+    "target": "_blank"
+   },
+   "table_scroll": {
+    "client": 1063,
+    "scroll": 1805,
+    "overflow_px": 742,
+    "flicks": 1.8
+   },
+   "pagination": [
+    "301\u201330 of 132",
+    "501\u2013100 of 7,680"
+   ],
+   "gauge_canvas": [
+    "g1 attr=314x120 css=315x120",
+    "g2 attr=314x120 css=315x120",
+    "g3 attr=314x120 css=315x120"
+   ],
+   "no_map_cells": 14,
+   "tech_buttons": [
+    "ALL TECH 83x44 *",
+    "SOLAR 63x44",
+    "BATTERY 76x44",
+    "ONSHORE 76x44",
+    "OFFSHORE 83x44"
+   ],
+   "wider_options": 21,
+   "wider_selected": "+ 20 MORE REPD TYPES (1,104 PROJECTS)",
+   "wider_rect": "242x44",
+   "widerFleetMeta": "OK \u00b7 20 more REPD technology types in one control \u00b7 1,104 projects \u00b7 22.76 GW",
+   "depth": {
+    "technology_row": {
+     "px": 1938,
+     "screens": 2.15
+    },
+    "counter": {
+     "px": 2216,
+     "screens": 2.46
+    },
+    "export": {
+     "px": 2174,
+     "screens": 2.42
+    },
+    "first_row": {
+     "px": 2395,
+     "screens": 2.66
+    }
+   },
+   "evidence": {
+    "generation": "202608291447",
+    "detailConcurrency": 4,
+    "maximumDetailConcurrency": 0,
+    "detailRequests": 0,
+    "newsRequests": 1,
+    "searchRequests": 0,
+    "chartsReady": true,
+    "newsReady": true,
+    "searchReady": false,
+    "sectorIntelligenceImports": 0,
+    "sectorPayloadRequestsAtMount": 0,
+    "federatedRelationshipImports": 0,
+    "federatedRelationshipPayloadRequests": 0,
+    "projectIntelligenceImports": 0,
+    "projectIntelligencePayloadRequests": 0,
+    "localityRequests": 1,
+    "localityReady": true,
+    "gridDistanceRequests": 1,
+    "gridDistanceReady": true,
+    "substationRequests": 1,
+    "substationReady": true,
+    "gridProximityImports": 0,
+    "gridProximityPayloadRequests": 0,
+    "gbElectricityImports": 0,
+    "gbElectricityPayloadRequests": 0,
+    "widerFleetImports": 1,
+    "widerFleetPayloadRequests": 1,
+    "newsBound": 47,
+    "newsSector": 85,
+    "newsDropped": 4
+   },
+   "errs": [],
+   "log": []
+  },
+  "share_at_table": {
+   "table_percent": 48.6,
+   "chrome_percent": 51.4,
+   "nothing_percent": 0,
+   "owners": [
+    ".nav 13.6%",
+    "html 11.1%",
+    ".main 8.3%",
+    ".meta 5.1%",
+    "#projectWindowControls 5.1%",
+    ".tablewrap 2.6%",
+    ".active 2.2%",
+    "#export 0.8%"
+   ]
+  },
+  "spine_pick": "SOLAR",
+  "after_spine": {
+   "hidden": false,
+   "viewport": "1400x900",
+   "doc_height": 1015,
+   "screens_tall": 1.13,
+   "counter": "3,563 of 7,680 records \u00b7 67,013.29 MW \u00b7 largest 840 MW",
+   "counter_dataset": {
+    "filteredCount": "3563",
+    "totalCount": "7680"
+   },
+   "v1": "67,013.29",
+   "v2": "3,563",
+   "v3": "840",
+   "g1": "314x120#c556b635",
+   "g2": "314x120#3ca869a2",
+   "g3": "314x120#f910af75",
+   "exportMeta": "CSV contains the current filtered rows only",
+   "export_dataset": {},
+   "export_btn": {
+    "text": "EXPORT FILTERED CSV",
+    "disabled": false,
+    "w": 155,
+    "h": 32
+   },
+   "row_count": 100,
+   "first_rows": [
+    [
+     "Botley West, Botley - Botl",
+     "Oxfordshire \u00b7 South East",
+     "Cassington",
+     "OX29 4DZ",
+     "Photovolt Development Part",
+     "Solar",
+     "Application Submitted",
+     "840 MWp",
+     "12588",
+     "GG2050-REPD-12588",
+     "16/12/2024",
+     "\u2014no exact canonical PRIMAR",
+     "MAP \u2197GRID2.96km \u00b7 132kVSUB"
+    ],
+    [
+     "Great North Road Solar Par",
+     "Nottinghamshire \u00b7 East Mid",
+     "North Muskham",
+     "NG23 6HT",
+     "Elements Green",
+     "Solar",
+     "Application Submitted",
+     "800 MWp",
+     "15149",
+     "GG2050-REPD-15149",
+     "13/10/2025",
+     "\u2014no exact canonical PRIMAR",
+     "MAP \u2197GRID1.07km \u00b7 400kVSUB"
+    ]
+   ],
+   "columns": [
+    "SITE NAME",
+    "COUNTY \u2195",
+    "TOWN \u2195",
+    "POSTCODE \u2195",
+    "OPERATOR",
+    "TECHNOLOGY",
+    "OFFICIAL REPD STATUS",
+    "OFFICIAL CAPACITY \u25bc",
+    "REPD REF",
+    "GLOBALGRID REF",
+    "REPD UPDATED \u2195",
+    "NEWS SIGNAL",
+    "ACTIONS"
+   ],
+   "map_hrefs": [
+    "https://ventusltd.github.io/gridatlas/atlas/?repd_ref=12588&project=Botley+West%2C+Botley+-+Botley+West+Solar+Project&technology=solar&capacity_mw=840&latitude=51.8132088&longitude=-1.3489728&zoom=12",
+    "https://ventusltd.github.io/gridatlas/atlas/?repd_ref=15149&project=Great+North+Road+Solar+Park&technology=solar&capacity_mw=800&latitude=53.138419&longitude=-0.8134645&zoom=12",
+    "https://ventusltd.github.io/gridatlas/atlas/?repd_ref=13043&project=Springwell%2C+Lincoln+-+Springwell+Solar+Farm+%26+Battery+Storage&technology=solar&capacity_mw=800&latitude=53.2451474&longitude=-0.5198203&zoom=12"
+   ],
+   "map_cells_total": 100,
+   "map_cell_rect": {
+    "w": 44,
+    "h": 25,
+    "left_px": 1909,
+    "target": "_blank"
+   },
+   "table_scroll": {
+    "client": 1063,
+    "scroll": 1778,
+    "overflow_px": 715,
+    "flicks": 1.7
+   },
+   "pagination": [
+    "301\u201330 of 132",
+    "501\u2013100 of 3,563"
+   ],
+   "gauge_canvas": [
+    "g1 attr=314x120 css=315x120",
+    "g2 attr=314x120 css=315x120",
+    "g3 attr=314x120 css=315x120"
+   ],
+   "no_map_cells": 0,
+   "tech_buttons": [
+    "ALL TECH 83x44",
+    "SOLAR 63x44 *",
+    "BATTERY 76x44",
+    "ONSHORE 76x44",
+    "OFFSHORE 83x44"
+   ],
+   "wider_options": 21,
+   "wider_selected": "+ 20 MORE REPD TYPES (1,104 PROJECTS)",
+   "wider_rect": "242x44",
+   "widerFleetMeta": "OK \u00b7 20 more REPD technology types in one control \u00b7 1,104 projects \u00b7 22.76 GW",
+   "depth": {
+    "technology_row": {
+     "px": -216,
+     "screens": -0.24
+    },
+    "counter": {
+     "px": 62,
+     "screens": 0.07
+    },
+    "export": {
+     "px": 20,
+     "screens": 0.02
+    },
+    "first_row": {
+     "px": 187,
+     "screens": 0.21
+    }
+   },
+   "evidence": {
+    "generation": "202608291447",
+    "detailConcurrency": 4,
+    "maximumDetailConcurrency": 0,
+    "detailRequests": 0,
+    "newsRequests": 1,
+    "searchRequests": 0,
+    "chartsReady": true,
+    "newsReady": true,
+    "searchReady": false,
+    "sectorIntelligenceImports": 0,
+    "sectorPayloadRequestsAtMount": 0,
+    "federatedRelationshipImports": 0,
+    "federatedRelationshipPayloadRequests": 0,
+    "projectIntelligenceImports": 0,
+    "projectIntelligencePayloadRequests": 0,
+    "localityRequests": 1,
+    "localityReady": true,
+    "gridDistanceRequests": 1,
+    "gridDistanceReady": true,
+    "substationRequests": 1,
+    "substationReady": true,
+    "gridProximityImports": 0,
+    "gridProximityPayloadRequests": 0,
+    "gbElectricityImports": 0,
+    "gbElectricityPayloadRequests": 0,
+    "widerFleetImports": 1,
+    "widerFleetPayloadRequests": 1,
+    "newsBound": 47,
+    "newsSector": 85,
+    "newsDropped": 4
+   },
+   "errs": [],
+   "log": []
+  },
+  "wider_pick": "LANDFILL GAS \u00b7 275",
+  "after_wider": {
+   "hidden": false,
+   "viewport": "1400x900",
+   "doc_height": 1015,
+   "screens_tall": 1.13,
+   "counter": "275 of 1,104 records \u00b7 787.87 MW \u00b7 largest 22.5 MW",
+   "counter_dataset": {
+    "filteredCount": "275",
+    "totalCount": "1104"
+   },
+   "v1": "787.87",
+   "v2": "275",
+   "v3": "22.5",
+   "g1": "314x120#94d5d4ab",
+   "g2": "314x120#d58b8b1c",
+   "g3": "314x120#ec75d90",
+   "exportMeta": "CSV contains the current filtered rows only",
+   "export_dataset": {},
+   "export_btn": {
+    "text": "EXPORT FILTERED CSV",
+    "disabled": false,
+    "w": 155,
+    "h": 32
+   },
+   "row_count": 50,
+   "first_rows": [
+    [
+     "Caledon Green - Gas Powere",
+     "Stirling",
+     "\u2014",
+     "FK3 8TR",
+     "CLAVERHOUSE GENERATION LIM",
+     "Landfill Gas",
+     "awaiting construction",
+     "22.5 MW",
+     "8795",
+     "GG2050-REPD-8795",
+     "\u2014",
+     "\u2014no news binding on this t",
+     "MAP \u2197"
+    ],
+    [
+     "Rainham Phase IILandfill G",
+     "London",
+     "\u2014",
+     "\u2014",
+     "ENERGY DEVELOPMENTS (UK) L",
+     "Landfill Gas",
+     "operational",
+     "17 MW",
+     "520",
+     "GG2050-REPD-520",
+     "\u2014",
+     "\u2014no news binding on this t",
+     "MAP \u2197"
+    ]
+   ],
+   "columns": [
+    "SITE NAME",
+    "COUNTY \u2195",
+    "TOWN \u2195",
+    "POSTCODE \u2195",
+    "OPERATOR",
+    "TECHNOLOGY",
+    "OFFICIAL REPD STATUS",
+    "OFFICIAL CAPACITY \u25bc",
+    "REPD REF",
+    "GLOBALGRID REF",
+    "REPD UPDATED \u2195",
+    "NEWS SIGNAL",
+    "ACTIONS"
+   ],
+   "map_hrefs": [
+    "https://ventusltd.github.io/gridatlas/atlas/?repd_ref=8795&project=Caledon+Green+-+Gas+Powered+Electricity+Generation+Facility&technology=biomass&capacity_mw=22.5&latitude=56.01013&longitude=-3.74061&zoom=12",
+    "https://ventusltd.github.io/gridatlas/atlas/?repd_ref=520&project=Rainham+Phase+II&technology=biomass&capacity_mw=17&latitude=51.49031&longitude=0.19376&zoom=12",
+    "https://ventusltd.github.io/gridatlas/atlas/?repd_ref=626&project=Pitsea+Tipp&technology=biomass&capacity_mw=14&latitude=51.53705&longitude=0.50894&zoom=12"
+   ],
+   "map_cells_total": 50,
+   "map_cell_rect": {
+    "w": 44,
+    "h": 25,
+    "left_px": 1811,
+    "target": "_blank"
+   },
+   "table_scroll": {
+    "client": 1063,
+    "scroll": 1680,
+    "overflow_px": 617,
+    "flicks": 1.5
+   },
+   "pagination": [
+    "301\u201330 of 132",
+    "501\u201350 of 275"
+   ],
+   "gauge_canvas": [
+    "g1 attr=314x120 css=315x120",
+    "g2 attr=314x120 css=315x120",
+    "g3 attr=314x120 css=315x120"
+   ],
+   "no_map_cells": 0,
+   "tech_buttons": [
+    "ALL TECH 83x44",
+    "SOLAR 63x44",
+    "BATTERY 76x44",
+    "ONSHORE 76x44",
+    "OFFSHORE 83x44"
+   ],
+   "wider_options": 21,
+   "wider_selected": "LANDFILL GAS \u00b7 275",
+   "wider_rect": "242x44",
+   "widerFleetMeta": "OK \u00b7 20 more REPD technology types in one control \u00b7 1,104 projects \u00b7 22.76 GW",
+   "depth": {
+    "technology_row": {
+     "px": -216,
+     "screens": -0.24
+    },
+    "counter": {
+     "px": 62,
+     "screens": 0.07
+    },
+    "export": {
+     "px": 20,
+     "screens": 0.02
+    },
+    "first_row": {
+     "px": 187,
+     "screens": 0.21
+    }
+   },
+   "evidence": {
+    "generation": "202608291447",
+    "detailConcurrency": 4,
+    "maximumDetailConcurrency": 0,
+    "detailRequests": 0,
+    "newsRequests": 1,
+    "searchRequests": 0,
+    "chartsReady": true,
+    "newsReady": true,
+    "searchReady": false,
+    "sectorIntelligenceImports": 0,
+    "sectorPayloadRequestsAtMount": 0,
+    "federatedRelationshipImports": 0,
+    "federatedRelationshipPayloadRequests": 0,
+    "projectIntelligenceImports": 0,
+    "projectIntelligencePayloadRequests": 0,
+    "localityRequests": 1,
+    "localityReady": true,
+    "gridDistanceRequests": 1,
+    "gridDistanceReady": true,
+    "substationRequests": 1,
+    "substationReady": true,
+    "gridProximityImports": 0,
+    "gridProximityPayloadRequests": 0,
+    "gbElectricityImports": 0,
+    "gbElectricityPayloadRequests": 0,
+    "widerFleetImports": 1,
+    "widerFleetPayloadRequests": 1,
+    "newsBound": 47,
+    "newsSector": 85,
+    "newsDropped": 4
+   },
+   "errs": [],
+   "log": []
+  },
+  "export_click": {
+   "state": "after_wider",
+   "after": {
+    "text": "EXPORT DECLINED \u00b7 LANDFILL GAS is a wider-fleet cut, not this product's own. It can fill 10 of this CSV's 50 columns: Site Name, REPD Ref, Technology, Official REPD Technology, Official REPD Capacity, Official REPD Status, Operator or Applicant, County, Longitude, Latitude. The other 40 \u2014 the GlobalGrid project and development IDs, identity status and confidence, planning authority and application reference, the REPD record-updated date and the seven planning milestone dates, region, country, derived lifecycle, the related-REPD and relationship columns, easting, northing and the coordinate provenance, the source digests and the news signal \u2014 are joins onto the spine's payload, which this cut does not read. A file carrying them blank would still leave here looking official, so no file was written. Switch to SOLAR, BATTERY, ONSHORE or OFFSHORE to export this product's own cut.",
+    "declined": true,
+    "missing": "GlobalGrid Project ID | GlobalGrid Development ID | Identity Status | Identity Confidence | Capacity Unit | Derived Lifecycle | Region | Country | Planning Authority | Planning Application Reference | REPD Record Updated | Planning Application Submitted | Planning Application Withdrawn | Planning Permission Granted | Planning Permission Refused | Planning Permission Expired | Under Construction | Operational | Old REPD Ref | Direct Related REPD Refs | Planning Sibling REPD Refs | Development REPD Refs | Typed Relationships JSON | Geometry Status | Easting | Northing | Source CRS | Atlas V9 URL | Output CRS | Coordinate Transform | Coordinate Use | Source Dataset | Source Row | Projects Array SHA-256 | Source Identity SHA-256 | Source Coordinate Fixture SHA-256 | Source Workbook SHA-256 | Source Reconciliation | Canonical News Signal \u2014 Event Unverified | Canonical News Match Note",
+    "counter": "275 of 1,104 records \u00b7 787.87 MW \u00b7 largest 22.5 MW"
+   },
+   "errs": []
+  }
+ }
+}

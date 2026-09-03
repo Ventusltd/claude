@@ -1,0 +1,225 @@
+{
+ "url": "https://ventusltd.github.io/gridatlas/atlas/?repd_ref=155&project=Markinch+Biomass+CHP+Plant&technology=biomass&capacity_mw=65&latitude=56.20118&longitude=-3.16226&zoom=12",
+ "profile": "slow-4g",
+ "mobile": true,
+ "utc": "2026-09-03T23:29:59Z",
+ "transitions": [
+  {
+   "popups": [],
+   "n_popups": 0,
+   "sheet": false,
+   "sheet_rect": null,
+   "answer_len": 0,
+   "deep": null,
+   "ref": null,
+   "loader_visible": true,
+   "working_label": null,
+   "search_bar": null,
+   "ready": "complete",
+   "identity_repeats": 0,
+   "painted_at_answer": "#gridatlas-loader",
+   "errs": [],
+   "t_s": 0.29
+  },
+  {
+   "popups": [],
+   "n_popups": 0,
+   "sheet": false,
+   "sheet_rect": null,
+   "answer_len": 0,
+   "deep": null,
+   "ref": null,
+   "loader_visible": false,
+   "working_label": null,
+   "search_bar": null,
+   "ready": "loading",
+   "identity_repeats": 0,
+   "painted_at_answer": "html",
+   "errs": [],
+   "t_s": 2.55
+  },
+  {
+   "popups": [],
+   "n_popups": 0,
+   "sheet": false,
+   "sheet_rect": null,
+   "answer_len": 0,
+   "deep": null,
+   "ref": null,
+   "loader_visible": false,
+   "working_label": null,
+   "search_bar": {
+    "rect": [
+     95,
+     149,
+     283,
+     24
+    ],
+    "text": "GO"
+   },
+   "ready": "loading",
+   "identity_repeats": 0,
+   "painted_at_answer": "#map",
+   "errs": [],
+   "t_s": 2.84
+  },
+  {
+   "popups": [],
+   "n_popups": 0,
+   "sheet": false,
+   "sheet_rect": null,
+   "answer_len": 0,
+   "deep": null,
+   "ref": null,
+   "loader_visible": false,
+   "working_label": null,
+   "search_bar": {
+    "rect": [
+     95,
+     149,
+     283,
+     24
+    ],
+    "text": "GO"
+   },
+   "ready": "complete",
+   "identity_repeats": 0,
+   "painted_at_answer": ".maplibregl-canvas",
+   "errs": [],
+   "t_s": 4.1
+  },
+  {
+   "popups": [
+    {
+     "cls": "maplibregl-popup-anchor-bottom",
+     "rect": [
+      89,
+      284,
+      216,
+      142
+     ],
+     "z": "auto",
+     "is_sheet": false,
+     "has_measure": false,
+     "text": "Markinch Biomass CHP Plantbiomass65 MWMarkinch, Fife \u00b7 FifeREPD 155 \u00b7 operational\u00d7"
+    }
+   ],
+   "n_popups": 1,
+   "sheet": false,
+   "sheet_rect": null,
+   "answer_len": 0,
+   "deep": "resolved",
+   "ref": "155",
+   "loader_visible": false,
+   "working_label": "DIV: Loading the substation data \u2014 the links need it.",
+   "search_bar": {
+    "rect": [
+     122,
+     100,
+     261,
+     44
+    ],
+    "text": "Markinch Biomass CHP PlantMarkinch, Fife \u00b7 Fife65 MW \u00b7 REPD 155Hill Street155 metres south west of, 61 Ballyards Road, M"
+   },
+   "ready": "complete",
+   "identity_repeats": 2,
+   "painted_at_answer": ".maplibregl-canvas",
+   "errs": [],
+   "t_s": 7.96
+  },
+  {
+   "popups": [
+    {
+     "cls": "gridatlas-sheet maplibregl-popup-anchor-top-right",
+     "rect": [
+      0,
+      358,
+      393,
+      494
+     ],
+     "z": "400",
+     "is_sheet": true,
+     "has_measure": true,
+     "text": "\u22ee\u22eeMarkinch Biomass CHP Plant\u2212\u00d7Markinch Biomass CHP Plantbiomass65 MWMarkinch, Fife \u00b7 FifeR"
+    }
+   ],
+   "n_popups": 1,
+   "sheet": true,
+   "sheet_rect": [
+    0,
+    358,
+    393,
+    494
+   ],
+   "answer_len": 692,
+   "deep": "resolved",
+   "ref": "155",
+   "loader_visible": false,
+   "working_label": null,
+   "search_bar": {
+    "rect": [
+     122,
+     100,
+     261,
+     44
+    ],
+    "text": "Markinch Biomass CHP PlantMarkinch, Fife \u00b7 Fife65 MW \u00b7 REPD 155Hill Street155 metres south west of, 61 Ballyards Road, M"
+   },
+   "ready": "complete",
+   "identity_repeats": 3,
+   "painted_at_answer": ".neon-answer",
+   "errs": [],
+   "t_s": 8.32
+  },
+  {
+   "popups": [
+    {
+     "cls": "gridatlas-sheet maplibregl-popup-anchor-top",
+     "rect": [
+      0,
+      358,
+      393,
+      494
+     ],
+     "z": "400",
+     "is_sheet": true,
+     "has_measure": true,
+     "text": "\u22ee\u22eeMarkinch Biomass CHP Plant\u2212\u00d7Markinch Biomass CHP Plantbiomass65 MWMarkinch, Fife \u00b7 FifeR"
+    }
+   ],
+   "n_popups": 1,
+   "sheet": true,
+   "sheet_rect": [
+    0,
+    358,
+    393,
+    494
+   ],
+   "answer_len": 692,
+   "deep": "resolved",
+   "ref": "155",
+   "loader_visible": false,
+   "working_label": null,
+   "search_bar": {
+    "rect": [
+     122,
+     100,
+     261,
+     44
+    ],
+    "text": "Markinch Biomass CHP PlantMarkinch, Fife \u00b7 Fife65 MW \u00b7 REPD 155Hill Street155 metres south west of, 61 Ballyards Road, M"
+   },
+   "ready": "complete",
+   "identity_repeats": 3,
+   "painted_at_answer": ".neon-answer",
+   "errs": [],
+   "t_s": 9.08
+  }
+ ],
+ "throttle": {
+  "latency": 150,
+  "downloadThroughput": 192000.0,
+  "uploadThroughput": 96000.0
+ },
+ "final_hidden": false
+}

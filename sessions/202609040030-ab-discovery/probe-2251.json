@@ -1,0 +1,183 @@
+{
+ "generation": "202609032251",
+ "mobile": false,
+ "utc": "2026-09-03T23:25:15Z",
+ "solar": {
+  "cap_pairs": [
+   {
+    "name": "Botley West, Botley - Botley W",
+    "cell_cap": "840 MWp",
+    "cell_tech": "Solar",
+    "link_cap": "840",
+    "link_tech": "solar",
+    "link_zoom": "12",
+    "link_lat": "51.8132088"
+   },
+   {
+    "name": "Great North Road Solar ParkREP",
+    "cell_cap": "800 MWp",
+    "cell_tech": "Solar",
+    "link_cap": "800",
+    "link_tech": "solar",
+    "link_zoom": "12",
+    "link_lat": "53.138419"
+   },
+   {
+    "name": "Springwell, Lincoln - Springwe",
+    "cell_cap": "800 MWp",
+    "cell_tech": "Solar",
+    "link_cap": "800",
+    "link_tech": "solar",
+    "link_zoom": "12",
+    "link_lat": "53.2451474"
+   },
+   {
+    "name": "The Tween Bridge Solar FarmREP",
+    "cell_cap": "800 MWp",
+    "cell_tech": "Solar",
+    "link_cap": "800",
+    "link_tech": "solar",
+    "link_zoom": "12",
+    "link_lat": "53.6207382"
+   },
+   {
+    "name": "Whitestone Solar FarmREPD 1769",
+    "cell_cap": "750 MWp",
+    "cell_tech": "Solar",
+    "link_cap": "750",
+    "link_tech": "solar",
+    "link_zoom": "12",
+    "link_lat": "53.4307198"
+   },
+   {
+    "name": "One Earth Solar FarmREPD 14806",
+    "cell_cap": "740 MWp",
+    "cell_tech": "Solar",
+    "link_cap": "740",
+    "link_tech": "solar",
+    "link_zoom": "12",
+    "link_lat": "53.2226387"
+   },
+   {
+    "name": "Cottam Solar ProjectREPD 10914",
+    "cell_cap": "600 MWp",
+    "cell_tech": "Solar",
+    "link_cap": "600",
+    "link_tech": "solar",
+    "link_zoom": "12",
+    "link_lat": "53.3520884"
+   },
+   {
+    "name": "Green Hill Solar Farm & Batter",
+    "cell_cap": "600 MWp",
+    "cell_tech": "Solar",
+    "link_cap": "600",
+    "link_tech": "solar",
+    "link_zoom": "12",
+    "link_lat": "52.29058"
+   }
+  ],
+  "pager": {
+   "text": "PREVIOUS 501\u2013100 of 3,563NEXT 50",
+   "controls": [
+    "PREVIOUS 50 103x34 disabled",
+    "NEXT 50 76x34"
+   ]
+  },
+  "strip": {
+   "meta": "CSV contains the current filtered rows only",
+   "declined_class": false,
+   "declined_dataset": null,
+   "btn_text": "EXPORT FILTERED CSV",
+   "btn_disabled": false,
+   "btn_aria": null,
+   "btn_size": "155x32"
+  },
+  "floor": {
+   "rows_read": 100,
+   "min": 49.99,
+   "below_1mw": 0,
+   "zero": 0,
+   "stated_claim": "every qualifying \u22651 MW record is loaded",
+   "size_note": "drag for round sizes, or type an exact MW value \u00b7 the register itself starts at 1 MW"
+  }
+ },
+ "geothermal_label": "GEOTHERMAL \u00b7 5",
+ "geothermal": {
+  "cap_pairs": [
+   {
+    "name": "Mawla Redruth - Geothermal Pow",
+    "cell_cap": "0 MW",
+    "cell_tech": "Geothermal",
+    "link_cap": "0",
+    "link_tech": "geothermal",
+    "link_zoom": "12",
+    "link_lat": "50.27058"
+   },
+   {
+    "name": "Tolvaddon Geothermal Power Pla",
+    "cell_cap": "0 MW",
+    "cell_tech": "Geothermal",
+    "link_cap": "0",
+    "link_tech": "geothermal",
+    "link_zoom": "12",
+    "link_lat": "50.23098"
+   },
+   {
+    "name": "Rosehill Farm - Geothermal Pow",
+    "cell_cap": "0 MW",
+    "cell_tech": "Geothermal",
+    "link_cap": "0",
+    "link_tech": "geothermal",
+    "link_zoom": "12",
+    "link_lat": "50.31858"
+   },
+   {
+    "name": "Lower Crahan Farm - Geothermal",
+    "cell_cap": "0 MW",
+    "cell_tech": "Geothermal",
+    "link_cap": "0",
+    "link_tech": "geothermal",
+    "link_zoom": "12",
+    "link_lat": "50.1233"
+   },
+   {
+    "name": "Eden Geothermal Limited - Eden",
+    "cell_cap": "0 MW",
+    "cell_tech": "Geothermal",
+    "link_cap": "0",
+    "link_tech": "geothermal",
+    "link_zoom": "12",
+    "link_lat": "50.3726"
+   }
+  ],
+  "pager": {
+   "text": "PREVIOUS 501\u20135 of 5NEXT 50",
+   "controls": [
+    "PREVIOUS 50 103x34 disabled",
+    "NEXT 50 76x34 disabled"
+   ]
+  },
+  "strip": {
+   "meta": "CSV contains the current filtered rows only",
+   "declined_class": false,
+   "declined_dataset": null,
+   "btn_text": "EXPORT FILTERED CSV",
+   "btn_disabled": false,
+   "btn_aria": null,
+   "btn_size": "155x32"
+  },
+  "floor": {
+   "rows_read": 5,
+   "min": 0,
+   "below_1mw": 5,
+   "zero": 5,
+   "stated_claim": "every qualifying \u22651 MW record is loaded",
+   "size_note": "drag for round sizes, or type an exact MW value \u00b7 the register itself starts at 1 MW"
+  },
+  "counter": "5 of 1,104 records \u00b7 0 MW \u00b7 largest 0 MW"
+ },
+ "shot": "shots\\probe-202609032251-geothermal.png",
+ "errs": [],
+ "log": []
+}
