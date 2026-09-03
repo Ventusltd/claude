@@ -337,7 +337,44 @@ sentence describing the instrument.
 
 ---
 
-## 8. Where the record lives
+## 8. Estate bottom line — every repo, default branch, read from the API
+
+This is the scan you asked for at the start of the session, done properly for the first time:
+repos enumerated from the API (a disk scan has under-counted this estate twice — 15, then 30,
+then 33), CI filtered to each repo's **own** default branch, read authenticated.
+
+**35 repositories. 20 green · 4 red · 11 with no workflow runs.**
+
+The four reds, each with its cause read from the log rather than inferred:
+
+| repo | since | cause |
+|---|---|---|
+| **globalgrid2050** | 03:17Z today | **D1, firing.** Not a defect — my verifier working |
+| **pipelinenews** | 00:10Z today | **D8** — the schema divergence in §5 |
+| **data-interconnectors** | 02 Sep | `Input required and not supplied: token` |
+| **globalgrid2050-hompage** | 02 Sep | `Input required and not supplied: token` — identical |
+
+**globalgrid2050 is red because the publication-truth gate is doing its job.** The exact message:
+
+> `PUBLICATION TRUTH: FAIL` — the homepage names Grid Atlas **v9.86 / 202609030200** as the
+> current verified release while the live composition is **v9.88 / 202609030234**
+
+That is D1, and it upgrades the decision. D1 was filed as *"the stamp cannot be maintained by
+hand"* — a maintenance argument. It is now **holding the flagship repository red**, and it will
+go red again within minutes of every GridAtlas cut. GridAtlas made ten cuts overnight. I did not
+re-stamp it, because re-stamping is the treadmill you need to decide about, not escape from: it
+would buy roughly the nine minutes until v9.89.
+
+The two `token` failures are one mechanical fault in two places — an action requiring a `token`
+input that no step supplies. Both predate tonight, neither is in my assigned lane, and I did not
+touch workflow auth wiring in repositories I have not read at 04:50. Named here so they are not
+mistaken for content defects; they are the cheapest two greens available.
+
+*(Method: `sessions/202609030422-handover/scripts/` — the sweep and the wall-walker.)*
+
+---
+
+## 9. Where the record lives
 
 - This file supersedes the 03:00 snapshot for anything it contradicts.
 - `07-routing-table.md` and `08-decisions-for-the-architect.md` are current to ~03:05Z and are
