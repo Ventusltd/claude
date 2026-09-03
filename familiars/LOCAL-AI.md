@@ -202,6 +202,17 @@ carried out to the exit code.
 
 ## Where the environment variables live
 
+**More than one lane writes these.** Between this session setting them and checking them
+forty minutes later, `OLLAMA_FLASH_ATTENTION`, `OLLAMA_NUM_PARALLEL` and
+`OLLAMA_MAX_LOADED_MODELS` had been cleared by another lane and `OLLAMA_KEEP_ALIVE` moved
+30m → 10m. They are shared mutable state exactly like the git index: read them back, do not
+assume yours survived.
+
+One of those pairings is not optional. **`OLLAMA_KV_CACHE_TYPE=q8_0` requires
+`OLLAMA_FLASH_ATTENTION=1`** — llama.cpp cannot use a quantised KV cache without flash
+attention, so clearing the second while leaving the first set is a broken configuration
+rather than a smaller one. It was found in that state and restored.
+
 Set at **User** scope, so the tray app inherits them on a normal start. Note that
 `[Environment]::SetEnvironmentVariable(...,'User')` does **not** reach an already-running
 PowerShell's child processes — the first restart silently kept `OLLAMA_FLASH_ATTENTION:false`
