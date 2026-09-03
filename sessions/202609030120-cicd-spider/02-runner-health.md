@@ -926,3 +926,43 @@ stated in the artefact's own `method` field and in `03-crosslink.md`, but the
 default shape is still the fat one, and defaults are what get used. If I were
 starting again I would emit the shipped graph as the artefact and the full scan
 as an appendix.
+
+---
+
+## RH23 — 2026-09-03T03:54Z — the clock error came back a third time, in the one
+## place I had not mechanised
+
+    $ date -u    2026-09-03T03:53:52Z
+    $ date       2026-09-03T04:53:52 GMTDT
+
+I have been narrating times roughly thirty minutes ahead of UTC for the last
+hour — "still 1c9909d at 04:09Z" when it was 03:39Z, "waiting for the window at
+04:46Z" when it was 04:16Z, and I told the coordinator I had 4.6 hours left when
+I had 5.1.
+
+**The commits are correct.** Every stamp since RH12 comes from
+`date -u +%Y%m%d%H%M` evaluated in the same command as the commit, and every one
+matches its `%cI`. The mechanism held exactly where I put it.
+
+**The prose is wrong**, because I never mechanised that. RH4 named the error,
+RH12 recorded that naming it had not fixed it and mechanised the commit stamp,
+and I then went on reading clocks by hand everywhere the mechanism did not
+reach. Same error, third venue: local `%cI` output in `git log`, arithmetic in
+my head, and estimates extrapolated from an already-wrong anchor.
+
+**What I changed.** No time appears in a message or a report unless it came from
+a `date -u` I ran in that same turn. Where I need an interval — "hours to
+09:00Z" — I compute it rather than estimate it. Nothing about my reasoning has
+proved able to hold a clock.
+
+The pattern across RH4, RH12 and this: **a correction only protects the call
+site you install it at.** That is now the third time tonight it has been the
+lesson — RH16 (guard on gates, not on cvaa), RH18 (guard changed the
+denominator downstream), and this. The estate's own `monotonic-utc-generations`
+would have caught all three of my commit-stamp errors and none of my prose ones,
+for the same reason: it checks what is committed, and prose is not.
+
+**Correction to the record:** every "Z" time I stated in a coordinator message
+between roughly 03:15Z and 03:54Z is about thirty minutes late. The measurements
+those messages carry — commit SHAs, counts, HTTP status codes, vaccine
+verdicts — are unaffected, because none of them was derived from a clock.
