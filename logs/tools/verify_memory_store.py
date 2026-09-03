@@ -320,6 +320,40 @@ def main() -> int:
         else:
             print(f"\nevery session transcript under {tdir} is in the store")
 
+        # Presence is not coverage. A session is converted ONCE, on request, and then
+        # keeps running - so a store can hold a parquet for every transcript and still
+        # be missing hours. On 3 September the store held session 5b94bee7 and stopped
+        # at 18:34:11Z; the session ran to 21:40:57Z, and 797 lines existed nowhere but
+        # the live JSONL. Every check above passed on it, because they all reconcile
+        # the store against ITSELF. This one reconciles it against the source.
+        live = {uuid_of(p.stem): p for p in tdir.rglob("*.jsonl")
+                if not p.stem.startswith("agent-")}
+        behind = []
+        for s in sessions:
+            path = live.get(uuid_of(s["session_id"]))
+            if path is None:
+                continue  # converted from a transcript this machine no longer holds
+            try:
+                with open(path, "rb") as fh:
+                    now_lines = sum(1 for ln in fh if ln.strip())
+            except OSError as exc:
+                problems.append(f"{path} could not be read to check for staleness: {exc}")
+                continue
+            stored = s["source_lines"] or 0
+            if now_lines > stored:
+                behind.append((str(s["session_id"])[:8], stored, now_lines, path))
+        if behind:
+            print(f"\n{len(behind)} session(s) in the store are BEHIND the live transcript:")
+            for sid, stored, now_lines, path in behind:
+                print(f"  - {sid}: store holds {stored:,} lines, "
+                      f"{path.name} now has {now_lines:,} (+{now_lines - stored:,})")
+            problems.append(
+                f"{len(behind)} session(s) are behind their live transcript; "
+                "re-run jsonl_to_parquet.py and render_session_markdown.py for each"
+            )
+        elif sessions:
+            print("no session in the store is behind its live transcript")
+
     generation = _dt.datetime.now(_dt.timezone.utc).strftime("%Y%m%d%H%M")
     manifest = {"generation": generation,
                 "sessions": sorted(sessions, key=lambda s: str(s["session_id"]))}
