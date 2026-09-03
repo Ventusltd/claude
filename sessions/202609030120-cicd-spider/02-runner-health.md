@@ -571,3 +571,17 @@ should be asked "what else reads a working copy?" before it is called done.
 
 `attestation-freshness` on gridatlas remains unconfirmed and is recorded as
 such, not as a finding.
+
+### RH16 addendum, 2026-09-03T02:40Z — the fix was not in the commit that
+### described it
+
+The patch above was applied by a script with three assertions. The third failed,
+the script exited before writing the file, and my `&&` chain committed and pushed
+`02-runner-health.md` describing a fix that `pass.py` did not contain
+(`b0a1c1f`). For four minutes this file asserted a guard that was not there.
+
+Applied properly and verified by parsing the file. The shape of the error is the
+one worth keeping: **I wrote the account of the fix and the fix in the same
+command, and only one of them was conditional on success.** A record that can be
+committed without the thing it records is not a record. From here the change is
+made and verified first, and described second.

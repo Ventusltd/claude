@@ -177,21 +177,36 @@ if not QUICK:
     st['cvaa']['measured_with_commit'] = cv_head
 
     def one_cvaa(d):
+        # RH16. The dirty-tree guard was applied to gates and not to cvaa, which
+        # reads the same working copies. A findings delta measured while an agent
+        # is mid-write is the same false signal RH6 was written to stop.
+        h0, dirty0 = tree_state(d)
+        if dirty0:
+            return d, None, f'{dirty0} uncommitted path(s)'
         rc,out = run('.', ['node', os.path.join(CV,'inoculate.mjs'),
                            os.path.join(GH,d), '--json','--no-write'], timeout=900)
+        h1, dirty1 = tree_state(d)
+        if h1 != h0 or dirty1:
+            return d, None, f'tree moved during the run ({h0[:7]}->{h1[:7]}, dirty {dirty1})'
         for line in out.split('\n'):
             line = line.strip()
             if line.startswith('{') and '"schema"' in line:
-                try: return d, json.loads(line)
+                try: return d, json.loads(line), None
                 except Exception: pass
-        return d, None
+        return d, None, 'no JSON record'
     cv = {}
+    unmeasurable = []
     with cf.ThreadPoolExecutor(max_workers=6) as ex:
-        for d,obj in ex.map(one_cvaa, repos):
+        for d,obj,why in ex.map(one_cvaa, repos):
             if obj is None:
-                D('RUNNER', f"cvaa produced no JSON for {d} - suspect the runner, not the repo")
+                if why and ('uncommitted' in why or 'moved during' in why):
+                    unmeasurable.append(d)          # not a finding, not a change
+                else:
+                    D('RUNNER', f"cvaa produced no JSON for {d} ({why}) - suspect the runner, not the repo")
                 continue
             cv[d] = obj
+    if unmeasurable:
+        D('CVAA-SKIP', f"{len(unmeasurable)} repo(s) mid-write, not measured: {', '.join(sorted(unmeasurable))}")
     prev = st['cvaa']['per_repo']
     for d,obj in cv.items():
         if d in prev and prev[d]['findings'] != obj['findings']:
@@ -202,7 +217,11 @@ if not QUICK:
     for v in set(inc)|set(old_inc):
         if inc.get(v,0) != old_inc.get(v,0):
             D('VACCINE', f"{v} incidence {old_inc.get(v,0)} -> {inc.get(v,0)} of {len(cv)}")
-    st['cvaa']['per_repo'] = {k:{"status":v['status'],"findings":v['findings']} for k,v in cv.items()}
+    # carry forward the last good figures for anything not measured this pass,
+    # so an unmeasured repository can never read as a change next pass either
+    carried = {k:v for k,v in prev.items() if k not in cv}
+    st['cvaa']['per_repo'] = dict(carried,
+        **{k:{"status":v['status'],"findings":v['findings']} for k,v in cv.items()})
     st['cvaa']['incidence'] = dict(inc)
     for d,obj in cv.items():
         wf = obj['context']['workflows']
