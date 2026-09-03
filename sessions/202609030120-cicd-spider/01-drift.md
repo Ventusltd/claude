@@ -1006,3 +1006,37 @@ need it — the trap recorded in D16. gridatlas is immune.
 
 Both are false negatives. **The dangerous half of D15 is the half that is
 left.**
+
+---
+
+## D3 — headline re-measured under the new ruler, 2026-09-03T04:14Z
+cvaa `4666369`, 25 active vaccines, all 32 repositories. Two antibodies changed
+since the first measurement, so the table was re-derived rather than carried
+forward.
+
+**14 of 32 immune. 513 findings across the other 18.** (Was 14 and 517.)
+
+| vaccine | now | at 02:28Z |
+|---|---|---|
+| `pinned-actions` | **15/32** | 16/32 |
+| `monotonic-utc-generations` | **14/32** | 14/32 |
+| `chaining-token` | **12/32** | 12/32 |
+| `least-permissions` | 11/32 | 11/32 |
+| `self-terminating-loops` | 7/32 | 7/32 |
+| `no-per-release-workflows` | 6/32 | 6/32 |
+| `no-time-based-gates` | 3/32 | 4/32 |
+| `pointer-verifies` | 2/32 | 2/32 |
+| `rollback-exercised`, `executor-declared`, `loop-exists` | 1/32 each | 1/32 |
+| `rollback-exists` | **0/32** | 1/32 |
+| the remaining 14 | 0 | 0 |
+
+**`rollback-exists` now fails nowhere in the estate** — gridatlas was the only
+repository failing it and closed it at `1762170` (D13).
+`attestation-freshness` and `full-history-checkout` are immune estate-wide under
+their rewritten antibodies.
+
+The top three are unchanged after four hours and roughly twenty repository
+commits, which is the useful finding: **the estate's remaining CVAA exposure is
+almost entirely CI supply-chain pinning and generation stamping, and neither
+moves on its own.** Both are one-off mechanical fixes rather than ongoing
+discipline problems.

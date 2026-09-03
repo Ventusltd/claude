@@ -1,9 +1,9 @@
 {
  "schema": "cicd-spider.state.v1",
  "session_dir": "claude/sessions/202609030120-cicd-spider",
- "pass": 8,
+ "pass": 10,
  "pass_started_utc": "2026-09-03T01:19:00Z",
- "pass_completed_utc": "2026-09-03T03:23:15Z",
+ "pass_completed_utc": "2026-09-03T04:06:39Z",
  "next_pass_due_utc": "2026-09-03T02:55:00Z",
  "run_until_utc": "2026-09-03T09:00:00Z",
  "read_only_except": "claude/sessions/202609030120-cicd-spider",
@@ -41,9 +41,11 @@
   "limit_per_hour": 60,
   "calls_used_pass1": 3,
   "note": "no gh CLI and no GH_TOKEN on this machine. Actions API must be sampled sparingly; git answers every HEAD question locally for free.",
-  "calls_used_last_pass": 1,
-  "remaining_at_pass": 24,
-  "ci_repos_sampled": []
+  "calls_used_last_pass": 2,
+  "remaining_at_pass": 36,
+  "ci_repos_sampled": [
+   "gridatlas"
+  ]
  },
  "heads": {
   "chatgpt-audits": {
@@ -56,11 +58,11 @@
    "workflows": 0
   },
   "claude": {
-   "head": "74daaff06241f992c96d53f78597bd18748e1083",
+   "head": "3ab4f429d3f47f975713369b598b89c1cf2cef42",
    "branch": "main",
-   "committed_at": "2026-09-03T04:22:27+01:00",
-   "subject": "202609030322: audit the antibodies behind every finding I reported as fact",
-   "dirty_files": 5,
+   "committed_at": "2026-09-03T05:05:40+01:00",
+   "subject": "202609030405: the mutable edge fired and the pin held",
+   "dirty_files": 2,
    "commit_count": 27,
    "workflows": 0
   },
@@ -182,12 +184,12 @@
    "workflows": 0
   },
   "gridatlas": {
-   "head": "cc449d584eb3896c10ff180ca020c5a515595308",
+   "head": "ed2135fffd8a82deaa883515dbae137eac3f0f71",
    "branch": "main",
-   "committed_at": "2026-09-03T04:19:38+01:00",
-   "subject": "202609030319: the live verifier expects the composition this repository declares",
+   "committed_at": "2026-09-03T04:36:54+01:00",
+   "subject": "202609030336: the explanation of a text scan belongs in the log, not in the text it scans",
    "dirty_files": 0,
-   "commit_count": 303,
+   "commit_count": 308,
    "workflows": 6
   },
   "pipelinenews": {
@@ -215,7 +217,7 @@
    "cmd": "node tools/proofs/run-current.mjs",
    "state": "pass",
    "detail": "every composed cartridge passed its generation-matched proof",
-   "last_run": "2026-09-03T03:22:33Z",
+   "last_run": "2026-09-03T04:05:56Z",
    "first_seen": "2026-09-03T01:35:14Z",
    "last_unmeasurable": "2026-09-03T02:29:30Z"
   },
@@ -224,14 +226,14 @@
    "cmd": "python derived/verify_connection_points.py",
    "state": "pass",
    "detail": "both products are clean: parameters as published, join reported, and neither claims to assess a connection.",
-   "last_run": "2026-09-03T03:22:33Z"
+   "last_run": "2026-09-03T04:05:56Z"
   },
   "datagridgb__verify-phase0-acceptance": {
    "repo": "data-grid-gb",
    "cmd": "python derived/verify_phase0_acceptance.py",
    "state": "pass",
    "detail": "}",
-   "last_run": "2026-09-03T03:22:33Z"
+   "last_run": "2026-09-03T04:05:56Z"
   },
   "datagridgb__verify-product": {
    "repo": "data-grid-gb",
@@ -239,7 +241,7 @@
    "state": "pass",
    "detail": "PASS chatgpt\\derived\\etys-2025.normalized.json 40f0aa1cbdcb35d9f62e9c87e89d8230b93faa4e45d0e08e6ecd18cf287010d0 counts={'circuit_changes': 1520, 'circuits': 1392, 'fault_scenarios': 7316, 's",
    "note": "REQUIRES a product path argument",
-   "last_run": "2026-09-03T03:22:33Z"
+   "last_run": "2026-09-03T04:05:56Z"
   },
   "pipelinenews__render_proof": {
    "repo": "pipelinenews",
@@ -247,52 +249,52 @@
    "state": "pass",
    "detail": "pipelinenews has 7 uncommitted path(s); another agent is mid-write",
    "note": "REQUIRES a release-id argument",
-   "last_run": "2026-09-03T03:22:33Z",
-   "last_unmeasurable": "2026-09-03T03:22:33Z"
+   "last_run": "2026-09-03T04:05:56Z",
+   "last_unmeasurable": "2026-09-03T04:05:56Z"
   },
   "pipelinenews__sector_render_proof": {
    "repo": "pipelinenews",
    "cmd": "node tools/intelligence/sector_render_proof.mjs <release-id>",
    "state": "pass",
    "detail": "pipelinenews has 7 uncommitted path(s); another agent is mid-write",
-   "last_run": "2026-09-03T03:22:33Z",
-   "last_unmeasurable": "2026-09-03T03:22:33Z"
+   "last_run": "2026-09-03T04:05:56Z",
+   "last_unmeasurable": "2026-09-03T04:05:56Z"
   },
   "pipelinenews__surface_truth_proof": {
    "repo": "pipelinenews",
    "cmd": "node tools/intelligence/surface_truth_proof.mjs <release-id>",
    "state": "pass",
    "detail": "pipelinenews has 7 uncommitted path(s); another agent is mid-write",
-   "last_run": "2026-09-03T03:22:33Z",
-   "last_unmeasurable": "2026-09-03T03:22:33Z"
+   "last_run": "2026-09-03T04:05:56Z",
+   "last_unmeasurable": "2026-09-03T04:05:56Z"
   },
   "gdm__verify": {
    "repo": "grid-distance-maths",
    "cmd": "node test/verify.mjs",
    "state": "pass",
    "detail": "34/34 checks passed",
-   "last_run": "2026-09-03T03:22:33Z"
+   "last_run": "2026-09-03T04:05:56Z"
   },
   "gdm__verify_nearest": {
    "repo": "grid-distance-maths",
    "cmd": "node test/verify_nearest.mjs",
    "state": "pass",
    "detail": "54/54 checks passed",
-   "last_run": "2026-09-03T03:22:33Z"
+   "last_run": "2026-09-03T04:05:56Z"
   },
   "gdm__verify_parity": {
    "repo": "grid-distance-maths",
    "cmd": "python test/verify_parity.py",
    "state": "pass",
    "detail": "446/446 parity checks passed - geodesy.py and geodesy.mjs agree",
-   "last_run": "2026-09-03T03:22:33Z"
+   "last_run": "2026-09-03T04:05:56Z"
   },
   "dgbe__price_decade_rollup": {
    "repo": "data-gb-electricity",
    "cmd": "python derived/verify_price_decade_rollup.py",
    "state": "pass",
    "detail": "PASS: price rollup v2 states inclusion, coverage, shares and exact extremes",
-   "last_run": "2026-09-03T03:22:33Z"
+   "last_run": "2026-09-03T04:05:56Z"
   },
   "dgbe__bounded_growth": {
    "repo": "data-gb-electricity",
@@ -307,7 +309,7 @@
    "state": "FAIL",
    "detail": "  - the homepage names Grid Atlas v9.86 / 202609030200 as the current verified release while the live composition is v9.88 / 202609030234",
    "first_seen": "2026-09-03T01:27:48Z",
-   "last_run": "2026-09-03T03:22:33Z",
+   "last_run": "2026-09-03T04:05:56Z",
    "last_unmeasurable": "2026-09-03T02:29:31Z"
   }
  },
@@ -335,21 +337,25 @@
    "template": "cvaa/consumer-workflow-template.yml"
   },
   "per_repo": {
-   "claude": {
-    "status": "not-immune",
-    "findings": 17
+   "Mahabharata": {
+    "status": "immune",
+    "findings": 0
    },
-   "cvaa": {
-    "status": "not-immune",
-    "findings": 4
+   "Solar-PV-Hybrid-and-off-grid": {
+    "status": "immune",
+    "findings": 0
    },
-   "pipelinenews": {
-    "status": "not-immune",
-    "findings": 167
+   "architecture": {
+    "status": "immune",
+    "findings": 0
    },
    "chatgpt-audits": {
     "status": "not-immune",
     "findings": 71
+   },
+   "claude": {
+    "status": "not-immune",
+    "findings": 21
    },
    "codex-chatgpt": {
     "status": "immune",
@@ -358,6 +364,10 @@
    "companies": {
     "status": "not-immune",
     "findings": 30
+   },
+   "cvaa": {
+    "status": "not-immune",
+    "findings": 4
    },
    "data-centres-gb": {
     "status": "not-immune",
@@ -383,6 +393,10 @@
     "status": "not-immune",
     "findings": 2
    },
+   "data_uk_dno_and_tso": {
+    "status": "immune",
+    "findings": 0
+   },
    "gb-electricity-ui": {
     "status": "immune",
     "findings": 0
@@ -390,6 +404,10 @@
    "gemini": {
     "status": "immune",
     "findings": 0
+   },
+   "globalgrid2050-hompage": {
+    "status": "not-immune",
+    "findings": 1
    },
    "globalgrid2050": {
     "status": "not-immune",
@@ -401,11 +419,51 @@
    },
    "gridatlas": {
     "status": "not-immune",
-    "findings": 74
+    "findings": 66
+   },
+   "pipelinenews": {
+    "status": "not-immune",
+    "findings": 167
+   },
+   "pv-arc-protection-circuit": {
+    "status": "immune",
+    "findings": 0
+   },
+   "registry_of_all_content_in_repos_and_dependencies": {
+    "status": "not-immune",
+    "findings": 1
+   },
+   "reports": {
+    "status": "immune",
+    "findings": 0
+   },
+   "seed-data": {
+    "status": "immune",
+    "findings": 0
+   },
+   "solar-electrical-topology-analysis-engine-text-based": {
+    "status": "not-immune",
+    "findings": 2
+   },
+   "solar-repowering-whitepaper": {
+    "status": "immune",
+    "findings": 0
    },
    "spiders": {
     "status": "not-immune",
     "findings": 2
+   },
+   "uk-dno-data": {
+    "status": "immune",
+    "findings": 0
+   },
+   "v11": {
+    "status": "immune",
+    "findings": 0
+   },
+   "youengineer-code-review": {
+    "status": "immune",
+    "findings": 0
    }
   },
   "incidence": {
@@ -413,8 +471,8 @@
    "chaining-token": 9,
    "least-permissions": 5,
    "no-per-release-workflows": 5,
-   "no-time-based-gates": 3,
-   "pinned-actions": 8,
+   "no-time-based-gates": 2,
+   "pinned-actions": 7,
    "self-terminating-loops": 5,
    "rollback-exercised": 1,
    "executor-declared": 1,
@@ -429,12 +487,13 @@
    "unscanned": [
     "pandapower"
    ],
-   "workflow_files_total": 354,
-   "findings_total": 546,
-   "immune_repos": 0,
-   "cold_clones_at": "scratchpad/estate (14 repos cloned 2026-09-03T01:41Z)"
+   "immune_repos": 14,
+   "findings_total": 513,
+   "measured_at": "2026-09-03T04:14Z",
+   "ruler_commit": "4666369",
+   "active_vaccines": 25
   },
-  "measured_with_commit": "791e24b242c004945d0edf3e8f744934b65c2c7d",
+  "measured_with_commit": "4666369489bdeb0e5548f1e34bf63d9893af74fb",
   "ruler": {
    "202608301321-one-active-scope.md": "2b9cf9774285",
    "202608301322-no-app-copies.md": "587c82a21b6e",
@@ -456,8 +515,8 @@
    "202608301703-executor-declared.md": "95123bd94f62",
    "202608301704-loop-exists.md": "97123837ecab",
    "202608301705-rollback-exercised.md": "722f4a9788e8",
-   "202608301706-attestation-freshness.md": "fedb4a04a66d",
-   "202608301720-full-history-checkout.md": "af62e0569ad8",
+   "202608301706-attestation-freshness.md": "af93c2aa7d3f",
+   "202608301720-full-history-checkout.md": "119004a6c451",
    "202608301810-no-time-based-gates.md": "3729a1e87969",
    "202608311458-release-name-convention.md": "e72a06e079e6",
    "202608312045-page-data-block-parses.md": "73682abef592"
@@ -548,9 +607,7 @@
     "executor-declared",
     "loop-exists",
     "monotonic-utc-generations",
-    "no-per-release-workflows",
-    "no-time-based-gates",
-    "pinned-actions"
+    "no-per-release-workflows"
    ],
    "spiders": [
     "chaining-token",
@@ -682,38 +739,36 @@
  ],
  "pipelinenews_release": "202609030009-pipelinenews",
  "last_pass_drift": [
-  "[HEAD] claude d7b1039 -> 74daaff [main] 202609030322: audit the antibodies behind every finding I reported as fact",
-  "[HEAD] globalgrid2050 fafa4d2 -> a0f93e8 [main] 202609030340: the one dead Grid Atlas link on the public directory",
-  "[HEAD] gridatlas 8fb95a2 -> cc449d5 [main] 202609030319: the live verifier expects the composition this repository declares",
+  "[HEAD] claude 271e57a -> 3ab4f42 [main] 202609030405: the mutable edge fired and the pin held",
+  "[HEAD] gridatlas efa0102 -> ed2135f [main] 202609030336: the explanation of a text scan belongs in the log, not in the text it scans",
+  "[CVAA-RULER] active vaccine set changed (25 -> 25): +[] -[] ~['202608301706-attestation-freshness.md', '202608301720-full-history-checkout.md']; a findings delta this pass may be the ruler, not the repo",
   "[CVAA-SKIP] 3 repo(s) mid-write, not measured: claude, cvaa, pipelinenews",
-  "[CVAA] globalgrid2050 findings 92 -> 93",
-  "[CVAA] gridatlas findings 77 -> 74",
+  "[CVAA] gridatlas findings 74 -> 66",
   "[BYTE-UNSAFE] 2 repo(s) have CRLF drift, so byte-dependent vaccines are not reportable from the workspace: data-gridatlas, gridatlas - re-measure in a clean clone",
-  "[VACCINE-GREEN] gridatlas no longer fails rollback-exists",
-  "[COUNT] gridatlas workflow files 5 -> 6",
-  "[API-BUDGET] 24/60 left, floor 25: CI not sampled this pass so the estate gates keep their share"
+  "[VACCINE-GREEN] gridatlas no longer fails no-time-based-gates",
+  "[VACCINE-GREEN] gridatlas no longer fails pinned-actions"
  ],
  "ci": {
   "gridatlas": {
-   "202609030251 Build GridAtlas v9.89 grid-data verified successor": {
-    "conclusion": "failure",
-    "head_sha": "b67d0a0",
-    "at": "2026-09-03T03:00:32Z"
-   },
    "202608312212 GridAtlas cartridge proof": {
     "conclusion": "success",
-    "head_sha": "8fb95a2",
-    "at": "2026-09-03T02:35:28Z"
-   },
-   "202608310050 GridAtlas next-version builders": {
-    "conclusion": "success",
-    "head_sha": "8fb95a2",
-    "at": "2026-09-03T02:35:24Z"
+    "head_sha": "ed2135f",
+    "at": "2026-09-03T03:37:12Z"
    },
    "pages build and deployment": {
     "conclusion": "success",
-    "head_sha": "8fb95a2",
-    "at": "2026-09-03T02:35:58Z"
+    "head_sha": "ed2135f",
+    "at": "2026-09-03T03:37:34Z"
+   },
+   "202608310050 GridAtlas next-version builders": {
+    "conclusion": "success",
+    "head_sha": "a9247f1",
+    "at": "2026-09-03T03:25:32Z"
+   },
+   "202608310015 GridAtlas overnight next versions": {
+    "conclusion": "success",
+    "head_sha": "a9247f1",
+    "at": "2026-09-03T03:25:29Z"
    }
   },
   "pipelinenews": {
@@ -1054,5 +1109,5 @@
  ],
  "f5_status": "no remaining instances. 5 mutable shipped runtime edges at 01:05Z, 2 after gridatlas v9.83, 1 after RH17. The remaining one is the publication-truth gate following the live pointer, which should stay mutable.",
  "runner_health_entries": 21,
- "last_updated": "2026-09-03T03:29:01Z"
+ "last_updated": "2026-09-03T04:09:35Z"
 }
