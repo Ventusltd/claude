@@ -60,3 +60,8 @@ sessions/<YYYYMMDDHHMM>-<slug>/
 | date | session | what it established |
 |---|---|---|
 | 2026-09-02/03 | [`202609021835-estate-and-corridor`](sessions/202609021835-estate-and-corridor/) | Estate-wide CI/CD scan; four Atlas defects; datapoint and LOC census; NESO provenance verified to the cell; routing gate run and failed |
+
+## Licence
+
+GPL-2.0-only, mirroring the Linux kernel. See [COPYING](COPYING).
+
