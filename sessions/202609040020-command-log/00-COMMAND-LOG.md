@@ -187,3 +187,62 @@ is about to be switched off is work that may not survive.
 Everything above is pushed. Nothing is held. The lanes were mid-flight when the machine went
 down, so assume any agent's unfinished work is lost and re-read the repos rather than the
 plan. The reading order in `## RESPAWN` still stands.
+
+---
+
+## 202609040040 — a correction and a data defect, recorded at the buzzer
+
+**The Markinch "not in the cut" finding was WRONG and is withdrawn.** Markinch is in the cut
+and **fully measured**: `ref 155 · RWE · biomass · 65.0 MW · Fife · operational`, circuit
+**2.47 km at 275 kV**, substation **2.486 km — Glenrothes Substation (SP Energy Networks,
+275/33 kV)**. The data is complete and correct.
+
+The lane's own account of how it got there is the transferable part, and it is two instruments
+failing the same way:
+
+- `wider-fleet.json` is a bare list of 1,104 dicts, not a dict. The first probe threw
+  `AttributeError: 'list' object has no attribute 'items'` and **a thrown probe was allowed to
+  count as an answer**.
+- Every file was searched for `repd_ref`. **`wider-fleet` and `grid-proximity` key it `ref`.**
+  So the grid-proximity check queried a key that does not exist there and returned False for
+  all 4,138 rows — a dead instrument reporting a clean negative.
+
+**So the Markinch defect is client-side, timing or Atlas-side, exactly as first suspected, and
+nothing on the Pipeline News data side excuses it.** That correction must reach the discovery
+lane before it chases a phantom.
+
+### The data defect found on the way, and it is real
+
+Reconciling the widening's 1,091 added rows:
+
+```
+wider-fleet          1,104
+  no ref                13  →  12 dropped, 1 CARRIED as ref: ""
+  ref present        1,091  →  1,090 carried, 1 DROPPED (13263 Rassau)
+carried total                   1,091
+```
+
+**Two errors that cancel exactly, which is why the total looked right.** One legitimate
+ref-bearing project was dropped and one identity-less row was added.
+
+- The added row is `ref: ""` — *BOC Limited, Wholeflats Road, Green Hydrogen Electrolyser
+  Plant*, 200 MW — carrying a real proximity measurement **under an empty identity that can
+  never be joined back to any project**. Twelve of its thirteen ref-less siblings were
+  correctly dropped; this one was not.
+- The dropped one, `13263 Rassau Industrial Estate`, has a ref AND a coordinate. Its name
+  contains an **embedded newline**, and `widen_spine.py` reshapes rows into a 40-column TSV
+  contract where an embedded newline splits one record into two. **Hypothesis, not result** —
+  the lane did not run the widening. It belongs to whoever owns `widen_spine.py`.
+
+Capacity was tested and killed as an explanation: 119 of the 120 ref-bearing zero-capacity
+rows were carried.
+
+### The rule this earned
+
+> **A zero result is not a finding until the probe has been shown to return non-zero on a
+> known-present case.** Both of tonight's instrument failures were a probe that could only
+> ever return nothing, reported as evidence that there was nothing.
+
+That is the same shape as the estate's existing rule — *a sweep that returns the same answer
+for every subject is a broken instrument* — one level down, and it now has a positive control
+attached: Markinch.
