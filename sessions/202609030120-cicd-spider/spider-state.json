@@ -1,9 +1,9 @@
 {
  "schema": "cicd-spider.state.v1",
  "session_dir": "claude/sessions/202609030120-cicd-spider",
- "pass": 4,
+ "pass": 8,
  "pass_started_utc": "2026-09-03T01:19:00Z",
- "pass_completed_utc": "2026-09-03T01:56:22Z",
+ "pass_completed_utc": "2026-09-03T03:23:15Z",
  "next_pass_due_utc": "2026-09-03T02:55:00Z",
  "run_until_utc": "2026-09-03T09:00:00Z",
  "read_only_except": "claude/sessions/202609030120-cicd-spider",
@@ -41,7 +41,9 @@
   "limit_per_hour": 60,
   "calls_used_pass1": 3,
   "note": "no gh CLI and no GH_TOKEN on this machine. Actions API must be sampled sparingly; git answers every HEAD question locally for free.",
-  "calls_used_last_pass": 7
+  "calls_used_last_pass": 1,
+  "remaining_at_pass": 24,
+  "ci_repos_sampled": []
  },
  "heads": {
   "chatgpt-audits": {
@@ -54,12 +56,12 @@
    "workflows": 0
   },
   "claude": {
-   "head": "9afd188c3142c1ec8ef1086563068896a077a0f6",
+   "head": "74daaff06241f992c96d53f78597bd18748e1083",
    "branch": "main",
-   "committed_at": "2026-09-03T02:55:37+01:00",
-   "subject": "202609030240: pass.py measures the estate with the published cvaa, not the working copy",
-   "dirty_files": 1,
-   "commit_count": 19,
+   "committed_at": "2026-09-03T04:22:27+01:00",
+   "subject": "202609030322: audit the antibodies behind every finding I reported as fact",
+   "dirty_files": 5,
+   "commit_count": 27,
    "workflows": 0
   },
   "codex-chatgpt": {
@@ -126,12 +128,12 @@
    "workflows": 1
   },
   "data-gridatlas": {
-   "head": "5484218a99a1cfde60c84daaa5aba001ebfcd697",
+   "head": "8bf88da9e210ce9f61dc0398869d3369f3fa2445",
    "branch": "main",
-   "committed_at": "2026-09-01T00:25:46+01:00",
-   "subject": "202608312345: pin text to LF, so the file on disk is the file that ships",
+   "committed_at": "2026-09-03T03:43:07+01:00",
+   "subject": "202609030243: the consumer probe reads the release directory that is served",
    "dirty_files": 0,
-   "commit_count": 18,
+   "commit_count": 20,
    "workflows": 11
   },
   "data-interconnectors": {
@@ -162,12 +164,12 @@
    "workflows": 0
   },
   "globalgrid2050": {
-   "head": "87e6da86edcc46c2916ada08f242c46ba767df2a",
+   "head": "a0f93e875717e7de71ed5664f0098b9b59a9df89",
    "branch": "main",
-   "committed_at": "2026-09-03T02:10:54+01:00",
-   "subject": "202609030109: link the three published releases that had no row",
+   "committed_at": "2026-09-03T04:17:34+01:00",
+   "subject": "202609030340: the one dead Grid Atlas link on the public directory",
    "dirty_files": 0,
-   "commit_count": 4514,
+   "commit_count": 4517,
    "workflows": 241
   },
   "grid-distance-maths": {
@@ -180,13 +182,13 @@
    "workflows": 0
   },
   "gridatlas": {
-   "head": "5a59e711bfdf3b18a04736ba55377a88d442e10d",
+   "head": "cc449d584eb3896c10ff180ca020c5a515595308",
    "branch": "main",
-   "committed_at": "2026-09-03T02:52:02+01:00",
-   "subject": "202609030151-gridatlas-v9.84: the proof reads the product through the pin, and a missing product is a red",
-   "dirty_files": 3,
-   "commit_count": 297,
-   "workflows": 5
+   "committed_at": "2026-09-03T04:19:38+01:00",
+   "subject": "202609030319: the live verifier expects the composition this repository declares",
+   "dirty_files": 0,
+   "commit_count": 303,
+   "workflows": 6
   },
   "pipelinenews": {
    "head": "cdb8fe99f2b0e70b4c8afde13e2d92123bf7df42",
@@ -211,25 +213,25 @@
   "gridatlas__run-current": {
    "repo": "gridatlas",
    "cmd": "node tools/proofs/run-current.mjs",
-   "state": "FAIL",
-   "detail": "gridatlas has 3 uncommitted path(s); another agent is mid-write",
-   "last_run": "2026-09-03T01:55:51Z",
+   "state": "pass",
+   "detail": "every composed cartridge passed its generation-matched proof",
+   "last_run": "2026-09-03T03:22:33Z",
    "first_seen": "2026-09-03T01:35:14Z",
-   "last_unmeasurable": "2026-09-03T01:55:51Z"
+   "last_unmeasurable": "2026-09-03T02:29:30Z"
   },
   "datagridgb__verify-connection-points": {
    "repo": "data-grid-gb",
    "cmd": "python derived/verify_connection_points.py",
    "state": "pass",
    "detail": "both products are clean: parameters as published, join reported, and neither claims to assess a connection.",
-   "last_run": "2026-09-03T01:55:51Z"
+   "last_run": "2026-09-03T03:22:33Z"
   },
   "datagridgb__verify-phase0-acceptance": {
    "repo": "data-grid-gb",
    "cmd": "python derived/verify_phase0_acceptance.py",
    "state": "pass",
    "detail": "}",
-   "last_run": "2026-09-03T01:55:51Z"
+   "last_run": "2026-09-03T03:22:33Z"
   },
   "datagridgb__verify-product": {
    "repo": "data-grid-gb",
@@ -237,7 +239,7 @@
    "state": "pass",
    "detail": "PASS chatgpt\\derived\\etys-2025.normalized.json 40f0aa1cbdcb35d9f62e9c87e89d8230b93faa4e45d0e08e6ecd18cf287010d0 counts={'circuit_changes': 1520, 'circuits': 1392, 'fault_scenarios': 7316, 's",
    "note": "REQUIRES a product path argument",
-   "last_run": "2026-09-03T01:55:51Z"
+   "last_run": "2026-09-03T03:22:33Z"
   },
   "pipelinenews__render_proof": {
    "repo": "pipelinenews",
@@ -245,52 +247,52 @@
    "state": "pass",
    "detail": "pipelinenews has 7 uncommitted path(s); another agent is mid-write",
    "note": "REQUIRES a release-id argument",
-   "last_run": "2026-09-03T01:55:51Z",
-   "last_unmeasurable": "2026-09-03T01:55:51Z"
+   "last_run": "2026-09-03T03:22:33Z",
+   "last_unmeasurable": "2026-09-03T03:22:33Z"
   },
   "pipelinenews__sector_render_proof": {
    "repo": "pipelinenews",
    "cmd": "node tools/intelligence/sector_render_proof.mjs <release-id>",
    "state": "pass",
    "detail": "pipelinenews has 7 uncommitted path(s); another agent is mid-write",
-   "last_run": "2026-09-03T01:55:51Z",
-   "last_unmeasurable": "2026-09-03T01:55:51Z"
+   "last_run": "2026-09-03T03:22:33Z",
+   "last_unmeasurable": "2026-09-03T03:22:33Z"
   },
   "pipelinenews__surface_truth_proof": {
    "repo": "pipelinenews",
    "cmd": "node tools/intelligence/surface_truth_proof.mjs <release-id>",
    "state": "pass",
    "detail": "pipelinenews has 7 uncommitted path(s); another agent is mid-write",
-   "last_run": "2026-09-03T01:55:51Z",
-   "last_unmeasurable": "2026-09-03T01:55:51Z"
+   "last_run": "2026-09-03T03:22:33Z",
+   "last_unmeasurable": "2026-09-03T03:22:33Z"
   },
   "gdm__verify": {
    "repo": "grid-distance-maths",
    "cmd": "node test/verify.mjs",
    "state": "pass",
    "detail": "34/34 checks passed",
-   "last_run": "2026-09-03T01:55:51Z"
+   "last_run": "2026-09-03T03:22:33Z"
   },
   "gdm__verify_nearest": {
    "repo": "grid-distance-maths",
    "cmd": "node test/verify_nearest.mjs",
    "state": "pass",
    "detail": "54/54 checks passed",
-   "last_run": "2026-09-03T01:55:52Z"
+   "last_run": "2026-09-03T03:22:33Z"
   },
   "gdm__verify_parity": {
    "repo": "grid-distance-maths",
    "cmd": "python test/verify_parity.py",
    "state": "pass",
    "detail": "446/446 parity checks passed - geodesy.py and geodesy.mjs agree",
-   "last_run": "2026-09-03T01:55:52Z"
+   "last_run": "2026-09-03T03:22:33Z"
   },
   "dgbe__price_decade_rollup": {
    "repo": "data-gb-electricity",
    "cmd": "python derived/verify_price_decade_rollup.py",
    "state": "pass",
    "detail": "PASS: price rollup v2 states inclusion, coverage, shares and exact extremes",
-   "last_run": "2026-09-03T01:55:52Z"
+   "last_run": "2026-09-03T03:22:33Z"
   },
   "dgbe__bounded_growth": {
    "repo": "data-gb-electricity",
@@ -303,9 +305,10 @@
    "repo": "globalgrid2050",
    "cmd": "python scripts/verify_published_versions.py",
    "state": "FAIL",
-   "detail": "  - the homepage names Grid Atlas v9.77 / 202609020018 as the current verified release while the live composition is v9.84 / 202609030151",
+   "detail": "  - the homepage names Grid Atlas v9.86 / 202609030200 as the current verified release while the live composition is v9.88 / 202609030234",
    "first_seen": "2026-09-03T01:27:48Z",
-   "last_run": "2026-09-03T01:55:52Z"
+   "last_run": "2026-09-03T03:22:33Z",
+   "last_unmeasurable": "2026-09-03T02:29:31Z"
   }
  },
  "gate_discovery": {
@@ -332,13 +335,21 @@
    "template": "cvaa/consumer-workflow-template.yml"
   },
   "per_repo": {
+   "claude": {
+    "status": "not-immune",
+    "findings": 17
+   },
+   "cvaa": {
+    "status": "not-immune",
+    "findings": 4
+   },
+   "pipelinenews": {
+    "status": "not-immune",
+    "findings": 167
+   },
    "chatgpt-audits": {
     "status": "not-immune",
     "findings": 71
-   },
-   "claude": {
-    "status": "not-immune",
-    "findings": 15
    },
    "codex-chatgpt": {
     "status": "immune",
@@ -347,10 +358,6 @@
    "companies": {
     "status": "not-immune",
     "findings": 30
-   },
-   "cvaa": {
-    "status": "not-immune",
-    "findings": 4
    },
    "data-centres-gb": {
     "status": "not-immune",
@@ -386,7 +393,7 @@
    },
    "globalgrid2050": {
     "status": "not-immune",
-    "findings": 92
+    "findings": 93
    },
    "grid-distance-maths": {
     "status": "not-immune",
@@ -394,11 +401,7 @@
    },
    "gridatlas": {
     "status": "not-immune",
-    "findings": 80
-   },
-   "pipelinenews": {
-    "status": "not-immune",
-    "findings": 167
+    "findings": 74
    },
    "spiders": {
     "status": "not-immune",
@@ -406,16 +409,14 @@
    }
   },
   "incidence": {
-   "monotonic-utc-generations": 14,
-   "no-per-release-workflows": 6,
-   "chaining-token": 10,
-   "least-permissions": 6,
-   "no-time-based-gates": 4,
-   "pinned-actions": 10,
-   "self-terminating-loops": 6,
-   "pointer-verifies": 2,
+   "monotonic-utc-generations": 11,
+   "chaining-token": 9,
+   "least-permissions": 5,
+   "no-per-release-workflows": 5,
+   "no-time-based-gates": 3,
+   "pinned-actions": 8,
+   "self-terminating-loops": 5,
    "rollback-exercised": 1,
-   "rollback-exists": 1,
    "executor-declared": 1,
    "loop-exists": 1
   },
@@ -433,7 +434,7 @@
    "immune_repos": 0,
    "cold_clones_at": "scratchpad/estate (14 repos cloned 2026-09-03T01:41Z)"
   },
-  "measured_with_commit": "d2893fab63fbcdae491e04a0be8c6a783b840911",
+  "measured_with_commit": "791e24b242c004945d0edf3e8f744934b65c2c7d",
   "ruler": {
    "202608301321-one-active-scope.md": "2b9cf9774285",
    "202608301322-no-app-copies.md": "587c82a21b6e",
@@ -461,7 +462,104 @@
    "202608311458-release-name-convention.md": "e72a06e079e6",
    "202608312045-page-data-block-parses.md": "73682abef592"
   },
-  "active_vaccines": 25
+  "active_vaccines": 25,
+  "crlf_drift": {
+   "chatgpt-audits": 38,
+   "codex-chatgpt": 0,
+   "companies": 75,
+   "data-centres-gb": 32,
+   "data-federation-map-for-globalgrid2050-all-repos": 133,
+   "data-gb-electricity": 8,
+   "data-grid-gb": 0,
+   "data-gridatlas": 65,
+   "data-interconnectors": 10,
+   "gb-electricity-ui": 8,
+   "gemini": 0,
+   "globalgrid2050": 3597,
+   "grid-distance-maths": 1,
+   "gridatlas": 238,
+   "spiders": 50
+  },
+  "not_immune": {
+   "chatgpt-audits": [
+    "monotonic-utc-generations"
+   ],
+   "codex-chatgpt": [],
+   "companies": [
+    "chaining-token",
+    "least-permissions",
+    "monotonic-utc-generations",
+    "no-per-release-workflows",
+    "no-time-based-gates"
+   ],
+   "data-centres-gb": [
+    "chaining-token",
+    "monotonic-utc-generations",
+    "no-per-release-workflows"
+   ],
+   "data-federation-map-for-globalgrid2050-all-repos": [
+    "chaining-token",
+    "least-permissions",
+    "monotonic-utc-generations",
+    "pinned-actions",
+    "self-terminating-loops"
+   ],
+   "data-gb-electricity": [
+    "chaining-token",
+    "monotonic-utc-generations",
+    "pinned-actions"
+   ],
+   "data-grid-gb": [
+    "chaining-token",
+    "monotonic-utc-generations",
+    "pinned-actions"
+   ],
+   "data-gridatlas": [
+    "chaining-token",
+    "monotonic-utc-generations",
+    "no-per-release-workflows",
+    "rollback-exercised",
+    "self-terminating-loops"
+   ],
+   "data-interconnectors": [
+    "monotonic-utc-generations",
+    "pinned-actions",
+    "self-terminating-loops"
+   ],
+   "gb-electricity-ui": [
+    "least-permissions",
+    "pinned-actions"
+   ],
+   "gemini": [],
+   "globalgrid2050": [
+    "chaining-token",
+    "least-permissions",
+    "monotonic-utc-generations",
+    "no-per-release-workflows",
+    "no-time-based-gates",
+    "pinned-actions",
+    "self-terminating-loops"
+   ],
+   "grid-distance-maths": [
+    "monotonic-utc-generations"
+   ],
+   "gridatlas": [
+    "chaining-token",
+    "executor-declared",
+    "loop-exists",
+    "monotonic-utc-generations",
+    "no-per-release-workflows",
+    "no-time-based-gates",
+    "pinned-actions"
+   ],
+   "spiders": [
+    "chaining-token",
+    "least-permissions",
+    "pinned-actions",
+    "self-terminating-loops"
+   ]
+  },
+  "incidence_denominator": 15
  },
  "crosslink": {
   "artefact": "crosslink.json",
@@ -534,83 +632,88 @@
  "open_drift": [
   {
    "id": "D1",
-   "first_seen": "2026-09-03T01:27:48Z",
+   "first_seen": "2026-09-03T01:52Z",
    "repo": "globalgrid2050",
-   "what": "homepage names Grid Atlas v9.77 / 202609020018 as current verified while live composition is v9.81 / 202609030119",
-   "gate": "scripts/verify_published_versions.py",
-   "touched_since": "not yet observed"
-  },
-  {
-   "id": "D2",
-   "first_seen": "2026-09-03T01:27:48Z",
-   "repo": "gridatlas -> data-grid-gb",
-   "what": "3 shipped cartridge fetches at @main. data-grid-gb b91e45b (branch codex/20260903-phase0-integrity, not yet on main) changes 882 of 886 connection points and drops with_location 502->489, with the schema string unchanged so the consumer fail-closed check cannot see it",
-   "gate": "none exists",
-   "touched_since": "reported to main at 2026-09-03T01:27:48Z"
+   "what": "homepage version stamp is hand-authored and compared to a derived live pointer; gridatlas cuts a version every ~9 min, so the gate is green only between cuts",
+   "status": "reopened 02:50Z after being closed 02:31Z; owner is cutting it, structural fix not yet decided"
   },
   {
    "id": "D3",
-   "first_seen": "2026-09-03T01:27:48Z",
+   "first_seen": "2026-09-03T01:30Z",
    "repo": "estate",
-   "what": "CVAA is wired into 1 of 33 repos, itself. globalgrid2050 carries 241 workflow files and no immune system",
-   "gate": "cvaa/consumer-workflow-template.yml exists and is unadopted"
-  },
-  {
-   "id": "D4",
-   "first_seen": "2026-09-03T01:27:48Z",
-   "repo": "cvaa",
-   "what": "vaccine disk-is-not-what-ships reads files['.gitattributes'], a key inoculate.mjs buildContext never populates (line 96 sets files = {STATE, index}), so its first branch fires unconditionally",
-   "gate": "self"
+   "what": "CVAA wired into 1 of 33 repos. 14 of 32 already immune; 517 findings in the other 18. Top three: pinned-actions 16/32, monotonic-utc-generations 14/32, chaining-token 12/32",
+   "status": "open; sequence behind D15"
   },
   {
    "id": "D5",
-   "first_seen": "2026-09-03T01:27:48Z",
+   "first_seen": "2026-09-03T01:26Z",
    "repo": "chatgpt-audits, claude, codex-chatgpt, gemini",
-   "what": ".gitattributes present but lacks `* text=auto eol=lf` - hand-verified, NOT taken from the broken vaccine"
+   "what": ".gitattributes present but lacks `* text=auto eol=lf` (hand-verified)",
+   "status": "open, low consequence"
+  },
+  {
+   "id": "D6",
+   "first_seen": "2026-09-03T01:30Z",
+   "repo": "companies",
+   "what": "5 places hold the retired gridatlas published path; the sync workflow cannot self-heal because line 96 asserts the retired shape against a correctly-derived live_url, and line 101 fetches the manifest from the app base where it 404s",
+   "status": "open, unowned, fully diagnosed for the 10:00 handoff. data-gridatlas half CLOSED at 8bf88da"
+  },
+  {
+   "id": "D8",
+   "first_seen": "2026-09-03T01:43Z",
+   "repo": "pipelinenews",
+   "what": "Deploy PipelineNews Pages failing on 9 consecutive heads since 2026-09-01",
+   "status": "open; owner says authorisation freeze by design, architect decision at 10:00. Artefact is not the blocker: 3 proofs pass, release verifies, zero mutable refs"
+  },
+  {
+   "id": "D11",
+   "first_seen": "2026-09-03T02:27Z",
+   "repo": "cvaa",
+   "what": "tools/selftest.mjs:6 uses new URL(..).pathname, so it cannot run on Windows. Passes on every runner; not a CI blocker",
+   "status": "open, low consequence"
+  },
+  {
+   "id": "D15",
+   "first_seen": "2026-09-03T04:02Z",
+   "repo": "cvaa",
+   "what": "4 of 25 active rules decide from prose: rollback-exercised, attestation-freshness, on-ledger-commits (commit subjects) and no-time-based-gates (comments). rollback-exercised reported gridatlas immune throughout the period rollback-exists proved it had no rollback at all",
+   "status": "open; blocks D3. Two are false negatives, which are never investigated"
   }
  ],
  "pipelinenews_release": "202609030009-pipelinenews",
  "last_pass_drift": [
-  "[HEAD] claude 1707a98 -> 9afd188 [main] 202609030240: pass.py measures the estate with the published cvaa, not the working copy",
-  "[HEAD] gridatlas 4b1641e -> 5a59e71 [main] 202609030151-gridatlas-v9.84: the proof reads the product through the pin, and a missing product is a red",
-  "[CVAA-RULER] cvaa published HEAD None -> d2893fa; vaccine set changed, so a findings delta this pass may be the ruler, not the repo",
-  "[CVAA] chatgpt-audits findings 72 -> 71",
-  "[CVAA] claude findings 4 -> 15",
-  "[CVAA] codex-chatgpt findings 1 -> 0",
-  "[CVAA] companies findings 31 -> 30",
-  "[CVAA] cvaa findings 5 -> 4",
-  "[CVAA] data-centres-gb findings 13 -> 12",
-  "[CVAA] data-federation-map-for-globalgrid2050-all-repos findings 9 -> 8",
-  "[CVAA] data-gb-electricity findings 6 -> 5",
-  "[CVAA] data-grid-gb findings 8 -> 7",
-  "[CVAA] data-gridatlas findings 21 -> 20",
-  "[CVAA] data-interconnectors findings 3 -> 2",
-  "[CVAA] gb-electricity-ui findings 1 -> 0",
-  "[CVAA] gemini findings 1 -> 0",
-  "[CVAA] globalgrid2050 findings 93 -> 92",
-  "[CVAA] grid-distance-maths findings 2 -> 1",
-  "[CVAA] gridatlas findings 83 -> 80",
-  "[CVAA] pipelinenews findings 172 -> 167",
-  "[CVAA] spiders findings 3 -> 2",
-  "[VACCINE] disk-is-not-what-ships incidence 18 -> 0 of 18",
-  "[CI-GREEN] gridatlas :: 202608312212 GridAtlas cartridge proof failure -> success @5a59e71"
+  "[HEAD] claude d7b1039 -> 74daaff [main] 202609030322: audit the antibodies behind every finding I reported as fact",
+  "[HEAD] globalgrid2050 fafa4d2 -> a0f93e8 [main] 202609030340: the one dead Grid Atlas link on the public directory",
+  "[HEAD] gridatlas 8fb95a2 -> cc449d5 [main] 202609030319: the live verifier expects the composition this repository declares",
+  "[CVAA-SKIP] 3 repo(s) mid-write, not measured: claude, cvaa, pipelinenews",
+  "[CVAA] globalgrid2050 findings 92 -> 93",
+  "[CVAA] gridatlas findings 77 -> 74",
+  "[BYTE-UNSAFE] 2 repo(s) have CRLF drift, so byte-dependent vaccines are not reportable from the workspace: data-gridatlas, gridatlas - re-measure in a clean clone",
+  "[VACCINE-GREEN] gridatlas no longer fails rollback-exists",
+  "[COUNT] gridatlas workflow files 5 -> 6",
+  "[API-BUDGET] 24/60 left, floor 25: CI not sampled this pass so the estate gates keep their share"
  ],
  "ci": {
   "gridatlas": {
+   "202609030251 Build GridAtlas v9.89 grid-data verified successor": {
+    "conclusion": "failure",
+    "head_sha": "b67d0a0",
+    "at": "2026-09-03T03:00:32Z"
+   },
    "202608312212 GridAtlas cartridge proof": {
     "conclusion": "success",
-    "head_sha": "5a59e71",
-    "at": "2026-09-03T01:52:25Z"
+    "head_sha": "8fb95a2",
+    "at": "2026-09-03T02:35:28Z"
    },
    "202608310050 GridAtlas next-version builders": {
     "conclusion": "success",
-    "head_sha": "5a59e71",
-    "at": "2026-09-03T01:52:17Z"
+    "head_sha": "8fb95a2",
+    "at": "2026-09-03T02:35:24Z"
    },
    "pages build and deployment": {
     "conclusion": "success",
-    "head_sha": "5a59e71",
-    "at": "2026-09-03T01:52:50Z"
+    "head_sha": "8fb95a2",
+    "at": "2026-09-03T02:35:58Z"
    }
   },
   "pipelinenews": {
@@ -656,55 +759,55 @@
    }
   },
   "globalgrid2050": {
-   "V9.6.2 Exact Commit Validation": {
-    "conclusion": "success",
-    "head_sha": "87e6da8",
-    "at": "2026-09-03T01:12:42Z"
-   },
-   "Deploy Jekyll with GitHub Pages dependencies preinstalled": {
-    "conclusion": "success",
-    "head_sha": "87e6da8",
-    "at": "2026-09-03T01:17:09Z"
-   },
-   "V9.6.1 Exact Commit Validation": {
-    "conclusion": "success",
-    "head_sha": "87e6da8",
-    "at": "2026-09-03T01:13:16Z"
-   },
-   "V9.7 Exact Commit Validation": {
-    "conclusion": "failure",
-    "head_sha": "87e6da8",
-    "at": "2026-09-03T01:12:01Z"
-   },
-   "V9.5 Exact Commit Validation": {
-    "conclusion": "success",
-    "head_sha": "87e6da8",
-    "at": "2026-09-03T01:12:44Z"
-   },
    "Verify published versions are reachable": {
     "conclusion": "failure",
-    "head_sha": "87e6da8",
-    "at": "2026-09-03T01:11:31Z"
+    "head_sha": "fafa4d2",
+    "at": "2026-09-03T02:35:44Z"
    },
    "Deploy GlobalGrid2050 Pages": {
     "conclusion": "success",
-    "head_sha": "87e6da8",
-    "at": "2026-09-03T01:15:00Z"
+    "head_sha": "687d03f",
+    "at": "2026-09-03T02:37:43Z"
    },
-   "V9.3 Exact Commit Validation": {
+   "V9.6.2 Exact Commit Validation": {
     "conclusion": "success",
-    "head_sha": "87e6da8",
-    "at": "2026-09-03T01:12:33Z"
+    "head_sha": "687d03f",
+    "at": "2026-09-03T02:31:21Z"
+   },
+   "V9.6.1 Exact Commit Validation": {
+    "conclusion": "success",
+    "head_sha": "687d03f",
+    "at": "2026-09-03T02:31:50Z"
    },
    "V9.5.1 Exact Commit Validation": {
     "conclusion": "success",
-    "head_sha": "87e6da8",
-    "at": "2026-09-03T01:13:02Z"
+    "head_sha": "687d03f",
+    "at": "2026-09-03T02:31:21Z"
+   },
+   "V9.5 Exact Commit Validation": {
+    "conclusion": "success",
+    "head_sha": "687d03f",
+    "at": "2026-09-03T02:31:23Z"
+   },
+   "V9.3 Exact Commit Validation": {
+    "conclusion": "success",
+    "head_sha": "687d03f",
+    "at": "2026-09-03T02:31:10Z"
+   },
+   "Deploy Jekyll with GitHub Pages dependencies preinstalled": {
+    "conclusion": "success",
+    "head_sha": "687d03f",
+    "at": "2026-09-03T02:32:58Z"
+   },
+   "V9.7 Exact Commit Validation": {
+    "conclusion": "failure",
+    "head_sha": "687d03f",
+    "at": "2026-09-03T02:30:42Z"
    },
    "V9.4 Exact Commit Validation": {
     "conclusion": "success",
-    "head_sha": "87e6da8",
-    "at": "2026-09-03T01:12:53Z"
+    "head_sha": "687d03f",
+    "at": "2026-09-03T02:31:25Z"
    }
   },
   "data-grid-gb": {
@@ -839,6 +942,41 @@
    }
   },
   "data-gridatlas": {
+   "Current integrity 8bf88da9e210ce9f61dc0398869d3369f3fa2445": {
+    "conclusion": null,
+    "head_sha": "8bf88da",
+    "at": "2026-09-03T02:43:54Z"
+   },
+   "Automation contract guard 8bf88da9e210ce9f61dc0398869d3369f3fa2445": {
+    "conclusion": "success",
+    "head_sha": "8bf88da",
+    "at": "2026-09-03T02:43:54Z"
+   },
+   "Hourly watchdog 8bf88da9e210ce9f61dc0398869d3369f3fa2445": {
+    "conclusion": null,
+    "head_sha": "8bf88da",
+    "at": "2026-09-03T02:43:52Z"
+   },
+   "pages build and deployment": {
+    "conclusion": null,
+    "head_sha": "8bf88da",
+    "at": "2026-09-03T02:43:44Z"
+   },
+   "Current integrity 4dd5c2db7f126db74dedcd25fe4675f0fe091ccd": {
+    "conclusion": "failure",
+    "head_sha": "4dd5c2d",
+    "at": "2026-09-03T02:42:12Z"
+   },
+   "Automation contract guard 4dd5c2db7f126db74dedcd25fe4675f0fe091ccd": {
+    "conclusion": "success",
+    "head_sha": "4dd5c2d",
+    "at": "2026-09-03T02:41:44Z"
+   },
+   "Hourly watchdog 4dd5c2db7f126db74dedcd25fe4675f0fe091ccd": {
+    "conclusion": "failure",
+    "head_sha": "4dd5c2d",
+    "at": "2026-09-03T02:41:57Z"
+   },
    "Hourly watchdog 5484218a99a1cfde60c84daaa5aba001ebfcd697": {
     "conclusion": "failure",
     "head_sha": "5484218",
@@ -849,20 +987,10 @@
     "head_sha": "5484218",
     "at": "2026-09-02T08:19:42Z"
    },
-   "pages build and deployment": {
-    "conclusion": "success",
-    "head_sha": "5484218",
-    "at": "2026-08-31T23:26:35Z"
-   },
    "Hourly watchdog b335aca6c9c6b028b358c419410e4cf5b2035c2e": {
     "conclusion": "failure",
     "head_sha": "b335aca",
     "at": "2026-08-31T20:02:38Z"
-   },
-   "Automation contract guard b335aca6c9c6b028b358c419410e4cf5b2035c2e": {
-    "conclusion": "success",
-    "head_sha": "b335aca",
-    "at": "2026-08-30T18:02:42Z"
    }
   }
  },
@@ -879,19 +1007,52 @@
    "by": "gridatlas v9.83 pinned-products module"
   },
   {
-   "id": "D4",
-   "closed": "2026-09-03T02:28Z",
-   "by": "not a defect - the vaccine is untracked and not in the repository (RH11)"
-  },
-  {
    "id": "D7",
    "closed": "2026-09-03T01:56Z",
-   "by": "gridatlas v9.84, CI success at 5a59e71"
+   "by": "gridatlas v9.84; CI success at 5a59e71"
   },
   {
    "id": "D9",
-   "closed": "2026-09-03T02:10Z",
-   "by": "merged into D6 - same defect, the watchdog was right"
+   "closed": "2026-09-03T03:00Z",
+   "by": "data-gridatlas 8bf88da; all three probes green in a clean clone"
+  },
+  {
+   "id": "D10",
+   "closed": "2026-09-03T02:28Z",
+   "by": "cvaa 791e24b; every self-test assertion re-run against a clean clone"
+  },
+  {
+   "id": "D12",
+   "closed": "2026-09-03T02:50Z",
+   "by": "globalgrid2050 fafa4d2; a skip now yields INCOMPLETE"
+  },
+  {
+   "id": "D13",
+   "closed": "2026-09-03T03:31Z",
+   "by": "gridatlas 1762170; tools/rollback.mjs 238 lines + a 180-line workflow"
+  },
+  {
+   "id": "dead-schedules",
+   "closed": "2026-09-03T03:58Z",
+   "by": "gridatlas 5556000 then a9247f1; zero live cron triggers, verified by direct parse"
+  },
+  {
+   "id": "gg2050-dead-link",
+   "closed": "2026-09-03T03:47Z",
+   "by": "globalgrid2050 a0f93e8; every gridatlas URL in index.html returns 200, verified on the file not the diff"
   }
- ]
+ ],
+ "drift_withdrawn": [
+  {
+   "id": "D4",
+   "why": "the vaccine is untracked and not in the repository (RH11)"
+  },
+  {
+   "id": "D14",
+   "why": "never a defect. current.json and live-set.json both carry generation 202609030234 at every commit examined. I reported it twice (RH21)"
+  }
+ ],
+ "f5_status": "no remaining instances. 5 mutable shipped runtime edges at 01:05Z, 2 after gridatlas v9.83, 1 after RH17. The remaining one is the publication-truth gate following the live pointer, which should stay mutable.",
+ "runner_health_entries": 21,
+ "last_updated": "2026-09-03T03:29:01Z"
 }
