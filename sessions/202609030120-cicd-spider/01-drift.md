@@ -849,3 +849,43 @@ drill leaves a workflow run and a record; `no-time-based-gates` needs to parse
 YAML rather than grep text.
 
 **Sequence: fix these four before D3's adoption, not after.**
+
+---
+
+## D16 — writing the word "cvaa" in a comment created a new vaccine failure
+**First seen** 2026-09-03T04:08Z, at gridatlas `a9f2f76`, clean tree
+(`dirty=0`, `crlf=0`).
+
+`a9f2f76` fixed `pinned-actions` — confirmed independently of the vaccine by
+direct grep: **3 actions, 0 unpinned**. In the same commit, a new failure
+appeared:
+
+    FAIL full-history-checkout
+      - 202608312212-cartridge-proof.yml runs cvaa with 2 checkout(s) lacking fetch-depth: 0
+
+**That workflow does not run cvaa.** It runs `tools/proofs/run-current.mjs`. The
+antibody selects its scope by testing the raw text:
+
+    if (!/(?:inoculate|cvaa|cvaa_sha)/i.test(w.text)) continue;
+    const checkouts = (w.text.match(/actions\/checkout@/g) || []).length;
+    const full      = (w.text.match(/fetch-depth:\s*0/g) || []).length;
+    if (checkouts > full) out.push(...)
+
+Measured: that file contained **zero** matches for `cvaa|inoculate` at `a9247f1`
+and one at `a9f2f76`. The added line is a comment explaining the fix —
+*"# with the repository checked out. cvaa reported three of them here -"*.
+
+So the word `cvaa`, in a comment, pulled the file into the rule's scope, where
+its two long-standing checkouts (gridatlas and grid-distance-maths, neither
+needing full history) immediately failed. **The workflow's behaviour did not
+change. Only the prose did.**
+
+**Fourth instance of the text-versus-state family, and the second where
+documenting a fix causes the failure** — `no-time-based-gates` did the same to
+the same repository forty minutes earlier.
+
+**The trap to avoid:** the obvious responses are to add `fetch-depth: 0` to two
+checkouts that do not need it, or to delete the sentence explaining the pinning.
+Both make the repository worse to satisfy a scope selector. The antibody should
+detect an actual invocation — `node …inoculate.mjs`, or a `uses:` of the cvaa
+workflow — rather than the word.
