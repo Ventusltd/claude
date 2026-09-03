@@ -1,0 +1,77 @@
+# The loop that makes the memory-store discipline enforced rather than documented.
+#
+# The disease is not a crash. It is a session that ends, whose transcript exists, and
+# which never reaches the queryable store - or a conversion that dropped lines quietly.
+# Long-term memory then develops holes that nothing reports, because the store still
+# answers every query, just from less data than it claims. Nobody notices, because the
+# rows that are missing are exactly the rows nothing asks about.
+#
+# So this runs on every push that touches the store, and four times a day regardless.
+# `--check` writes nothing: it measures every parquet with DuckDB, reconciles each
+# against the audit record beside it, and validates the committed manifest against
+# what it measured. A stale manifest fails here.
+#
+# THE ACTIONS ARE PINNED BY COMMIT. `@v5` is a mutable tag; whoever can move it can run
+# code in the job that decides whether this repository's memory is trustworthy.
+# 11bd71901bbe5b1630ceea73d27597364c9af683 is actions/checkout v4.2.2, the same commit
+# gridatlas already names everywhere, so the estate names one checkout.
+# a26af69be951a213d495a4c3e4e4022e16d87065 is actions/setup-python v5.
+#
+# Perpetual by construction: no expiry, no wall-clock gate, no end date. The cron is
+# every six hours on every day of every month. The only exit that is not a measurement
+# is the one below, when there is no store to measure yet.
+
+name: 202609031030 Verify the session memory store
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'logs/parquet/**'
+      - 'logs/reports/**'
+      - 'logs/tools/**'
+      - 'requirements.txt'
+      - '.github/workflows/202609031030-verify-memory-store.yml'
+  pull_request:
+    paths:
+      - 'logs/parquet/**'
+      - 'logs/reports/**'
+      - 'logs/tools/**'
+  schedule:
+    - cron: '17 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: verify-memory-store-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+
+      - name: Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+
+      - name: Install the pinned reader and writer
+        run: python -m pip install --disable-pip-version-check -r requirements.txt
+
+      # An empty store is not a failure - it is a repository that has not started one.
+      # A store that exists and is short of what its audit records claim is.
+      - name: The store holds every line its audit records claim for it
+        run: |
+          if ! ls logs/parquet/*.parquet >/dev/null 2>&1; then
+            echo "logs/parquet/ holds no parquet files; there is no store to verify"
+            exit 0
+          fi
+          python logs/tools/verify_memory_store.py --check

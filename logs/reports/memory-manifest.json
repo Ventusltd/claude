@@ -1,0 +1,137 @@
+{
+  "generation": "202609031039",
+  "sessions": [
+    {
+      "session_id": "0e09c52a-c13e-42a7-b3dc-71349e17045c",
+      "project": "C--Users-vikra",
+      "source_lines": 118,
+      "distinct_source_lines": 118,
+      "rows": 118,
+      "parquet_file": "logs/parquet/session_0e09c52a.parquet",
+      "parquet_bytes": 35288,
+      "parquet_sha256": "7eb3102c7eda6fcdb0617501fd91bc82c759984e252dfe80e93b992d4c216174",
+      "first_ts": "2026-09-01T12:10:15.253000+00:00",
+      "last_ts": "2026-09-01T12:15:47.435000+00:00"
+    },
+    {
+      "session_id": "4114eb37-a2a3-4f8f-8d65-bea1eb363052",
+      "project": "C--Windows-system32",
+      "source_lines": 320,
+      "distinct_source_lines": 320,
+      "rows": 320,
+      "parquet_file": "logs/parquet/session_4114eb37.parquet",
+      "parquet_bytes": 62191,
+      "parquet_sha256": "130fedaf55935c8141a935fdd4b73fc2f04b4be1f87f6cc168b18ab9fa4c2a56",
+      "first_ts": "2026-09-02T16:05:52.454000+00:00",
+      "last_ts": "2026-09-02T17:48:26.274000+00:00"
+    },
+    {
+      "session_id": "5b94bee7-197b-4cfd-944b-d4cf3aa02d18",
+      "project": "C--Users-vikra",
+      "source_lines": 5159,
+      "distinct_source_lines": 5159,
+      "rows": 5159,
+      "parquet_file": "logs/parquet/session_5b94bee7.parquet",
+      "parquet_bytes": 781239,
+      "parquet_sha256": "7049f4a5a7eebd5dca3832deb81d450e58e8e352e94121a209a1495a7fb76693",
+      "first_ts": "2026-09-02T18:29:52.377000+00:00",
+      "last_ts": "2026-09-03T10:17:34.937000+00:00"
+    },
+    {
+      "session_id": "9556e57d-6c2a-4ea2-8037-fe2dee67f7ed",
+      "project": "C--Users-vikra",
+      "source_lines": 2356,
+      "distinct_source_lines": 2356,
+      "rows": 2360,
+      "parquet_file": "logs/parquet/session_9556e57d.parquet",
+      "parquet_bytes": 1320265,
+      "parquet_sha256": "83e44db6e107314461de488d20a0775787d75d727bec2f56bf862680f6c30b3e",
+      "first_ts": "2026-09-01T22:23:50.787000+00:00",
+      "last_ts": "2026-09-02T00:50:01.859000+00:00"
+    },
+    {
+      "session_id": "b1c826bc-a79c-406b-b2ac-a261ebc63603",
+      "project": "C--Users-vikra-OneDrive-Documents-GitHub",
+      "source_lines": 77,
+      "distinct_source_lines": 77,
+      "rows": 77,
+      "parquet_file": "logs/parquet/session_b1c826bc.parquet",
+      "parquet_bytes": 24660,
+      "parquet_sha256": "fba3a9105382fca8af6e0981cad7df6bf203ed0856d678bf70f5dea2fbb188eb",
+      "first_ts": "2026-08-30T21:26:58.944000+00:00",
+      "last_ts": "2026-08-30T21:34:41.547000+00:00"
+    },
+    {
+      "session_id": "bbe4731a-0373-47dc-b753-0b5977329b78",
+      "project": "C--Users-vikra",
+      "source_lines": 2132,
+      "distinct_source_lines": 2132,
+      "rows": 2132,
+      "parquet_file": "logs/parquet/session_bbe4731a.parquet",
+      "parquet_bytes": 270412,
+      "parquet_sha256": "1b899bc3e41a1a5a78a13262ad9fbe1f3fce8f4ef72cd49f1c2adca1c349faf3",
+      "first_ts": "2026-09-02T17:10:36.412000+00:00",
+      "last_ts": "2026-09-03T01:04:26.492000+00:00"
+    },
+    {
+      "session_id": "dfac5e26-89f2-47c9-acff-30f7eba5468f",
+      "project": "C--Users-vikra",
+      "source_lines": 3075,
+      "distinct_source_lines": 3075,
+      "rows": 3075,
+      "parquet_file": "logs/parquet/session_dfac5e26.parquet",
+      "parquet_bytes": 491549,
+      "parquet_sha256": "69fb5d3c9066778fee1b1b25253644a468e4f227b6dd34e98496ca1ce40ba3d2",
+      "first_ts": "2026-09-01T17:54:31.137000+00:00",
+      "last_ts": "2026-09-01T22:22:42.792000+00:00"
+    },
+    {
+      "session_id": "ed278f26-f04d-4329-94fc-6119688c25a4",
+      "project": "C--Users-vikra-OneDrive-Documents-GitHub",
+      "source_lines": 3904,
+      "distinct_source_lines": 3904,
+      "rows": 3904,
+      "parquet_file": "logs/parquet/session_ed278f26.parquet",
+      "parquet_bytes": 867273,
+      "parquet_sha256": "82257949cecaca22e7581c41fc745a10ff3ee2fca77267e4f890217284051d21",
+      "first_ts": "2026-08-30T21:45:35.143000+00:00",
+      "last_ts": "2026-08-31T14:06:26.989000+00:00"
+    },
+    {
+      "session_id": "fb1f8db8-2401-4885-889f-9f0fef279cb3",
+      "project": "C--Users-vikra",
+      "source_lines": 1370,
+      "distinct_source_lines": 1370,
+      "rows": 1370,
+      "parquet_file": "logs/parquet/session_fb1f8db8.parquet",
+      "parquet_bytes": 242806,
+      "parquet_sha256": "863fb6ff66cb19e1871710325fafdaef7b8b01b121d067100b6736abeb8cf36f",
+      "first_ts": "2026-08-31T14:07:40.946000+00:00",
+      "last_ts": "2026-08-31T16:17:13.154000+00:00"
+    },
+    {
+      "session_id": "fe663175-d3c6-426e-a70e-3ed23fc8c14c",
+      "project": "C--Users-vikra",
+      "source_lines": 11230,
+      "distinct_source_lines": 11230,
+      "rows": 11236,
+      "parquet_file": "logs/parquet/session_fe663175.parquet",
+      "parquet_bytes": 3719628,
+      "parquet_sha256": "457bfb75b78c82a677abef1d153b49f9b200ca397fd71cebd3b317bb9a44ac68",
+      "first_ts": "2026-08-31T17:42:40.516000+00:00",
+      "last_ts": "2026-09-01T17:53:19.247000+00:00"
+    },
+    {
+      "session_id": "ffe1875f-b9ce-465c-b56a-59faf73f90c9",
+      "project": "C--Users-vikra",
+      "source_lines": 933,
+      "distinct_source_lines": 933,
+      "rows": 933,
+      "parquet_file": "logs/parquet/session_ffe1875f.parquet",
+      "parquet_bytes": 138997,
+      "parquet_sha256": "8c95df97bec43d43bf5054372f5b15d82d0a655538590c689ef7bd194bd39601",
+      "first_ts": "2026-08-31T16:18:06.527000+00:00",
+      "last_ts": "2026-08-31T17:41:30.921000+00:00"
+    }
+  ]
+}
