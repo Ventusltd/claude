@@ -763,3 +763,38 @@ sitting in the two JSON files it already has in context — rather than inferrin
 freshness from prose that anyone can write in any order.
 
 D14 stays open.
+
+---
+
+## gridatlas dead schedules — CLOSED 2026-09-03T03:58Z, by gridatlas, without me
+Verified at `a9247f1` on a tree with `dirty=0` and `crlf=0`:
+`no-time-based-gates` is off the FAIL list, and a direct parse finds **zero live
+cron triggers** in any gridatlas workflow.
+
+Worth recording how it was closed, because the reasoning is better than the
+finding. gridatlas removed the three August-pinned schedules and kept a comment
+explaining why — and then hit the antibody themselves:
+
+> *"The cvaa antibody for this vaccine scans the raw workflow text for `cron:`
+> followed by a quoted string, with no notion of a YAML comment, so quoting a
+> REMOVED cron verbatim leaves the finding standing. Measured: the schedules
+> were gone from the parsed triggers — `schedule present: False` on both files —
+> and the vaccine still reported all three. A tool that cannot tell a record
+> from a trigger will be fought rather than followed, so the record is kept and
+> the shape is not."*
+
+They rewrote the quoted crons as `schedule   30,45 23 30 8 *`, which preserves
+the record and drops the shape the scanner matches. `5556000` removed the
+schedules; `a9247f1` fixed the record's shape.
+
+**This is a third instance of the text-versus-state family, and the inverse of
+D14's.** `attestation-freshness` reads prose *instead of* state and returns a
+false negative. `no-time-based-gates` reads prose *as if it were* state and
+returns a false positive — and it punishes the repository specifically for
+documenting the fix. Two of the estate's own rules cannot distinguish a record
+of a thing from the thing.
+
+I found the same defect independently a few minutes later and did not report it,
+because they had already written it down. Noting that here rather than in a
+message: **a HEAD move I have not read is not evidence of anything, and neither
+is one I have.**
