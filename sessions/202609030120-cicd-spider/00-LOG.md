@@ -221,3 +221,38 @@ describing a guard the driver did not contain. A record that can be committed
 without the thing it records is not a record.
 
 **Open:** D3 D5 D6/D9 D8 D11 D12. **Closed:** D1 D2 D4 D7 D10.
+
+---
+
+## Pass 6 — 2026-09-03T02:58Z — two closures, one denominator of my own
+
+**Closed: D9.** data-gridatlas `8bf88da` — "the consumer probe reads the release
+directory that is served". Verified in a clean clone: resolve and all three
+probes green. An hourly watchdog red since 2026-09-01 is green, **and it was
+right the whole time.** The commit before it (`4dd5c2d`) added `.gitattributes`
+to the automation boundary — adjacent, not the fix — and I recorded that
+explicitly, because a HEAD move in the right repository looks like a fix.
+
+**Closed: D12**, correctly — a skip now yields `INCOMPLETE`, so a verdict can no
+longer be computed over fewer checks than it names.
+
+**Reopened: D1**, fifteen minutes after it closed, and the second opening is the
+finding. Ten gridatlas version cuts in three hours, v9.87→v9.88 ninety-six
+seconds apart, against a hand-authored stamp cut twice in the same window. Two
+values required to be equal; one authored, one derived; only the derived half
+moves on its own.
+
+**Still open: D6's `companies` half.** HEAD untouched since 31 August, golden
+deep link still 404, regenerating cron fires once a year.
+
+**RH18.** Pass 6 reported seven vaccines improving at once. Nothing improved —
+RH16's guard had correctly declined to measure three mid-write repositories and
+the denominator moved 18→15. I called a wrong denominator the dangerous kind two
+hours ago and then shipped one while fixing something else. Now diffed per
+repository over repositories measured in both passes.
+
+**F5 has no remaining instances** (RH17): five mutable shipped runtime edges at
+01:05Z, two after v9.83, one after I found I had been counting a string the
+pipelinenews compiler exists to delete.
+
+**Open:** D1 D3 D5 D6 D8 D11. **Closed:** D2 D4 D7 D9 D10 D12.
