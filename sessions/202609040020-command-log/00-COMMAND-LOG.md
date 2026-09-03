@@ -123,3 +123,67 @@ Every one concluded on the runner, not a laptop.
 - Local model: 42 of 44 red-job classifications grounded, **2 rejected as inventions**, and the
   rejections were the predicted class — two real log lines spliced into one command that was
   never run.
+
+---
+
+## 202609040035 — shipped on instruction, session closing
+
+The architect called stop-and-ship with the laptop about to go off. Everything that had been
+reviewed was pushed rather than left committed-and-held, because held work on a machine that
+is about to be switched off is work that may not survive.
+
+### Pushed in this entry
+
+| repo | sha | what |
+|---|---|---|
+| pipelinenews | `face863` | release `202609032329` — a dash stops claiming a search that never ran |
+| pipelinenews | `5f9b4c4` | cartridge `unnamed-is-not-unspoken` — the SUB hover says the layer has no name, and invents none |
+| pipelinenews | `0bc5efd` | seventh SPENT note: `wider-fleet-proximity` is the one that fails OPEN |
+| globalgrid2050 | `5efdc5ef` | the catalogue compiler identifies the row it governs, so it can refresh it again |
+| globalgrid2050 | `5c700a4a` | the homepage names the Grid Atlas actually being served — v9.99 |
+| globalgrid2050 | `ea97bf09` | Pipeline News `202609032329` published — **29 snapshots, all reachable** |
+
+`PUBLICATION TRUTH: PASS`. GridAtlas live at `202609032315` (v9.99), homepage 200.
+
+### The three findings that outlive the night
+
+1. **The compiler did not merely refuse — it corrupts.** Pointed at what
+   `catalogue-gridatlas-v9.yml` actually feeds it, `compile_root()` returned `changed=True`
+   and inserted a SECOND stale row after the V8 sentinel. It has never happened only because
+   the workflow dies earlier, on a `cmp` of two files that differ at char 2 of line 1. **A
+   latent corruption behind a broken gate is the worst shape in this estate**: the day
+   somebody fixes the gate, the corruption ships. Now refused, and the governed row is
+   identified structurally by the `GRIDATLAS_V9_AUTOMATION` markers — a narrowing, not a
+   loosening.
+2. **The href occurs THREE times, not two.** The `os-strip` banner, the governed row, and the
+   immutable `.../atlas/releases/202608291239-atlas-v9/` row which contains the composition
+   URL as a prefix. Every account of this jam — `CLAUDE.md`, and mine twice tonight — said
+   twice. Href-counting was never salvageable. **That correction belongs in `CLAUDE.md`.**
+3. **A dash asserted a search that never ran, on 4,633 rows, and was true of none of them.**
+   The payload's own coverage block reads `with_circuit 3047, no_circuit 0`. Zero projects
+   were measured and found nothing. The two silences — never searched (4,605) and cannot be
+   searched (28) — are now separate on screen.
+
+### Open at close, in priority order
+
+1. **The seam we opened ourselves.** `grid-proximity.json` is 4,138 rows; `grid-distance.json`
+   and `substation-33kv.json` are 3,047. `grid-distance.json` says of itself: *"carried
+   across, not recomputed, so the two can never disagree."* They now disagree by 1,091. A
+   payload asserting an invariant that is false is worse than one that is incomplete, and this
+   is a regression from tonight's own widening. **Next version.**
+2. **The Markinch contradiction.** A lane reported REPD 155 absent from the Pipeline News cut
+   entirely — but the architect reached it *from* Pipeline News, and a product cannot emit a
+   MAP link for a row it does not hold. Three candidates given to that lane: `repd_ref` typed
+   as int in one payload and string in another (`Counter[400]` and `Counter[400.0]` are the
+   same key and have produced a false defect here before); the row living in
+   `wider-fleet.json` rather than the spine; or REPD 155 being one of the **nine biomass
+   projects of 823 that the widening did not reach**. Unresolved.
+3. **The stylesheet hoist**, authorised with five acceptance conditions. 35 characters left.
+4. **The `--applicable` fix**, authorised, must handle all three traps or not ship.
+5. **Two gates that have never been green** — pipelinenews Pages, and globalgrid2050 `V9.7`.
+
+### For the successor
+
+Everything above is pushed. Nothing is held. The lanes were mid-flight when the machine went
+down, so assume any agent's unfinished work is lost and re-read the repos rather than the
+plan. The reading order in `## RESPAWN` still stands.
