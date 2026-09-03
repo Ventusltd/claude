@@ -1269,3 +1269,37 @@ honest single line is:
 `census.sh` now clones and measures all 16 cold repositories and prints
 `cold clones present: N of 16` before measuring, so the denominator is asserted
 rather than inferred.
+
+---
+
+## D3 — DEFINITIVE CENSUS, 2026-09-03T05:26Z, ruler cvaa `93e568e`
+Measured, not computed. `bash census.sh` reproduces it; membership is committed
+beside this file as `census-members.json`.
+
+**35 owned; 1 fork (`pandapower`) excluded; 34 measured; 16 immune.**
+
+| rule | failing | quiet on (control) |
+|---|---|---|
+| `monotonic-utc-generations` | 14 of 34 | 20 |
+| `chaining-token` | 12 of 34 | 22 |
+| `self-terminating-loops` | 7 of 34 | 27 |
+| `no-per-release-workflows` | 6 of 34 | 28 |
+| `no-time-based-gates` | 3 of 34 | 31 |
+| `pointer-verifies` | 2 of 34 | 32 |
+| `executor-declared` | 1 of 34 | 33 |
+| `loop-exists` | 1 of 34 | 33 |
+
+**Every rule is quiet somewhere, so no rule is a broken instrument.**
+
+**Warnings — `level: warning`, accepted dated allowances, NOT failures:**
+`pinned-actions` 15 of 34, `least-permissions` 11 of 34. Neither fails anywhere.
+
+**Skips — the rule declined to decide; a skip is not a pass:**
+`rollback-exercised` on data-gridatlas and gridatlas (no
+`atlas/state/rollback-drills.json`), `derived-state-not-authored` on gridatlas.
+
+**The shape of the estate, in one line:** eight rules fail at all; the two that
+fail most widely are about the estate misreporting its own time and pushing with
+the default token; and the two most-cited "problems" of the night —
+`pinned-actions` and `least-permissions` — are warnings the estate has already
+priced, with expiry dates.
