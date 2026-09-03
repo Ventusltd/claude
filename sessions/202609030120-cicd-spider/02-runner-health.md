@@ -895,3 +895,34 @@ Two of the 25 active vaccines carry prose-dependent logic. That is the caveat
 that belongs on every estate-wide figure in `01-drift.md`: the incidence table
 is as good as the antibodies behind it, and I have now read all of them rather
 than trusting the runner.
+
+---
+
+## RH22 — 2026-09-03T04:20Z — context-diet, applied to me
+
+The brief says later passes must get shorter as the estate stabilises. Measured,
+words per pass entry in `00-LOG.md`:
+
+    Pass 1  437    Pass 4  213    Pass 7  204
+    Pass 2  600    Pass 5  261    Pass 8  187
+    Pass 3  140    Pass 6  275    Pass 9  136
+
+Downward, and the peak is diagnostic: **pass 2 is the longest entry I wrote and
+it is the pass whose headline finding was false.** The false red needed six
+hundred words because it had to be argued; the true findings since have needed
+under two hundred because they could be shown. Length has tracked doubt rather
+than substance.
+
+Where I am not on diet: `01-drift.md` and `02-runner-health.md` are ~45 KB each,
+about 2 KB per entry. Those are standing documents rather than per-pass, so
+growth is expected — but the reasoning in a runner-health entry is the deliverable
+(the brief asks what I changed, not merely that I was wrong), so I am keeping it
+and noting the cost rather than pretending there isn't one.
+
+`crosslink.json` is 2.2 MB, which is 6,854 edges of which 335 are dependencies.
+A consumer wanting the dependency graph should filter
+`evidenceTier == "shipped"` and get a file about twenty times smaller. That is
+stated in the artefact's own `method` field and in `03-crosslink.md`, but the
+default shape is still the fat one, and defaults are what get used. If I were
+starting again I would emit the shipped graph as the artefact and the full scan
+as an appendix.
