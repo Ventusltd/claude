@@ -429,6 +429,39 @@ Worth noting *how* it survived: the arithmetic was right and the category was wr
 recount reproduced it. It was recounted four times and agreed with itself each time, which reads
 as confirmation. A category error is immune to repetition — only a control catches it.
 
+### And the #1 failure is not what its name suggests — the stamps are *chosen*, not drifting
+
+`monotonic-utc-generations` is now the estate's top exposure, so I opened it rather than quoting
+the headline. The rule asserts two separate things: that generations never go backwards, and that
+each is within 15 minutes of its real UTC commit time. **The second dominates, and the direction
+is the finding.**
+
+| repo | commits examined | stamp **ahead** of its own commit | worst |
+|---|---|---|---|
+| pipelinenews | 220 | **125** | 252 min |
+| gridatlas | 298 | **118** | 235 min |
+| claude | 86 | 8 | 77 min |
+
+A stamp *behind* its commit can be innocent — in an archive repo a commit that files
+`sessions/202609021813-…/` is correctly titled with that session's generation, and exactly one
+commit here is that case. **A stamp ahead of its own commit cannot be.** `date -u` does not
+return the future. It means the generation was decided when the work started and committed hours
+later — which is precisely what the rule's own message says: *generations are read from `date -u`
+at commit time, never chosen.*
+
+**Why this matters to you specifically.** You said the timestamps exist to prevent collisions.
+A stamp chosen at the start of a task and committed four hours later does not prevent a collision
+— it reserves a name and then misreports when the work happened. Two lanes choosing stamps in
+advance can still collide, and the published ordering stops matching the order things were done.
+
+*(My own commits tonight are clean — 77 of 86 in `claude` are within 15 minutes, and none of the
+eight ahead are mine; the stamp came from `date -u` evaluated in the same command as the commit,
+which is the whole discipline. I mention it because it is the cheap fix: it is a habit, not a tool.)*
+
+I first guessed this was an artefact of concurrent agents committing out of order. It is not, and
+I was wrong because I read a truncated output and stopped. The ordering failures are the minority
+everywhere.
+
 *(Method: `sessions/202609030422-handover/scripts/` — the sweep and the wall-walker.)*
 
 ---
