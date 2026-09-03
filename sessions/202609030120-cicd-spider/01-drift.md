@@ -1353,3 +1353,20 @@ symptom with a second cause.
 Low consequence — all four are agent-notes repositories rather than shipping
 surfaces — but it stays open, because it is the exact defect the estate wrote a
 vaccine about.
+
+### D5 — down to 3 of 18, 2026-09-03T05:36Z
+`claude` fixed: `.gitattributes` now carries `* text=auto eol=lf` with the
+reasoning written into the file, and its 23 CRLF working-copy blobs are the
+residue described in RH34 rather than a second defect.
+
+**Still open:** `chatgpt-audits`, `codex-chatgpt`, `gemini` — all three carry
+bare `* text=auto`. Deliberately not touched: they are other lanes' note
+repositories, possibly mid-write, and none is a shipping surface. One line each
+when someone owns them.
+
+**Both sweeps that reported this closed were measuring a different predicate.**
+A test for the *presence* of `.gitattributes`, or a loose `grep text=auto`,
+returns 0 of 18 — and bare `text=auto` matches that grep while being the defect
+itself. The tell was the shape of the answer: the anchored predicate returns
+4 and 14, the loose one returns 0 and 18. **A flat answer across every subject
+is the signature we have both spent the night calling a broken instrument.**
