@@ -160,9 +160,11 @@ prevent, reintroduced by the act of fixing it. All 23 are now restored by `rm` +
 The only CRLF blobs in the estate are **223 CSVs in globalgrid2050**, deliberately exempt under
 `*.csv -text` with the reasoning written into `.gitattributes`: RFC 4180 specifies CRLF for
 `text/csv`, none sits inside a hashed release or an attested artefact. That was solved on
-purpose on 31 August. Nothing to fix. *(One small drift: the comment says "221 historical
-generation CSVs under `data/generation/`"; the measurement is 223, and they include
-`data/electricity/`. Prose, not bytes.)*
+purpose on 31 August. Nothing to fix. *(Two small drifts in that file's prose, neither
+affecting bytes: it says "221 historical generation CSVs under `data/generation/`", but the
+measurement is **223** and they are spread across three trees — 199 under `data/generation/`,
+12 under `data/electricity/`, and 12 more under `uk_energy_tracking_v5`/`v6` that the comment
+does not mention at all.)*
 
 **D11 — closed**, verified rather than assumed: `fileURLToPath` landed and `selftest` returns
 rc=0 on Windows, where it previously could not run at all.
@@ -439,7 +441,8 @@ This is the scan you asked for at the start of the session, done properly for th
 repos enumerated from the API (a disk scan has under-counted this estate twice — 15, then 30,
 then 33), CI filtered to each repo's **own** default branch, read authenticated.
 
-**35 repositories. 20 green · 4 red · 11 with no workflow runs.**
+**35 repositories. 19 green · 5 red · 11 with no workflow runs** (re-measured 09:26Z; the
+earlier 20/4 was a 05:00Z snapshot).
 
 > **The denominator, stated once: 35 owned; 1 fork (`pandapower`) excluded; 34 measured, 16 immune.**
 >
@@ -475,9 +478,36 @@ The four reds, each with its cause read from the log rather than inferred:
 | repo | since | cause |
 |---|---|---|
 | **globalgrid2050** | 03:17Z today | **D1, firing.** Not a defect — my verifier working |
+| **globalgrid2050** *(second workflow)* | **02 Sep 19:25Z** | **`v9-7-validate.yml` — six consecutive failures, and I missed it entirely** |
 | **pipelinenews** | 00:10Z today | **D8** — the schema divergence in §5 |
+| **data-gridatlas** | **08:09Z today** | **NEW — `layer-fidelity`, 50 of 120 checks failing** |
 | **data-interconnectors** | 02 Sep | `Input required and not supplied: token` |
 | **globalgrid2050-hompage** | 02 Sep | `Input required and not supplied: token` — identical |
+
+**Two of these were found by an independent audit after this document was written, and one of
+them I had actively mis-attributed.**
+
+**`globalgrid2050` has TWO failing workflows, not one.** I recorded its red as D1 and stopped
+there. `v9-7-validate.yml` is *also* red at head `a0f93e8`, and on **every run back to 2 September
+19:25Z** — six consecutive failures across six commits. The cause is unrelated to D1: the V9.7
+regional build no longer reproduces `regional_manifest.json` from its own inputs
+(`input_sha256` committed `cea104c3…` vs rebuilt `e6c42cd8…`). **A committed manifest that does
+not reproduce is exactly the class of defect this estate exists to catch**, and it sat unseen for
+fourteen hours because the repo was already red for another reason and I attributed the whole
+signal to the first cause I recognised. *A red repository can hide a second red.*
+
+**`data-gridatlas` — new, and unowned.** `202608301931-layer-fidelity.yml` failed at 08:09Z at
+head `8bf88da`, hours after this document was written and inside the monitoring agent's
+rate-limit outage. **50 of 120 layer checks fail**: four layers (`ind`, `air`, `metro`, `tram`)
+return **zero features**, and the large layers (`solar`, `wind`, `bess`, `naei_co2`) all sit at
+**60.3 s** against a 15 s budget — they are hitting the 60 s source-loaded timeout. 70 layers
+still pass, so the instrument discriminates and this is a real signal rather than a broken check.
+Diagnosis in flight.
+
+**Method note, because it is why finding two surfaced at all.** The 05:00Z sweep took *the latest
+run on the default branch*. The audit took *the latest run per workflow file at head*. The first
+cannot see a red workflow sitting behind a newer green one from a different workflow — which is
+precisely how `v9-7-validate` stayed invisible. **Use the second.**
 
 **globalgrid2050 is red because the publication-truth gate is doing its job.** The exact message:
 
@@ -524,7 +554,9 @@ sequencing) because the wrong version has been in every table.
 It had been counting `state != 'immune'`, which merges a **failure** with a **warning**. In this
 estate a warning is the opposite of a defect — it means *known, accepted, ratcheted, expires
 2026-09-30*. Counting states properly, across **34 repos × 25 vaccines = 850 states: 777 immune,
-47 fail, 26 warn** — 16 repositories immune outright.
+~47 fail, 26 warn** *(the per-rule table below sums to **46**, not 47 — the discrepancy is
+unresolved and belongs to the census, not to this document; treat 46 as the enumerated total
+and 47 as unverified)* — 16 repositories immune outright.
 
 *(These were first published over 32 repos as 727/47/26. The two additions are the private repos
 named above; both carry zero workflows and are immune, so **no failing count moved** — only the
@@ -564,7 +596,7 @@ denominator and the drift figures independently; the per-rule counts are its mea
 second one.)*
 
 `pinned-actions` declares `level: warning` in its own file and **fails nowhere in the estate** —
-17 immune, 15 warn, 0 fail. It led every table we produced. `self-terminating-loops` appeared in
+19 immune, 15 warn, 0 fail. It led every table we produced. `self-terminating-loops` appeared in
 none of them.
 
 This changes the adoption story, not just the order. The remaining exposure is not "almost
@@ -589,11 +621,22 @@ is the finding.**
 | gridatlas | 298 | **118** | 248 min |
 | globalgrid2050 | 56 | 19 | **827 min** — a stamp chosen ~14 h before its commit |
 | claude | 89 | 8 | 77 min |
-| cvaa | 15 | 3 | 248 min |
+| cvaa | 24 | 1 | 200 min | *(corrected — see below)* |
 | data-grid-gb | 5 | **5 of 5** | 116 min |
 
-Both of us computed this independently — the spider from `%aI` without my script, I with `gen_drift.py`
-— and every figure agrees.
+Both of us computed this independently — the spider from `%aI` without my script, I with
+`gen_drift.py` — and every figure agreed.
+
+**One row was wrong and an independent audit caught it: `cvaa`.** It was first published as
+*15 stamped / 3 ahead / worst 248 min*. Those are the numbers for the **parallel session's
+divergent worktree** at `c18cc13` (9 behind origin, 2 ahead) — the very tree §5 records me as
+having deliberately not touched. I measured the workspace and published it as the repository.
+At `origin/main` the true figures are **24 stamped / 1 ahead / worst 200 min**. Every other row
+was re-checked against origin and holds.
+
+That is *measure the artefact, never the workspace* — the estate's oldest rule — broken by the
+person quoting it, in the same document that quotes it. It survived because the number was
+plausible and nobody re-derived it from a clean ref.
 
 A stamp *behind* its commit can be innocent — in an archive repo a commit that files
 `sessions/202609021813-…/` is correctly titled with that session's generation, and exactly one
@@ -607,7 +650,7 @@ A stamp chosen at the start of a task and committed four hours later does not pr
 — it reserves a name and then misreports when the work happened. Two lanes choosing stamps in
 advance can still collide, and the published ordering stops matching the order things were done.
 
-*(My own commits tonight are clean — 77 of 86 in `claude` are within 15 minutes, and none of the
+*(My own commits tonight are clean — 80 of 89 in `claude` are within 15 minutes, and none of the
 eight ahead are mine; the stamp came from `date -u` evaluated in the same command as the commit,
 which is the whole discipline. I mention it because it is the cheap fix: it is a habit, not a tool.)*
 
