@@ -1,0 +1,215 @@
+# Can a GitHub runner run a model? Measure it, then answer.
+#
+# =============================================================================
+# THIS JOB IS INFORMATIONAL. IT EXITS 0 ON EVERY RESULT, INCLUDING A BAD ONE.
+#
+# It is a measurement, not a threshold. There is no tokens/sec below which something is
+# broken - a slow number is the answer, not a failure. And a benchmark that goes red would
+# mail the actor for reporting exactly what it was asked to report.
+#
+# It is also workflow_dispatch ONLY: no schedule at all. Hardware does not change nightly,
+# so a nightly run would burn minutes to reprint the same table.
+# =============================================================================
+#
+# THE QUESTION
+#
+# "Run a sandbox in GitHub so we can use the compute available there too" is two proposals
+# wearing one sentence. One of them is obviously right - crawls and surveys are parallel and
+# deterministic and belong on free runners. The other is inference, and the honest way to
+# settle it is to measure rather than to assert.
+#
+# WHAT IS KNOWN BEFORE MEASURING, and why it still needs measuring
+#
+# Standard GitHub-hosted runners have NO GPU. ubuntu-24.04 is 4 vCPU / 16 GB. So a model
+# runs on CPU or not at all. That much is documentation. What documentation does not give
+# you is the shape of the cost: how many seconds of every run are spent acquiring the model
+# before a single token is produced, and how far tokens/sec falls as the model grows. Those
+# two numbers decide whether the idea survives, and they are what this job produces.
+#
+# HOW IT MEASURES
+#
+#   1. The runner's actual specification, read off the machine, not off a docs page.
+#   2. COLD START: the seconds to fetch llama.cpp and the seconds to fetch the model. This
+#      is paid on every run unless the model is cached, and it is the cost that decides the
+#      question for short jobs.
+#   3. WARM START: the same job with the model restored from the Actions cache, so the
+#      difference between the two is a measurement rather than an estimate.
+#   4. THROUGHPUT: llama-bench, which reports prompt-eval (pp512) and generation (tg128)
+#      tokens/sec separately, averaged over repeats. Those are different numbers and quoting
+#      one for the other overstates a CPU by roughly an order of magnitude.
+#
+# Two model sizes, so the result is a curve and not a point.
+#
+# The llama.cpp build is PINNED to b10793. `latest` is a moving target; a benchmark whose
+# binary changes between runs is not comparable with its own history.
+
+name: 202609032355 Llama on a CPU runner, measured
+
+on:
+  workflow_dispatch:
+    inputs:
+      llama_build:
+        description: 'llama.cpp release tag to pin'
+        default: 'b10793'
+        required: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: llama-cpu-benchmark
+  cancel-in-progress: true
+
+jobs:
+  bench:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - label: qwen2.5-0.5b-q4_k_m
+            repo: Qwen/Qwen2.5-0.5B-Instruct-GGUF
+            file: qwen2.5-0.5b-instruct-q4_k_m.gguf
+          - label: qwen2.5-3b-q4_k_m
+            repo: Qwen/Qwen2.5-3B-Instruct-GGUF
+            file: qwen2.5-3b-instruct-q4_k_m.gguf
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+
+      # Read the machine. A benchmark without its runner's specification is an anecdote.
+      - name: What this runner actually is
+        run: |
+          set -uo pipefail
+          {
+            echo "### Runner"
+            echo '```'
+            echo "vCPU:      $(nproc)"
+            echo "model:     $(grep -m1 'model name' /proc/cpuinfo | cut -d: -f2- | sed 's/^ //')"
+            echo "MHz:       $(grep -m1 'cpu MHz' /proc/cpuinfo | cut -d: -f2- | sed 's/^ //')"
+            echo "MemTotal:  $(grep MemTotal /proc/meminfo | awk '{print $2/1024/1024 " GiB"}')"
+            echo "disk free: $(df -BG --output=avail / | tail -1 | tr -d ' ')"
+            echo "AVX2:      $(grep -qm1 avx2 /proc/cpuinfo && echo yes || echo no)"
+            echo "AVX512F:   $(grep -qm1 avx512f /proc/cpuinfo && echo yes || echo no)"
+            echo "AMX:       $(grep -qm1 amx_tile /proc/cpuinfo && echo yes || echo no)"
+            echo "GPU:       $(lspci 2>/dev/null | grep -ci 'vga\|3d\|display' || echo 0) display devices"
+            echo "nvidia:    $(command -v nvidia-smi >/dev/null && nvidia-smi -L || echo 'no nvidia-smi, no CUDA device')"
+            echo '```'
+          } | tee -a "$GITHUB_STEP_SUMMARY"
+
+      # COLD START, part one: the runtime. 16.7 MB, so this is the cheap half.
+      - name: Fetch llama.cpp (timed)
+        env:
+          BUILD: ${{ inputs.llama_build || 'b10793' }}
+        run: |
+          set -uo pipefail
+          url="https://github.com/ggml-org/llama.cpp/releases/download/${BUILD}/llama-${BUILD}-bin-ubuntu-x64.tar.gz"
+          t0=$(date +%s.%N)
+          curl -sSL --retry 3 -o /tmp/llama.tar.gz "$url"
+          rc=$?
+          t1=$(date +%s.%N)
+          echo "curl rc: $rc"
+          if [ "$rc" -ne 0 ]; then
+            echo "could not fetch $url - reporting that, not pretending it succeeded"
+            echo "LLAMA_OK=0" >> "$GITHUB_ENV"
+            exit 0
+          fi
+          mkdir -p /tmp/llama && tar -xzf /tmp/llama.tar.gz -C /tmp/llama
+          bin=$(find /tmp/llama -name 'llama-bench' -type f | head -1)
+          echo "LLAMA_BENCH=$bin" >> "$GITHUB_ENV"
+          echo "LLAMA_OK=1" >> "$GITHUB_ENV"
+          echo "RUNTIME_FETCH_S=$(echo "$t1 - $t0" | bc)" >> "$GITHUB_ENV"
+          echo "runtime fetched in $(echo "$t1 - $t0" | bc)s, $(du -m /tmp/llama.tar.gz | cut -f1) MB"
+
+      # WARM START: if the model is already in the Actions cache it is restored here and the
+      # download below is skipped. `cache-hit` is what makes cold and warm a measurement
+      # rather than a guess.
+      - name: Restore the model from the Actions cache
+        id: modelcache
+        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
+        with:
+          path: /tmp/models/${{ matrix.file }}
+          key: gguf-${{ matrix.label }}-v1
+
+      # COLD START, part two: the model. This is the number that decides the question.
+      - name: Fetch the model if the cache missed (timed)
+        run: |
+          set -uo pipefail
+          mkdir -p /tmp/models
+          if [ -f "/tmp/models/${{ matrix.file }}" ]; then
+            echo "cache HIT; no download"
+            echo "MODEL_FETCH_S=0" >> "$GITHUB_ENV"
+            echo "CACHE=hit" >> "$GITHUB_ENV"
+          else
+            url="https://huggingface.co/${{ matrix.repo }}/resolve/main/${{ matrix.file }}"
+            t0=$(date +%s.%N)
+            curl -sSL --retry 3 -o "/tmp/models/${{ matrix.file }}" "$url"
+            rc=$?
+            t1=$(date +%s.%N)
+            echo "curl rc: $rc"
+            if [ "$rc" -ne 0 ]; then
+              echo "MODEL_OK=0" >> "$GITHUB_ENV"
+              exit 0
+            fi
+            echo "MODEL_FETCH_S=$(echo "$t1 - $t0" | bc)" >> "$GITHUB_ENV"
+            echo "CACHE=miss" >> "$GITHUB_ENV"
+          fi
+          echo "MODEL_MB=$(du -m "/tmp/models/${{ matrix.file }}" | cut -f1)" >> "$GITHUB_ENV"
+          ls -la /tmp/models
+
+      # llama-bench reports prompt-eval and generation SEPARATELY. They differ by roughly an
+      # order of magnitude on a CPU, and quoting the first as if it were the second is the
+      # standard way this measurement gets overstated.
+      - name: Throughput
+        run: |
+          set -uo pipefail
+          if [ "${LLAMA_OK:-0}" != "1" ] || [ ! -f "/tmp/models/${{ matrix.file }}" ]; then
+            echo "no runtime or no model; nothing was measured, and that is what is reported"
+            exit 0
+          fi
+          t0=$(date +%s.%N)
+          "$LLAMA_BENCH" -m "/tmp/models/${{ matrix.file }}" \
+            -p 512 -n 128 -r 3 -t "$(nproc)" -o json > /tmp/bench.json 2>/tmp/bench.err
+          rc=$?
+          t1=$(date +%s.%N)
+          echo "llama-bench rc: $rc, wall $(echo "$t1 - $t0" | bc)s"
+          tail -20 /tmp/bench.err || true
+          python3 - <<'PY' | tee -a "$GITHUB_STEP_SUMMARY"
+          import json, os
+          label = os.environ.get('MATRIX_LABEL', '?')
+          try:
+              rows = json.load(open('/tmp/bench.json'))
+          except Exception as e:
+              print('### %s\n\nllama-bench produced no parseable JSON: %s\n' % (label, e))
+              raise SystemExit(0)
+          print('### %s' % label)
+          print('')
+          print('| test | tokens/sec | stddev |')
+          print('|---|---:|---:|')
+          for r in rows:
+              n = r.get('n_prompt') or 0
+              g = r.get('n_gen') or 0
+              name = ('prompt eval (pp%d)' % n) if n else ('generation (tg%d)' % g)
+              print('| %s | %.2f | %.2f |' % (name, r.get('avg_ts', 0), r.get('stddev_ts', 0)))
+          print('')
+          print('runner: %s vCPU · model %s MB · runtime fetch %ss · model fetch %ss (cache %s)'
+                % (os.environ.get('NPROC', '?'), os.environ.get('MODEL_MB', '?'),
+                   os.environ.get('RUNTIME_FETCH_S', '?'), os.environ.get('MODEL_FETCH_S', '?'),
+                   os.environ.get('CACHE', '?')))
+          PY
+        env:
+          MATRIX_LABEL: ${{ matrix.label }}
+          NPROC: 4
+
+      - name: Upload the raw measurements
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: llama-bench-${{ matrix.label }}
+          path: |
+            /tmp/bench.json
+            /tmp/bench.err
+          if-no-files-found: warn
+          retention-days: 90

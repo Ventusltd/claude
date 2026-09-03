@@ -1,0 +1,182 @@
+# The crawl that finds a dead link before a user does.
+#
+# =============================================================================
+# THIS JOB IS INFORMATIONAL. IT EXITS 0 ON EVERY FINDING, INCLUDING A 404.
+#
+# Two reasons, and the second is the one that gets forgotten.
+#
+# 1. It is a REPORT, not a gate. A crawl of 76 published releases will always find
+#    something - an optional data layer that was never uploaded, a release the Pages
+#    deploy has not served yet, a historical snapshot pointing at a route that has since
+#    moved. None of those are reasons to stop a build. A survey that exits non-zero is
+#    lying about its own role.
+#
+# 2. GitHub mails the actor when a workflow FAILS. A nightly crawl that goes red the
+#    first night it finds a stale link mails a human every night thereafter, and the
+#    predictable result is that the mail is filtered and the finding is never read again.
+#    The way to keep a crawl worth reading is to make sure it never shouts.
+#
+# The findings live in the JSON artifact and in the committed board at
+# docs/boards/estate-link-crawl.md. Read them there. If you are about to "fix" this into
+# a gate: don't. Write a separate, narrow gate over the one route that must never die,
+# and leave this surveying everything else.
+# =============================================================================
+#
+# WHY IT IS IN THE CLOUD AND NOT ON THE LAPTOP
+#
+# 76 published releases, ~976 outbound routes, every one an HTTP request against a live
+# origin. That is embarrassingly parallel and entirely deterministic - the two properties
+# that make work worth moving off a machine that also has to run a browser and a model.
+# Four surfaces, four runners, in parallel, on a public repository, for nothing.
+#
+# WHAT IT LOOKS FOR
+#
+# Dead routes, and dead SENTINELS. A sentinel is a REPD reference a release promises will
+# deep-link into GridAtlas. When the Atlas moved from /gridatlas/<release-id>/ to
+# /gridatlas/atlas/releases/<release-id>/, the live Pipeline News release went on emitting
+# the old shape and all eight of its sentinels began to 404 - with the page still rendering,
+# because a broken deep link is something a user clicks, not something a build sees.
+#
+# The crawler distinguishes a base URL a manifest DECLARES from one a page actually SHIPS
+# (resolved through the import closure of its <script type=module>), because roughly thirty
+# release directories still carry the old module without importing it. Counting those as
+# defects would report thirty broken releases where there is one.
+#
+# The actions are pinned by commit. @v4 is a mutable tag and whoever can move it can run
+# code in this job. 11bd71901bbe5b1630ceea73d27597364c9af683 is actions/checkout v4.2.2,
+# the commit gridatlas and claude already name, so the estate names one checkout.
+
+name: 202609032340 Estate link and sentinel crawl
+
+on:
+  workflow_dispatch:
+  # ONE nightly informational run. No second schedule, and nothing here can go red, so
+  # this cannot become a recurring failure notification.
+  schedule:
+    - cron: '41 2 * * *'
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/estate_link_crawl.py'
+      - '.github/workflows/202609032340-estate-link-crawl.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: estate-link-crawl
+  cancel-in-progress: true
+
+jobs:
+  crawl:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        surface:
+          - globalgrid2050
+          - pipelinenews-intel
+          - gridatlas-atlas
+          - pipelinenews-releases
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+
+      - name: Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+
+      # The token is only used to ENUMERATE published releases, because GitHub Pages serves
+      # no directory listing. A crawler that discovers releases by scraping the origin finds
+      # nothing and reports a clean surface - the worst answer available, a green light that
+      # measured nothing. The repository says what was published; the origin says what is
+      # served; the gap between them is the finding.
+      - name: Crawl ${{ matrix.surface }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -uo pipefail
+          python scripts/estate_link_crawl.py \
+            --surface '${{ matrix.surface }}' \
+            --out 'crawl-${{ matrix.surface }}.json'
+          rc=$?
+          echo "crawler exit: $rc"
+
+      - name: Upload the shard
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: crawl-${{ matrix.surface }}
+          path: crawl-${{ matrix.surface }}.json
+          if-no-files-found: warn
+          retention-days: 30
+
+  collate:
+    needs: crawl
+    if: always()
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+
+      - name: Collect every shard
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          path: shards
+          merge-multiple: true
+
+      - name: Collate into one board
+        run: |
+          set -uo pipefail
+          ls -la shards || true
+          python scripts/estate_link_crawl.py \
+            --collate 'shards/crawl-*.json' \
+            --out estate-link-crawl.json \
+            --board docs/boards/estate-link-crawl.md
+          echo "collate exit: $?"
+
+      - name: Upload the collated crawl
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: estate-link-crawl
+          path: estate-link-crawl.json
+          if-no-files-found: warn
+          retention-days: 90
+
+      # The board is committed so a later session reads a file instead of re-running the
+      # crawl. Staged BY EXPLICIT PATH: this repository has other lanes writing to it, and
+      # `git add -A` in a job would sweep up their work in progress.
+      - name: Commit the board if it changed
+        run: |
+          set -uo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/boards/estate-link-crawl.md
+          if git diff --cached --quiet; then
+            echo "the board is unchanged; nothing to commit"
+            exit 0
+          fi
+          # The message goes to a FILE. A heredoc in a YAML block scalar depends on both
+          # YAML's indentation stripping and the shell's, and backticks in an unquoted one
+          # have eaten three commit messages in this estate.
+          {
+            printf '%s\n\n' 'docs/boards/estate-link-crawl.md: the nightly crawl of every published release'
+            printf '%s\n' 'Written by 202609032340-estate-link-crawl.yml. Informational: the crawl exits 0'
+            printf '%s\n' 'on every finding, so a dead link is recorded here rather than mailed to anyone.'
+          } > /tmp/commit-msg.txt
+          git commit -F /tmp/commit-msg.txt
+          git pull --rebase --quiet || true
+          # A push that loses a race is not a defect of the crawl. The artifact holds the
+          # same findings and the next run rewrites the board.
+          git push || echo "push declined; the findings are in the artifact"
