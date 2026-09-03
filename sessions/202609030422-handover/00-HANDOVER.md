@@ -205,9 +205,40 @@ close to tautological. I wrote that down rather than let the green read as proof
    `additive-cartridge-release.v1` the intended successor?* If yes, the gate needs a branch for
    it — and note the code already has that shape, since `current-atlas-link-release.v2` gets one.
 
-   **Caveat, and it is important.** Nothing behind line 664 has ever executed for these releases.
-   There may be a second wall. Neither the spider nor I have shown that fixing the schema makes
-   the deploy succeed — only that this is the *first* failure, and that it is not authorisation.
+   **There is a second wall. There are twelve.** I answered the caveat rather than leaving it,
+   by replacing the gate's `require()` with a collector in a throwaway clone — changing nothing
+   in the repository — so one run walks as far as the code physically can instead of stopping at
+   the first failure. For `202609030009-pipelinenews`:
+
+   ```
+    1. timestamp release schema changed          8. timestamp public URL changed
+    2. timestamp build schema changed            9. pointer state entered immutable release bytes
+    3. timestamp manifest generation mismatch   10. immutable release encodes transient pointer state
+    4. timestamp manifest release ID mismatch   11. exact identity-routing contract changed
+    5. timestamp release is not immutable       12. timestamp functional output list missing
+    6. timestamp release classification changed 13. timestamp release output list missing
+    7. entrypoint is not folder-local index.html
+   ```
+
+   then `TypeError: object of type 'NoneType' has no len()` — so **everything past 13 is
+   unmeasured**, not passing.
+
+   **The harness is sound, and here is the control that shows it.** Run the same way against
+   `202608300309-pipelinenews` — the one release with the v2 schema — **no assertion fails and
+   the validator runs to completion.** So the thirteen are real properties of the newer format,
+   not an artefact of my instrument.
+
+   **This changes the fix.** Updating the line 52 constant, which is the obvious two-line move,
+   would clear failure 1 and expose eleven more. `additive-cartridge-release.v1` is not a renamed
+   `timestamp-folder-successor.v1`; it is a structurally different release format — different in
+   generation, release_id, immutability, classification, entrypoint, public URL, pointer state,
+   identity-routing and both output lists. It needs **its own validator branch**, exactly as
+   `current-atlas-link-release.v2` already has one in `validate_current_atlas_link_v2`.
+
+   That is a new function, not a constant edit — and it is the kind of thing I will not write
+   against a fail-closed deploy gate while you are asleep, because every one of those thirteen
+   assertions is someone's deliberate guarantee about an immutable release, and deciding which
+   still apply to the new format is a design judgement, not a repair.
 
    **This also explains §6.** `202608300309` is the last release the gate could accept, and it is
    exactly the stamp frozen into every published page's title. The stale title and the frozen
