@@ -506,9 +506,11 @@ Diagnosis in flight.
 
 ### `data-gridatlas` diagnosed: the red is real, the blast radius is zero
 
-**Nothing downstream is exposed.** A sweep across gridatlas, globalgrid2050, pipelinenews, cvaa
-and data-grid-gb for any reference to `data-gridatlas` on `main`/`HEAD`/`master` returned **zero
-matches**. No consumer checks the repo out either. The pin is **enforced rather than merely
+**Nothing downstream is exposed.** A sweep across **all 21 local worktrees** — not a sample — for
+any reference to `data-gridatlas` on `main`/`HEAD`/`master`/`refs/heads/*` returned **zero
+matches**. The only near-hits were HTML `data-*` attributes on Grid Atlas's own DOM
+(`data-gridatlas-collapsed`, `data-gridatlas-router`), which name nothing in that repository — a
+discrimination the grep had to make, and did. No consumer checks the repo out either. The pin is **enforced rather than merely
 declared**, at two independent layers, and both arrive at the same digest:
 
 - **Build time** — `gridatlas/compiler/202608292126-build-map-ready-v9.py` fetches from a commit
