@@ -232,10 +232,38 @@ def ci(repo):
     for x in d.get('workflow_runs',[]): latest.setdefault(x['name'], x)
     return repo, {n:{'conclusion':x['conclusion'],'head_sha':x['head_sha'][:7],
                      'at':x['updated_at']} for n,x in latest.items()}, None
+# RH15. The 60/hour unauthenticated budget is SHARED - by four agents on this
+# machine and by the estate's own gates, which come from the same IP. At 02:02Z
+# globalgrid2050/scripts/verify_published_versions.py printed
+#   skipped: pipelinenews lineage head: HTTP Error 403: rate limit exceeded
+# because the budget was at 0/60. A standing observer that exhausts the budget
+# blinds the gates it is observing, and the gate SKIPS rather than failing -
+# and a skip is not a pass. So: check the free rate_limit endpoint first, leave
+# a floor for everyone else, and sample the busy repos more often than the
+# quiet ones.
+def budget():
+    try:
+        req = urllib.request.Request('https://api.github.com/rate_limit',
+                                     headers={'User-Agent':'cicd-spider'})
+        with urllib.request.urlopen(req, timeout=30) as r:
+            return json.loads(r.read())['resources']['core']['remaining']
+    except Exception:
+        return 0
+FLOOR = 25
+remaining = budget()
+moved = {d for d in repos if st['heads'][d]['head'] != new_heads[d]['head']}
+sample = [r for r in CI_REPOS if r in moved] or CI_REPOS[:3]
+if remaining < FLOOR + len(sample):
+    D('API-BUDGET', f'{remaining}/60 left, floor {FLOOR}: CI not sampled this pass '
+                    f'so the estate gates keep their share')
+    sample = []
+st['github_api']['remaining_at_pass'] = remaining
+st['github_api']['ci_repos_sampled'] = sample
+
 prev_ci = st.get('ci', {})
-new_ci = {}
-with cf.ThreadPoolExecutor(max_workers=4) as ex:
-    for repo, res, err in ex.map(ci, CI_REPOS):
+new_ci = dict(prev_ci)
+with cf.ThreadPoolExecutor(max_workers=3) as ex:
+    for repo, res, err in ex.map(ci, sample):
         if res is None:
             D('API', f'{repo} actions API unreachable: {err}')
             new_ci[repo] = prev_ci.get(repo, {})
@@ -256,7 +284,7 @@ with cf.ThreadPoolExecutor(max_workers=4) as ex:
             elif was == 'failure' and cur['conclusion'] == 'success':
                 D('CI-GREEN', f"{repo} :: {wf[:60]} failure -> success @{cur['head_sha']}")
 st['ci'] = new_ci
-st['github_api']['calls_used_last_pass'] = len(CI_REPOS)
+st['github_api']['calls_used_last_pass'] = len(sample) + 1
 
 # ------------------------------------------------------------- 5. write out
 st['heads'] = new_heads

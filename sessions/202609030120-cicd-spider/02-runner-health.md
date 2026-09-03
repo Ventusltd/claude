@@ -495,3 +495,49 @@ clone of the published HEAD, which is the same rule RH6 established for dirty
 trees and RH11 established for cvaa. Three separate corrections have now
 converged on one sentence: *the working copy beside me is not the thing I am
 being asked about.*
+
+---
+
+## RH15 — 2026-09-03T02:02Z — I exhausted the shared API budget and an estate
+## gate went partially blind because of it
+
+Running `globalgrid2050/scripts/verify_published_versions.py`:
+
+    skipped: pipelinenews lineage head: HTTP Error 403: rate limit exceeded
+    PUBLICATION TRUTH: FAIL
+      - the homepage names Grid Atlas v9.77 / 202609020018 as the current
+        verified release while the live composition is v9.86 / 202609030200
+
+    $ curl -s https://api.github.com/rate_limit
+    remaining 0 of 60   used 60   reset 02:34Z
+
+The 60/hour unauthenticated budget is **per IP**, and this machine is running
+four agents plus the estate's own gates. I had been spending 7 calls a pass on
+CI sampling and more on ad-hoc checks, and I took the budget to zero. The gate
+at `verify_published_versions.py:146` needs one call for its pipelinenews
+lineage check, could not have it, and **skipped** — printing `skipped:` and
+carrying on to report on everything else.
+
+So a standing observer measuring the estate had made one of the estate's gates
+stop measuring part of what it exists to measure. And it did not fail; it
+skipped. **A skip is not a pass** is standing discipline here, and this is a
+gate that silently degrades to a narrower check whenever the budget is spent by
+anyone — an agent, another gate, or a spider.
+
+**What I changed in `pass.py`:**
+
+1. Check `api.github.com/rate_limit` first — that endpoint is free — and abort
+   CI sampling entirely if fewer than 25 calls remain, emitting an
+   `API-BUDGET` drift line instead. The estate's gates keep their share.
+2. Sample CI only for repositories whose HEAD moved since the previous pass,
+   falling back to three when nothing moved. Typical cost drops from 7 calls a
+   pass to 1-4.
+3. Record `remaining_at_pass` in `spider-state.json`, so a later instance can
+   see whether a thin pass was thin because nothing happened or because it could
+   not look.
+
+**The finding that is not about me:** `verify_published_versions.py` should
+fail, not skip, when it cannot reach the API — or state the skip in its verdict
+line rather than four lines above it. As written, its `PUBLICATION TRUTH` result
+can be produced from a strictly smaller set of checks than it names, and nothing
+in the verdict says so.
