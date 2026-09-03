@@ -374,3 +374,53 @@ inside cvaa's own self-test.
 **The cut:** derive the count from the vaccine files on disk minus superseded,
 or assert a floor rather than equality. One line, and it is the only thing
 keeping the estate's immune system red.
+
+---
+
+## D10 — update: fixed at cvaa 791e24b; verified, not assumed
+**2026-09-03T02:28Z.** The coordinator cut three commits; the first two were
+their own broken gates (`57c19ea` fixed the second of two constants, `67c5e34`
+used `require()` on a `.lock`, which reads it as JavaScript). `791e24b` is the
+real one. Verified against a clean clone of it, with no working copy involved:
+
+    line 28  md files 26 == lock keys 26                        MATCH
+    line 41  active = 25   (readdir minus /^superseded_by:/m)
+    line 43  run.results.length = 25                            MATCH
+    inoculate . --no-write  rc=0, final line exactly
+             "repo is immune to all vaccines on file"           MATCH
+    run.status = immune, shallow = false                        MATCH
+
+The hard-coded 23 is gone and the count is now derived from the vaccine files,
+which is the cure rather than a new constant. Closing on the runner's
+conclusion, not on this.
+
+---
+
+## D11 — cvaa's own self-test cannot run on a Windows machine
+**First seen** 2026-09-03T02:27Z. **Touched since:** no. Low consequence,
+recorded because of what it is rather than what it costs.
+
+    $ node tools/selftest.mjs
+    Error: ENOENT: scandir 'C:\C:\Users\...\cvaa-v\vaccines'
+
+`tools/selftest.mjs:6`
+
+    const here = new URL('..', import.meta.url).pathname;
+
+On Linux `.pathname` yields `/home/runner/work/cvaa/cvaa/` and this is correct.
+On Windows it yields `/C:/Users/…` — a leading slash before the drive letter —
+and `join()` produces `C:\C:\Users\…`. **So this step passes on every runner and
+cannot pass on any Windows laptop.** It is not a CI blocker.
+
+`inoculate.mjs:12` does it correctly:
+
+    const here = dirname(fileURLToPath(import.meta.url));
+
+and that file carries an explicit comment about normalising CRLF so that "cvaa
+cannot run on a developer machine at all" is avoided. The runner got that care;
+the self-test did not.
+
+Worth recording because cvaa is the estate's instrument for exactly this class
+of defect — a check that answers differently depending on whose machine it runs
+on — and it has one in its own tooling. One line: use `fileURLToPath`, never
+`.pathname`.
