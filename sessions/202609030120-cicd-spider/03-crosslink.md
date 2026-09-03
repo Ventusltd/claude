@@ -28,16 +28,23 @@ lies — the raw scan found 6,854 cross-repo edges and 336 of them are real.
 
 | tier | edges | what it is |
 |---|---:|---|
-| **shipped** | **336** | live code, config, workflows, published surfaces |
+| **shipped** | **335** | live code, config, workflows, published surfaces |
 | catalogue | 6,116 | `registry_of_all_content…` inventory rows (RH7) |
 | record | 247 | session logs, threads, governance briefs |
 | doc | 79 | README and prose |
 | archive | 64 | `archive/`, `workflow-archive/` |
 | superseded | 8 | retired gridatlas cartridge generations (RH8) |
 | declared | 4 | a URL inside a `.json` — a declaration, never a fetch (RH9) |
+| build-rewrite | 1 | a URL a compiler exists to DELETE (RH17) |
 
 Shipped edges by kind: 160 published-surface, 152 contract, 18 repo-ref,
-**5 runtime-data**, 1 api.
+**4 runtime-data**, 1 api.
+
+Four separate corrections tonight all moved the graph **downward** — RH7
+(catalogue), RH8 (superseded), RH9 (declared), RH17 (build-rewrite). Each was a
+case of counting text *about* code as code. 6,854 raw cross-repo edges, 335
+real. A graph built without these tiers is 95% noise and will be believed
+anyway, because it is bigger.
 
 ## Load-bearing repositories
 
@@ -65,34 +72,35 @@ the estate's second most depended-on repository cannot publish.
 `data-grid-gb` has in-repos 1 and is still the sharpest data risk, because that
 one consumer is the map. Degree measures blast radius, not fragility.
 
-## Mutable edges — F5, and there are now two
+## Mutable edges — F5 has no remaining instances
 
 An unpinned edge is a surface where a product can change under a shipped
-consumer with no cut in between. **Shipped tier, executable files only:**
+consumer with no cut in between. **Shipped tier, executable files only, after
+four corrections to my own extractor:**
 
 | from | to | ref | path | evidence |
 |---|---|---|---|---|
-| `pipelinenews` | `globalgrid2050` | `main` | `dist/major_project_news_v9_5_1.json` | `index/202608261927-compile-index.mjs:128` |
 | `globalgrid2050` | `gridatlas` | `main` | `atlas/current.json` | `scripts/verify_published_versions.py:54` |
 
-**The second one should stay mutable.** It is the publication-truth gate, and
-following the live pointer is its entire job. Pinning it would defeat it. F5 is
-about edges that *should* be pinned and are not, and this is not one — recording
-the distinction matters more than the count.
+**That one should stay mutable.** It is the publication-truth gate, and following
+the live pointer is its entire job. Pinning it would defeat it. F5 is about
+edges that *should* be pinned and are not, and this is not one.
 
-So the estate's real remaining exposure is **one edge**: pipelinenews compiling
-against `globalgrid2050@main`.
+**So no instance of F5 remains in the estate.**
+
+    01:05Z   5   as first measured
+    01:44Z   2   gridatlas v9.83 pinned three by commit, SHA-256 and byte length
+    02:44Z   1   RH17: the pipelinenews one was never an edge
 
 Pinned, for contrast: `gridatlas -> data-grid-gb@1c9909d`,
 `pipelinenews -> companies@148335a6`,
 `pipelinenews -> data-centres-gb@c5dfdee3`.
 
-### What changed tonight
+### The two corrections behind that number
 
-At 01:05Z this file recorded **five** mutable shipped edges, three of them
-`gridatlas -> data-grid-gb` / `data-gb-electricity`. gridatlas v9.83 (4a17fa3,
-01:38Z) added `atlas/modules/202609030137-pinned-products.js`, which pins all
-three by commit, SHA-256 and byte length:
+**gridatlas v9.83** (4a17fa3, 01:38Z) added
+`atlas/modules/202609030137-pinned-products.js`, pinning all three of its
+runtime fetches by commit, SHA-256 and byte length:
 
     data-grid-gb        1c9909d  derived/connection-points.v3.json        11e28859   2,896,561 B
     data-grid-gb        1c9909d  derived/gb-transmission-network.v1.json  fc331cc2  10,069,966 B
@@ -100,13 +108,21 @@ three by commit, SHA-256 and byte length:
 
 Its header states the reasoning better than I did: *"a schema string defends
 SHAPE and is blind to VALUES"*, with COWLEY 10→5 and ABHAM 4→2 transformers as
-the measured case. **5 → 2 in 33 minutes.**
+the measured case.
 
-One residue: `gridatlas/atlas/current.json:292` still carries
-`"reads": "…/data-gb-electricity/main/derived/price-decade-rollup.json"` as
-prose describing the panel, while the composed cartridge reads that product
-through the pin. Stale documentation of a fixed defect — worth a line, not a
-cut.
+**pipelinenews was never a defect.** The `@main` URL at
+`index/202608261927-compile-index.mjs:128` is the `original` argument to
+`replaceExactly()` — the string the compiler exists to delete, replacing a
+branch fallback with a generation-pinned local path. Verified against the built
+artefact rather than the build script: `releases/202609030009-pipelinenews`
+contains **zero** `githubusercontent…/main/` URLs. It is the one repository that
+mechanically strips mutable refs at build time, and I had it filed as the last
+one holding one (RH17).
+
+One residue, not an edge: `gridatlas/atlas/current.json:292` still carries
+`"reads": "…/data-gb-electricity/main/…"` as prose describing the panel, while
+the composed cartridge reads that product through the pin. Stale documentation
+of a fixed defect.
 
 ## Contract edges — the part that already works
 
