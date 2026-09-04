@@ -1,0 +1,41 @@
+{"repd": "12464", "tech": "bess", "observer": "pilot", "classes": ["ATTRIBUTION_COVERED"]}
+{"repd": "7698", "tech": "wind_offshore", "observer": "pilot", "classes": ["NO_TECH_LAYER"]}
+{"repd": "3139", "tech": "wind_onshore", "observer": "pilot", "classes": ["NO_TECH_LAYER"]}
+{"repd": "15205", "tech": "other", "observer": "pilot", "classes": ["NO_TECH_LAYER"]}
+{"repd": "2498", "tech": "wind_offshore", "observer": "pilot", "classes": ["NO_TECH_LAYER"]}
+{"repd": "801", "tech": "biomass", "observer": "pilot", "classes": ["OK"]}
+{"repd": "11663", "tech": "wind_offshore", "observer": "agent2", "classes": ["NO_TECH_LAYER", "NO_LINKS_DRAWN"]}
+{"repd": "2540", "tech": "wind_offshore", "observer": "agent2", "classes": ["NO_TECH_LAYER"]}
+{"repd": "6483", "tech": "wind_offshore", "observer": "agent2", "classes": ["NO_TECH_LAYER", "NO_LINKS_DRAWN"]}
+{"repd": "7206", "tech": "wind_onshore", "observer": "agent2", "classes": ["NO_TECH_LAYER"]}
+{"repd": "4011", "tech": "wind_onshore", "observer": "agent2", "classes": ["NO_TECH_LAYER"]}
+{"repd": "11864", "tech": "solar", "observer": "agent2", "classes": ["OK"]}
+{"repd": "14098", "tech": "solar", "observer": "agent2", "classes": ["OK"]}
+{"repd": "15169", "tech": "bess", "observer": "agent2", "classes": ["OK"]}
+{"repd": "232", "tech": "biomass", "observer": "agent2", "classes": ["OK"]}
+{"repd": "16365", "tech": "hydrogen", "observer": "agent2", "classes": ["OK"]}
+{"repd": "10085", "tech": "solar", "observer": "agent3", "classes": ["TECH_LAYER_UNRESOLVED"]}
+{"repd": "12926", "tech": "solar", "observer": "agent3", "classes": ["OK"]}
+{"repd": "7858", "tech": "solar", "observer": "agent3", "classes": ["OK"]}
+{"repd": "15528", "tech": "bess", "observer": "agent3", "classes": ["OK"]}
+{"repd": "15005", "tech": "bess", "observer": "agent3", "classes": ["OK"]}
+{"repd": "17245", "tech": "bess", "observer": "agent3", "classes": ["OK"]}
+{"repd": "10999", "tech": "wind_onshore", "observer": "agent3", "classes": ["NO_TECH_LAYER"]}
+{"repd": "14295", "tech": "wind_onshore", "observer": "agent3", "classes": ["NO_TECH_LAYER"]}
+{"repd": null, "tech": null, "observer": "agent4", "classes": ["ATTRIBUTION_COVERED"]}
+{"repd": "5181", "tech": "wind_onshore", "observer": "agent3", "classes": ["NO_TECH_LAYER"]}
+{"repd": "2512", "tech": "wind_offshore", "observer": "agent3", "classes": ["NO_TECH_LAYER"]}
+{"repd": "2476", "tech": "wind_offshore", "observer": "agent3", "classes": ["NO_TECH_LAYER"]}
+{"repd": "2524", "tech": "wind_offshore", "observer": "agent3", "classes": ["NO_TECH_LAYER"]}
+{"repd": null, "tech": null, "observer": "agent4", "classes": ["TECH_LAYER_UNRESOLVED"]}
+{"repd": "579", "tech": "biomass", "observer": "agent3", "classes": ["OK"]}
+{"repd": "583", "tech": "biomass", "observer": "agent3", "classes": ["OK"]}
+{"repd": "9840", "tech": "biomass", "observer": "agent3", "classes": ["OK"]}
+{"repd": "13506", "tech": "biomass", "observer": "agent3", "classes": ["OK"]}
+{"repd": null, "tech": null, "observer": "agent4", "classes": ["TECH_LAYER_UNRESOLVED"]}
+{"repd": "6491", "tech": "biomass", "observer": "agent3", "classes": ["OK"]}
+{"repd": "5722", "tech": "biomass", "observer": "agent3", "classes": ["OK"]}
+{"repd": "6166", "tech": "biomass", "observer": "agent3", "classes": ["OK"]}
+{"repd": "185", "tech": "biomass", "observer": "agent3", "classes": ["OK"]}
+{"repd": "523", "tech": "biomass", "observer": "agent5", "classes": ["OK"]}
+{"repd": null, "tech": null, "observer": "agent4", "classes": ["NO_TECH_LAYER", "SLOW_LAYER_CONTROLS"]}
