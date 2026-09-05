@@ -7,15 +7,34 @@ one points at.
 
 ## Latest handover
 
-**[sessions/202609050125-carry-on-handover/00-LOG.md](sessions/202609050125-carry-on-handover/00-LOG.md)**
+**[sessions/202609050257-session-184379c4/00-LOG.md](sessions/202609050257-session-184379c4/00-LOG.md)**
 
-Covers session `82e00a22`, 2026-09-04 12:21 UTC → 2026-09-05 (cut off at 23:25:05 UTC on the
-usage limit). GridAtlas v9.108 → v9.116, the ventus-grid-engine repo, the shared estate menu,
-the genome spider, the promotion lane, and every open decision.
+Session `184379c4`, the night of 2026-09-04 into 2026-09-05. Three GridAtlas generations
+shipped (v9.117 → v9.119), three Pipeline News iterations from the second lane, the homepage
+replaced and then repaired, the build status published, and a third lane auditing seven days
+of git and every chat.
 
-**Next job as of 2026-09-05 01:25 UTC:** the homepage swap is *parked* on Vikram's word
-("forget the home page matters for a while"). Outstanding beneath it: the `studies` errata,
-then the GB load flow.
+**Read §6 first — what is open and where to pick up.** Then §5, which is what the night cost
+to learn.
+
+The session before it:
+[sessions/202609050125-carry-on-handover/00-LOG.md](sessions/202609050125-carry-on-handover/00-LOG.md)
+— session `82e00a22`, GridAtlas v9.108 → v9.116, the ventus-grid-engine repo, the shared
+estate menu, the genome spider and the promotion lane.
+
+## Live now
+
+- Build status, republished at intervals: https://globalgrid2050.com/status.html
+- The estate's front page: https://globalgrid2050.com/
+- Grid Atlas: https://ventusltd.github.io/gridatlas/atlas/
+- The engine graph, which is the map of the estate's mathematics:
+  https://ventusltd.github.io/ventus-grid-engine/?graph=engine-graph
+
+## Two things about time
+
+Vikram's clock is **BST, UTC+1**. When he writes `202609050333` he means **02:33 UTC**.
+Stamps here are read from `date -u` at commit time and never typed, so generations read an
+hour behind his phone. That is correct, not drift.
 
 ## Rule this file exists to enforce
 
