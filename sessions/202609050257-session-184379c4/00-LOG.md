@@ -178,3 +178,58 @@ identity, and three manifest checks fail.
 
 See [[carry-on-2026-09-05]], [[composed-bytes-not-parts]], [[stamps-and-lanes]],
 [[chrome-automation-hidden-tab]], [[graphical-interfaces-not-terminals]].
+
+---
+
+## 9. Filed after §1–§8, 202609050415 UTC
+
+The log above was written at 02:57. This is what happened after it, kept here so
+the file remains the whole session rather than the first half of it.
+
+| UTC | repo | commit | what |
+|---|---|---|---|
+| 03:20 | ventus-grid-engine | `3d3a561` | the engine publishes which receiver a deep link may be built against; `buildDeepLink(project)` supplies it, a retired one throws, `auditProjectRows` is the query |
+| 03:30 | testcode | `73f916c` | the test code engine: offline gates first, network only if they pass, nothing published from it |
+| 03:45 | seven repos | licence | **Apache-2.0** on gridatlas, ventus-grid-engine, pipelinenews, spiders, testcode, grid-distance-maths, globalgrid2050-homepage |
+| 03:50 | testcode | `04f7135` | the link-target driver — 64 sites naming the retired receiver, 10 live, 54 immutable |
+| 03:54 | gridatlas | `18cffd5` | **v9.121** — print a slide or save an image, fitting whatever page the reader chose |
+| 04:00 | testcode | `5bcd746` | **all 7,680 REPD rows** audited offline, 10/10 |
+| 04:05 | pipelinenews / globalgrid2050 | `7432805` / `5fa6ebf7` | **the MAP button fixed** across all seven v9.7 plugins |
+| 04:10 | testcode | `882e86c` | a mention is not a link — the driver stopped flagging assertions of absence |
+| 04:15 | globalgrid2050 | `c1b24e6d` | the published status brought up to date, 25 entries |
+
+### The result that mattered
+
+The MAP button had pointed at `repd_grid_atlasv8` — a page that answers HTTP 200
+and carries **no engine at all**: 21,045 bytes, zero cartridges, zero
+`current.json`, against 20 cartridge references in the v9 shell. Every MAP click
+from Pipeline News landed somewhere that could not compute. Nothing caught it
+because a retired receiver is not a broken link; a link checker calls it green.
+
+It now computes: **Longfield REPD 8162 → BRAINTREE, 9.44 km, 400/132 kV, NGET.**
+
+### What the licences exclude, and why
+
+Data and document repositories were left alone deliberately. `studies`,
+`seed-data` and `data-grid-gb` carry REPD, NESO ETYS and OpenStreetMap material
+that is **not the rights holder's to license**. A licence granted over material
+that was never the licensor's to grant is worth nothing to the adopter who
+relied on it.
+
+### Three more lessons, at the same cost as the ones in §5
+
+- **A gate that can never go green is an alarm.** The link driver's first
+  version failed all 64 sites, including immutable published versions that must
+  not be rewritten. Classify history, judge only what is live.
+- **A mention is not a link.** It then flagged files naming the retired route in
+  order to *assert its absence* — a proof reported as the thing it prevents.
+- **A blank export downloads happily.** A WebGL canvas read outside a render
+  frame gives a fully transparent PNG. Sample the pixels before offering the
+  file; a refusal beats an empty rectangle opened in front of someone else.
+
+### The next thing, decided but not built
+
+The end-owner scope feature: a menu button to click anywhere and analyse nearby
+substations, and adding substations for optioneering. **Session-only** — never
+persisted, never carried in a deep link, so a speculative asset can never be
+mistaken for a published one. That decision is the architect's, recorded here.
