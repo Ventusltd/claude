@@ -1,0 +1,1412 @@
+﻿GLOBALGRID2050 LIVE LOG
+Plain text on purpose. Append-only. All times UTC; the architect's clock is BST, UTC+1.
+Started 2026-09-05T10:39:40Z
+==============================================================================
+
+------------------------------------------------------------------------------
+TICK 2026-09-05T10:39:40Z
+REPOS  (branch | head | subject | dirty files)
+  globalgrid2050                   main                         c1b24e6d 202609050415: status - the MAP button computes, all 7
+                                   DIRTY: 11 file(s)
+                                      M .github/workflows/catalogue-composition-refresh.yml.disabled
+                                      M uk_renewables_pipeline/v9.7/index.html
+                                      M uk_renewables_pipeline/v9.7/scripts/core/atlas-receiver-v9-7.js
+                                      M uk_renewables_pipeline/v9.7/scripts/plugins/projects-v9-5-1.js
+                                      M uk_renewables_pipeline/v9.7/styles/v9-3.css
+                                      M uk_renewables_pipeline/v9.7/styles/v9-6-1.css
+                                      M uk_renewables_pipeline/v9.7/tests/browser_smoke_v9_7.mjs
+                                      M uk_renewables_pipeline/v9.7/tests/check_v9_5_1.mjs
+  gridatlas                        candidate/promotion-lane     3061dfc 202609042235-gridatlas candidate: promotion-lane docs,
+                                   DIRTY: 4 file(s)
+                                     ?? grid-run.err
+                                     ?? grid-run.log
+                                     ?? harvest-cache.json
+                                     ?? tmp-debug-visibility.mjs
+  gridatlas-main-202609050200      main                         18cffd5 202609050354: v9.121 - print the view, or save it, and
+                                   DIRTY: 2 file(s)
+                                      M atlas/modules/202609031958-menu-bar.js
+                                     ?? tools/proofs/export-print-and-image-outcomes.browser.mjs
+  pipelinenews                     main                         7432805 202609050353: retire the legacy receiver branch from b
+                                   DIRTY: 8 file(s)
+                                     ?? build/202609010145-v8-fast-site-manifest.json
+                                     ?? releases/202609010145-v8-fast-candidate.html
+                                     ?? releases/202609050242-pipelinenews/
+                                     ?? releases/data/202609010145-sector-intelligence.json
+                                     ?? releases/data/202609010145-v8-fast-registry.json
+                                     ?? releases/data/intelligence/202609010145/
+                                     ?? releases/javascript/202609010145-sector-intelligence.js
+                                     ?? releases/javascript/202609010145-v8-fast-runtime.js
+  ventus-grid-engine               main                         fe4eba6 202609050345: a licence, so the work can actually be a
+                                   DIRTY: 1 file(s)
+                                      M docs/session-logs/202609042330-carry-on.md
+  testcode                         main                         882e86c 202609050410: a mention is not a link
+                                   DIRTY: 6 file(s)
+                                      M drivers/link-targets.mjs
+                                     ?? link-targets.json
+                                     ?? menu-map.json
+                                     ?? p951.js
+                                     ?? repd-rows.json
+                                     ?? testcode-run.json
+  spiders                          main                         5616e8e 202609050345: a licence, so the work can actually be a
+                                   DIRTY: 1 file(s)
+                                     ?? spider_cvaa/
+  claude                           main                         0e95028 202609050415: the session log carries the whole night,
+                                   DIRTY: 24 file(s)
+                                      M CLAUDE.md
+                                      M familiars/localai.py
+                                      M familiars/reap.py
+                                     ?? familiars/AUTOPILOT.md
+                                     ?? familiars/OVERNIGHT-GOVERNOR.md
+                                     ?? familiars/autopilot.py
+                                     ?? familiars/governor-probe.ps1
+                                     ?? familiars/hardware.py
+LIVE  (http status | bytes | url)
+  200       31121 bytes    527 ms  https://globalgrid2050.com/
+  200       14321 bytes    270 ms  https://globalgrid2050.com/status.html
+  200        8499 bytes    208 ms  https://globalgrid2050.com/uk_renewables_pipeline/v9.7/
+  200        5223 bytes    290 ms  https://ventusltd.github.io/gridatlas/atlas/
+  200       47012 bytes    378 ms  https://ventusltd.github.io/gridatlas/atlas/current.json
+  200       35016 bytes    191 ms  https://ventusltd.github.io/ventus-grid-engine/
+PROCESSES  (pid | minutes | command)
+  44004      24.1 min  C:\Users\vikra\AppData\Local\Programs\Python\Python312\python.exe -m http.server 8765 --di
+
+------------------------------------------------------------------------------
+TICK 2026-09-05T10:41:43Z
+REPOS  (branch | head | subject | dirty files)
+  globalgrid2050                   main                         c1b24e6d 202609050415: status - the MAP button computes, all 7
+                                   DIRTY: 11 file(s)
+                                      M .github/workflows/catalogue-composition-refresh.yml.disabled
+                                      M uk_renewables_pipeline/v9.7/index.html
+                                      M uk_renewables_pipeline/v9.7/scripts/core/atlas-receiver-v9-7.js
+                                      M uk_renewables_pipeline/v9.7/scripts/plugins/projects-v9-5-1.js
+                                      M uk_renewables_pipeline/v9.7/styles/v9-3.css
+                                      M uk_renewables_pipeline/v9.7/styles/v9-6-1.css
+                                      M uk_renewables_pipeline/v9.7/tests/browser_smoke_v9_7.mjs
+                                      M uk_renewables_pipeline/v9.7/tests/check_v9_5_1.mjs
+  gridatlas                        candidate/promotion-lane     3061dfc 202609042235-gridatlas candidate: promotion-lane docs,
+                                   DIRTY: 4 file(s)
+                                     ?? grid-run.err
+                                     ?? grid-run.log
+                                     ?? harvest-cache.json
+                                     ?? tmp-debug-visibility.mjs
+  gridatlas-main-202609050200      main                         18cffd5 202609050354: v9.121 - print the view, or save it, and
+                                   DIRTY: 2 file(s)
+                                      M atlas/modules/202609031958-menu-bar.js
+                                     ?? tools/proofs/export-print-and-image-outcomes.browser.mjs
+  pipelinenews                     main                         7432805 202609050353: retire the legacy receiver branch from b
+                                   DIRTY: 8 file(s)
+                                     ?? build/202609010145-v8-fast-site-manifest.json
+                                     ?? releases/202609010145-v8-fast-candidate.html
+                                     ?? releases/202609050242-pipelinenews/
+                                     ?? releases/data/202609010145-sector-intelligence.json
+                                     ?? releases/data/202609010145-v8-fast-registry.json
+                                     ?? releases/data/intelligence/202609010145/
+                                     ?? releases/javascript/202609010145-sector-intelligence.js
+                                     ?? releases/javascript/202609010145-v8-fast-runtime.js
+  ventus-grid-engine               main                         fe4eba6 202609050345: a licence, so the work can actually be a
+                                   DIRTY: 1 file(s)
+                                      M docs/session-logs/202609042330-carry-on.md
+  testcode                         main                         882e86c 202609050410: a mention is not a link
+                                   DIRTY: 6 file(s)
+                                      M drivers/link-targets.mjs
+                                     ?? link-targets.json
+                                     ?? menu-map.json
+                                     ?? p951.js
+                                     ?? repd-rows.json
+                                     ?? testcode-run.json
+  spiders                          main                         5616e8e 202609050345: a licence, so the work can actually be a
+                                   DIRTY: 1 file(s)
+                                     ?? spider_cvaa/
+  claude                           main                         0e95028 202609050415: the session log carries the whole night,
+                                   DIRTY: 24 file(s)
+                                      M CLAUDE.md
+                                      M familiars/localai.py
+                                      M familiars/reap.py
+                                     ?? familiars/AUTOPILOT.md
+                                     ?? familiars/OVERNIGHT-GOVERNOR.md
+                                     ?? familiars/autopilot.py
+                                     ?? familiars/governor-probe.ps1
+                                     ?? familiars/hardware.py
+LIVE  (http status | bytes | url)
+  200       31121 bytes    266 ms  https://globalgrid2050.com/
+  200       14321 bytes     93 ms  https://globalgrid2050.com/status.html
+  200        8499 bytes     91 ms  https://globalgrid2050.com/uk_renewables_pipeline/v9.7/
+  200        5223 bytes    179 ms  https://ventusltd.github.io/gridatlas/atlas/
+  200       47012 bytes    228 ms  https://ventusltd.github.io/gridatlas/atlas/current.json
+  200       35016 bytes     70 ms  https://ventusltd.github.io/ventus-grid-engine/
+PROCESSES  (pid | minutes | command)
+  44004      26.1 min  C:\Users\vikra\AppData\Local\Programs\Python\Python312\python.exe -m http.server 8765 --di
+
+------------------------------------------------------------------------------
+TICK 2026-09-05T10:43:46Z
+REPOS  (branch | head | subject | dirty files)
+  globalgrid2050                   main                         c1b24e6d 202609050415: status - the MAP button computes, all 7
+                                   DIRTY: 11 file(s)
+                                      M .github/workflows/catalogue-composition-refresh.yml.disabled
+                                      M uk_renewables_pipeline/v9.7/index.html
+                                      M uk_renewables_pipeline/v9.7/scripts/core/atlas-receiver-v9-7.js
+                                      M uk_renewables_pipeline/v9.7/scripts/plugins/projects-v9-5-1.js
+                                      M uk_renewables_pipeline/v9.7/styles/v9-3.css
+                                      M uk_renewables_pipeline/v9.7/styles/v9-6-1.css
+                                      M uk_renewables_pipeline/v9.7/tests/browser_smoke_v9_7.mjs
+                                      M uk_renewables_pipeline/v9.7/tests/check_v9_5_1.mjs
+  gridatlas                        candidate/promotion-lane     3061dfc 202609042235-gridatlas candidate: promotion-lane docs,
+                                   DIRTY: 4 file(s)
+                                     ?? grid-run.err
+                                     ?? grid-run.log
+                                     ?? harvest-cache.json
+                                     ?? tmp-debug-visibility.mjs
+  gridatlas-main-202609050200      main                         18cffd5 202609050354: v9.121 - print the view, or save it, and
+                                   DIRTY: 2 file(s)
+                                      M atlas/modules/202609031958-menu-bar.js
+                                     ?? tools/proofs/export-print-and-image-outcomes.browser.mjs
+  pipelinenews                     main                         7432805 202609050353: retire the legacy receiver branch from b
+                                   DIRTY: 8 file(s)
+                                     ?? build/202609010145-v8-fast-site-manifest.json
+                                     ?? releases/202609010145-v8-fast-candidate.html
+                                     ?? releases/202609050242-pipelinenews/
+                                     ?? releases/data/202609010145-sector-intelligence.json
+                                     ?? releases/data/202609010145-v8-fast-registry.json
+                                     ?? releases/data/intelligence/202609010145/
+                                     ?? releases/javascript/202609010145-sector-intelligence.js
+                                     ?? releases/javascript/202609010145-v8-fast-runtime.js
+  ventus-grid-engine               main                         fe4eba6 202609050345: a licence, so the work can actually be a
+                                   DIRTY: 1 file(s)
+                                      M docs/session-logs/202609042330-carry-on.md
+  testcode                         main                         882e86c 202609050410: a mention is not a link
+                                   DIRTY: 6 file(s)
+                                      M drivers/link-targets.mjs
+                                     ?? link-targets.json
+                                     ?? menu-map.json
+                                     ?? p951.js
+                                     ?? repd-rows.json
+                                     ?? testcode-run.json
+  spiders                          main                         5616e8e 202609050345: a licence, so the work can actually be a
+                                   DIRTY: 1 file(s)
+                                     ?? spider_cvaa/
+  claude                           main                         0e95028 202609050415: the session log carries the whole night,
+                                   DIRTY: 24 file(s)
+                                      M CLAUDE.md
+                                      M familiars/localai.py
+                                      M familiars/reap.py
+                                     ?? familiars/AUTOPILOT.md
+                                     ?? familiars/OVERNIGHT-GOVERNOR.md
+                                     ?? familiars/autopilot.py
+                                     ?? familiars/governor-probe.ps1
+                                     ?? familiars/hardware.py
+LIVE  (http status | bytes | url)
+  200       31121 bytes    262 ms  https://globalgrid2050.com/
+  200       14321 bytes     93 ms  https://globalgrid2050.com/status.html
+  200        8499 bytes     84 ms  https://globalgrid2050.com/uk_renewables_pipeline/v9.7/
+  200        5223 bytes    168 ms  https://ventusltd.github.io/gridatlas/atlas/
+  200       47012 bytes    218 ms  https://ventusltd.github.io/gridatlas/atlas/current.json
+  200       35016 bytes     71 ms  https://ventusltd.github.io/ventus-grid-engine/
+PROCESSES  (pid | minutes | command)
+  44004      28.2 min  C:\Users\vikra\AppData\Local\Programs\Python\Python312\python.exe -m http.server 8765 --di
+  20048       0.2 min  node  tools/proofs/run-current.mjs
+
+------------------------------------------------------------------------------
+TICK 2026-09-05T10:45:48Z
+REPOS  (branch | head | subject | dirty files)
+  globalgrid2050                   main                         c1b24e6d 202609050415: status - the MAP button computes, all 7
+                                   DIRTY: 11 file(s)
+                                      M .github/workflows/catalogue-composition-refresh.yml.disabled
+                                      M uk_renewables_pipeline/v9.7/index.html
+                                      M uk_renewables_pipeline/v9.7/scripts/core/atlas-receiver-v9-7.js
+                                      M uk_renewables_pipeline/v9.7/scripts/plugins/projects-v9-5-1.js
+                                      M uk_renewables_pipeline/v9.7/styles/v9-3.css
+                                      M uk_renewables_pipeline/v9.7/styles/v9-6-1.css
+                                      M uk_renewables_pipeline/v9.7/tests/browser_smoke_v9_7.mjs
+                                      M uk_renewables_pipeline/v9.7/tests/check_v9_5_1.mjs
+  gridatlas                        candidate/promotion-lane     3061dfc 202609042235-gridatlas candidate: promotion-lane docs,
+                                   DIRTY: 4 file(s)
+                                     ?? grid-run.err
+                                     ?? grid-run.log
+                                     ?? harvest-cache.json
+                                     ?? tmp-debug-visibility.mjs
+  gridatlas-main-202609050200      main                         18cffd5 202609050354: v9.121 - print the view, or save it, and
+                                   DIRTY: 2 file(s)
+                                      M atlas/modules/202609031958-menu-bar.js
+                                     ?? tools/proofs/export-print-and-image-outcomes.browser.mjs
+  pipelinenews                     main                         7432805 202609050353: retire the legacy receiver branch from b
+                                   DIRTY: 8 file(s)
+                                     ?? build/202609010145-v8-fast-site-manifest.json
+                                     ?? releases/202609010145-v8-fast-candidate.html
+                                     ?? releases/202609050242-pipelinenews/
+                                     ?? releases/data/202609010145-sector-intelligence.json
+                                     ?? releases/data/202609010145-v8-fast-registry.json
+                                     ?? releases/data/intelligence/202609010145/
+                                     ?? releases/javascript/202609010145-sector-intelligence.js
+                                     ?? releases/javascript/202609010145-v8-fast-runtime.js
+  ventus-grid-engine               main                         fe4eba6 202609050345: a licence, so the work can actually be a
+                                   DIRTY: 1 file(s)
+                                      M docs/session-logs/202609042330-carry-on.md
+  testcode                         main                         882e86c 202609050410: a mention is not a link
+                                   DIRTY: 6 file(s)
+                                      M drivers/link-targets.mjs
+                                     ?? link-targets.json
+                                     ?? menu-map.json
+                                     ?? p951.js
+                                     ?? repd-rows.json
+                                     ?? testcode-run.json
+  spiders                          main                         5616e8e 202609050345: a licence, so the work can actually be a
+                                   DIRTY: 1 file(s)
+                                     ?? spider_cvaa/
+  claude                           main                         0e95028 202609050415: the session log carries the whole night,
+                                   DIRTY: 24 file(s)
+                                      M CLAUDE.md
+                                      M familiars/localai.py
+                                      M familiars/reap.py
+                                     ?? familiars/AUTOPILOT.md
+                                     ?? familiars/OVERNIGHT-GOVERNOR.md
+                                     ?? familiars/autopilot.py
+                                     ?? familiars/governor-probe.ps1
+                                     ?? familiars/hardware.py
+LIVE  (http status | bytes | url)
+  200       31121 bytes    272 ms  https://globalgrid2050.com/
+  200       14321 bytes     97 ms  https://globalgrid2050.com/status.html
+  200        8499 bytes     81 ms  https://globalgrid2050.com/uk_renewables_pipeline/v9.7/
+  200        5223 bytes    146 ms  https://ventusltd.github.io/gridatlas/atlas/
+  200       47012 bytes    222 ms  https://ventusltd.github.io/gridatlas/atlas/current.json
+  200       35016 bytes     66 ms  https://ventusltd.github.io/ventus-grid-engine/
+PROCESSES  (pid | minutes | command)
+  44004      30.2 min  C:\Users\vikra\AppData\Local\Programs\Python\Python312\python.exe -m http.server 8765 --di
+
+------------------------------------------------------------------------------
+TICK 2026-09-05T10:47:50Z
+REPOS  (branch | head | subject | dirty files)
+  globalgrid2050                   main                         c1b24e6d 202609050415: status - the MAP button computes, all 7
+                                   DIRTY: 11 file(s)
+                                      M .github/workflows/catalogue-composition-refresh.yml.disabled
+                                      M uk_renewables_pipeline/v9.7/index.html
+                                      M uk_renewables_pipeline/v9.7/scripts/core/atlas-receiver-v9-7.js
+                                      M uk_renewables_pipeline/v9.7/scripts/plugins/projects-v9-5-1.js
+                                      M uk_renewables_pipeline/v9.7/styles/v9-3.css
+                                      M uk_renewables_pipeline/v9.7/styles/v9-6-1.css
+                                      M uk_renewables_pipeline/v9.7/tests/browser_smoke_v9_7.mjs
+                                      M uk_renewables_pipeline/v9.7/tests/check_v9_5_1.mjs
+  gridatlas                        candidate/promotion-lane     3061dfc 202609042235-gridatlas candidate: promotion-lane docs,
+                                   DIRTY: 4 file(s)
+                                     ?? grid-run.err
+                                     ?? grid-run.log
+                                     ?? harvest-cache.json
+                                     ?? tmp-debug-visibility.mjs
+  gridatlas-main-202609050200      main                         18cffd5 202609050354: v9.121 - print the view, or save it, and
+                                   DIRTY: 2 file(s)
+                                      M atlas/modules/202609031958-menu-bar.js
+                                     ?? tools/proofs/export-print-and-image-outcomes.browser.mjs
+  pipelinenews                     main                         7432805 202609050353: retire the legacy receiver branch from b
+                                   DIRTY: 8 file(s)
+                                     ?? build/202609010145-v8-fast-site-manifest.json
+                                     ?? releases/202609010145-v8-fast-candidate.html
+                                     ?? releases/202609050242-pipelinenews/
+                                     ?? releases/data/202609010145-sector-intelligence.json
+                                     ?? releases/data/202609010145-v8-fast-registry.json
+                                     ?? releases/data/intelligence/202609010145/
+                                     ?? releases/javascript/202609010145-sector-intelligence.js
+                                     ?? releases/javascript/202609010145-v8-fast-runtime.js
+  ventus-grid-engine               main                         fe4eba6 202609050345: a licence, so the work can actually be a
+                                   DIRTY: 1 file(s)
+                                      M docs/session-logs/202609042330-carry-on.md
+  testcode                         main                         882e86c 202609050410: a mention is not a link
+                                   DIRTY: 6 file(s)
+                                      M drivers/link-targets.mjs
+                                     ?? link-targets.json
+                                     ?? menu-map.json
+                                     ?? p951.js
+                                     ?? repd-rows.json
+                                     ?? testcode-run.json
+  spiders                          main                         5616e8e 202609050345: a licence, so the work can actually be a
+                                   DIRTY: 1 file(s)
+                                     ?? spider_cvaa/
+  claude                           main                         0e95028 202609050415: the session log carries the whole night,
+                                   DIRTY: 24 file(s)
+                                      M CLAUDE.md
+                                      M familiars/localai.py
+                                      M familiars/reap.py
+                                     ?? familiars/AUTOPILOT.md
+                                     ?? familiars/OVERNIGHT-GOVERNOR.md
+                                     ?? familiars/autopilot.py
+                                     ?? familiars/governor-probe.ps1
+                                     ?? familiars/hardware.py
+LIVE  (http status | bytes | url)
+  200       31121 bytes    276 ms  https://globalgrid2050.com/
+  200       14321 bytes     96 ms  https://globalgrid2050.com/status.html
+  200        8499 bytes     75 ms  https://globalgrid2050.com/uk_renewables_pipeline/v9.7/
+  200        5223 bytes    157 ms  https://ventusltd.github.io/gridatlas/atlas/
+  200       47012 bytes    222 ms  https://ventusltd.github.io/gridatlas/atlas/current.json
+  200       35016 bytes     92 ms  https://ventusltd.github.io/ventus-grid-engine/
+PROCESSES  (pid | minutes | command)
+  44004      32.2 min  C:\Users\vikra\AppData\Local\Programs\Python\Python312\python.exe -m http.server 8765 --di
+
+------------------------------------------------------------------------------
+TICK 2026-09-05T10:49:52Z
+REPOS  (branch | head | subject | dirty files)
+  globalgrid2050                   main                         c1b24e6d 202609050415: status - the MAP button computes, all 7
+                                   DIRTY: 11 file(s)
+                                      M .github/workflows/catalogue-composition-refresh.yml.disabled
+                                      M uk_renewables_pipeline/v9.7/index.html
+                                      M uk_renewables_pipeline/v9.7/scripts/core/atlas-receiver-v9-7.js
+                                      M uk_renewables_pipeline/v9.7/scripts/plugins/projects-v9-5-1.js
+                                      M uk_renewables_pipeline/v9.7/styles/v9-3.css
+                                      M uk_renewables_pipeline/v9.7/styles/v9-6-1.css
+                                      M uk_renewables_pipeline/v9.7/tests/browser_smoke_v9_7.mjs
+                                      M uk_renewables_pipeline/v9.7/tests/check_v9_5_1.mjs
+  gridatlas                        candidate/promotion-lane     3061dfc 202609042235-gridatlas candidate: promotion-lane docs,
+                                   DIRTY: 4 file(s)
+                                     ?? grid-run.err
+                                     ?? grid-run.log
+                                     ?? harvest-cache.json
+                                     ?? tmp-debug-visibility.mjs
+  gridatlas-main-202609050200      main                         18cffd5 202609050354: v9.121 - print the view, or save it, and
+                                   DIRTY: 2 file(s)
+                                      M atlas/modules/202609031958-menu-bar.js
+                                     ?? tools/proofs/export-print-and-image-outcomes.browser.mjs
+  pipelinenews                     main                         7432805 202609050353: retire the legacy receiver branch from b
+                                   DIRTY: 8 file(s)
+                                     ?? build/202609010145-v8-fast-site-manifest.json
+                                     ?? releases/202609010145-v8-fast-candidate.html
+                                     ?? releases/202609050242-pipelinenews/
+                                     ?? releases/data/202609010145-sector-intelligence.json
+                                     ?? releases/data/202609010145-v8-fast-registry.json
+                                     ?? releases/data/intelligence/202609010145/
+                                     ?? releases/javascript/202609010145-sector-intelligence.js
+                                     ?? releases/javascript/202609010145-v8-fast-runtime.js
+  ventus-grid-engine               main                         fe4eba6 202609050345: a licence, so the work can actually be a
+                                   DIRTY: 1 file(s)
+                                      M docs/session-logs/202609042330-carry-on.md
+  testcode                         main                         882e86c 202609050410: a mention is not a link
+                                   DIRTY: 6 file(s)
+                                      M drivers/link-targets.mjs
+                                     ?? link-targets.json
+                                     ?? menu-map.json
+                                     ?? p951.js
+                                     ?? repd-rows.json
+                                     ?? testcode-run.json
+  spiders                          main                         5616e8e 202609050345: a licence, so the work can actually be a
+                                   DIRTY: 1 file(s)
+                                     ?? spider_cvaa/
+  claude                           main                         0e95028 202609050415: the session log carries the whole night,
+                                   DIRTY: 24 file(s)
+                                      M CLAUDE.md
+                                      M familiars/localai.py
+                                      M familiars/reap.py
+                                     ?? familiars/AUTOPILOT.md
+                                     ?? familiars/OVERNIGHT-GOVERNOR.md
+                                     ?? familiars/autopilot.py
+                                     ?? familiars/governor-probe.ps1
+                                     ?? familiars/hardware.py
+LIVE  (http status | bytes | url)
+  200       31121 bytes    468 ms  https://globalgrid2050.com/
+  200       14321 bytes    209 ms  https://globalgrid2050.com/status.html
+  200        8499 bytes    181 ms  https://globalgrid2050.com/uk_renewables_pipeline/v9.7/
+  200        5223 bytes    283 ms  https://ventusltd.github.io/gridatlas/atlas/
+  200       47012 bytes    323 ms  https://ventusltd.github.io/gridatlas/atlas/current.json
+  200       35016 bytes    198 ms  https://ventusltd.github.io/ventus-grid-engine/
+PROCESSES  (pid | minutes | command)
+  44004      34.3 min  C:\Users\vikra\AppData\Local\Programs\Python\Python312\python.exe -m http.server 8765 --di
+
+------------------------------------------------------------------------------
+TICK 2026-09-05T10:51:55Z
+REPOS  (branch | head | subject | dirty files)
+  globalgrid2050                   main                         c1b24e6d 202609050415: status - the MAP button computes, all 7
+                                   DIRTY: 11 file(s)
+                                      M .github/workflows/catalogue-composition-refresh.yml.disabled
+                                      M uk_renewables_pipeline/v9.7/index.html
+                                      M uk_renewables_pipeline/v9.7/scripts/core/atlas-receiver-v9-7.js
+                                      M uk_renewables_pipeline/v9.7/scripts/plugins/projects-v9-5-1.js
+                                      M uk_renewables_pipeline/v9.7/styles/v9-3.css
+                                      M uk_renewables_pipeline/v9.7/styles/v9-6-1.css
+                                      M uk_renewables_pipeline/v9.7/tests/browser_smoke_v9_7.mjs
+                                      M uk_renewables_pipeline/v9.7/tests/check_v9_5_1.mjs
+  gridatlas                        candidate/promotion-lane     3061dfc 202609042235-gridatlas candidate: promotion-lane docs,
+                                   DIRTY: 4 file(s)
+                                     ?? grid-run.err
+                                     ?? grid-run.log
+                                     ?? harvest-cache.json
+                                     ?? tmp-debug-visibility.mjs
+  gridatlas-main-202609050200      main                         18cffd5 202609050354: v9.121 - print the view, or save it, and
+                                   DIRTY: 2 file(s)
+                                      M atlas/modules/202609031958-menu-bar.js
+                                     ?? tools/proofs/export-print-and-image-outcomes.browser.mjs
+  pipelinenews                     main                         7432805 202609050353: retire the legacy receiver branch from b
+                                   DIRTY: 8 file(s)
+                                     ?? build/202609010145-v8-fast-site-manifest.json
+                                     ?? releases/202609010145-v8-fast-candidate.html
+                                     ?? releases/202609050242-pipelinenews/
+                                     ?? releases/data/202609010145-sector-intelligence.json
+                                     ?? releases/data/202609010145-v8-fast-registry.json
+                                     ?? releases/data/intelligence/202609010145/
+                                     ?? releases/javascript/202609010145-sector-intelligence.js
+                                     ?? releases/javascript/202609010145-v8-fast-runtime.js
+  ventus-grid-engine               main                         fe4eba6 202609050345: a licence, so the work can actually be a
+                                   DIRTY: 1 file(s)
+                                      M docs/session-logs/202609042330-carry-on.md
+  testcode                         main                         882e86c 202609050410: a mention is not a link
+                                   DIRTY: 6 file(s)
+                                      M drivers/link-targets.mjs
+                                     ?? link-targets.json
+                                     ?? menu-map.json
+                                     ?? p951.js
+                                     ?? repd-rows.json
+                                     ?? testcode-run.json
+  spiders                          main                         5616e8e 202609050345: a licence, so the work can actually be a
+                                   DIRTY: 1 file(s)
+                                     ?? spider_cvaa/
+  claude                           main                         0e95028 202609050415: the session log carries the whole night,
+                                   DIRTY: 25 file(s)
+                                      M CLAUDE.md
+                                      M familiars/localai.py
+                                      M familiars/reap.py
+                                     ?? familiars/AUTOPILOT.md
+                                     ?? familiars/OVERNIGHT-GOVERNOR.md
+                                     ?? familiars/autopilot.py
+                                     ?? familiars/governor-probe.ps1
+                                     ?? familiars/hardware.py
+LIVE  (http status | bytes | url)
+  200       31121 bytes    264 ms  https://globalgrid2050.com/
+  200       14321 bytes    120 ms  https://globalgrid2050.com/status.html
+  200        8499 bytes     81 ms  https://globalgrid2050.com/uk_renewables_pipeline/v9.7/
+  200        5223 bytes    197 ms  https://ventusltd.github.io/gridatlas/atlas/
+  200       47012 bytes    217 ms  https://ventusltd.github.io/gridatlas/atlas/current.json
+  200       35016 bytes     74 ms  https://ventusltd.github.io/ventus-grid-engine/
+PROCESSES  (pid | minutes | command)
+  44004      36.3 min  C:\Users\vikra\AppData\Local\Programs\Python\Python312\python.exe -m http.server 8765 --di
+
+------------------------------------------------------------------------------
+TICK 2026-09-05T10:53:57Z
+REPOS  (branch | head | subject | dirty files)
+  globalgrid2050                   main                         c1b24e6d 202609050415: status - the MAP button computes, all 7
+                                   DIRTY: 11 file(s)
+                                      M .github/workflows/catalogue-composition-refresh.yml.disabled
+                                      M uk_renewables_pipeline/v9.7/index.html
+                                      M uk_renewables_pipeline/v9.7/scripts/core/atlas-receiver-v9-7.js
+                                      M uk_renewables_pipeline/v9.7/scripts/plugins/projects-v9-5-1.js
+                                      M uk_renewables_pipeline/v9.7/styles/v9-3.css
+                                      M uk_renewables_pipeline/v9.7/styles/v9-6-1.css
+                                      M uk_renewables_pipeline/v9.7/tests/browser_smoke_v9_7.mjs
+                                      M uk_renewables_pipeline/v9.7/tests/check_v9_5_1.mjs
+  gridatlas                        candidate/promotion-lane     3061dfc 202609042235-gridatlas candidate: promotion-lane docs,
+                                   DIRTY: 4 file(s)
+                                     ?? grid-run.err
+                                     ?? grid-run.log
+                                     ?? harvest-cache.json
+                                     ?? tmp-debug-visibility.mjs
+  gridatlas-main-202609050200      main                         18cffd5 202609050354: v9.121 - print the view, or save it, and
+                                   DIRTY: 2 file(s)
+                                      M atlas/modules/202609031958-menu-bar.js
+                                     ?? tools/proofs/export-print-and-image-outcomes.browser.mjs
+  pipelinenews                     main                         7432805 202609050353: retire the legacy receiver branch from b
+                                   DIRTY: 8 file(s)
+                                     ?? build/202609010145-v8-fast-site-manifest.json
+                                     ?? releases/202609010145-v8-fast-candidate.html
+                                     ?? releases/202609050242-pipelinenews/
+                                     ?? releases/data/202609010145-sector-intelligence.json
+                                     ?? releases/data/202609010145-v8-fast-registry.json
+                                     ?? releases/data/intelligence/202609010145/
+                                     ?? releases/javascript/202609010145-sector-intelligence.js
+                                     ?? releases/javascript/202609010145-v8-fast-runtime.js
+  ventus-grid-engine               main                         fe4eba6 202609050345: a licence, so the work can actually be a
+                                   DIRTY: 1 file(s)
+                                      M docs/session-logs/202609042330-carry-on.md
+  testcode                         main                         882e86c 202609050410: a mention is not a link
+                                   DIRTY: 6 file(s)
+                                      M drivers/link-targets.mjs
+                                     ?? link-targets.json
+                                     ?? menu-map.json
+                                     ?? p951.js
+                                     ?? repd-rows.json
+                                     ?? testcode-run.json
+  spiders                          main                         5616e8e 202609050345: a licence, so the work can actually be a
+                                   DIRTY: 1 file(s)
+                                     ?? spider_cvaa/
+  claude                           main                         0e95028 202609050415: the session log carries the whole night,
+                                   DIRTY: 25 file(s)
+                                      M CLAUDE.md
+                                      M familiars/localai.py
+                                      M familiars/reap.py
+                                     ?? familiars/AUTOPILOT.md
+                                     ?? familiars/OVERNIGHT-GOVERNOR.md
+                                     ?? familiars/autopilot.py
+                                     ?? familiars/governor-probe.ps1
+                                     ?? familiars/hardware.py
+LIVE  (http status | bytes | url)
+  200       31121 bytes    302 ms  https://globalgrid2050.com/
+  200       14321 bytes     94 ms  https://globalgrid2050.com/status.html
+  200        8499 bytes     82 ms  https://globalgrid2050.com/uk_renewables_pipeline/v9.7/
+  200        5223 bytes    177 ms  https://ventusltd.github.io/gridatlas/atlas/
+  200       47012 bytes    210 ms  https://ventusltd.github.io/gridatlas/atlas/current.json
+  200       35016 bytes     68 ms  https://ventusltd.github.io/ventus-grid-engine/
+PROCESSES  (pid | minutes | command)
+  44004      38.3 min  C:\Users\vikra\AppData\Local\Programs\Python\Python312\python.exe -m http.server 8765 --di
+
+------------------------------------------------------------------------------
+TICK 2026-09-05T10:55:59Z
+REPOS  (branch | head | subject | dirty files)
+  globalgrid2050                   main                         c1b24e6d 202609050415: status - the MAP button computes, all 7
+                                   DIRTY: 11 file(s)
+                                      M .github/workflows/catalogue-composition-refresh.yml.disabled
+                                      M uk_renewables_pipeline/v9.7/index.html
+                                      M uk_renewables_pipeline/v9.7/scripts/core/atlas-receiver-v9-7.js
+                                      M uk_renewables_pipeline/v9.7/scripts/plugins/projects-v9-5-1.js
+                                      M uk_renewables_pipeline/v9.7/styles/v9-3.css
+                                      M uk_renewables_pipeline/v9.7/styles/v9-6-1.css
+                                      M uk_renewables_pipeline/v9.7/tests/browser_smoke_v9_7.mjs
+                                      M uk_renewables_pipeline/v9.7/tests/check_v9_5_1.mjs
+  gridatlas                        candidate/promotion-lane     3061dfc 202609042235-gridatlas candidate: promotion-lane docs,
+                                   DIRTY: 4 file(s)
+                                     ?? grid-run.err
+                                     ?? grid-run.log
+                                     ?? harvest-cache.json
+                                     ?? tmp-debug-visibility.mjs
+  gridatlas-main-202609050200      main                         18cffd5 202609050354: v9.121 - print the view, or save it, and
+                                   DIRTY: 2 file(s)
+                                      M atlas/modules/202609031958-menu-bar.js
+                                     ?? tools/proofs/export-print-and-image-outcomes.browser.mjs
+  pipelinenews                     main                         7432805 202609050353: retire the legacy receiver branch from b
+                                   DIRTY: 8 file(s)
+                                     ?? build/202609010145-v8-fast-site-manifest.json
+                                     ?? releases/202609010145-v8-fast-candidate.html
+                                     ?? releases/202609050242-pipelinenews/
+                                     ?? releases/data/202609010145-sector-intelligence.json
+                                     ?? releases/data/202609010145-v8-fast-registry.json
+                                     ?? releases/data/intelligence/202609010145/
+                                     ?? releases/javascript/202609010145-sector-intelligence.js
+                                     ?? releases/javascript/202609010145-v8-fast-runtime.js
+  ventus-grid-engine               main                         fe4eba6 202609050345: a licence, so the work can actually be a
+                                   DIRTY: 1 file(s)
+                                      M docs/session-logs/202609042330-carry-on.md
+  testcode                         main                         882e86c 202609050410: a mention is not a link
+                                   DIRTY: 6 file(s)
+                                      M drivers/link-targets.mjs
+                                     ?? link-targets.json
+                                     ?? menu-map.json
+                                     ?? p951.js
+                                     ?? repd-rows.json
+                                     ?? testcode-run.json
+  spiders                          main                         5616e8e 202609050345: a licence, so the work can actually be a
+                                   DIRTY: 1 file(s)
+                                     ?? spider_cvaa/
+  claude                           main                         0e95028 202609050415: the session log carries the whole night,
+                                   DIRTY: 26 file(s)
+                                      M CLAUDE.md
+                                      M familiars/localai.py
+                                      M familiars/reap.py
+                                     ?? familiars/AUTOPILOT.md
+                                     ?? familiars/OVERNIGHT-GOVERNOR.md
+                                     ?? familiars/autopilot.py
+                                     ?? familiars/governor-probe.ps1
+                                     ?? familiars/hardware.py
+LIVE  (http status | bytes | url)
+  200       31121 bytes    301 ms  https://globalgrid2050.com/
+  200       14321 bytes    106 ms  https://globalgrid2050.com/status.html
+  200        8499 bytes     86 ms  https://globalgrid2050.com/uk_renewables_pipeline/v9.7/
+  200        5223 bytes    154 ms  https://ventusltd.github.io/gridatlas/atlas/
+  200       47012 bytes    235 ms  https://ventusltd.github.io/gridatlas/atlas/current.json
+  200       35016 bytes     79 ms  https://ventusltd.github.io/ventus-grid-engine/
+PROCESSES  (pid | minutes | command)
+  44004      40.4 min  C:\Users\vikra\AppData\Local\Programs\Python\Python312\python.exe -m http.server 8765 --di
+
+------------------------------------------------------------------------------
+TICK 2026-09-05T10:58:02Z
+REPOS  (branch | head | subject | dirty files)
+  globalgrid2050                   main                         c1b24e6d 202609050415: status - the MAP button computes, all 7
+                                   DIRTY: 11 file(s)
+                                      M .github/workflows/catalogue-composition-refresh.yml.disabled
+                                      M uk_renewables_pipeline/v9.7/index.html
+                                      M uk_renewables_pipeline/v9.7/scripts/core/atlas-receiver-v9-7.js
+                                      M uk_renewables_pipeline/v9.7/scripts/plugins/projects-v9-5-1.js
+                                      M uk_renewables_pipeline/v9.7/styles/v9-3.css
+                                      M uk_renewables_pipeline/v9.7/styles/v9-6-1.css
+                                      M uk_renewables_pipeline/v9.7/tests/browser_smoke_v9_7.mjs
+                                      M uk_renewables_pipeline/v9.7/tests/check_v9_5_1.mjs
+  gridatlas                        candidate/promotion-lane     3061dfc 202609042235-gridatlas candidate: promotion-lane docs,
+                                   DIRTY: 4 file(s)
+                                     ?? grid-run.err
+                                     ?? grid-run.log
+                                     ?? harvest-cache.json
+                                     ?? tmp-debug-visibility.mjs
+  gridatlas-main-202609050200      main                         18cffd5 202609050354: v9.121 - print the view, or save it, and
+                                   DIRTY: 2 file(s)
+                                      M atlas/modules/202609031958-menu-bar.js
+                                     ?? tools/proofs/export-print-and-image-outcomes.browser.mjs
+  pipelinenews                     main                         7432805 202609050353: retire the legacy receiver branch from b
+                                   DIRTY: 8 file(s)
+                                     ?? build/202609010145-v8-fast-site-manifest.json
+                                     ?? releases/202609010145-v8-fast-candidate.html
+                                     ?? releases/202609050242-pipelinenews/
+                                     ?? releases/data/202609010145-sector-intelligence.json
+                                     ?? releases/data/202609010145-v8-fast-registry.json
+                                     ?? releases/data/intelligence/202609010145/
+                                     ?? releases/javascript/202609010145-sector-intelligence.js
+                                     ?? releases/javascript/202609010145-v8-fast-runtime.js
+  ventus-grid-engine               main                         fe4eba6 202609050345: a licence, so the work can actually be a
+                                   DIRTY: 1 file(s)
+                                      M docs/session-logs/202609042330-carry-on.md
+  testcode                         main                         882e86c 202609050410: a mention is not a link
+                                   DIRTY: 6 file(s)
+                                      M drivers/link-targets.mjs
+                                     ?? link-targets.json
+                                     ?? menu-map.json
+                                     ?? p951.js
+                                     ?? repd-rows.json
+                                     ?? testcode-run.json
+  spiders                          main                         5616e8e 202609050345: a licence, so the work can actually be a
+                                   DIRTY: 1 file(s)
+                                     ?? spider_cvaa/
+  claude                           main                         0e95028 202609050415: the session log carries the whole night,
+                                   DIRTY: 26 file(s)
+                                      M CLAUDE.md
+                                      M familiars/localai.py
+                                      M familiars/reap.py
+                                     ?? familiars/AUTOPILOT.md
+                                     ?? familiars/OVERNIGHT-GOVERNOR.md
+                                     ?? familiars/autopilot.py
+                                     ?? familiars/governor-probe.ps1
+                                     ?? familiars/hardware.py
+LIVE  (http status | bytes | url)
+  200       31121 bytes    270 ms  https://globalgrid2050.com/
+  200       14321 bytes    112 ms  https://globalgrid2050.com/status.html
+  200        8499 bytes     80 ms  https://globalgrid2050.com/uk_renewables_pipeline/v9.7/
+  200        5223 bytes    153 ms  https://ventusltd.github.io/gridatlas/atlas/
+  200       47012 bytes    210 ms  https://ventusltd.github.io/gridatlas/atlas/current.json
+  200       35016 bytes     84 ms  https://ventusltd.github.io/ventus-grid-engine/
+PROCESSES  (pid | minutes | command)
+  44004      42.4 min  C:\Users\vikra\AppData\Local\Programs\Python\Python312\python.exe -m http.server 8765 --di
+
+------------------------------------------------------------------------------
+TICK 2026-09-05T11:00:04Z
+REPOS  (branch | head | subject | dirty files)
+  globalgrid2050                   main                         c1b24e6d 202609050415: status - the MAP button computes, all 7
+                                   DIRTY: 11 file(s)
+                                      M .github/workflows/catalogue-composition-refresh.yml.disabled
+                                      M uk_renewables_pipeline/v9.7/index.html
+                                      M uk_renewables_pipeline/v9.7/scripts/core/atlas-receiver-v9-7.js
+                                      M uk_renewables_pipeline/v9.7/scripts/plugins/projects-v9-5-1.js
+                                      M uk_renewables_pipeline/v9.7/styles/v9-3.css
+                                      M uk_renewables_pipeline/v9.7/styles/v9-6-1.css
+                                      M uk_renewables_pipeline/v9.7/tests/browser_smoke_v9_7.mjs
+                                      M uk_renewables_pipeline/v9.7/tests/check_v9_5_1.mjs
+  gridatlas                        candidate/promotion-lane     3061dfc 202609042235-gridatlas candidate: promotion-lane docs,
+                                   DIRTY: 4 file(s)
+                                     ?? grid-run.err
+                                     ?? grid-run.log
+                                     ?? harvest-cache.json
+                                     ?? tmp-debug-visibility.mjs
+  gridatlas-main-202609050200      main                         18cffd5 202609050354: v9.121 - print the view, or save it, and
+                                   DIRTY: 2 file(s)
+                                      M atlas/modules/202609031958-menu-bar.js
+                                     ?? tools/proofs/export-print-and-image-outcomes.browser.mjs
+  pipelinenews                     main                         7432805 202609050353: retire the legacy receiver branch from b
+                                   DIRTY: 8 file(s)
+                                     ?? build/202609010145-v8-fast-site-manifest.json
+                                     ?? releases/202609010145-v8-fast-candidate.html
+                                     ?? releases/202609050242-pipelinenews/
+                                     ?? releases/data/202609010145-sector-intelligence.json
+                                     ?? releases/data/202609010145-v8-fast-registry.json
+                                     ?? releases/data/intelligence/202609010145/
+                                     ?? releases/javascript/202609010145-sector-intelligence.js
+                                     ?? releases/javascript/202609010145-v8-fast-runtime.js
+  ventus-grid-engine               main                         fe4eba6 202609050345: a licence, so the work can actually be a
+                                   DIRTY: 1 file(s)
+                                      M docs/session-logs/202609042330-carry-on.md
+  testcode                         main                         882e86c 202609050410: a mention is not a link
+                                   DIRTY: 6 file(s)
+                                      M drivers/link-targets.mjs
+                                     ?? link-targets.json
+                                     ?? menu-map.json
+                                     ?? p951.js
+                                     ?? repd-rows.json
+                                     ?? testcode-run.json
+  spiders                          main                         5616e8e 202609050345: a licence, so the work can actually be a
+                                   DIRTY: 1 file(s)
+                                     ?? spider_cvaa/
+  claude                           main                         0e95028 202609050415: the session log carries the whole night,
+                                   DIRTY: 26 file(s)
+                                      M CLAUDE.md
+                                      M familiars/localai.py
+                                      M familiars/reap.py
+                                     ?? familiars/AUTOPILOT.md
+                                     ?? familiars/OVERNIGHT-GOVERNOR.md
+                                     ?? familiars/autopilot.py
+                                     ?? familiars/governor-probe.ps1
+                                     ?? familiars/hardware.py
+LIVE  (http status | bytes | url)
+  200       31121 bytes    381 ms  https://globalgrid2050.com/
+  200       14321 bytes    212 ms  https://globalgrid2050.com/status.html
+  200        8499 bytes    181 ms  https://globalgrid2050.com/uk_renewables_pipeline/v9.7/
+  200        5223 bytes    269 ms  https://ventusltd.github.io/gridatlas/atlas/
+  200       47012 bytes    298 ms  https://ventusltd.github.io/gridatlas/atlas/current.json
+  200       35016 bytes    174 ms  https://ventusltd.github.io/ventus-grid-engine/
+PROCESSES  (pid | minutes | command)
+  44004      44.5 min  C:\Users\vikra\AppData\Local\Programs\Python\Python312\python.exe -m http.server 8765 --di
+
+------------------------------------------------------------------------------
+TICK 2026-09-05T11:02:07Z
+REPOS  (branch | head | subject | dirty files)
+  globalgrid2050                   main                         c1b24e6d 202609050415: status - the MAP button computes, all 7
+                                   DIRTY: 11 file(s)
+                                      M .github/workflows/catalogue-composition-refresh.yml.disabled
+                                      M uk_renewables_pipeline/v9.7/index.html
+                                      M uk_renewables_pipeline/v9.7/scripts/core/atlas-receiver-v9-7.js
+                                      M uk_renewables_pipeline/v9.7/scripts/plugins/projects-v9-5-1.js
+                                      M uk_renewables_pipeline/v9.7/styles/v9-3.css
+                                      M uk_renewables_pipeline/v9.7/styles/v9-6-1.css
+                                      M uk_renewables_pipeline/v9.7/tests/browser_smoke_v9_7.mjs
+                                      M uk_renewables_pipeline/v9.7/tests/check_v9_5_1.mjs
+  gridatlas                        candidate/promotion-lane     3061dfc 202609042235-gridatlas candidate: promotion-lane docs,
+                                   DIRTY: 4 file(s)
+                                     ?? grid-run.err
+                                     ?? grid-run.log
+                                     ?? harvest-cache.json
+                                     ?? tmp-debug-visibility.mjs
+  gridatlas-main-202609050200      main                         18cffd5 202609050354: v9.121 - print the view, or save it, and
+                                   DIRTY: 2 file(s)
+                                      M atlas/modules/202609031958-menu-bar.js
+                                     ?? tools/proofs/export-print-and-image-outcomes.browser.mjs
+  pipelinenews                     main                         7432805 202609050353: retire the legacy receiver branch from b
+                                   DIRTY: 8 file(s)
+                                     ?? build/202609010145-v8-fast-site-manifest.json
+                                     ?? releases/202609010145-v8-fast-candidate.html
+                                     ?? releases/202609050242-pipelinenews/
+                                     ?? releases/data/202609010145-sector-intelligence.json
+                                     ?? releases/data/202609010145-v8-fast-registry.json
+                                     ?? releases/data/intelligence/202609010145/
+                                     ?? releases/javascript/202609010145-sector-intelligence.js
+                                     ?? releases/javascript/202609010145-v8-fast-runtime.js
+  ventus-grid-engine               main                         fe4eba6 202609050345: a licence, so the work can actually be a
+                                   DIRTY: 1 file(s)
+                                      M docs/session-logs/202609042330-carry-on.md
+  testcode                         main                         882e86c 202609050410: a mention is not a link
+                                   DIRTY: 6 file(s)
+                                      M drivers/link-targets.mjs
+                                     ?? link-targets.json
+                                     ?? menu-map.json
+                                     ?? p951.js
+                                     ?? repd-rows.json
+                                     ?? testcode-run.json
+  spiders                          main                         5616e8e 202609050345: a licence, so the work can actually be a
+                                   DIRTY: 1 file(s)
+                                     ?? spider_cvaa/
+  claude                           main                         4ec33f0 202609051101: two independent session logs, written by
+                                   DIRTY: 23 file(s)
+                                      M CLAUDE.md
+                                      M familiars/localai.py
+                                      M familiars/reap.py
+                                     ?? familiars/AUTOPILOT.md
+                                     ?? familiars/OVERNIGHT-GOVERNOR.md
+                                     ?? familiars/autopilot.py
+                                     ?? familiars/governor-probe.ps1
+                                     ?? familiars/hardware.py
+LIVE  (http status | bytes | url)
+  200       31121 bytes    303 ms  https://globalgrid2050.com/
+  200       14321 bytes    114 ms  https://globalgrid2050.com/status.html
+  200        8499 bytes     85 ms  https://globalgrid2050.com/uk_renewables_pipeline/v9.7/
+  200        5223 bytes    161 ms  https://ventusltd.github.io/gridatlas/atlas/
+  200       47012 bytes    229 ms  https://ventusltd.github.io/gridatlas/atlas/current.json
+  200       35016 bytes     77 ms  https://ventusltd.github.io/ventus-grid-engine/
+PROCESSES  (pid | minutes | command)
+  44004      46.5 min  C:\Users\vikra\AppData\Local\Programs\Python\Python312\python.exe -m http.server 8765 --di
+
+------------------------------------------------------------------------------
+TICK 2026-09-05T11:04:09Z
+REPOS  (branch | head | subject | dirty files)
+  globalgrid2050                   main                         c1b24e6d 202609050415: status - the MAP button computes, all 7
+                                   DIRTY: 11 file(s)
+                                      M .github/workflows/catalogue-composition-refresh.yml.disabled
+                                      M uk_renewables_pipeline/v9.7/index.html
+                                      M uk_renewables_pipeline/v9.7/scripts/core/atlas-receiver-v9-7.js
+                                      M uk_renewables_pipeline/v9.7/scripts/plugins/projects-v9-5-1.js
+                                      M uk_renewables_pipeline/v9.7/styles/v9-3.css
+                                      M uk_renewables_pipeline/v9.7/styles/v9-6-1.css
+                                      M uk_renewables_pipeline/v9.7/tests/browser_smoke_v9_7.mjs
+                                      M uk_renewables_pipeline/v9.7/tests/check_v9_5_1.mjs
+  gridatlas                        candidate/promotion-lane     3061dfc 202609042235-gridatlas candidate: promotion-lane docs,
+                                   DIRTY: 4 file(s)
+                                     ?? grid-run.err
+                                     ?? grid-run.log
+                                     ?? harvest-cache.json
+                                     ?? tmp-debug-visibility.mjs
+  gridatlas-main-202609050200      main                         18cffd5 202609050354: v9.121 - print the view, or save it, and
+                                   DIRTY: 2 file(s)
+                                      M atlas/modules/202609031958-menu-bar.js
+                                     ?? tools/proofs/export-print-and-image-outcomes.browser.mjs
+  pipelinenews                     main                         7432805 202609050353: retire the legacy receiver branch from b
+                                   DIRTY: 8 file(s)
+                                     ?? build/202609010145-v8-fast-site-manifest.json
+                                     ?? releases/202609010145-v8-fast-candidate.html
+                                     ?? releases/202609050242-pipelinenews/
+                                     ?? releases/data/202609010145-sector-intelligence.json
+                                     ?? releases/data/202609010145-v8-fast-registry.json
+                                     ?? releases/data/intelligence/202609010145/
+                                     ?? releases/javascript/202609010145-sector-intelligence.js
+                                     ?? releases/javascript/202609010145-v8-fast-runtime.js
+  ventus-grid-engine               main                         fe4eba6 202609050345: a licence, so the work can actually be a
+                                   DIRTY: 1 file(s)
+                                      M docs/session-logs/202609042330-carry-on.md
+  testcode                         main                         882e86c 202609050410: a mention is not a link
+                                   DIRTY: 6 file(s)
+                                      M drivers/link-targets.mjs
+                                     ?? link-targets.json
+                                     ?? menu-map.json
+                                     ?? p951.js
+                                     ?? repd-rows.json
+                                     ?? testcode-run.json
+  spiders                          main                         5616e8e 202609050345: a licence, so the work can actually be a
+                                   DIRTY: 1 file(s)
+                                     ?? spider_cvaa/
+  claude                           main                         4ec33f0 202609051101: two independent session logs, written by
+                                   DIRTY: 23 file(s)
+                                      M CLAUDE.md
+                                      M familiars/localai.py
+                                      M familiars/reap.py
+                                     ?? familiars/AUTOPILOT.md
+                                     ?? familiars/OVERNIGHT-GOVERNOR.md
+                                     ?? familiars/autopilot.py
+                                     ?? familiars/governor-probe.ps1
+                                     ?? familiars/hardware.py
+LIVE  (http status | bytes | url)
+  200       31121 bytes    296 ms  https://globalgrid2050.com/
+  200       14321 bytes    107 ms  https://globalgrid2050.com/status.html
+  200        8499 bytes     79 ms  https://globalgrid2050.com/uk_renewables_pipeline/v9.7/
+  200        5223 bytes    181 ms  https://ventusltd.github.io/gridatlas/atlas/
+  200       47012 bytes    224 ms  https://ventusltd.github.io/gridatlas/atlas/current.json
+  200       35016 bytes     71 ms  https://ventusltd.github.io/ventus-grid-engine/
+PROCESSES  (pid | minutes | command)
+  44004      48.5 min  C:\Users\vikra\AppData\Local\Programs\Python\Python312\python.exe -m http.server 8765 --di
+
+------------------------------------------------------------------------------
+TICK 2026-09-05T11:06:11Z
+REPOS  (branch | head | subject | dirty files)
+  globalgrid2050                   main                         c1b24e6d 202609050415: status - the MAP button computes, all 7
+                                   DIRTY: 11 file(s)
+                                      M .github/workflows/catalogue-composition-refresh.yml.disabled
+                                      M uk_renewables_pipeline/v9.7/index.html
+                                      M uk_renewables_pipeline/v9.7/scripts/core/atlas-receiver-v9-7.js
+                                      M uk_renewables_pipeline/v9.7/scripts/plugins/projects-v9-5-1.js
+                                      M uk_renewables_pipeline/v9.7/styles/v9-3.css
+                                      M uk_renewables_pipeline/v9.7/styles/v9-6-1.css
+                                      M uk_renewables_pipeline/v9.7/tests/browser_smoke_v9_7.mjs
+                                      M uk_renewables_pipeline/v9.7/tests/check_v9_5_1.mjs
+  gridatlas                        candidate/promotion-lane     3061dfc 202609042235-gridatlas candidate: promotion-lane docs,
+                                   DIRTY: 4 file(s)
+                                     ?? grid-run.err
+                                     ?? grid-run.log
+                                     ?? harvest-cache.json
+                                     ?? tmp-debug-visibility.mjs
+  gridatlas-main-202609050200      main                         18cffd5 202609050354: v9.121 - print the view, or save it, and
+                                   DIRTY: 2 file(s)
+                                      M atlas/modules/202609031958-menu-bar.js
+                                     ?? tools/proofs/export-print-and-image-outcomes.browser.mjs
+  pipelinenews                     main                         7432805 202609050353: retire the legacy receiver branch from b
+                                   DIRTY: 8 file(s)
+                                     ?? build/202609010145-v8-fast-site-manifest.json
+                                     ?? releases/202609010145-v8-fast-candidate.html
+                                     ?? releases/202609050242-pipelinenews/
+                                     ?? releases/data/202609010145-sector-intelligence.json
+                                     ?? releases/data/202609010145-v8-fast-registry.json
+                                     ?? releases/data/intelligence/202609010145/
+                                     ?? releases/javascript/202609010145-sector-intelligence.js
+                                     ?? releases/javascript/202609010145-v8-fast-runtime.js
+  ventus-grid-engine               main                         fe4eba6 202609050345: a licence, so the work can actually be a
+                                   DIRTY: 1 file(s)
+                                      M docs/session-logs/202609042330-carry-on.md
+  testcode                         main                         882e86c 202609050410: a mention is not a link
+                                   DIRTY: 6 file(s)
+                                      M drivers/link-targets.mjs
+                                     ?? link-targets.json
+                                     ?? menu-map.json
+                                     ?? p951.js
+                                     ?? repd-rows.json
+                                     ?? testcode-run.json
+  spiders                          main                         5616e8e 202609050345: a licence, so the work can actually be a
+                                   DIRTY: 1 file(s)
+                                     ?? spider_cvaa/
+  claude                           main                         4ec33f0 202609051101: two independent session logs, written by
+                                   DIRTY: 23 file(s)
+                                      M CLAUDE.md
+                                      M familiars/localai.py
+                                      M familiars/reap.py
+                                     ?? familiars/AUTOPILOT.md
+                                     ?? familiars/OVERNIGHT-GOVERNOR.md
+                                     ?? familiars/autopilot.py
+                                     ?? familiars/governor-probe.ps1
+                                     ?? familiars/hardware.py
+LIVE  (http status | bytes | url)
+  200       31121 bytes    316 ms  https://globalgrid2050.com/
+  200       14321 bytes    126 ms  https://globalgrid2050.com/status.html
+  200        8499 bytes     92 ms  https://globalgrid2050.com/uk_renewables_pipeline/v9.7/
+  200        5223 bytes    170 ms  https://ventusltd.github.io/gridatlas/atlas/
+  200       47012 bytes    344 ms  https://ventusltd.github.io/gridatlas/atlas/current.json
+  200       35016 bytes     86 ms  https://ventusltd.github.io/ventus-grid-engine/
+PROCESSES  (pid | minutes | command)
+  44004      50.6 min  C:\Users\vikra\AppData\Local\Programs\Python\Python312\python.exe -m http.server 8765 --di
+
+------------------------------------------------------------------------------
+TICK 2026-09-05T11:08:14Z
+REPOS  (branch | head | subject | dirty files)
+  globalgrid2050                   main                         c1b24e6d 202609050415: status - the MAP button computes, all 7
+                                   DIRTY: 11 file(s)
+                                      M .github/workflows/catalogue-composition-refresh.yml.disabled
+                                      M uk_renewables_pipeline/v9.7/index.html
+                                      M uk_renewables_pipeline/v9.7/scripts/core/atlas-receiver-v9-7.js
+                                      M uk_renewables_pipeline/v9.7/scripts/plugins/projects-v9-5-1.js
+                                      M uk_renewables_pipeline/v9.7/styles/v9-3.css
+                                      M uk_renewables_pipeline/v9.7/styles/v9-6-1.css
+                                      M uk_renewables_pipeline/v9.7/tests/browser_smoke_v9_7.mjs
+                                      M uk_renewables_pipeline/v9.7/tests/check_v9_5_1.mjs
+  gridatlas                        candidate/promotion-lane     3061dfc 202609042235-gridatlas candidate: promotion-lane docs,
+                                   DIRTY: 4 file(s)
+                                     ?? grid-run.err
+                                     ?? grid-run.log
+                                     ?? harvest-cache.json
+                                     ?? tmp-debug-visibility.mjs
+  gridatlas-main-202609050200      main                         18cffd5 202609050354: v9.121 - print the view, or save it, and
+                                   DIRTY: 2 file(s)
+                                      M atlas/modules/202609031958-menu-bar.js
+                                     ?? tools/proofs/export-print-and-image-outcomes.browser.mjs
+  pipelinenews                     main                         7432805 202609050353: retire the legacy receiver branch from b
+                                   DIRTY: 8 file(s)
+                                     ?? build/202609010145-v8-fast-site-manifest.json
+                                     ?? releases/202609010145-v8-fast-candidate.html
+                                     ?? releases/202609050242-pipelinenews/
+                                     ?? releases/data/202609010145-sector-intelligence.json
+                                     ?? releases/data/202609010145-v8-fast-registry.json
+                                     ?? releases/data/intelligence/202609010145/
+                                     ?? releases/javascript/202609010145-sector-intelligence.js
+                                     ?? releases/javascript/202609010145-v8-fast-runtime.js
+  ventus-grid-engine               main                         fe4eba6 202609050345: a licence, so the work can actually be a
+                                   DIRTY: 1 file(s)
+                                      M docs/session-logs/202609042330-carry-on.md
+  testcode                         main                         882e86c 202609050410: a mention is not a link
+                                   DIRTY: 6 file(s)
+                                      M drivers/link-targets.mjs
+                                     ?? link-targets.json
+                                     ?? menu-map.json
+                                     ?? p951.js
+                                     ?? repd-rows.json
+                                     ?? testcode-run.json
+  spiders                          main                         5616e8e 202609050345: a licence, so the work can actually be a
+                                   DIRTY: 1 file(s)
+                                     ?? spider_cvaa/
+  claude                           main                         4ec33f0 202609051101: two independent session logs, written by
+                                   DIRTY: 23 file(s)
+                                      M CLAUDE.md
+                                      M familiars/localai.py
+                                      M familiars/reap.py
+                                     ?? familiars/AUTOPILOT.md
+                                     ?? familiars/OVERNIGHT-GOVERNOR.md
+                                     ?? familiars/autopilot.py
+                                     ?? familiars/governor-probe.ps1
+                                     ?? familiars/hardware.py
+LIVE  (http status | bytes | url)
+  200       31121 bytes    240 ms  https://globalgrid2050.com/
+  200       14321 bytes     85 ms  https://globalgrid2050.com/status.html
+  200        8499 bytes     84 ms  https://globalgrid2050.com/uk_renewables_pipeline/v9.7/
+  200        5223 bytes    155 ms  https://ventusltd.github.io/gridatlas/atlas/
+  200       47012 bytes    238 ms  https://ventusltd.github.io/gridatlas/atlas/current.json
+  200       35016 bytes     84 ms  https://ventusltd.github.io/ventus-grid-engine/
+PROCESSES  (pid | minutes | command)
+  44004      52.6 min  C:\Users\vikra\AppData\Local\Programs\Python\Python312\python.exe -m http.server 8765 --di
+
+------------------------------------------------------------------------------
+TICK 2026-09-05T11:10:16Z
+REPOS  (branch | head | subject | dirty files)
+  globalgrid2050                   main                         c1b24e6d 202609050415: status - the MAP button computes, all 7
+                                   DIRTY: 11 file(s)
+                                      M .github/workflows/catalogue-composition-refresh.yml.disabled
+                                      M uk_renewables_pipeline/v9.7/index.html
+                                      M uk_renewables_pipeline/v9.7/scripts/core/atlas-receiver-v9-7.js
+                                      M uk_renewables_pipeline/v9.7/scripts/plugins/projects-v9-5-1.js
+                                      M uk_renewables_pipeline/v9.7/styles/v9-3.css
+                                      M uk_renewables_pipeline/v9.7/styles/v9-6-1.css
+                                      M uk_renewables_pipeline/v9.7/tests/browser_smoke_v9_7.mjs
+                                      M uk_renewables_pipeline/v9.7/tests/check_v9_5_1.mjs
+  gridatlas                        candidate/promotion-lane     3061dfc 202609042235-gridatlas candidate: promotion-lane docs,
+                                   DIRTY: 4 file(s)
+                                     ?? grid-run.err
+                                     ?? grid-run.log
+                                     ?? harvest-cache.json
+                                     ?? tmp-debug-visibility.mjs
+  gridatlas-main-202609050200      main                         18cffd5 202609050354: v9.121 - print the view, or save it, and
+                                   DIRTY: 2 file(s)
+                                      M atlas/modules/202609031958-menu-bar.js
+                                     ?? tools/proofs/export-print-and-image-outcomes.browser.mjs
+  pipelinenews                     main                         7432805 202609050353: retire the legacy receiver branch from b
+                                   DIRTY: 8 file(s)
+                                     ?? build/202609010145-v8-fast-site-manifest.json
+                                     ?? releases/202609010145-v8-fast-candidate.html
+                                     ?? releases/202609050242-pipelinenews/
+                                     ?? releases/data/202609010145-sector-intelligence.json
+                                     ?? releases/data/202609010145-v8-fast-registry.json
+                                     ?? releases/data/intelligence/202609010145/
+                                     ?? releases/javascript/202609010145-sector-intelligence.js
+                                     ?? releases/javascript/202609010145-v8-fast-runtime.js
+  ventus-grid-engine               main                         fe4eba6 202609050345: a licence, so the work can actually be a
+                                   DIRTY: 1 file(s)
+                                      M docs/session-logs/202609042330-carry-on.md
+  testcode                         main                         882e86c 202609050410: a mention is not a link
+                                   DIRTY: 6 file(s)
+                                      M drivers/link-targets.mjs
+                                     ?? link-targets.json
+                                     ?? menu-map.json
+                                     ?? p951.js
+                                     ?? repd-rows.json
+                                     ?? testcode-run.json
+  spiders                          main                         5616e8e 202609050345: a licence, so the work can actually be a
+                                   DIRTY: 1 file(s)
+                                     ?? spider_cvaa/
+  claude                           main                         4ec33f0 202609051101: two independent session logs, written by
+                                   DIRTY: 23 file(s)
+                                      M CLAUDE.md
+                                      M familiars/localai.py
+                                      M familiars/reap.py
+                                     ?? familiars/AUTOPILOT.md
+                                     ?? familiars/OVERNIGHT-GOVERNOR.md
+                                     ?? familiars/autopilot.py
+                                     ?? familiars/governor-probe.ps1
+                                     ?? familiars/hardware.py
+LIVE  (http status | bytes | url)
+  200       31121 bytes    394 ms  https://globalgrid2050.com/
+  200       14321 bytes    209 ms  https://globalgrid2050.com/status.html
+  200        8499 bytes    202 ms  https://globalgrid2050.com/uk_renewables_pipeline/v9.7/
+  200        5223 bytes    343 ms  https://ventusltd.github.io/gridatlas/atlas/
+  200       47012 bytes    218 ms  https://ventusltd.github.io/gridatlas/atlas/current.json
+  200       35016 bytes    209 ms  https://ventusltd.github.io/ventus-grid-engine/
+PROCESSES  (pid | minutes | command)
+  44004      54.7 min  C:\Users\vikra\AppData\Local\Programs\Python\Python312\python.exe -m http.server 8765 --di
+
+------------------------------------------------------------------------------
+TICK 2026-09-05T11:12:19Z
+REPOS  (branch | head | subject | dirty files)
+  globalgrid2050                   main                         c1b24e6d 202609050415: status - the MAP button computes, all 7
+                                   DIRTY: 11 file(s)
+                                      M .github/workflows/catalogue-composition-refresh.yml.disabled
+                                      M uk_renewables_pipeline/v9.7/index.html
+                                      M uk_renewables_pipeline/v9.7/scripts/core/atlas-receiver-v9-7.js
+                                      M uk_renewables_pipeline/v9.7/scripts/plugins/projects-v9-5-1.js
+                                      M uk_renewables_pipeline/v9.7/styles/v9-3.css
+                                      M uk_renewables_pipeline/v9.7/styles/v9-6-1.css
+                                      M uk_renewables_pipeline/v9.7/tests/browser_smoke_v9_7.mjs
+                                      M uk_renewables_pipeline/v9.7/tests/check_v9_5_1.mjs
+  gridatlas                        candidate/promotion-lane     3061dfc 202609042235-gridatlas candidate: promotion-lane docs,
+                                   DIRTY: 4 file(s)
+                                     ?? grid-run.err
+                                     ?? grid-run.log
+                                     ?? harvest-cache.json
+                                     ?? tmp-debug-visibility.mjs
+  gridatlas-main-202609050200      main                         18cffd5 202609050354: v9.121 - print the view, or save it, and
+                                   DIRTY: 2 file(s)
+                                      M atlas/modules/202609031958-menu-bar.js
+                                     ?? tools/proofs/export-print-and-image-outcomes.browser.mjs
+  pipelinenews                     main                         7432805 202609050353: retire the legacy receiver branch from b
+                                   DIRTY: 8 file(s)
+                                     ?? build/202609010145-v8-fast-site-manifest.json
+                                     ?? releases/202609010145-v8-fast-candidate.html
+                                     ?? releases/202609050242-pipelinenews/
+                                     ?? releases/data/202609010145-sector-intelligence.json
+                                     ?? releases/data/202609010145-v8-fast-registry.json
+                                     ?? releases/data/intelligence/202609010145/
+                                     ?? releases/javascript/202609010145-sector-intelligence.js
+                                     ?? releases/javascript/202609010145-v8-fast-runtime.js
+  ventus-grid-engine               main                         fe4eba6 202609050345: a licence, so the work can actually be a
+                                   DIRTY: 1 file(s)
+                                      M docs/session-logs/202609042330-carry-on.md
+  testcode                         main                         882e86c 202609050410: a mention is not a link
+                                   DIRTY: 6 file(s)
+                                      M drivers/link-targets.mjs
+                                     ?? link-targets.json
+                                     ?? menu-map.json
+                                     ?? p951.js
+                                     ?? repd-rows.json
+                                     ?? testcode-run.json
+  spiders                          main                         5616e8e 202609050345: a licence, so the work can actually be a
+                                   DIRTY: 1 file(s)
+                                     ?? spider_cvaa/
+  claude                           main                         4ec33f0 202609051101: two independent session logs, written by
+                                   DIRTY: 23 file(s)
+                                      M CLAUDE.md
+                                      M familiars/localai.py
+                                      M familiars/reap.py
+                                     ?? familiars/AUTOPILOT.md
+                                     ?? familiars/OVERNIGHT-GOVERNOR.md
+                                     ?? familiars/autopilot.py
+                                     ?? familiars/governor-probe.ps1
+                                     ?? familiars/hardware.py
+LIVE  (http status | bytes | url)
+  200       31121 bytes    285 ms  https://globalgrid2050.com/
+  200       14321 bytes    116 ms  https://globalgrid2050.com/status.html
+  200        8499 bytes     86 ms  https://globalgrid2050.com/uk_renewables_pipeline/v9.7/
+  200        5223 bytes    177 ms  https://ventusltd.github.io/gridatlas/atlas/
+  200       47012 bytes    227 ms  https://ventusltd.github.io/gridatlas/atlas/current.json
+  200       35016 bytes     73 ms  https://ventusltd.github.io/ventus-grid-engine/
+PROCESSES  (pid | minutes | command)
+  44004      56.7 min  C:\Users\vikra\AppData\Local\Programs\Python\Python312\python.exe -m http.server 8765 --di
+
+------------------------------------------------------------------------------
+TICK 2026-09-05T11:14:21Z
+REPOS  (branch | head | subject | dirty files)
+  globalgrid2050                   main                         c1b24e6d 202609050415: status - the MAP button computes, all 7
+                                   DIRTY: 11 file(s)
+                                      M .github/workflows/catalogue-composition-refresh.yml.disabled
+                                      M uk_renewables_pipeline/v9.7/index.html
+                                      M uk_renewables_pipeline/v9.7/scripts/core/atlas-receiver-v9-7.js
+                                      M uk_renewables_pipeline/v9.7/scripts/plugins/projects-v9-5-1.js
+                                      M uk_renewables_pipeline/v9.7/styles/v9-3.css
+                                      M uk_renewables_pipeline/v9.7/styles/v9-6-1.css
+                                      M uk_renewables_pipeline/v9.7/tests/browser_smoke_v9_7.mjs
+                                      M uk_renewables_pipeline/v9.7/tests/check_v9_5_1.mjs
+  gridatlas                        candidate/promotion-lane     3061dfc 202609042235-gridatlas candidate: promotion-lane docs,
+                                   DIRTY: 4 file(s)
+                                     ?? grid-run.err
+                                     ?? grid-run.log
+                                     ?? harvest-cache.json
+                                     ?? tmp-debug-visibility.mjs
+  gridatlas-main-202609050200      main                         18cffd5 202609050354: v9.121 - print the view, or save it, and
+                                   DIRTY: 2 file(s)
+                                      M atlas/modules/202609031958-menu-bar.js
+                                     ?? tools/proofs/export-print-and-image-outcomes.browser.mjs
+  pipelinenews                     main                         7432805 202609050353: retire the legacy receiver branch from b
+                                   DIRTY: 8 file(s)
+                                     ?? build/202609010145-v8-fast-site-manifest.json
+                                     ?? releases/202609010145-v8-fast-candidate.html
+                                     ?? releases/202609050242-pipelinenews/
+                                     ?? releases/data/202609010145-sector-intelligence.json
+                                     ?? releases/data/202609010145-v8-fast-registry.json
+                                     ?? releases/data/intelligence/202609010145/
+                                     ?? releases/javascript/202609010145-sector-intelligence.js
+                                     ?? releases/javascript/202609010145-v8-fast-runtime.js
+  ventus-grid-engine               main                         fe4eba6 202609050345: a licence, so the work can actually be a
+                                   DIRTY: 1 file(s)
+                                      M docs/session-logs/202609042330-carry-on.md
+  testcode                         main                         882e86c 202609050410: a mention is not a link
+                                   DIRTY: 6 file(s)
+                                      M drivers/link-targets.mjs
+                                     ?? link-targets.json
+                                     ?? menu-map.json
+                                     ?? p951.js
+                                     ?? repd-rows.json
+                                     ?? testcode-run.json
+  spiders                          main                         5616e8e 202609050345: a licence, so the work can actually be a
+                                   DIRTY: 1 file(s)
+                                     ?? spider_cvaa/
+  claude                           main                         4ec33f0 202609051101: two independent session logs, written by
+                                   DIRTY: 23 file(s)
+                                      M CLAUDE.md
+                                      M familiars/localai.py
+                                      M familiars/reap.py
+                                     ?? familiars/AUTOPILOT.md
+                                     ?? familiars/OVERNIGHT-GOVERNOR.md
+                                     ?? familiars/autopilot.py
+                                     ?? familiars/governor-probe.ps1
+                                     ?? familiars/hardware.py
+LIVE  (http status | bytes | url)
+  200       31121 bytes    297 ms  https://globalgrid2050.com/
+  200       14321 bytes    108 ms  https://globalgrid2050.com/status.html
+  200        8499 bytes     92 ms  https://globalgrid2050.com/uk_renewables_pipeline/v9.7/
+  200        5223 bytes    169 ms  https://ventusltd.github.io/gridatlas/atlas/
+  200       47012 bytes    239 ms  https://ventusltd.github.io/gridatlas/atlas/current.json
+  200       35016 bytes     76 ms  https://ventusltd.github.io/ventus-grid-engine/
+PROCESSES  (pid | minutes | command)
+  44004      58.7 min  C:\Users\vikra\AppData\Local\Programs\Python\Python312\python.exe -m http.server 8765 --di
+
+------------------------------------------------------------------------------
+TICK 2026-09-05T11:16:23Z
+REPOS  (branch | head | subject | dirty files)
+  globalgrid2050                   main                         c1b24e6d 202609050415: status - the MAP button computes, all 7
+                                   DIRTY: 11 file(s)
+                                      M .github/workflows/catalogue-composition-refresh.yml.disabled
+                                      M uk_renewables_pipeline/v9.7/index.html
+                                      M uk_renewables_pipeline/v9.7/scripts/core/atlas-receiver-v9-7.js
+                                      M uk_renewables_pipeline/v9.7/scripts/plugins/projects-v9-5-1.js
+                                      M uk_renewables_pipeline/v9.7/styles/v9-3.css
+                                      M uk_renewables_pipeline/v9.7/styles/v9-6-1.css
+                                      M uk_renewables_pipeline/v9.7/tests/browser_smoke_v9_7.mjs
+                                      M uk_renewables_pipeline/v9.7/tests/check_v9_5_1.mjs
+  gridatlas                        candidate/promotion-lane     3061dfc 202609042235-gridatlas candidate: promotion-lane docs,
+                                   DIRTY: 4 file(s)
+                                     ?? grid-run.err
+                                     ?? grid-run.log
+                                     ?? harvest-cache.json
+                                     ?? tmp-debug-visibility.mjs
+  gridatlas-main-202609050200      main                         18cffd5 202609050354: v9.121 - print the view, or save it, and
+                                   DIRTY: 2 file(s)
+                                      M atlas/modules/202609031958-menu-bar.js
+                                     ?? tools/proofs/export-print-and-image-outcomes.browser.mjs
+  pipelinenews                     main                         7432805 202609050353: retire the legacy receiver branch from b
+                                   DIRTY: 8 file(s)
+                                     ?? build/202609010145-v8-fast-site-manifest.json
+                                     ?? releases/202609010145-v8-fast-candidate.html
+                                     ?? releases/202609050242-pipelinenews/
+                                     ?? releases/data/202609010145-sector-intelligence.json
+                                     ?? releases/data/202609010145-v8-fast-registry.json
+                                     ?? releases/data/intelligence/202609010145/
+                                     ?? releases/javascript/202609010145-sector-intelligence.js
+                                     ?? releases/javascript/202609010145-v8-fast-runtime.js
+  ventus-grid-engine               main                         fe4eba6 202609050345: a licence, so the work can actually be a
+                                   DIRTY: 1 file(s)
+                                      M docs/session-logs/202609042330-carry-on.md
+  testcode                         main                         882e86c 202609050410: a mention is not a link
+                                   DIRTY: 6 file(s)
+                                      M drivers/link-targets.mjs
+                                     ?? link-targets.json
+                                     ?? menu-map.json
+                                     ?? p951.js
+                                     ?? repd-rows.json
+                                     ?? testcode-run.json
+  spiders                          main                         5616e8e 202609050345: a licence, so the work can actually be a
+                                   DIRTY: 1 file(s)
+                                     ?? spider_cvaa/
+  claude                           main                         4ec33f0 202609051101: two independent session logs, written by
+                                   DIRTY: 23 file(s)
+                                      M CLAUDE.md
+                                      M familiars/localai.py
+                                      M familiars/reap.py
+                                     ?? familiars/AUTOPILOT.md
+                                     ?? familiars/OVERNIGHT-GOVERNOR.md
+                                     ?? familiars/autopilot.py
+                                     ?? familiars/governor-probe.ps1
+                                     ?? familiars/hardware.py
+LIVE  (http status | bytes | url)
+  200       31121 bytes    282 ms  https://globalgrid2050.com/
+  200       14321 bytes     99 ms  https://globalgrid2050.com/status.html
+  200        8499 bytes     82 ms  https://globalgrid2050.com/uk_renewables_pipeline/v9.7/
+  200        5223 bytes    181 ms  https://ventusltd.github.io/gridatlas/atlas/
+  200       47012 bytes    369 ms  https://ventusltd.github.io/gridatlas/atlas/current.json
+  200       35016 bytes     80 ms  https://ventusltd.github.io/ventus-grid-engine/
+PROCESSES  (pid | minutes | command)
+  44004      60.8 min  C:\Users\vikra\AppData\Local\Programs\Python\Python312\python.exe -m http.server 8765 --di
+
+------------------------------------------------------------------------------
+TICK 2026-09-05T11:18:26Z
+REPOS  (branch | head | subject | dirty files)
+  globalgrid2050                   main                         c1b24e6d 202609050415: status - the MAP button computes, all 7
+                                   DIRTY: 11 file(s)
+                                      M .github/workflows/catalogue-composition-refresh.yml.disabled
+                                      M uk_renewables_pipeline/v9.7/index.html
+                                      M uk_renewables_pipeline/v9.7/scripts/core/atlas-receiver-v9-7.js
+                                      M uk_renewables_pipeline/v9.7/scripts/plugins/projects-v9-5-1.js
+                                      M uk_renewables_pipeline/v9.7/styles/v9-3.css
+                                      M uk_renewables_pipeline/v9.7/styles/v9-6-1.css
+                                      M uk_renewables_pipeline/v9.7/tests/browser_smoke_v9_7.mjs
+                                      M uk_renewables_pipeline/v9.7/tests/check_v9_5_1.mjs
+  gridatlas                        candidate/promotion-lane     3061dfc 202609042235-gridatlas candidate: promotion-lane docs,
+                                   DIRTY: 4 file(s)
+                                     ?? grid-run.err
+                                     ?? grid-run.log
+                                     ?? harvest-cache.json
+                                     ?? tmp-debug-visibility.mjs
+  gridatlas-main-202609050200      main                         18cffd5 202609050354: v9.121 - print the view, or save it, and
+                                   DIRTY: 2 file(s)
+                                      M atlas/modules/202609031958-menu-bar.js
+                                     ?? tools/proofs/export-print-and-image-outcomes.browser.mjs
+  pipelinenews                     main                         7432805 202609050353: retire the legacy receiver branch from b
+                                   DIRTY: 8 file(s)
+                                     ?? build/202609010145-v8-fast-site-manifest.json
+                                     ?? releases/202609010145-v8-fast-candidate.html
+                                     ?? releases/202609050242-pipelinenews/
+                                     ?? releases/data/202609010145-sector-intelligence.json
+                                     ?? releases/data/202609010145-v8-fast-registry.json
+                                     ?? releases/data/intelligence/202609010145/
+                                     ?? releases/javascript/202609010145-sector-intelligence.js
+                                     ?? releases/javascript/202609010145-v8-fast-runtime.js
+  ventus-grid-engine               main                         fe4eba6 202609050345: a licence, so the work can actually be a
+                                   DIRTY: 1 file(s)
+                                      M docs/session-logs/202609042330-carry-on.md
+  testcode                         main                         882e86c 202609050410: a mention is not a link
+                                   DIRTY: 6 file(s)
+                                      M drivers/link-targets.mjs
+                                     ?? link-targets.json
+                                     ?? menu-map.json
+                                     ?? p951.js
+                                     ?? repd-rows.json
+                                     ?? testcode-run.json
+  spiders                          main                         5616e8e 202609050345: a licence, so the work can actually be a
+                                   DIRTY: 1 file(s)
+                                     ?? spider_cvaa/
+  claude                           main                         4ec33f0 202609051101: two independent session logs, written by
+                                   DIRTY: 23 file(s)
+                                      M CLAUDE.md
+                                      M familiars/localai.py
+                                      M familiars/reap.py
+                                     ?? familiars/AUTOPILOT.md
+                                     ?? familiars/OVERNIGHT-GOVERNOR.md
+                                     ?? familiars/autopilot.py
+                                     ?? familiars/governor-probe.ps1
+                                     ?? familiars/hardware.py
+LIVE  (http status | bytes | url)
+  200       31121 bytes    275 ms  https://globalgrid2050.com/
+  200       14321 bytes    108 ms  https://globalgrid2050.com/status.html
+  200        8499 bytes     86 ms  https://globalgrid2050.com/uk_renewables_pipeline/v9.7/
+  200        5223 bytes    156 ms  https://ventusltd.github.io/gridatlas/atlas/
+  200       47012 bytes    246 ms  https://ventusltd.github.io/gridatlas/atlas/current.json
+  200       35016 bytes     69 ms  https://ventusltd.github.io/ventus-grid-engine/
+PROCESSES  (pid | minutes | command)
+  44004      62.8 min  C:\Users\vikra\AppData\Local\Programs\Python\Python312\python.exe -m http.server 8765 --di
+
+------------------------------------------------------------------------------
+TICK 2026-09-05T11:20:28Z
+REPOS  (branch | head | subject | dirty files)
+  globalgrid2050                   main                         c1b24e6d 202609050415: status - the MAP button computes, all 7
+                                   DIRTY: 11 file(s)
+                                      M .github/workflows/catalogue-composition-refresh.yml.disabled
+                                      M uk_renewables_pipeline/v9.7/index.html
+                                      M uk_renewables_pipeline/v9.7/scripts/core/atlas-receiver-v9-7.js
+                                      M uk_renewables_pipeline/v9.7/scripts/plugins/projects-v9-5-1.js
+                                      M uk_renewables_pipeline/v9.7/styles/v9-3.css
+                                      M uk_renewables_pipeline/v9.7/styles/v9-6-1.css
+                                      M uk_renewables_pipeline/v9.7/tests/browser_smoke_v9_7.mjs
+                                      M uk_renewables_pipeline/v9.7/tests/check_v9_5_1.mjs
+  gridatlas                        candidate/promotion-lane     3061dfc 202609042235-gridatlas candidate: promotion-lane docs,
+                                   DIRTY: 4 file(s)
+                                     ?? grid-run.err
+                                     ?? grid-run.log
+                                     ?? harvest-cache.json
+                                     ?? tmp-debug-visibility.mjs
+  gridatlas-main-202609050200      main                         18cffd5 202609050354: v9.121 - print the view, or save it, and
+                                   DIRTY: 2 file(s)
+                                      M atlas/modules/202609031958-menu-bar.js
+                                     ?? tools/proofs/export-print-and-image-outcomes.browser.mjs
+  pipelinenews                     main                         7432805 202609050353: retire the legacy receiver branch from b
+                                   DIRTY: 8 file(s)
+                                     ?? build/202609010145-v8-fast-site-manifest.json
+                                     ?? releases/202609010145-v8-fast-candidate.html
+                                     ?? releases/202609050242-pipelinenews/
+                                     ?? releases/data/202609010145-sector-intelligence.json
+                                     ?? releases/data/202609010145-v8-fast-registry.json
+                                     ?? releases/data/intelligence/202609010145/
+                                     ?? releases/javascript/202609010145-sector-intelligence.js
+                                     ?? releases/javascript/202609010145-v8-fast-runtime.js
+  ventus-grid-engine               main                         fe4eba6 202609050345: a licence, so the work can actually be a
+                                   DIRTY: 1 file(s)
+                                      M docs/session-logs/202609042330-carry-on.md
+  testcode                         main                         882e86c 202609050410: a mention is not a link
+                                   DIRTY: 6 file(s)
+                                      M drivers/link-targets.mjs
+                                     ?? link-targets.json
+                                     ?? menu-map.json
+                                     ?? p951.js
+                                     ?? repd-rows.json
+                                     ?? testcode-run.json
+  spiders                          main                         5616e8e 202609050345: a licence, so the work can actually be a
+                                   DIRTY: 1 file(s)
+                                     ?? spider_cvaa/
+  claude                           main                         4ec33f0 202609051101: two independent session logs, written by
+                                   DIRTY: 23 file(s)
+                                      M CLAUDE.md
+                                      M familiars/localai.py
+                                      M familiars/reap.py
+                                     ?? familiars/AUTOPILOT.md
+                                     ?? familiars/OVERNIGHT-GOVERNOR.md
+                                     ?? familiars/autopilot.py
+                                     ?? familiars/governor-probe.ps1
+                                     ?? familiars/hardware.py
+LIVE  (http status | bytes | url)
+  200       31121 bytes    401 ms  https://globalgrid2050.com/
+  200       14321 bytes    223 ms  https://globalgrid2050.com/status.html
+  200        8499 bytes    207 ms  https://globalgrid2050.com/uk_renewables_pipeline/v9.7/
+  200        5223 bytes    316 ms  https://ventusltd.github.io/gridatlas/atlas/
+  200       47012 bytes    229 ms  https://ventusltd.github.io/gridatlas/atlas/current.json
+  200       35016 bytes    208 ms  https://ventusltd.github.io/ventus-grid-engine/
+PROCESSES  (pid | minutes | command)
+  44004      64.9 min  C:\Users\vikra\AppData\Local\Programs\Python\Python312\python.exe -m http.server 8765 --di

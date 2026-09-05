@@ -1,0 +1,379 @@
+ASTRA ISSUE REVIEW - 2026-09-05
+Review of the issues supplied by Vikram, against local source and deployed pages.
+Product: GlobalGrid2050 Pipeline News plus GridAtlas and their verification tools.
+Result: the principal reported user-facing failures remain deployed.
+MAP candidate: improves reachability and removes the receiver wait, but is unfinished.
+Print candidate: source edited, not composed or deployed; no release approval earned.
+Evidence: C:\Users\vikra\astra-issue-review-20260905
+This review: C:\Users\vikra\OneDrive\Documents\GitHub\claude\logs\ASTRA-ISSUE-REVIEW-20260905.txt
+Historical sources: SESSION-LOG-A.txt and SESSION-LOG-B.txt in this same directory.
+No application fixes were written, committed, pushed or deployed during this review.
+
+READING THE VERDICTS
+====================
+RUNTIME = freshly reproduced in this review.
+SOURCE = inspected in current source; not a complete end-to-end test.
+HISTORICAL = retained from earlier evidence; not independently remeasured here.
+OPEN REQUEST = work requested earlier, with no implementation/acceptance evidence.
+These categories are deliberately separate. Absence of a reproduction is not a pass.
+
+Measurements below were taken around 11:31-11:38 UTC on 2026-09-05 (BST = UTC+1).
+Browser: bundled Playwright Chromium on Windows, 393 x 852, touch/mobile emulation.
+This is NOT Android Chrome, iOS Safari, an Android app WebView, or a cold-radio test.
+One run per Pipeline scenario: timings are observations, not comparative benchmarks.
+The patched scenario substitutes local HTML/JS/CSS into live requests. Every substituted
+file's SHA-256 is recorded; it is a controlled candidate test, not a deployed build.
+Request routing disables browser caching, so these runs cannot measure warm-cache gains.
+
+REPOSITORY AND DEPLOYMENT IDENTITY
+=================================
+Root below is C:\Users\vikra\OneDrive\Documents\GitHub\.
+globalgrid2050 main: c1b24e6d601d765c7df6cade43000a7f74bedd27
+  9 modified tracked paths, 2 untracked at review start.
+gridatlas-main-202609050200 main: 18cffd516db0bec7f8186aafe60962cb154fcc53
+  atlas/modules/202609031958-menu-bar.js modified; new export outcome proof untracked.
+  Live generation 202609050354, composition v9.121.
+testcode main: 882e86c95ef353dfa7f199f1d11b85b127803408
+  drivers/link-targets.mjs modified, plus earlier untracked receipts.
+cvaa codex/202609012100-cvaa-mission: 19a20cef4fefa1b233d7beef9efd7b51fa67548d
+claude main: 4ec33f09f5b62381d0d7e65b0fbc65341086a1c9
+ventus-grid-engine main: fe4eba61bb91d9de5d1a2294457a66f94a940912
+Full before/after status and source hashes are in the evidence directory.
+
+Fresh HTTP body comparisons, not merely status codes:
+- Homepage live bytes equal globalgrid2050 HEAD.
+- Pipeline v9.7 HTML, both implicated CSS files, receiver module and active project
+  plugin all equal HEAD and differ from the unfinished local edits.
+- GridAtlas live current.json equals local HEAD byte-for-byte.
+- Live status.html and status.json differ from HEAD. status.json is still 10,454 bytes
+  live versus the newer committed document; the old 19-entry version remains served.
+Evidence: live-byte-checks.json includes URLs, response headers, sizes and SHA-256 values.
+
+PRIORITY 1 - FAILURES A READER CAN HIT NOW
+========================================
+01. MAP is off-screen on a phone. RUNTIME, still deployed.
+    Fresh unfiltered first-row measurement: viewport 393; anchor x=1156.17,
+    width=37.06, height=21; hit-test at its centre fails. Table width=1280;
+    wrapper width=373. This is 763 px past the viewport's right edge, not the
+    earlier 828 px measurement of a different filtered row/viewport.
+    Causes remain the unconditional table min-width in v9-3.css and the mobile
+    hide-mobile override in v9-6-1.css. Both are present in served HEAD bytes.
+    Candidate result: anchor x=308, 44x44, centre hit-test succeeds with receiver
+    stalled. The sticky action column provides reachability; it does not make
+    all columns fit the viewport. Screenshot visually confirms that distinction.
+    Next: retain the geometry fix in a new release; verify horizontal scrolling,
+    varied rows, enlarged text, and actual touch navigation on target devices.
+
+02. Empty table while receiver request stalls. RUNTIME, still deployed.
+    Holding /ventus-grid-engine/deeplink/receivers.json open leaves zero table rows
+    after the 15-second observation window, while project JSON has arrived.
+    The normal run renders 7,680 rows. This directly demonstrates the blocking
+    dependency; a fast abort would not be an equivalent test of a stalled request.
+    Source: projects-v9-5-1.js in committed v9.7 awaits the payload and receiver
+    together; index.html starts with an empty tbody.
+    Candidate: 7,680 rows appear with the receiver still stalled; observed 1,078 ms.
+    Normal live run observed 4,774 ms. Different cache/network histories mean these
+    timings must not be advertised as a measured speedup.
+    Next: first data paint must not await the external contract; show a useful loading
+    state and test timeout, offline, malformed contract, changed route and retirement.
+
+03. Massive DOM and full data reload. RUNTIME + SOURCE, unresolved by candidate.
+    Live: 7,680 rows, 323,801 DOM ELEMENTS, document height 800,437 CSS pixels.
+    Candidate: 7,680 rows, 323,802 elements, height 1,244,143 pixels. Larger touch
+    controls and notes make rows taller. That is not itself a failure of reachability,
+    but the candidate demonstrably does not solve the rendering/memory workload.
+    JSON resource bodies total 10,043,874 decoded bytes in this run. Project partitions
+    transfer approximately 1,180,086 bytes compressed (resource timing transferSize).
+    Source: canonical-projects-v9-1.js:14 uses cache:no-store for partitions; the
+    candidate leaves this unchanged. Rendering still materialises the whole table.
+    Next: paginate/window the DOM, lazily construct expanded record details, retain
+    complete dataset search/export, and cache immutable versioned partition assets.
+    Distinguish dataset record count from rendered row count in acceptance tests.
+
+04. MAP ATLAS navigation still targets retired V8. RUNTIME + SOURCE.
+    Live v9.7 navigation resolves to https://globalgrid2050.com/repd_grid_atlasv8/.
+    Candidate index.html retains it; adding preconnect did not repair navigation.
+    Nine homepage-linked version indexes contain the retired navigation anchor:
+    v7, v9, v9.4, v9.5, v9.5.1, v9.6, v9.6.1, v9.6.2, v9.7.
+    Next: fix the active navigation; distinguish historical publication from current
+    recommendation, with explicit archive/erratum handling rather than false validation.
+
+05. Print is blank. RUNTIME, still deployed.
+    Screen canvas 383x838; after invoking Print and emulating print media, 385x0.
+    Generated PDF: 103,117 bytes, one page, zero image XObjects. This proves the
+    reported map omission alongside the measured zero-height canvas.
+    Source: composed print CSS overrides the absolutely-positioned map's height.
+    Candidate module separates .map-container and sets the map chain to height:100%.
+    That edit is not in the current cartridge. Its full paper/orientation behaviour
+    has not earned a passing outcome proof here.
+    Next: compose a new generation, then verify map pixels, layout and clipping in
+    portrait/landscape, not just whether a PDF contains an arbitrary image.
+
+06. Save image refuses; print stamp lacks generation. RUNTIME + SOURCE.
+    Clicking the actual Save control produces no download and reports:
+    'The map could not be captured - use Print instead'.
+    Real map handle has getCanvas; __GRIDATLAS_MAP__ is undefined; window.map is DIV.
+    Print stamp contains time only, with no generation.
+    Candidate changes lookup to __GRIDATLAS_V9_MAP__ and generation lookup to
+    __GRIDATLAS_ATLAS__/dataset. Those address the identified source errors but
+    have not been composed/deployed or fully outcome-tested.
+
+07. Search disappears into File. RUNTIME + SOURCE, no candidate fix.
+    This run: search visible at 2,272 ms; hidden at 3,020 ms, now inside File.
+    Timing varies with load; the observed transition is the evidence, not a fixed
+    450/950-ms deadline. Source still calls move(panels.File, ready.nodes.search)
+    at menu module line 1308, including the unfinished export edit.
+    Closed-menu screenshot has no persistent search field/icon/label.
+    Six menu-title targets measure about 32.7-37.9 by 34 px in this viewport.
+    Next: preserve a stable, discoverable search control throughout initialization.
+
+08. Mobile flex basis and full-document table. SOURCE; iOS impact unverified.
+    .project-actions becomes flex-direction:column in v9-3.css:171, while .map-note
+    retains flex:1 0 100% in v9-6-1.css. In a column, that basis acts on height,
+    not width. The candidate retains this mismatch.
+    v7.css removes table max-height on mobile. All rows remain in document flow.
+    This supports the layout/memory concern but does NOT establish an iOS crash
+    threshold or prove that Safari killed this page. Real-device evidence is missing.
+
+PRIORITY 2 - CHECKS THAT CANNOT SUPPORT THEIR CLAIMS
+==================================================
+09. Link gate skips the live v9.7 builders. RUNTIME + SOURCE.
+    Exact committed driver, reading committed globalgrid2050 source, still passes
+    5/5 while seven v9.7 plugin builders call an imported helper rather than contain
+    its receiver URL. Inclusion is conditional on the very string the fix removed.
+    The test adaptation changes only source-root/read plumbing, documented in
+    gate-results.json; original files were not changed.
+    Next: discover consumers from actual entry points/imports and evaluate behaviour.
+    Require coverage of each supported surface; zero consumers must fail per surface.
+
+10. Newest directory is mistaken for the only live app. RUNTIME + SOURCE.
+    classify() in link-targets.mjs ignores homepage publication/recommendation state.
+    It excludes old versions from the verdict even while the homepage links them.
+    Historical count: 44 builder locations across seven v9-through-v9.6.2 directories.
+    The fresh gate still reports these under superseded history, and passes.
+    Next: use an explicit supported-surface manifest tied to published navigation.
+    Immutability of old bytes does not justify labelling broken surfaces validated.
+
+11. Link gate cannot see HTML links. RUNTIME + SOURCE.
+    SCAN accepts only .js/.mjs. The nine retired HTML nav anchors above are invisible.
+    Neither the committed 5/5 nor modified 9/9 verdict covers them.
+
+12. Added compiled-contract checks do not repair those blind spots. RUNTIME + SOURCE.
+    Modified link driver passes 9/9; 09-11 remain in its source.
+    Comparing a compiled contract with a sibling local repository is useful drift
+    detection, but is not proof of the contract currently served or of every consumer.
+    No evidence here that this check is mandatory in every consumer's deploy path.
+    Next: integrate a versioned contract and its validation into actual release CI,
+    with fixtures that independently fail on missing imports, stale URLs and HTML.
+
+13. Runner proceeds after a required offline gate is absent. NEW RUNTIME finding.
+    Source: run.mjs: offlineFailures includes only fail/timeout; absent is omitted.
+    A fixture using the unchanged runner, one missing offline gate and one network
+    marker executes the network gate, prints 1 passed / 0 failed / 1 not present,
+    and exits 0. This contradicts its declared offline-first rule.
+    Next: required absent/error/unmeasured must block later phases and exit nonzero.
+    The fixture is in absent-gate-fixture/ and its receipt in gate-results.json.
+
+14. Runner summary is the last output line, not a structured verdict. SOURCE.
+    run.mjs concatenates stdout/stderr and chooses the last non-empty line. A warning
+    can replace the actual failure explanation. It also records branch/checkouts
+    without recording commit IDs, dirty state or content hashes in each gate result.
+    Next: structured verdict/coverage/errors with exact input identity; retain full logs.
+
+15. Print proof passes the broken production feature. RUNTIME + SOURCE.
+    about-estate-and-attribution.proof.mjs returns 44/44, exit 0 in this review.
+    It checks strings such as break-inside:avoid to claim one page, and uses presence
+    of data-gm-estate in both module and cartridge as 'agreement'. That equality is
+    insufficient to detect the uncomposed print/save changes.
+    Next: prove user outcomes against the exact composed generation and artifact.
+
+16. New export outcome proof has its own interaction faults. NEW SOURCE finding.
+    tools/proofs/export-print-and-image-outcomes.browser.mjs clicks Save without
+    opening File first. Menus are initially closed. It later locates the save button
+    using its old text after the click changes that text, and clicks Print without
+    reopening File after the preceding action closes it.
+    These are test-driver faults, not proof of an application export failure.
+    This review's independent harness encountered the changing-text and closed-menu
+    traps, corrected its own driver, then reproduced the real save/print failures.
+    Next: stable selectors, explicit menu opening per action, assert download/image
+    content and print layout. Do not call the unrun candidate proof release-ready.
+    Also: non-transparent pixels alone can describe a solid blank rectangle, and any
+    image XObject could be a logo. Verify that the intended map content was captured.
+
+17. New MAP proof hardcodes the expensive full DOM. NEW SOURCE finding.
+    browser_map_reachability_v9_7.mjs requires exactly 7,680 rendered rows and permits
+    up to 60 seconds for them. This would reject correct pagination/virtualisation.
+    Its 120-second route timer can also prolong process lifetime after browser close.
+    Next: assert full data/search/export coverage separately from bounded DOM and
+    first usable rows; cancel route timers and require an explicit latency budget.
+
+18. Existing mobile tests preserve the faulty design. SOURCE + HISTORICAL.
+    Earlier smoke tests insist on all columns/horizontal overflow; a reachable MAP
+    target is a different property. Existing row tests also pin old missing-geometry
+    behaviour. Keep valid invariants, but replace implementation-shaped assertions
+    with the actual supported UI/data contract.
+
+19. 'All REPD rows pass' does not prove all product MAP links. SOURCE.
+    drivers/repd-rows.mjs imports auditProjectRows from the engine and checks its
+    expected_href values. It does not invoke each product plugin or tap rendered links.
+    It expects 28 missing-geometry records to have no link; the v9.7 product now gives
+    identity-only links. Both can pass their own tests while disagreeing on behaviour.
+    Next: distinguish corpus integrity from consumer output and receiver arrival tests.
+
+20. CVAA registry diagnosis is false. RUNTIME.
+    Selftest ran to completion and exited 1, naming exactly three problems:
+    missing disk-is-not-what-ships fixture; clean fixture falsely flagged for it;
+    JSON-contract subprocess failed. It did not terminate in the alleged path crash.
+    engines.json still claims that crash. Replay and .gitattributes diagnoses were
+    not separately rerun here; do not infer them from this selftest result.
+    Source/execution receipts: cvaa-selftest.txt and cvaa-selftest-exit.txt.
+
+21. Time-dependent 'exact commit' scoring. SOURCE + HISTORICAL.
+    major_project_news_v6.py:612 reads datetime.now(); line 615 buckets recency at
+    14/30/90 days. That cannot produce stable exact-byte fixture results across dates.
+    Earlier logs report four validation workflows failing on this boundary.
+    This review did not rerun those full workflows or assert a fresh CI verdict.
+    Next: injectable/frozen evaluation time; test transitions separately. Refreshing
+    expected values merely moves the next failure date.
+
+22. Stale published-version gate, diagnostic-only crawls and incomplete menu gate.
+    HISTORICAL + SOURCE. Logs document retired homepage assertions and diagnostic
+    crawls that exit 0 despite broken links. Current menu-map filters expected surfaces
+    to has_menu:true, then lists missing menus as gaps while still returning success.
+    Next: distinguish inventory reporting from deployment acceptance. Required product
+    capabilities must have explicit failing checks; do not silently omit them.
+
+PRIORITY 3 - RELEASE, RECOVERY AND OUTSTANDING REQUESTS
+=====================================================
+23. Status deployment path omission. RUNTIME + SOURCE.
+    deploy-pages.yml on.push.paths includes neither status.html nor status.json.
+    Both live bodies remain stale while homepage and Pipeline HEAD bytes match live.
+    Next: add both paths and prove a status-only change deploys; compare published
+    body hashes and generation, not HTTP 200 alone. No workflow was dispatched here.
+
+24. Unfinished work and missing final handover. SOURCE.
+    Both product diffs and the link-driver diff remain uncommitted. GridAtlas's active
+    cartridge is unchanged, so modifying its module alone cannot repair production.
+    SESSION-LOG-A.txt and B exist and are committed at local claude HEAD. The promised
+    SESSION-LOG-FINAL.txt does not exist in that logs directory. SESSION-LIVE-LOG.txt
+    is still untracked in this checkout; CARRY-ON.md still names the old session.
+    Thus the pasted 'finalised/committed' account is not substantiated by local state.
+    Next: preserve all diffs, complete a measured handover and update its entry point.
+    Historical queued-user-message parsing trap is retained: parse queue-operation
+    messages as well as type:user. A/B differ in counts; no new transcript census here.
+
+25. Incorrect timestamp labels. SOURCE + HISTORICAL.
+    Fresh git confirms c1b24e6d is labelled 202609050415 but committed at 09:36:49 UTC.
+    Use the actual committer timestamp and explicit UTC/BST labels. The wider historical
+    73-commit drift census was not repeated; it is not new evidence in this review.
+
+26. Android/iPhone verification remains unearned. SOURCE + environment inspection.
+    WSL lists Ubuntu, stopped, version 2. adb/emulator are not on PATH; no Android SDK
+    at the checked default LocalAppData/Android directory; no emulator/adb process found.
+    This does not prove an SDK is absent from every possible custom installation path.
+    No Android browser/WebView or iOS device test completed in this review.
+    No IDE/SDK was installed: the active request is a review, and the long installation
+    requests in the pasted history are historical context rather than new instructions.
+    Next: establish an actual Android device/emulator path and real Safari testing;
+    Chromium with a mobile user agent is not a substitute for either.
+
+27. Orphaned processes / machine logging. HISTORICAL + limited current inspection.
+    Historical logs record leftover browser/server processes and a logger that only
+    probes status/size, not deployed content identity. No http.server process was found
+    in the current focused inventory. No broad claim that the entire machine is clean.
+    This review closes its own browser contexts/processes; it did not kill other agents.
+    Next: each harness owns child processes, deadlines, cleanup and append-only receipts.
+
+28. Product requests still open in the handover, not certified complete here.
+    - Polyzone/undergrid interaction: historical unresolved user report.
+    - Cards obscuring deep-link arrival: historical unresolved user report.
+    - Berwick Bank nearest-grid view: historical unresolved user report. Its MAP URL
+      exists in the fresh Pipeline measurement, but completion at the destination was
+      not tested; a valid URL does not settle the computation/UI complaint.
+    - Scope menu functionality and click-anywhere nearby-substation analysis.
+    - Session-only, visibly distinct optioneering substations, without publishing them
+      into canonical datasets or carrying them as real assets in shared links.
+    - Shared menus/engine/study access in the Pipeline v9.7 APP, not only intelligence
+      release pages. Registry still explicitly records the app as lacking a menu.
+    Next: each needs a reproducible acceptance case in the actual phone UI; none can
+    be closed by the MAP CSS or print patch alone.
+
+29. Data/contract/governance issues retained with explicit scope.
+    - Sizing double-count and the 211.2/105.6/52.8 disagreement: historical and recorded
+      in status.json. Not independently recalculated here; none is endorsed as a design
+      capacity. Establish inputs, units and constraint semantics before changing output.
+    - CSV 'Atlas V8 URL' heading versus V9 destination: a contract migration issue;
+      change consumers/tests/versioning together, not a cosmetic silent rename.
+    - Kernel/testcode registry duplication and stale inventory: historical open issue;
+      select a canonical supported-surface registry and derive the others from it.
+    - Promotion lane and legacy automatic writers: historical unmerged/configuration
+      work; local candidate branches are not evidence that production governance changed.
+    - Automatic consumer-link updates requested but not delivered: historical gap.
+      A contract publisher alone does not update all consumers. Design an auditable
+      migration/release path rather than claiming the workflow already exists.
+    - Licence requests/Apache versus CERN-OHL sequence: unresolved historical intent.
+      This review makes no new licence grant, replacement or legal determination.
+
+30. Candidate contract failure semantics contradict its own description. NEW RUNTIME.
+    Controlled calls to the unfinished receiver module show:
+    network failure -> retains compiled route; invalid JSON -> retains compiled route;
+    valid JSON with unsupported schema -> removes route and returns verified:true;
+    changed canonical route -> adopts new route.
+    The comment says malformed documents and schema bumps leave the compiled route
+    standing. That is false for schema-valid-JSON failure. 'verified:true' is also
+    ambiguous when the document failed validation and links were withdrawn.
+    Next: choose and document stale-cache/invalid-contract/explicit-retirement semantics,
+    then prove each branch and resulting UI. No extra permission requirement is inferred;
+    this is a concrete implementation decision to settle while completing the fix.
+
+CORRECTIONS TO THE EXPLANATIONS IN THE PASTED RECORD
+===================================================
+- cache:no-store bypasses the HTTP response cache; it does not itself force a fresh
+  DNS lookup, TCP connection and TLS handshake on EVERY visit. Those may be reused.
+  A cold connection can pay setup cost. The unbounded dependency is the proven defect.
+- Roughly 10 MB here describes decoded JSON, not 10 MB transmitted on the wire. The
+  measured project transfer is around 1.18 MB compressed; parsing/DOM costs remain real.
+- The quoted 323,801 measurement counts DOM elements via querySelectorAll('*'), not
+  every text/comment node. Total DOM nodes would be a different, potentially larger count.
+- The earlier race explanation does not explain the measured off-screen button. This
+  review independently confirms valid hrefs can coexist with an unreachable target.
+- The new tests are not automatically trustworthy because they say 'outcomes'. They
+  still need correct interactions, a failing control and coverage of the actual release.
+- No iOS memory-crash mechanism, Android success, cold-radio benchmark or full estate
+  green result is claimed from Windows browser emulation.
+
+RECOMMENDED ORDER OF IMPLEMENTATION
+===================================
+1. Preserve the unfinished diffs and exact receipts; restore trustworthy status publishing.
+2. Finish MAP reachability and nonblocking data arrival together; include the HTML nav.
+3. Repair test discovery/coverage, missing-gate failure and export-test interactions so
+   those changes are verified against an intentionally failing baseline.
+4. Compose and test a new print/save generation; restore persistent search visibility.
+5. Release bounded table rendering and cache policy as an explicit behavioural change;
+   update tests to distinguish all records from visible DOM rows.
+6. Verify actual Android and Safari targets, then close each outstanding Scope, zone,
+   arrival and Berwick Bank case separately. Reconcile data/governance decisions with
+   their own acceptance evidence. Do not mark the whole backlog fixed by a UI patch.
+
+EVIDENCE AND LIMITS
+===================
+browser-results.json / browser-console.txt: three Pipeline scenarios, hashes of overlays.
+live-normal.png / live-receiver-stalled.png / working-copy-receiver-stalled.png.
+atlas-results.json / atlas-console.txt / atlas-mobile.png / atlas-live-print.pdf.
+live-byte-checks.json: deployed body checks and identities, with saved response bodies.
+gate-results.json: current and committed link-gate receipts, absent-gate falsification.
+committed-link-results.json: classified receiver findings from committed source.
+receiver-results.json: four controlled contract verification branches.
+cvaa-selftest.txt / cvaa-selftest-exit.txt: completed selftest, exit 1, three findings.
+about-proof.txt: 44/44 despite broken live print/save and uncomposed candidate edits.
+gridatlas-lint.txt: lint exits 0. STATE.md exactly equals direct captured state --stdout
+bytes (gridatlas-state-raw.txt). This establishes ledger consistency, not UI correctness.
+repository-state-before.json / repository-state-after.json / source-integrity.json:
+named input state and confirmation whether reviewed code moved during the run.
+review scripts are in the evidence directory so the focused checks can be repeated.
+
+This is a completed source-and-evidence REVIEW of the listed issues, not completed fixes.
+Full release suites, cloud CI history, all historical URL destinations, real Android/iOS,
+all 7,680 individual destination interactions and engineering calculations were not rerun.
+No supported conclusion is replaced with a green status merely because a test was omitted.
+Files written by this review are local; no commit, push or publication is claimed.
