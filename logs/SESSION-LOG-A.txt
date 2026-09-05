@@ -1,0 +1,1049 @@
+GLOBALGRID2050 - SESSION LOG A
+Session id 184379c4-0ce4-49bf-9e89-600d63e68803
+Written 2026-09-05T10:46Z by an independent agent reading the raw transcript, git, and the live
+sites. A second agent wrote LOG B from the same material without seeing this one. Where the two
+disagree, that disagreement is information; neither was allowed to ask the main session what
+happened.
+
+==============================================================================================
+0. HOW TO READ THIS FILE
+==============================================================================================
+
+Plain text on purpose, wrapped at about 100 columns, so it can be pasted whole into ChatGPT,
+Gemini or Claude.
+
+Every time in this file is UTC. Vikram's own clock is BST, UTC+1. Stamps inside this estate are
+read from `date -u` at commit time and never typed, so a generation stamp reads one hour behind
+his phone. When he wrote "time stamp gmt right now is 202609050333 yes 3:33AM" he meant
+2026-09-05T02:33Z. Git commit dates quoted below are UTC unless marked.
+
+Sources used, in order of authority:
+  1. C:\Users\vikra\.claude\projects\C--Users-vikra\184379c4-0ce4-49bf-9e89-600d63e68803.jsonl
+     (3,088 lines; 950 assistant records, 516 user records, 164 queue records)
+  2. `git log`, `git status`, `git diff` in the repositories under
+     C:\Users\vikra\OneDrive\Documents\GitHub
+  3. Live HTTP probes of globalgrid2050.com and ventusltd.github.io
+  4. Secondary: claude/CARRY-ON.md, claude/sessions/202609050125-carry-on-handover/,
+     globalgrid2050/status.json
+
+A note on the transcript that matters if anyone re-derives this log: most of Vikram's messages
+are NOT stored as `type:"user"` records. Only 16 are. The rest - 44 more - were typed while the
+assistant was mid-turn and are stored as `type:"queue-operation"`, `operation:"enqueue"`, with
+the text in a top-level `content` field. Parsing only `type:"user"` loses two thirds of what he
+said, including the single most important instruction of the night (01:30:25Z).
+
+==============================================================================================
+1. WHAT THE SESSION WAS FOR, AND HOW IT STARTED
+==============================================================================================
+
+The previous session (82e00a22) had been cut off by a Claude usage limit at about 2026-09-05
+00:47 local (23:47Z on 09-04). Its log had been written only into Claude's private memory path
+(.claude/projects/.../memory/) and not into GitHub/claude/sessions/ where every other session log
+lives, so Vikram could not find it the next morning.
+
+This session opened at 2026-09-05T01:19:39Z with him asking whether he had usage limit left, then
+"continue from my last session by checking the log files". Within six minutes he had said, in
+effect: the log is missing, find it properly and write a handover into it.
+
+At 01:30:25Z he gave the night's actual brief - rebuild the front page, then work through UI,
+menu, deep-link and MAP-button defects with a second agent, shipping at least three iterations of
+Pipeline News and GridAtlas by morning. The session ran from 01:19Z to at least 10:46Z with one
+long gap (03:53Z to 09:35Z) during which no user message arrived; the assistant was idle or
+blocked in that window and the transcript shows no work in it.
+
+The session ended - as far as this log goes - with him stopping all work and ordering two
+independent agents to write session logs, of which this is one.
+
+==============================================================================================
+2. CHRONOLOGY (UTC)
+==============================================================================================
+
+01:19:39  Session opens. "please advise if i have usage limit left". Assistant says it cannot
+          read quota and points at /usage.
+01:20:03  "continue from my last session by checking the log files".
+01:21:56  Assistant reports the resume point from session 82e00a22.
+01:25:48  Diagnosis: last night's log existed only in Claude's private memory, never in
+          GitHub/claude/sessions/. Writing a real file to disk.
+01:28ish  claude@31bc1a2 "202609050125: the carry-on handover, where it can actually be found";
+          then claude@6e85062 renames it to 00-LOG.md to match CLAUDE.md's documented read path.
+01:30:25  The night's brief arrives (see section 3, entry at 01:30:25Z).
+01:34-01:43  Homepage rebuilt. globalgrid2050@a4faffc1 "the front page shows only what is being
+          built now". Old page preserved byte-identical at /historical_builds.html at the root so
+          its 229 relative links still resolve. The search box was wired for the first time (it
+          had never had a script tag). Claimed live size 5,934 bytes, down from 111,836.
+01:40:29  Seven CI gates go red. Assistant measures rather than assumes, finds six were green on
+          the previous commit, and concludes the breakage is its own.
+01:42:42  Finds the estate's own record labels v9.7 CANDIDATE and v9.6.2 LIVE VALIDATED, while the
+          new homepage had claimed v9.7 outright. globalgrid2050@6ecc0dc0 carries the fifteen
+          published-version labels the exact-commit gates require.
+01:44:49  Lane B launched (general-purpose agent, "Pipeline News overnight lane").
+01:45-01:53  GridAtlas work begins. Notes that the canonical gridatlas clone is parked on
+          `candidate/promotion-lane`, not main, and that Codex has a `menu-first` branch in
+          flight. Work is done in the worktree gridatlas-main-202609050200 (on main).
+01:48:14  First confident claim about the estate menu: "the estate menu is not in GridAtlas at
+          all". Retracted at 01:49:52 - GridAtlas has its own File/Scope/About bar and it IS in
+          the composed bytes; the DOM query had matched on uppercase titles.
+01:57:17  Full suite 779/780. The one failure is the 393x852 mobile arrival gate.
+02:08-02:27  The mobile gate will not complete. Sequence of diagnoses: headless/no-GPU, then
+          "Target crashed", then a control against the live unchanged Atlas that finishes in 6 s.
+          Conclusion stated at 02:27:05: "the hang is the worktree sitting inside OneDrive".
+          Runs are moved to C:\Users\vikra\ga117.
+02:33:21  Vikram: publish status at intervals so context survives; gives his 3:33AM BST stamp.
+02:36:48  status.html / status.json published (globalgrid2050@799dd36d).
+02:37:32  Control run: the PREVIOUS generation completes the gate; the new one crashes.
+02:37:45  Real cause found and it is the session's own: adoptLate() runs from a MutationObserver
+          and the attribution re-append wrote to the DOM on every pass - infinite feedback loop,
+          plus a fetch started on every mutation.
+02:38:53  Gate passes at 393x852 on the fixed generation. v9.117 composed as generation
+          202609050238.
+02:41-02:49  Pipeline News "truncation" investigated by Lane B. Verdict: the app is identical
+          across releases; what was truncated was the front page - 30 Pipeline News releases had
+          become 1 at a4faffc1. Repaired by globalgrid2050@9a1cd023.
+02:42:34  gridatlas v9.117 pushed (54438ef).
+02:44-02:49  v9.118 (9c1ed59) all 44 engine-graph nodes in File; v9.119 (100d206) the offline
+          claim measured before being made.
+02:53:51  Lane C launched: seven days of git plus every chat, producing the agenda and the flaws.
+02:57:29  "record this whole log offline so you can respawn...". claude@3e58f90 writes
+          sessions/202609050257-session-184379c4/00-LOG.md.
+03:00-03:01  v9.120 (5c013cd) adds the GB price and constraint study to View.
+03:05:22  "ALL OTHER TECHNOLOGIES HAVE BEEN LOST HERE".
+03:05-03:09  Measured and answered: v9.7 had not been touched in 24 h; its technology buttons are
+          ALL TECH / SOLAR / BATTERY / ONSHORE / OFFSHORE and always were; the corpus is 3,563
+          solar + 1,609 BESS + 2,399 onshore + 109 offshore = 7,680. No technology was lost.
+03:08:13  Vikram supplies the Longfield deep link that did not compute.
+03:10:01  The real defect found: https://globalgrid2050.com/repd_grid_atlasv8/ is 21,045 bytes
+          with 0 cartridges, 0 current.json, no nearest(), no corridor. Pipeline News MAP buttons
+          pointed at a receiver carrying no engine.
+03:11-03:16  ventus-grid-engine@30efa2b adds ?focus=<module>; ventus-grid-engine@3d3a561 makes the
+          engine declare which receiver a deep link may be built against.
+03:13:29 / 03:16:09  Vikram orders the testcode repo to become the estate's test engine.
+03:14-03:21  testcode built from an empty repo: 70c5d7d initial, 73f916c the engine.
+03:24:41  Consolidated report, including a correction against an earlier claim of its own (the
+          "already failing before tonight" gate: nine consecutive reds, but twelve of its current
+          failures were caused by this session removing the producer and leaving the consumer
+          check enabled).
+03:32:46  "Fix the licenses get in with it". Apache-2.0 applied to seven repositories.
+03:37-03:46  testcode@04f7135 link-target driver; testcode@5bcd746 all 7,680 REPD rows audited
+          offline, 10/10.
+03:50-03:54  Print and image export built into the GridAtlas File menu; gridatlas v9.121
+          (18cffd5), generation 202609050354.
+03:53:29  pipelinenews@7432805 and globalgrid2050@5fa6ebf7: the MAP button rewritten across all
+          seven v9.7 plugin generations to read the receiver from ventus-grid-engine at runtime
+          instead of holding a hard-coded URL.
+03:59:26  "The MAP button is fixed and live." Verified on served bytes at desktop.
+--------- GAP: no user message and no work between 03:53Z and 09:35Z ---------
+09:35:43  "Please update". status.html republished with 25 entries; the session log extended.
+          globalgrid2050@c1b24e6d, claude@0e95028.
+09:58:38  "Why is it hanging for so long?"
+09:59:31  Ten orphaned processes found, all spawned by this session's own lanes, running 7-8
+          hours after their work finished: 7 node dev servers (ports 8144, 8200, 8216, 8233,
+          8242, 8304, 8309, ~248 MB), 2 python http.server, 1 headless Chromium orphaned when a
+          browser proof was stopped. All ten killed; the user's own Chrome untouched.
+10:02:12  Vikram, with an iPhone screenshot: load time horrendous, MAP button does not work,
+          tested on mobile. Summon a fresh agent.
+10:03-10:09  Four independent agents launched: (1) browser measurement of load time and MAP href;
+          (2) testcode + git + cvaa causal map; (3) an implementer to apply the fix via git;
+          (4) the blank-print and vanishing-search-bar question.
+10:04:15  The main session states a race-condition diagnosis with a code quotation.
+10:10:47  Agent 1 reports and falsifies it. See section 6.
+10:11:34  "My diagnosis was wrong." Implementer redirected from the race to the CSS geometry.
+10:18:15  Agent 2 reports the causal chain, the gate blind spots, and two further open findings.
+10:30:56  "Then spin up a Linux agent that does mobile browsers testing in android based apps".
+10:31:42  Measured: WSL Ubuntu 2 installed but Stopped; no adb, no Android SDK, no emulator.
+          Machine: Intel Core Ultra 7 255HX, 20 cores, 15.5 GB RAM (6 GB free), 279.9 GB free on
+          C:, Intel iGPU + NVIDIA RTX 5070 Laptop, Hyper-V present.
+10:32:10  Android agent launched; at 10:33 authorised for a full SDK + emulator install.
+10:33:54  The print answer: three defects, all shipped by this session four hours earlier.
+10:38:34  "Android testing failed... Stop all agents and use 2 agents to provide 2 independent
+          logs of the entire session".
+10:39:11  All three running agents stopped mid-work (TaskStop on "Independently fix the MAP
+          race", "Linux Android mobile browser testing", "Fix the blank print and dead save").
+10:39:40  claude/logs/live-log.ps1 written and started in the background; it appends ticks to
+          claude/logs/SESSION-LIVE-LOG.txt (206 lines at the time of writing).
+10:40:11  Log agent A launched. 10:40:41 log agent B launched.
+
+==============================================================================================
+3. EVERY INSTRUCTION HE GAVE, VERBATIM, IN ORDER
+==============================================================================================
+
+His exact words, unedited, including typos and swearing. Timestamps are UTC. "[queued]" means it
+was typed while the assistant was mid-turn and absorbed into that turn.
+
+01:19:39Z
+  "please advise if i have usage limit left"
+
+01:20:03Z
+  "continue from my last session by checking the log files"
+
+01:24:48Z [queued]
+  "The fucking session limit made me stop now I cannot find the log file, you can made a handover
+  kind of doc in it too , look properly"
+
+01:25:40Z [queued] - a pasted terminal capture identifying the cut-off session. The load-bearing
+line in it:
+  "You've hit your session limit · resets 2am (Europe/London)"
+  prefaced by "It was this session"
+
+01:30:25Z [queued] - THE NIGHT'S BRIEF
+  "What I want you to do is to use chrome all night, take your time and fix the UI issues, Grid
+  Engine Issues, The Menu issues, all my grievences in that log file until morning, setup another
+  sub agent too, so you and 1 other sub agent, ship at least 3 iterations by morning of
+  pipelinenews, gridatlas, deep links fixes, move the attribution away from the menus, test as
+  many REPD deep links as you can, fix the map button. But first, MAKE THIS THE DEFAUL HOME PAGE
+  https://ventusltd.github.io/globalgrid2050-homepage/ as in put all content in an archieve on
+  www.globalgrid.com and the lets make prominent ONLY what we are building right now, call the
+  rest of the content, historical builds, its an internal dashboard for us but its visible to the
+  public so we need to keep it tidy but the new releases for our apps be more prominent so we can
+  focus, the UI between spiders, gridatlas, pipelinenews etc is already doing a good job check the
+  old links, is this scope confusing asking questions"
+
+01:38:41Z [queued]
+  "This is also a massive clue built today
+  https://ventusltd.github.io/ventus-grid-engine/?graph=engine-graph"
+
+01:42:41Z [queued]
+  "Supporting documentation - Goals until 2050
+  https://ventusltd.github.io/ventus-grid-engine/?graph=engine-graph
+  C:\Users\vikra\OneDrive\Documents\GitHub\spiders
+  C:\Users\vikra\OneDrive\Documents\GitHub\seed-data
+  C:\Users\vikra\OneDrive\Documents\GitHub\grid-distance-maths
+  C:\Users\vikra\OneDrive\Documents\GitHub\cvaa
+  C:\Users\vikra\OneDrive\Documents\GitHub\ventus-grid-engine confirm if you got all supporting
+  links to evolve next versions of gridatlas via ALL lines of REPD via pipelinenews, just be aware
+  pipelinenews also has loads of bugs such as other technolgies sort also brings up solar, and
+  also the UI via deeplink into gridatlas can be awkward as the cards get in the way, the scoping
+  menu has nothing it seems either and the and the polyzone undergrid doesnt work - advise if this
+  helps or if it confuses?"
+
+01:43:52Z [queued]
+  "also advise how codex can track what you are doing in the offline folders that will later be
+  pushed to github online I am getting claude to review everything so we have a good overview by
+  morning too"
+
+01:45:39Z [queued]
+  "This is the main event re menus FYI
+  https://ventusltd.github.io/ventus-grid-engine/?graph=engine-graph"
+
+01:47:59Z [queued]
+  "dont publish that its random and doesnt make sense https://ventusltd.github.io/spiders/ this is
+  for spider genome, look up past talk on this between us, this is our vehicle for crosslinking
+  logic, maths, repos etc not for publishing the tool but rather the result which is this with all
+  the maths etc engines which you need to include in the gridatlas, pipelinews and other dahsboards
+  drodown menus https://ventusltd.github.io/ventus-grid-engine/?graph=engine-graph this was your
+  best work earlier before we could deploy the tokens ran out"
+
+01:49:24Z [queued]
+  "Push this to about menu https://ventusltd.github.io/spiders/spider_printer_v1/"
+
+01:49:58Z [queued]
+  "Push this to about menu to in gridatlas and pipeline news
+  https://ventusltd.github.io/data-federation-map-for-globalgrid2050-all-repos/dashboard/sandbox/spider_full_po_test.html"
+
+01:55:48Z [queued]
+  "And recover all the talk about mjs files and include them int en file, edit etc menus"
+
+01:59:16Z [queued]
+  "Prioritise iPhone mobile environments first used dedicated webOS Linux based kits if you can
+  This isn't a website it's an OS for the the energy transition, this isn't narrative on the stock
+  market for manipulation of bonuses, it's actually technology to avert climate disasters #seed
+  repo"
+  (his apostrophes are curly in the original: "isn’t", "it’s")
+
+01:59:58Z [queued]
+  "Then spin Ubuntu in virtual environments fuck windows and their gatekeeping"
+
+02:00:17Z [queued]
+  "Ubuntu is already installed in powershell fyi"
+
+02:01:31Z [queued]
+  "You have totally fucked pipeline news
+
+  Check vs Older version
+  Use cvaa process and other agents and git don't fuck me over
+  https://globalgrid2050.com/pipelinenews_intelligence/202609031308/ here is an older version for
+  comparison"
+
+02:04:29Z [queued]
+  "pipelinenews is truncated compare vs older versions and use GIT to keep code in check"
+
+02:06:21Z [queued]  "/claude-in-chrome"
+02:06:38Z [queued]  "/dataviz"
+02:07:18Z [queued]  "/context"
+
+02:33:21Z [queued]
+  "Ensure to publish regular intervals on to globalgrid2050.com homepage website so that we can
+  recover context when the context window inevitably dies or hallucinations
+
+  Such as time stamp gmt right now is 202609050333 yes 3:33AM as it's painful to pilot this. Keep
+  getting smarter via Claude repo or Claude.md or GIT!"
+
+02:41:18Z [queued] - a re-send of the block from 01:59:58Z-02:06:38Z, unchanged.
+
+02:41:35Z [queued]
+  "why are the drop down engines here NOT in the menus of gridatlas and pipelinenews
+  https://ventusltd.github.io/ventus-grid-engine/?graph=engine-graph"
+
+02:42:52Z [queued]
+  "Why are the mjs files not there?"
+
+02:43:50Z [queued]
+  "The MJS apps that AI and humans can deploy as an IDE via menu reminders or active threads to
+  click via or text they could execute with AI in approved terminal s or powershells or IDE lets
+  hand power to the people"
+
+02:45:05Z [queued]
+  "The text can travel like Linux and GIT
+  We are trying to make git deployed on the energy transition with liars like Trump around it's
+  important"
+
+02:46:55Z [queued]
+  "And they should be able to build our entire code offline too just like Linux did git
+  Find my notes about the energy transition power being much larger than git and the paragraphs
+  about 27 million lines of code via Linus a few lines of code in 1991 that has narrative you can
+  use"
+
+02:47:33Z [queued]
+  "Power being much larger than the internet and the grid being much older and larger!"
+
+02:48:33Z [queued]
+  "This is why globalgrid2050 or gg50 for command line etc needs to become the web based OS for
+  the energy transition with the UK as the testing and development ground but engines deployable
+  anywhere"
+
+02:53:51Z [queued]
+  "run another agent that does git tracking of all code since the last 7 days and queries all
+  chats and then processes what is the agenda and what are the flaws"
+
+02:57:29Z
+  "record this whole log offline so you can respawn when the usage limit or context runs out"
+
+02:58:58Z [queued]
+  "add this to the appropriate menuw on gridatlas and pipeline news
+  https://globalgrid2050.com/data/grid_studies_public/great_britain_electricity_price_grid_constraint_trends_2016_2026.html"
+
+03:05:22Z
+  "ALL OTHER TECHNOLOGIES HAVE BEEN LOST HERE compare to previous versions
+  https://globalgrid2050.com/uk_renewables_pipeline/v9.7/"
+
+03:08:13Z [queued]
+  "https://globalgrid2050.com/repd_grid_atlasv8/?repd_ref=8162&project=Longfield&technology=solar&capacity_mw=500&latitude=51.7831862&longitude=0.5449877&zoom=12
+  Firefox browser longfield grid engine didnt compute or fire via amp button on
+  https://globalgrid2050.com/uk_renewables_pipeline/v9.7/?technology=solar"
+
+03:09:44Z [queued]
+  "you need to equip the ventus grid engine repo and leave cvaa vaccines via git and spiders in
+  places where that above doesnt keep happening, the links should intelligently update"
+
+03:10:55Z [queued]
+  "you need to define a query that targets all project rows on pipeline news that have an REPD id
+  and if they do then the alogrigm or spiders or git via cvaa needs to auto update each of those
+  links via workflows that auto run on github BUT ONLY AFTER they have been proven to work offline
+  on the machine first"
+
+03:13:29Z [queued]
+  "cvaa, spiders, ventus grid engines, menus driver (map all menus), all of these + git + CI/CD
+  need to become our test code environments immediately establish the test code engine and
+  workflows proven offline then github actions via C:\Users\vikra\OneDrive\Documents\GitHub\testcode"
+
+03:16:09Z [queued]
+  "start a process that the test codes run via git accross ALL REPD projects and make the testcode
+  engine clever so that you can use it as a driver to automate links updates in map button, make
+  sure menus have what you want, make sure spiders diagram properly. The test code engine becomes
+  the line that runs through everything logically that needs compute"
+
+03:32:46Z
+  "Fix the licenses get in with it"
+
+03:33:46Z [queued]
+  "I follow the Gita the work itself is the reward"
+
+03:35:12Z [queued]
+  "Exactly respect 3rd party Lincenses but you see over complicating the licenses lets first prove
+  the product serves a first and ship the fixes with the test code engines"
+
+03:37:41Z [queued]
+  "The product must work and serve a purpose first also my repo on arc Supression has a lot of
+  logic you can use and apply to the licenses that's the cern license but also the content can be
+  applied to code as well
+  https://raw.githubusercontent.com/Ventusltd/pv-arc-protection-circuit/main/Open-Hardware-Disclosure.md
+
+  Globalgrid2050.com or gg50 for command line but behave the same way no server dependencies must
+  work anywhere with a machine"
+
+03:43:44Z
+  "Test any issues in chrome extension via UI finish the next 3 versions once test code tells you
+  all 7000 + REPD rows pass the testcode git, spiders mapping and ventus grid engine deep links
+  all must intersect to catch gaps and deploy
+
+  Then you need to programme the runners to speed up the app menu growth and then end owner scope
+  feature add menu button click anywhere to analyse nearby substations if they exist, allow
+  another menu, add substations for optioneering"
+
+03:50:19Z
+  "Existing only for the season but allow the ussr to export screenshot prints via file save or
+  file print and they should produce beautiful slides of what's on display be it mobile or desktop
+  allow users to show the graphical wonder"
+  (read by the session as "existing only for the session" and "the user"; that reading was not
+  challenged, and the export was built session-only and never persisted)
+
+03:51:31Z [queued]
+  "We tried to create a save as and kernel engine before but it's not compete see
+  https://ventusltd.github.io/registry_of_all_content_in_repos_and_dependencies/"
+
+03:52:41Z [queued]
+  "You need to add a print button on menus!"
+
+03:53:22Z [queued]
+  "And make sure print always fits to page in landscape or portrait on mobile, or desktop and
+  sizes to fit the page"
+
+--- gap of 5 hours 42 minutes ---
+
+09:35:43Z
+  "Please update"
+
+09:58:38Z
+  "Why is it hanging for so long?"
+
+10:02:12Z (with an iPhone screenshot attached - the only image in the session)
+  "Load time on pipelinenews is horrendous and the map button doesn't work just tested on mobile
+  Summon a fresh agent with fresh context to check"
+
+10:03:12Z [queued]
+  "Summon another fresh agent that use the testcode repo + git + cvaa process to map the failure
+  and reports back"
+
+10:03:32Z [queued]
+  "I am testing on iPhone in portrait mode"
+
+10:06:08Z
+  "Get an independent agent to review the fix and apply it via git as you have been working long
+  you can trust yourself without git, test code, cvaa, spiders mapping proof via an independent
+  agent writing the logic and then check locally"
+
+10:06:24Z [queued]
+  "Can't*"
+  (this corrects the previous message: he meant "you CAN'T trust yourself without git, test code,
+  cvaa, spiders mapping proof")
+
+10:08:10Z
+  "Also another agent should explain by the print save button produces a blank screen rather than
+  what's on the screen and why the adddress and search bar dissapears on load"
+
+10:08:19Z [queued]
+  "Why*"
+  (corrects "explain by" to "explain why")
+
+10:30:56Z
+  "Then spin up a Linux agent that does mobile browsers testing in android based apps"
+
+10:31:49Z [queued]
+  "The machine is massive compute
+  You need the agents to download appropriate IDE software and run it in powershell"
+
+10:38:34Z
+  "Android testing failed, run a powershell command that is keeping a log of everything happening
+  so we can pick up where we left off in a fresh context window and via chat analytics in ChatGPT,
+  Gemini, Claude, the file must be a simple txt log built by a dedicated agent right now. Stop all
+  agents and use 2 agents to provide 2 independent logs of the entire session"
+
+10:38:59Z [queued]
+  "Terminate all work and focus on writing logs with 2 independent agents"
+
+10:39:34Z [queued]
+  "The log file must be written by independent agents as you are exhausted with too much
+  information"
+
+==============================================================================================
+4. WHAT SHIPPED - FROM GIT, NOT FROM CLAIMS
+==============================================================================================
+
+All commits below are on `main` and pushed (every repo reports 0 ahead / 0 behind its upstream).
+Times are UTC.
+
+globalgrid2050 (github.com/Ventusltd/globalgrid2050)
+  a4faffc1  01:38Z  the front page shows only what is being built now
+                    Verified: /historical_builds.html serves 200 at exactly 111,836 bytes today,
+                    which is the byte count the old page had. The homepage was 5,934 bytes at
+                    01:43Z; it is 31,121 bytes now, having grown when the 30 Pipeline News
+                    releases were restored and later edits landed.
+  6ecc0dc0  01:43Z  carry the published-version labels the exact-commit gates require
+  1a6445cc  01:48Z  the spiders link comes off the front page (on his explicit instruction)
+  e4f32ae4  02:06Z  publish Pipeline News 202609050200
+  1b51cf26  02:20Z  publish Pipeline News 202609050216
+  347d93fa  02:35Z  publish Pipeline News 202609050233
+  799dd36d  02:36Z  publish the build status (status.html / status.json)
+  9a1cd023  02:53Z  put the thirty Pipeline News releases back on the front page
+  e6f39c98  03:04Z  status - v9.120, the log filed offline
+  362b679a  03:11Z  publish Pipeline News 202609050309 (live, 200, 26,831 bytes)
+  24171fd1  03:24Z  the front page names the newest release
+  5fa6ebf7  03:53Z  the MAP button lands where the engine is, and the receiver is read not typed
+                    11 files, +369/-83. Deleted the hard-coded receiver URL from seven v9.7 plugin
+                    generations; added scripts/core/atlas-receiver-v9-7.js (+168 lines) which
+                    fetches the contract from ventusltd.github.io at runtime.
+                    Verified at the time: all seven served plugins carry 0 mentions of the retired
+                    route; the new module serves 200; testcode link-targets flipped from
+                    10 live sites FAIL / exit 1 to 4/4 passed / exit 0.
+  c1b24e6d  09:36Z  status - the MAP button computes, all 7,680 rows pass, and what is still open
+
+gridatlas (worked in the worktree gridatlas-main-202609050200, branch main)
+  54438ef   03:42Z  v9.117 - the attribution leaves the map, and File opens the maths
+                    Verified: proof 25/25 made to fail first; full suite green; 393x852 arrival
+                    gate earned on this generation.
+  9c1ed59   03:48Z  v9.118 - all 44 nodes the engine graph publishes, grouped, plus one runnable
+                    copyable command. Proof 29/29.
+  100d206   03:52Z  v9.119 - the engine command tells the truth about being offline. Measured
+                    first: the engine has zero dependencies and its 9 proofs / 133 checks run
+                    with no npm install and no network call. Proof 30/30.
+  5c013cd   04:03Z  v9.120 - the GB price and constraint study, in View. Proof 33/33.
+  1789664   04:34Z  a licence (Apache-2.0)
+  18cffd5   04:57Z  v9.121 - print the view, or save it, and the credit goes with it
+  Live check now: https://ventusltd.github.io/gridatlas/atlas/current.json reports
+  generation 202609050354 with 4 cartridges - i.e. v9.121 is the served generation.
+  (Note: these commit times are BST as reported by git log --date=local; in UTC they are one
+  hour earlier - 02:42, 02:48, 02:52, 03:03, 03:34 and 03:57 respectively.)
+
+pipelinenews (Lane B)
+  4fc83af   02:05Z  the WIDER FLEET control stops naming a cut the table has stopped showing
+  e9aef6f   02:19Z  the pager belongs to the cut on screen
+  6b7890d   02:35Z  every status the register has, not the four the row draws
+                    2,416 of 7,680 records (31.5%) sat in ten REPD statuses no control could
+                    select. Reachable went from 5,264 to 7,680.
+  6e30dc0   03:10Z  the estate is in this product's own menu, engine list read not retyped
+  f421890   03:34Z  a licence
+  7432805   03:53Z  retire the legacy receiver branch from both deep-link source parts
+                    ACTIVE_TARGET defaulted to "legacy" in BOTH source parts; composed releases
+                    were only correct because the builder rewrote that line. The branch was
+                    removed rather than the default.
+
+ventus-grid-engine
+  30efa2b   02:12Z  the receiver takes ?focus= so dashboards can link into the maths
+                    Verified live in Chrome landing on engine/v9-nearest-search.js.
+  3d3a561   03:13Z  the engine says which receiver a deep link must be built against
+                    20 checks; run against the previous contract first, where it cannot even
+                    import - so the proof cannot pass without the change.
+  37f9d15   03:13Z  (bot) Regenerate genome graph: 44 nodes, 51 edges
+  fe4eba6   03:34Z  a licence
+
+testcode (new repository this session; github.com/Ventusltd/testcode)
+  70c5d7d   03:12Z  Initial commit
+  73f916c   03:23Z  the test code engine - the line that runs through everything
+  9ea25b4   03:34Z  a licence
+  04f7135   03:38Z  the link-target driver - which receiver every deep link lands on
+  5bcd746   03:45Z  all 7,680 REPD rows, audited offline
+                    7,680 rows read; 7,680 carry an REPD identity; 7,652 linkable; 28 without
+                    geometry - matching the contract's declared 7652/28. 10/10 checks.
+  882e86c   03:59Z  a mention is not a link (Lane B's critique of the driver, carried)
+
+spiders
+  5616e8e   03:34Z  a licence
+
+claude (the log / board repository)
+  31bc1a2   01:28Z  the carry-on handover, where it can actually be found
+  6e85062   01:30Z  name the handover 00-LOG.md, as CLAUDE.md already instructs
+  bcb8e91   01:45Z  the overnight lane board and Lane B brief
+  794a031, 68c9cb5, 22a7d16, aa65ae7, a02240f, f2b280d, c16450d, c38c466 - board updates
+  60d2a5e   02:54Z  Lane C brief
+  3e58f90   02:59Z  the full session log, offline, so this can be respawned
+  84ee6fa   03:15Z  Lane C - the agenda and the flaws, seven days of git and every chat
+  0e95028   09:37Z  the session log carries the whole night, not the first half
+
+Licences (Apache-2.0), verified by reading the files on disk today:
+  ventus-grid-engine, pipelinenews, spiders, testcode, grid-distance-maths,
+  globalgrid2050-homepage, and gridatlas (LICENSE present in the main worktree).
+  globalgrid2050 keeps its pre-existing CERN OHL-S at LICENSE.txt.
+  Still with NO licence: cvaa, seed-data, studies, claude.
+
+Live probes taken 2026-09-05T10:45Z, all HTTP 200:
+  https://globalgrid2050.com/                                              31,121 bytes
+  https://globalgrid2050.com/historical_builds.html                       111,836 bytes
+  https://globalgrid2050.com/status.html                                   14,321 bytes
+  https://globalgrid2050.com/status.json                                   10,454 bytes
+  https://globalgrid2050.com/uk_renewables_pipeline/v9.7/                   8,499 bytes
+  https://globalgrid2050.com/pipelinenews_intelligence/202609050309/       26,831 bytes
+  https://ventusltd.github.io/gridatlas/atlas/                              5,223 bytes
+  https://ventusltd.github.io/ventus-grid-engine/?graph=engine-graph       35,016 bytes
+  https://ventusltd.github.io/ventus-grid-engine/deeplink/receivers.json     2,326 bytes
+
+The last local run of the test engine (testcode/testcode-run.json, generated
+2026-09-05T10:33:37Z, offline phase only):
+  grid-engine              PASS  436 ms    9 proofs, 133 checks
+  gridatlas-composition    PASS  121,801 ms  (read from gridatlas-main-202609050200, main)
+  cvaa                     FAIL  54,256 ms  "warning: unshare -rn unavailable; antibodies run
+                                             without a network namespace"
+  menus                    PASS  129 ms
+  link-targets             PASS  364 ms    9/9
+  repd-rows                PASS  139 ms    10/10
+
+==============================================================================================
+5. WHAT IS BROKEN
+==============================================================================================
+
+Including - especially - what this session broke itself.
+
+5.1  THE MAP BUTTON ON A PHONE IS DRAWN OFF THE SIDE OF THE SCREEN. STILL LIVE.
+     Measured at a 389 px viewport: the MAP anchor's left edge is at x = 1217, i.e. 828 px past
+     the right edge; document.elementFromPoint() at the anchor's own centre returns null; the tap
+     target is 36 x 21 px against Apple's 44 x 44 guidance. The table is 1280 px wide inside a
+     358 px scroll container with 11 columns visible.
+     Two CSS rules cause it, and neither is sufficient alone:
+       styles/v9-3.css:209-211  `.tablewrap table { min-width: 1280px; }` - unconditional; the
+         media query above it closes at line 201.
+       styles/v9-6-1.css:9-11  `.tablewrap .hide-mobile { display: table-cell; }` inside
+         `@media (max-width:768px)`, which re-shows the six columns v7.css hides on mobile.
+     Ablation, pixels off-screen: as served 828; min-width:0 alone 346; hiding hide-mobile alone
+     799; both together 16.
+     This is NOT a regression from the deep-link rewrite. v9.6.2 serves the identical rule, so
+     the button has been unreachable on a phone since v9.6.1 shipped.
+     STATUS: a fix exists in the globalgrid2050 WORKING TREE and is NOT committed and NOT live.
+     Confirmed by fetching the live CSS at 10:45Z: `min-width: 1280px` is still unconditional at
+     line 209-210 and `.hide-mobile { display: table-cell }` is still there.
+
+5.2  PIPELINE NEWS v9.7 LOAD TIME. STILL LIVE.
+     Measured at 389 px: 44 requests, 1,253,475 bytes transferred; 16 x
+     data/v9.1/projects/part-0NN.json at ~78 KB gzipped each, about 9.8 MB of decoded JSON
+     (uncompressed on the wire the second agent measured 9,605,283 bytes across the 16 parts);
+     network complete at 965 ms; table populated at 3,363 ms, so 2,398 ms is pure JS + DOM
+     construction on a desktop CPU on a wired link; 323,801 DOM nodes; 7,680 rows; page height
+     803,643 px. There is no pagination and no virtualisation. A phone SoC does that work several
+     times slower.
+     45 unbundled ES modules, 237,708 bytes, each its own request. Chart.js is loaded from
+     cdn.jsdelivr.net in <head> with no defer, no async and no version pin.
+
+5.3  GRIDATLAS PRINT PRODUCES A BLANK SHEET. SHIPPED AT 03:54Z BY THIS SESSION. STILL LIVE.
+     The print stylesheet collapses the map to 0 px tall. Measured: canvas 838 px on screen ->
+     0 px in print on the phone; 518 -> 0 on desktop. The shipped PDF contains zero images;
+     disabling that one stylesheet yields two full-resolution images from the same page.
+     Cause: a false premise written into the author's own comment - "body becomes a flex column so
+     the map takes the remaining height". The DOM is body > .dashboard > .map-container > #map, so
+     making body a flex column reaches .dashboard, not the map. `flex:1 1 auto` was inert and
+     `height:auto!important` collapsed #map to its content height, whose only child is absolutely
+     positioned.
+
+5.4  GRIDATLAS "SAVE IMAGE" NEVER WORKED AT ALL. SHIPPED AT 03:54Z BY THIS SESSION. STILL LIVE.
+     The code looks up `window.__GRIDATLAS_MAP__`, which does not exist anywhere in the estate.
+     `window.map` then resolves to the <div id="map"> by named-element reflection, so `.getCanvas`
+     is undefined, the render-frame guard is skipped, and the control always refuses. The real
+     handle is `window.__GRIDATLAS_V9_MAP__`, used elsewhere in the same composed file. With the
+     correct handle it produces a real 340 KB image.
+     The two controls formed a closed loop: save says "use Print", print returns a blank sheet.
+     STATUS: a fix exists in the gridatlas-main-202609050200 working tree
+     (atlas/modules/202609031958-menu-bar.js, +58/-12) and is NOT committed, NOT composed into a
+     cartridge, and NOT live. current.json still serves generation 202609050354.
+
+5.5  THE PROOF THAT WAS SUPPOSED TO CATCH 5.3 AND 5.4 PASSED 44/44.
+     It asserted CSS strings and code shapes - that a rule existed, that a function was called -
+     and never asserted an outcome. That is the estate's own recorded failure mode, written into
+     the gate meant to prevent it.
+
+5.6  SEARCH DISAPPEARS FROM GRIDATLAS WITHIN THE FIRST SECOND.
+     Visible at about 450 ms, gone by about 950 ms. With menus closed on a 393 px screen the only
+     visible controls are six menu titles at 33-38 x 34 px plus GRID, SUBS and LAYERS. There is no
+     visible affordance that search exists - no field, no magnifier, no word. Its only home is
+     behind FILE. Six map chips, fullscreen, the search bar and the attribution all leave the
+     screen inside the first second.
+
+5.7  SIX OF THE SEVEN v9.7 PLUGIN GENERATIONS CAN NEVER OBTAIN THE DEEP-LINK CONTRACT.
+     After 5fa6ebf7 all seven call buildAtlasDeepLinkV9_7, whose first line is
+     `if (!canonicalRoute) return "";`. Only projects-v9-5-1.js:297 ever calls
+     loadAtlasReceiverV9_7(). For the other six canonicalRoute is permanently "", and five of the
+     six do not import atlasUnavailableReasonV9_7 either, so they would render an empty href
+     silently - the exact failure this commit was written to end. Latent, not live: only
+     app-v9-7.js is referenced from index.html today. One entry-point edit from being live.
+
+5.8  44 LINK-BUILDING SITES ACROSS SEVEN LIVE globalgrid2050 VERSION DIRECTORIES STILL BUILD
+     AGAINST THE RETIRED RECEIVER.
+     v9 (4), v9.4 (5), v9.5 (6), v9.5.1 (7), v9.6 (8), v9.6.1 (7), v9.6.2 (7). Plus 10 in
+     pipelinenews/archive, which is genuine history. Every one of those seven directories is a
+     live URL linked from globalgrid2050.com. The retired receiver
+     https://globalgrid2050.com/repd_grid_atlasv8/ is 21,045 bytes with 0 cartridges, 0
+     current.json, no nearest(), no corridor - it computes nothing.
+     v9.6.2 is labelled LIVE VALIDATED on the homepage while v9.7 is labelled CANDIDATE.
+
+5.9  THE GATE MEANT TO CATCH 5.8 STOPPED MEASURING v9.7 ON THE DAY v9.7 WAS FIXED, SILENTLY.
+     testcode drivers/link-targets.mjs filters with `if (!source.includes(bare)) continue;`. After
+     5fa6ebf7 the seven v9.7 plugins contain no receiver URL at all, so the driver skips all
+     seven and exits 0. Zero runtime sites measured in the release the driver was written for.
+     Its classify() also calls seven live apps "history" because only the newest directory is
+     judged: `return m[1] === newestVersion ? 'live' : 'superseded-published';`
+
+5.10 THE RELEASE'S OWN PROOF CERTIFIES THE FAILURE MODE AS CORRECT.
+     tests/check_v9_5_1.mjs:143 -
+       assert.equal(atlasUrlV9_5_1(berwick), "", "no contract read yet, so no link may be built");
+     There is no companion assertion that the contract is ever obtainable within a bounded time on
+     a reader's device, so the proof can never go red on it.
+
+5.11 FOUR EXACT-COMMIT GATES FAIL ON A CALENDAR BOUNDARY, NOT ON ANY COMMIT.
+     major_project_news_v6.py:612 reads datetime.now() and buckets at 14 / 30 / 90 days; the
+     fixture froze a story one day old. The gates were green at 2026-09-04T22:37Z and red at
+     2026-09-05T01:39Z - those two runs bracket the moment it crossed 14 days. Recency goes
+     10 -> 8 and confidence 91 -> 89. It decays again on 2026-09-20 and 2026-11-19 and nobody is
+     watching those dates.
+
+5.12 "Verify published versions are reachable" HAD NINE CONSECUTIVE REDS, AND TWELVE OF ITS
+     CURRENT FAILURES WERE CAUSED BY THIS SESSION. a4faffc1 removed the homepage catalogue block
+     the check asserts; the producer was retired and the consumer check left enabled. The served
+     homepage now carries zero GRIDATLAS_V9_AUTOMATION_START/END markers and zero V8 sentinel -
+     the exact contract CLAUDE.md says compile_root() was rebuilt to bind to.
+
+5.13 cvaa IS RED AND CANNOT GROW AN ANTIBODY FOR ANY OF THE ABOVE BY ACCIDENT.
+     All 33 vaccines are about workflows, generations, pointers and ledgers; none looks at what a
+     published page does at runtime. Running the fleet against globalgrid2050 gives 95 findings
+     and 5 FAILs (no-per-release-workflows, self-terminating-loops, chaining-token,
+     monotonic-utc-generations, disk-is-not-what-ships), none touching the MAP button or load
+     time. The registry's own description of cvaa's defects was itself found to be wrong: it says
+     tools/selftest.mjs "crashes on a Windows path fault"; on 19a20ce it does not crash - it runs
+     to completion and exits 1 with 3 reported problems. The exit-code trap recorded again:
+     `node tools/selftest.mjs | tail -25; echo $?` reports tail's status, not the gate's.
+
+5.14 `cache: "no-store"` ON THE CROSS-ORIGIN CONTRACT FETCH.
+     scripts/core/atlas-receiver-v9-7.js:115 -
+       const response = await fetch(RECEIVERS_URL, { mode: "cors", cache: "no-store" });
+     RECEIVERS_URL (line 46) is
+     https://ventusltd.github.io/ventus-grid-engine/deeplink/receivers.json. Both that file and
+     the engine graph serve Access-Control-Allow-Origin: * and Cache-Control: max-age=600, and
+     no-store discards it, so the round trip recurs on every load. There is no AbortController, no
+     AbortSignal.timeout and no Promise.race anywhere in the module - no timeout at all - and
+     there was no <link rel="preconnect"> for the second origin. Measured cost on this machine:
+     59 ms. Latent risk on a cold mobile radio, not today's fault.
+
+5.15 A CSS RULE WRITTEN FOR THE WRONG FLEX AXIS, MOBILE-ONLY, INTRODUCED BY 5fa6ebf7.
+     styles/v9-6-1.css:17 `.project-actions .map-note { flex: 1 0 100%; }` was written to force a
+     line break in a row-direction flex container, but styles/v9-3.css:169 sets
+     `.project-actions { flex-direction: column; min-width: 68px }` under
+     `@media (max-width: 768px)`. In column direction flex-basis:100% is a HEIGHT, and
+     flex-shrink:0 forbids shrinking. On a receiver failure that is 7,680 of them. No desktop run
+     and no static check enters this branch. NOT confirmed to have fired - named as a code path.
+
+5.16 TEN ORPHANED PROCESSES LEFT RUNNING FOR 7-8 HOURS BY THIS SESSION'S OWN LANES.
+     7 node dev servers holding ports 8144, 8200, 8216, 8233, 8242, 8304, 8309 (~248 MB total),
+     2 python http.server instances (7.7 h and 6.2 h), 1 headless Chromium orphaned at 7.6 h when
+     a browser proof was stopped and the Node parent died without its Playwright child. All ten
+     stopped at 09:59Z. This is a repeatable failure mode: stopping a Node proof does not stop its
+     browser.
+
+5.17 THE CSV COLUMN IS STILL HEADED "Atlas V8 URL" WHILE CARRYING A V9 LINK.
+     Pinned by contracts/projects-plugin.v7.2.json and a test; a governed rename, recorded as an
+     erratum rather than fixed.
+
+5.18 CHECKS THAT FAIL FOR REASONS UNRELATED TO ANY CHANGE.
+     check_v9_0.mjs and check_v9_5_1.mjs fail at their LAST assertions, demanding "V9.0 INTERIM"
+     and "UK RENEWABLES PIPELINE V9.5.1" from V9.7's index.html - strings never in that tree. Both
+     pre-existing. check_v9_7.mjs fails on a clean checkout until its own regional-news build
+     re-runs (stale committed manifest digest); run_v9_7.sh runs that first, so the suite passes.
+
+==============================================================================================
+6. WHERE THE SESSION WAS WRONG - DIAGNOSES FALSIFIED BY MEASUREMENT
+==============================================================================================
+
+These are the highest-value entries in this file. Each is a claim made with confidence and then
+disproved.
+
+6.1  "THE ESTATE MENU IS NOT IN GRIDATLAS AT ALL" (01:48:14Z) - WRONG within 90 seconds.
+     GridAtlas has its own menu bar and it IS in the composed bytes. The DOM query had looked for
+     uppercase titles; the actual titles are File / Scope / About. Served bytes matched main
+     exactly, no drift.
+
+6.2  "THE HANG IS THE WORKTREE SITTING INSIDE OneDrive" (02:27:05Z) - NOT ESTABLISHED, AND THE
+     REAL CAUSE WAS THIS SESSION'S OWN CODE.
+     The 393x852 browser gate would not complete. chromium.launch() appeared to hang with no
+     browser spawned; a headed run with --enable-unsafe-swiftshader produced, verbatim:
+       page.evaluate: Target crashed
+     A control against the LIVE Atlas finished in 6 seconds, and the conclusion drawn was that
+     OneDrive was the cause. Ten minutes later a proper control - the PREVIOUS generation of the
+     SAME tree - completed the gate and printed a full arrival, while the new generation crashed
+     the renderer. The actual cause was a bug introduced at v9.117: adoptLate() runs from a
+     MutationObserver and the attribution re-append wrote to the DOM on every pass, triggering
+     another mutation and another re-append - an infinite feedback loop, plus a fetch started on
+     every mutation.
+     The OneDrive claim was nevertheless written into testcode/engines.json as a known constraint:
+       "Will not run from a working copy inside OneDrive: it stalls or crashes the renderer. Copy
+        atlas/, data/ and tools/ outside OneDrive and junction node_modules. Measured 2026-09-05."
+     UNCERTAIN. The first control changed two variables at once (location AND page bytes), and the
+     clean control isolated the generation, not the location. What would settle it: run the SAME
+     generation from inside OneDrive and from C:\Users\vikra\ga117, holding bytes constant, and
+     compare. Until then, treat "outside OneDrive" as a working practice with an unproven reason.
+
+6.3  "THE MAP BUTTON IS FIXED AND LIVE" (03:59:26Z) - TRUE ONLY ON A DESKTOP.
+     Verified on served bytes: all seven plugins carried 0 mentions of the retired route, the new
+     receiver module served 200, and the gate flipped from 10 FAIL to 4/4. Six hours later Vikram
+     tested on an iPhone and the button did not work. The verification had proved WHERE the button
+     points, never WHETHER it can be reached. Restated by the session at 10:11:34Z: "my 'verified
+     live' claim earlier was verified on a desktop, where it genuinely is clickable."
+
+6.4  THE RACE-CONDITION DIAGNOSIS (10:04:15Z) - FALSIFIED, COMPLETELY, WITHIN SEVEN MINUTES.
+     The claim was that the cross-origin receiver fetch inside
+     `const [model] = await Promise.all([loadCanonicalProjectsV9_5_1(), loadAtlasReceiverV9_7()])`
+     at projects-v9-5-1.js:295 gated the first paint against an empty <tbody>, so on a phone
+     nothing could render until a second origin answered, and the MAP button could not exist.
+     Measured inside the app at 389 px: receivers.json fetch starts at 184 ms, ends at 243 ms -
+     59 ms - finishing 722 ms BEFORE the last project part (965 ms). All 7,680 of 7,680 rows
+     rendered a correct <a href> with the five contract parameters. Zero NO MAP cells. Zero
+     console messages of any kind. engine-graph.json is never fetched at load at all; it sits
+     behind the ENGINE NODES toggle, lazy, 0 bytes on arrival. Both intelligence releases made 0
+     cross-origin requests.
+     The mechanism was real code, correctly read, and it was not what was happening.
+
+6.5  "THE INTELLIGENCE RELEASES ARE SLOW" - FALSIFIED.
+     New release 202609050309 vs old 202609031308: requests 11 vs 11; transfer 60,539 B vs
+     49,895 B; DOMContentLoaded 952 ms vs 941 ms; DOM nodes 3,545 vs 3,518; page height 4,995 px
+     vs 4,885 px. The new release is +10,644 bytes and +11 ms. The slow surface is the app.
+
+6.6  "PIPELINE NEWS IS TRUNCATED" (his words, 02:04:29Z) - THE APP WAS NOT; THE FRONT PAGE WAS.
+     Lane B measured both releases live at desktop and at 393x852: counter 7,680 of 7,680 and
+     356,474.09 MW identical; 100 rows / 13 columns identical; pager 1-100 of 7,680 identical;
+     first three rows Berwick Bank, Ossian, Marram identical; last row of window identical;
+     newspaper 30 stories, 1-30 of 132 identical. Served index.html byte-identical across the
+     lineage (sha256 1e9079e1..., 40 anchors). What was truncated was the homepage: 30 Pipeline
+     News releases had become 1 at a4faffc1 - this session's own change. Repaired at 9a1cd023.
+
+6.7  "ALL OTHER TECHNOLOGIES HAVE BEEN LOST" (his words, 03:05:22Z) - NOTHING WAS LOST.
+     v9.7 had not been touched in 24 hours. Its technology buttons are ALL TECH / SOLAR / BATTERY
+     / ONSHORE / OFFSHORE, the same as v9.6.2, v9.5.1 and every earlier published app, and no
+     version ever had a WIDER FLEET control. The corpus is 3,563 solar + 1,609 BESS + 2,399
+     onshore + 109 offshore = 7,680, four technologies by contract. What WAS real in that report
+     was the deep link: the MAP button pointed at a receiver with no engine, and 28 records with
+     no REPD coordinate got a silently empty href.
+
+6.8  A SUBAGENT'S OWN INSTRUMENT WAS WRONG BEFORE THE ENGINE WAS.
+     Lane B's first nearest() call returned 7,355 km. It had passed (lat, lon); this estate's
+     geodesy is (lon, lat). The number was the instrument, not the engine. This is a recorded,
+     repeating trap.
+
+6.9  THE ORPHANED-PROCESS ANSWER (09:59Z) WAS A CORRECT MEASUREMENT AND THE WRONG ANSWER TO THE
+     QUESTION THAT FOLLOWED. Ten processes really were left running for 7-8 hours and really did
+     hold eight localhost ports. But three minutes after they were cleared, Vikram reported the
+     phone load time as still horrendous, and the cause turned out to be the app building 323,801
+     DOM nodes. The two are unrelated.
+
+6.10 A CHECK THAT MATCHED ITS OWN REGEX LITERAL (03:12:09Z), AND A CHECK THAT MATCHED THE
+     EXPLANATORY COMMENT RATHER THAN THE COMMAND (02:49:51Z). Both self-referential, both caught
+     and tightened by the session itself.
+
+6.11 A 20-MINUTE "HANG" THAT WAS A PIPE. `node proof.mjs | tail` withholds all output until the
+     process ends. Re-run unpiped, the proof was fine. Same family as the exit-code trap in 5.13.
+
+==============================================================================================
+7. WHAT IS STILL OPEN
+==============================================================================================
+
+7.1  WAITING ON WORK (nobody is blocked on Vikram)
+
+  a) COMMIT AND SHIP THE MOBILE MAP FIX. The change is in the globalgrid2050 working tree,
+     uncommitted, written by an agent that was stopped mid-task at 10:39Z. It touches:
+       index.html                              +6   adds <link rel="preconnect" ...>
+       scripts/core/atlas-receiver-v9-7.js  +174/-  receiver known at import; loader becomes
+                                                    verifyAtlasReceiverV9_7()
+       scripts/plugins/projects-v9-5-1.js    +40/-  Promise.all replaced; the payload alone is
+                                                    awaited; contract verified asynchronously and
+                                                    only re-renders if it disagrees
+       styles/v9-3.css                       +36/-  min-width:1280px moved inside
+                                                    @media (min-width: 769px); touch targets
+                                                    raised to 44 x 44 min
+       styles/v9-6-1.css                     +66/-  the .hide-mobile { display: table-cell }
+                                                    override removed
+       tests/browser_smoke_v9_7.mjs, tests/check_v9_5_1.mjs, tests/run_v9_7.sh  updated
+       tests/browser_map_reachability_v9_7.mjs  NEW, untracked
+     UNCERTAIN: there is no record in the transcript that the new reachability proof was ever run
+     to a result, nor that it was made to fail first. It must be falsified against c1b24e6d before
+     it is trusted. Do not commit it on the strength of the diff alone.
+
+  b) COMMIT, COMPOSE AND SHIP THE GRIDATLAS PRINT / SAVE FIX. In the gridatlas-main-202609050200
+     working tree, uncommitted: atlas/modules/202609031958-menu-bar.js (+58/-12) plus a new
+     untracked tools/proofs/export-print-and-image-outcomes.browser.mjs. A module edit that is
+     never composed into a cartridge never reaches the served page - that is this estate's
+     classic failure and it applies here directly. current.json still serves 202609050354.
+
+  c) PAGINATE OR VIRTUALISE THE v9.7 PROJECT TABLE. 2,398 ms of DOM building for 7,680 rows on a
+     desktop CPU. This is its own version, not a patch.
+
+  d) COMMIT testcode/drivers/link-targets.mjs (+69/-1, uncommitted) and write the two gates the
+     second agent specified: an offline-receiver arrival gate served from 127.0.0.1 at 393x852
+     with all cross-origin requests aborted, asserting rows within 10,000 ms; and a rule that a
+     version directory contributing zero runtime link-building sites must FAIL rather than be
+     absent, with `live` read from what the homepage actually links.
+
+  e) THE END-OWNER SCOPE FEATURE, NEVER STARTED. Click anywhere to analyse nearby substations if
+     they exist; a further menu; add substations for optioneering. Decided during the session:
+     session-only, never persisted, never carried in a deep link, so a speculative asset can never
+     be mistaken for a published one. Would be a Scope tool, a click handler against the 278
+     mapped >=400 kV sites, and a visually distinct user-added layer.
+
+  f) ANDROID / MOBILE BROWSER TESTING DOES NOT EXIST ON THIS MACHINE. Measured: WSL Ubuntu 2
+     installed but Stopped; adb NOT on PATH; no Android SDK at the default location; emulator NOT
+     on PATH. The agent authorised to install the SDK and emulator was stopped before it finished.
+     UNCERTAIN: "Android testing failed" is Vikram's phrase; the transcript contains no failure
+     report from that agent, so what exactly failed is not recorded. Ask him, or re-run.
+
+  g) IOS REMAINS UNMEASURABLE HERE, AND THAT IS STRUCTURAL. Every browser measurement in this
+     session is Chromium on Windows. resize_window did not work (the window stayed 1707 px), so
+     mobile geometry was measured in a same-origin 393 px iframe - correct for CSS box maths, but
+     no WebKit, no touch input, no real network, no CPU throttling. Playwright's WebKit build on
+     Windows is not iOS Safari either. His phone screenshots remain the only real iOS evidence.
+
+  h) STILL UNDONE FROM THE NIGHT'S ORIGINAL BRIEF: the poly zone / undergrid, the cards
+     obstructing a deep-link arrival, and Berwick Bank not completing the nearest-grid view in
+     Pipeline News.
+
+  i) THE SIZING DOUBLE-COUNT IS SERVED, NOT MERELY COMMITTED - HTTP 200, line 147, byte-identical
+     across five files.
+
+7.2  WAITING ON VIKRAM PERSONALLY
+
+  a) v9.6.2 CARRIES THE "LIVE VALIDATED" LABEL ON THE HOMEPAGE WHILE ITS MAP BUTTON COMPUTES
+     NOTHING (see 5.8). Either the label moves or those pages keep a dead button. Rewriting a
+     dated publication is his call; the session declined to make it.
+
+  b) THE SIZING FIGURE. His brief says 211.2 where 105.6 is real; the engine graph's own evidence
+     says the binding constraint is min(105.6, 52.8) = 52.8. This must be settled before anyone
+     quotes a number.
+
+  c) THE KERNEL. globalgrid2050.kernel_boot.v1 at
+     https://ventusltd.github.io/registry_of_all_content_in_repos_and_dependencies/ is real but
+     describes an older estate: generated 2026-08-31, 14 repos of the account's 40, naming none of
+     gridatlas, pipelinenews, ventus-grid-engine, cvaa, seed-data, studies, grid-distance-maths or
+     testcode, and still listing a repo retired to a stub. testcode keeps a second registry. One
+     should read the other; which way round is a design call.
+
+  d) LICENCES ON THE REMAINING REPOSITORIES. cvaa, seed-data, studies and claude still have none.
+     Publishing a licence grants those rights irrevocably for every version published under it, so
+     the choice is the rights holder's alone.
+
+==============================================================================================
+8. STATE OF EVERY REPOSITORY AT 2026-09-05T10:46Z
+==============================================================================================
+
+All under C:\Users\vikra\OneDrive\Documents\GitHub unless noted. "sync" is
+`git rev-list --left-right --count @{u}...HEAD`.
+
+globalgrid2050
+  branch main, HEAD c1b24e6d601d765c7df6cade43000a7f74bedd27, sync 0/0
+  DIRTY - 9 modified, 2 untracked. The uncommitted mobile MAP fix (7.1a) plus
+  .github/workflows/catalogue-composition-refresh.yml.disabled and
+  scripts/test_catalogue_gridatlas_v9.py.
+
+gridatlas
+  branch candidate/promotion-lane, HEAD 3061dfcc890184de0158494175268d38ae64e3b3, sync 0/0
+  DIRTY - 4 untracked only: grid-run.err, grid-run.log, harvest-cache.json,
+  tmp-debug-visibility.mjs. THIS CLONE HAS NO WORK FROM TONIGHT ON IT. Its last commit is
+  2026-09-04T22:35Z.
+
+gridatlas-main-202609050200  (a git worktree of gridatlas, gitdir
+  gridatlas/.git/worktrees/gridatlas-main-202609050200)
+  branch main, HEAD 18cffd516db0bec7f8186aafe60962cb154fcc53, sync 0/0
+  DIRTY - atlas/modules/202609031958-menu-bar.js modified; new untracked
+  tools/proofs/export-print-and-image-outcomes.browser.mjs. This is the print/save fix (7.1b).
+
+pipelinenews
+  branch main, HEAD 74328052ff635443731f2d7da08a203afaedbf9e, sync 0/0
+  DIRTY - 8 untracked, all build/release artefacts (releases/202609050242-pipelinenews/,
+  202609010145-* files). No tracked file modified.
+
+ventus-grid-engine
+  branch main, HEAD fe4eba61bb91d9de5d1a2294457a66f94a940912, sync 0/0
+  DIRTY - docs/session-logs/202609042330-carry-on.md modified.
+
+testcode
+  branch main, HEAD 882e86c95ef353dfa7f199f1d11b85b127803408, sync 0/0
+  DIRTY - drivers/link-targets.mjs modified (+69/-1); untracked run outputs
+  link-targets.json, menu-map.json, repd-rows.json, testcode-run.json, p951.js.
+
+spiders
+  branch main, HEAD 5616e8ec817bfc01c4e6c659ff58e919e9d43da4, sync 0/0
+  DIRTY - untracked spider_cvaa/ only.
+
+claude
+  branch main, HEAD 0e95028e4e6ea466c9a158e573f972ce7cfc7111, sync 0/0
+  DIRTY - CLAUDE.md, familiars/localai.py, familiars/reap.py modified; many untracked under
+  familiars/ and logs/, including logs/SESSION-LIVE-LOG.txt and logs/live-log.ps1 created at
+  10:39Z. This file, logs/SESSION-LOG-A.txt, is also untracked.
+
+cvaa
+  branch codex/202609012100-cvaa-mission, HEAD 19a20cef4fefa1b233d7beef9efd7b51fa67548d
+  NO UPSTREAM CONFIGURED for this branch. Last commit 2026-09-01. Not committed to this session.
+  DIRTY - 2 untracked vaccines files.
+
+globalgrid2050-homepage
+  branch main, HEAD 13055b1906e4a72dbcf7405d31fd12219607d622, sync 0/0, clean.
+
+studies
+  branch main, HEAD 6caf90f27d04473378b759513280e51537f85f7a, sync 0/0
+  DIRTY - 4 untracked PDFs.
+
+Other gridatlas worktrees that exist and are not this session's (from `git worktree list`):
+  C:\Users\vikra\codex-grid-202609020010  codex/202609020010-grid-route
+  C:\Users\vikra\g963                     codex/202609012025-v963-recovery
+  C:\Users\vikra\gfi                      codex/202609040059-finding-integration
+  C:\Users\vikra\gmenu                    codex/2026090401-menu-first
+  plus five under .claude-worktrees/ from 2026-08-31.
+  C:\Users\vikra\ga117 was used as a scratch copy outside OneDrive for browser gates.
+
+==============================================================================================
+9. THINGS A FRESH SESSION WILL TRIP OVER
+==============================================================================================
+
+9.1  THE CANONICAL gridatlas CLONE IS ON A CANDIDATE BRANCH. `GitHub\gridatlas` sits on
+     candidate/promotion-lane at a commit from 2026-09-04T22:35Z. All of tonight's GridAtlas work
+     (v9.117 to v9.121) is on `main` in the WORKTREE `GitHub\gridatlas-main-202609050200`. Two
+     tools measured the wrong tree because of this and reported PASS about bytes nobody asked
+     about; both now print the branch in every result line. If you read gridatlas and see no
+     v9.117+, you are on the wrong checkout, not looking at missing work.
+
+9.2  A MODULE EDIT THAT IS NOT COMPOSED NEVER REACHES THE SERVED PAGE. GridAtlas serves an
+     immutable shell plus hashed cartridges listed in atlas/current.json. Editing
+     atlas/modules/*.js changes nothing a reader sees until `node tools/recompose.mjs` cuts a new
+     generation. A new cartridge also needs its `.gitattributes` whitespace exemption, which
+     recompose does not add. Convention here is to restamp both cartridges together - a
+     carried-forward proof asserts the old composition identity.
+
+9.3  BROWSER GATES ARE RUN FROM A COPY OUTSIDE OneDrive (e.g. C:\Users\vikra\ga117) and
+     testcode/engines.json records that as a hard constraint. See 6.2: the reason is not actually
+     established. Follow the practice; do not repeat the claim as fact.
+
+9.4  MOST OF VIKRAM'S MESSAGES ARE NOT `type:"user"` IN THE TRANSCRIPT. See section 0. Anyone
+     re-reading this session's jsonl must also parse `type:"queue-operation"` with
+     `operation:"enqueue"`.
+
+9.5  A BACKGROUNDED CHROME TAB STALLS MapLibre AND DROPS CLICKS. This happened at least three
+     times tonight. The workaround used was to read the user's own already-open Atlas tab
+     read-only, or to go to the served bytes instead.
+
+9.6  PIPING A LONG-RUNNING NODE PROOF THROUGH `tail` OR `head` LOOKS LIKE A HANG AND HIDES THE
+     EXIT CODE. `node x.mjs | tail -25; echo $?` reports tail's status. Run unpiped.
+
+9.7  STOPPING A NODE BROWSER PROOF ORPHANS ITS PLAYWRIGHT CHROMIUM, AND DEV SERVERS ARE NEVER
+     REAPED. Ten such processes accumulated over eight hours. Check with
+     `Get-CimInstance Win32_Process -Filter "Name='node.exe'"` before blaming the app.
+
+9.8  THE ESTATE'S GEODESY IS (lon, lat), NOT (lat, lon). Getting it backwards produced 7,355 km
+     for a 9.44 km answer.
+
+9.9  HIS CLOCK IS BST. Anything he types as a time is one hour ahead of the stamps in this estate.
+
+9.10 THERE ARE TWO SESSION LOG LOCATIONS AND ONLY ONE IS FINDABLE. Writing a handover into
+     .claude/projects/.../memory/ is how the previous session's log was lost. CLAUDE.md's
+     documented read path is claude/sessions/<latest>/00-LOG.md, and CARRY-ON.md names it.
+
+9.11 A BACKGROUND POWERSHELL LOGGER IS RUNNING. claude/logs/live-log.ps1, started 10:39:40Z,
+     appending ticks to claude/logs/SESSION-LIVE-LOG.txt (206 lines when this was written). It
+     records repo heads, dirty files and live HTTP codes. It is untracked. If it is still running
+     it will keep appending; if the session is replaced, restart it or stop it deliberately.
+
+9.12 status.json / status.html ON THE LIVE SITE LAG THE REPOSITORY. At 10:45Z the repository's
+     status.json has 25 entries and the live one has 19. GitHub Pages deploys behind the push.
+     Read the repository copy when it matters.
+
+==============================================================================================
+10. FILES WORTH OPENING FIRST IN A NEW SESSION
+==============================================================================================
+
+  C:\Users\vikra\OneDrive\Documents\GitHub\claude\CARRY-ON.md
+  C:\Users\vikra\OneDrive\Documents\GitHub\claude\sessions\202609050257-session-184379c4\00-LOG.md
+  C:\Users\vikra\OneDrive\Documents\GitHub\claude\sessions\202609050125-carry-on-handover\02-LANE-BOARD.md
+  C:\Users\vikra\OneDrive\Documents\GitHub\claude\sessions\202609050125-carry-on-handover\05-LANE-C-agenda-and-flaws.md
+  C:\Users\vikra\OneDrive\Documents\GitHub\claude\logs\SESSION-LIVE-LOG.txt
+  C:\Users\vikra\OneDrive\Documents\GitHub\globalgrid2050\status.json
+  C:\Users\vikra\OneDrive\Documents\GitHub\testcode\engines.json
+  C:\Users\vikra\OneDrive\Documents\GitHub\testcode\testcode-run.json
+
+END OF LOG A
