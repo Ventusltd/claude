@@ -30,6 +30,7 @@ every generation must touch and git cannot merge meaningfully. One lane each.
 | 02:58 | A | gridatlas | (built, unpushed) | v9.117 gen 202609050158: attribution out of the map into About, last, small print; About gains an Estate group (engine graph, federation map, spider printer) | proof 17/17 made to fail first; suite 779/780 |
 | 02:05 | B | pipelinenews | `4fc83af` | release `202609050200-pipelinenews`, cartridge `the-control-names-the-table`: the WIDER FLEET *other technologies* control stops naming a cut the table has stopped showing | see B1 below |
 | 02:06 | B | globalgrid2050 | `e4f32ae4` | published that release to `pipelinenews_intelligence/202609050200/` — **a new directory only; `index.html` not touched** | live 200; served bytes SHA-256 identical to the release; 6 of 6 → 0 of 6 |
+| 03:05 | A | ventus-grid-engine | `30efa2b` | receiver takes `?focus=<module>` so a dashboard menu can link INTO one piece of maths; proof run against the pre-change bytes first and failed 5/8 there | live 200, confirmed in Chrome landing on `engine/v9-nearest-search.js` |
 
 ## Open at the time of writing
 
