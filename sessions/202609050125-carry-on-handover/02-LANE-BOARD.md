@@ -35,6 +35,7 @@ every generation must touch and git cannot merge meaningfully. One lane each.
 | 02:20 | B | globalgrid2050 | `1b51cf26` | published that release to `pipelinenews_intelligence/202609050216/` — **new directory only; `index.html` not touched** | live 200; served bytes SHA-256 identical to the release; both defects gone on the live URL |
 | 02:35 | B | pipelinenews | `6b7890d` | release `202609050233-pipelinenews`, cartridge `every-status-the-register-has`: 2,416 of the 7,680 records were in ten official REPD statuses no control could select | see B3 below |
 | 02:35 | B | globalgrid2050 | `347d93fa` | published that release to `pipelinenews_intelligence/202609050233/` — **new directory only; `index.html` not touched** | live 200; served bytes SHA-256 identical; 7,680 of 7,680 now reachable, 0 unreachable |
+| 02:49 | B | claude | (this commit) | **TRUNCATION REPORT INVESTIGATED — not reproduced in the app.** `202609031308` and `202609050233` render identically live at 393x852 and at desktop: 100 rows, 13 columns, `7,680 of 7,680 records`, `1-100 of 7,680`, same first and last row, 30 stories, `1-30 of 132`. Served `index.html` is byte-identical across the whole lineage. `app.mjs` grew 83,114 -> 98,813 B; no payload shrank. **The measured truncation tonight is the front page: 111,836 B / 30 Pipeline releases -> 9,359 B / 1** (`a4faffc1`, Lane A, 01:39). Full evidence in `04-LANE-B-truncation-investigation.md`. **Nothing further published; Lane B is holding.** | live, both URLs |
 
 ## Open at the time of writing
 
