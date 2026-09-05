@@ -31,6 +31,8 @@ every generation must touch and git cannot merge meaningfully. One lane each.
 | 02:05 | B | pipelinenews | `4fc83af` | release `202609050200-pipelinenews`, cartridge `the-control-names-the-table`: the WIDER FLEET *other technologies* control stops naming a cut the table has stopped showing | see B1 below |
 | 02:06 | B | globalgrid2050 | `e4f32ae4` | published that release to `pipelinenews_intelligence/202609050200/` — **a new directory only; `index.html` not touched** | live 200; served bytes SHA-256 identical to the release; 6 of 6 → 0 of 6 |
 | 03:05 | A | ventus-grid-engine | `30efa2b` | receiver takes `?focus=<module>` so a dashboard menu can link INTO one piece of maths; proof run against the pre-change bytes first and failed 5/8 there | live 200, confirmed in Chrome landing on `engine/v9-nearest-search.js` |
+| 02:19 | B | pipelinenews | `e9aef6f` | release `202609050216-pipelinenews`, cartridge `the-pager-belongs-to-the-cut-on-screen`: the shared table pager stops repainting the product's rows under a wider-fleet cut, and stops naming a window size it does not move | see B2 below |
+| 02:20 | B | globalgrid2050 | `1b51cf26` | published that release to `pipelinenews_intelligence/202609050216/` — **new directory only; `index.html` not touched** | live 200; served bytes SHA-256 identical to the release; both defects gone on the live URL |
 
 ## Open at the time of writing
 
@@ -165,3 +167,67 @@ updated_desc} → 100 Onshore Wind badges, `2,399 of 7,680`, every time.
   international item is painted `bess`.
 - **Six other technology-bucket implementations disagree across the estate.**
   Full survey in `03-LANE-B-technology-bucket-drift.md`.
+
+### B2 · 202609050219 · the pager belongs to the cut on screen, and stops naming a window it does not move
+
+| | |
+|---|---|
+| stamp | `202609050219` (pipelinenews) / `202609050220` (globalgrid2050), `date -u` in the commit command, checked against `git log --format=%ct` |
+| commits | `Ventusltd/pipelinenews@e9aef6f` · `Ventusltd/globalgrid2050@1b51cf26` |
+| release | `202609050216-pipelinenews`, from `202609050200-pipelinenews` |
+| live URL | https://globalgrid2050.com/pipelinenews_intelligence/202609050216/ |
+| HTTP | 200; `index.html`, `app.mjs`, `wider-fleet.mjs` all SHA-256 identical served vs release |
+
+**Two defects on one shared control.** The table pager is a single panel used by
+the product *and* by any wider-fleet cut on screen, and the spine's handler moves
+`windowStart` and calls `renderTable()` **directly**, not through `apply()` — so
+the release seam shipped in B1 could not see it. The cartridge's capture-phase
+listener did not stop the press either, so both handlers ran on every click.
+
+Measured live on `202609050200`, WIDER FLEET = LANDFILL GAS showing `1–50 of 275`:
+
+| | |
+|---|---|
+| one press of NEXT | `101–200 of 7,680` |
+| what was on screen | 16 solar · 71 battery · 6 onshore · 7 offshore · **0 landfill gas** |
+| what the control said | LANDFILL GAS |
+
+And the same two buttons said **PREVIOUS 50 / NEXT 50** while moving the spine's
+window of **100** (`1–100` → `101–200`). They also serve the wider cut, whose
+page is 50, so no number on those buttons can be true of both cuts.
+
+**The fix.** `event.stopPropagation()` in the cartridge's pager listener once it
+has decided the press is its own — which is what its own comment, *"the spine
+owns its own paging"*, already claimed. `windowStart` is left untouched while a
+cut holds the table and `apply()` zeroes it on return, so nothing is left
+half-paged. The number comes off the buttons; the range readout between them is
+derived and already states the exact window for whichever cut is showing.
+`WIDER_FLEET_CONTRACT.owns_the_pager_while_showing` is invarianted at mount.
+
+**Measurement, on the live URL:**
+
+| | `202609050200` parent | `202609050216` child, live |
+|---|---|---|
+| button labels | PREVIOUS 50 / NEXT 50, moves 100 | PREVIOUS / NEXT, moves 100 |
+| pager under a wider cut | `1–50 of 275` → `101–200 of 7,680`, 0 landfill gas | `1–50` → `51–100` → … → `251–275 of 275`, NEXT disabled at the end, 25 rows on the last page, **0 spine rows leaked** |
+| product paging afterwards | — | `1–100 of 7,680` → `101–200 of 7,680` |
+
+Regressions re-run on the child: the six B1 triggers plus a spine technology tab
+are **0 of 7**; the wider-fleet deep link still arrives
+(`?technology=Landfill+Gas` → `275 of 1,101 records`, 787.87 MW, mount reports
+`deep link · Landfill Gas`).
+
+**Also measured, no defect found:**
+
+- **All ten sort modes are correct.** Each was checked for monotonicity across
+  the rendered window: `county_asc/desc`, `town_asc/desc`, `postcode_asc/desc`,
+  `capacity_desc/asc`, `updated_desc/asc` — no break in any of them.
+- **The phone path holds at 393×852.** Measured in a same-origin 393-wide
+  iframe, so the media queries actually fire (a resized Chrome window did not
+  change `innerWidth` here). No horizontal document overflow: `scrollWidth` 380
+  against a 390 viewport; the table scrolls inside its own `overflow-x:auto`
+  wrapper (1,680 wide in a 347 box), which is the intended behaviour. Both nav
+  variants are `display:none` at that width, but the `RELEASES` opener is 82×44
+  at the top right and opens a 360×679 menu of 20 links, every one 44px tall.
+  **v9.7's discontinued-v9.6 mobile failure has not recurred here.** One gap:
+  the opener never sets `aria-expanded` — noted, not fixed.
