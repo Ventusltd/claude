@@ -5,6 +5,82 @@ limit, a crash, or a night's work finishing — the handover for it is written u
 `sessions/` and named here. To pick up where the last session stopped, open the file this
 one points at.
 
+## 2026-09-05 afternoon - where this stopped
+
+**TELEPRINTER EXISTS AND IS NOT PUSHED.** `GitHub/teleprinter`, committed at
+`2575d89`, remote already set to `github.com/Ventusltd/teleprinter`.
+**The GitHub repo has not been created** - no `gh` CLI and no API token on this
+machine, only the Windows credential manager. Create the repo, then
+`git push -u origin main`. Nothing else is needed.
+
+It is a standalone, dependency-free print engine: emit the record exactly as it
+was. No paper, no reflow, no clever processing. Two paths, and every record says
+which produced it - `display` (getDisplayMedia, the compositor's own output, the
+only honest screen grab) and `compose` (canvas + SVG foreignObject, a
+reconstruction, which is what iOS Safari gets because it has no
+getDisplayMedia). One PDF unit per captured pixel. **81/81** outcome checks
+across chromium 151, firefox 153 and webkit 26.5 at 393x852, 852x393 and
+1400x900.
+
+### LIVE right now
+
+```
+ventusltd.github.io/gridatlas/atlas/    generation 202609051340, v9.127
+globalgrid2050.com/                     sha256 4847b38b == committed
+globalgrid2050.com/uk_renewables_pipeline/202609051156/
+```
+
+### OPEN, in the order I would take them
+
+1. **The Atlas menu bar does not install in real Chrome.** `installed:false`,
+   `waiting_for:["63 unique layer controls"]`, `layer_controls:0`. Reproduced on
+   BOTH the live generation and pinned `202609051211`, at 2327x1156, with **no
+   console errors** - it fails closed, silently. Every Playwright run at
+   1400x900 and 393x852 finds it fine, which is exactly why no gate caught it.
+   **No menu means no Print and no PDF**, so this blocks the export work
+   entirely. Start here.
+2. **The in-Atlas print still assumes paper.** The final spec is "FULL SCREEN
+   DIGITAL PRINT NOTHING ELSE - WE ARE NOT USING PAPER". The uncommitted
+   working-tree edits in `gridatlas-main-202609050200` move the PDF writer to
+   1:1 with the capture, removing a 1190pt long-edge downscale that was turning
+   1390x518 into 1190x443. **The right answer is to replace the in-Atlas export
+   with the teleprinter engine**, not to keep patching it.
+3. **`forCable()` takes one scalar kilometre.** The x1.245 highway-corridor
+   factor has no coordinates, so a land/sea test is structurally impossible, and
+   all 15 of its proof checks operate on that same scalar - none could ever go
+   red for the Irish Sea. Measured: South Antrim to Western HVDC, 142.21 km,
+   printed as ~177.05 km "highway corridor". A signature change, and the
+   architect's call.
+4. **Zero features at >=400 kV on the island of Ireland**, so every NI project
+   answers across the sea, to *Western HVDC Converter Station* - a converter
+   hall admitted because `voltagesKv` reads its DC pole tag `600000;400000` as a
+   400 kV class. No jurisdiction test, no distance cap, no sea test.
+5. **Pagination is designed but not built.** Codex's mechanism is ~14 lines and
+   slices only the VIEW, never `all` or `filtered`, which is why search, CSV and
+   counts stay whole. Full diff plan and a 10-check proof in
+   `scratchpad/review-pagination/`. Mine renders 7,680 rows / 323,802 elements
+   against Codex's 50 / 3,314 - and mine is 55% TALLER than the v9.7 it fixed.
+6. **Five gates fixed in `testcode`, committed at `18f9d12`, NOT pushed.** It is
+   behind 9 of Codex's commits and touches no `sandbox/**` path, so it rebases
+   clean.
+7. **Two Pages workflows race on every push to globalgrid2050.** Last 100 runs:
+   10 success / 1 cancelled, and 7 success / 2 cancelled. On the last commit the
+   Jekyll one succeeded while the configured one was still pending - the
+   homepage is being published by a workflow neither lane configured.
+
+### What I got wrong today, so it is not repeated
+
+- Edited published v9.7 IN PLACE and pushed it live. Restored; the improvements
+  went to a new stamp. See [[never-edit-a-published-version]].
+- Shipped `body > *{display:none}` in print CSS. Anyone using the browser's own
+  print rather than the app button got a **completely white sheet**, because the
+  raster it depended on had never been created.
+- Reported a 2 px / 2.5 km print discrepancy measured by a harness that had not
+  actually triggered the print path.
+- Claimed the ring-search bug was live. It is not - plain loops, 0 disagreements
+  in 1,000 origins. The real defect is a haversine argmin flip: Meads Primary
+  returned where Bexhill Town Primary is 33.7 m closer.
+
 ## Read these first, in this order
 
 **Start with the Astra review.** It is the newest document, it is the only one that
