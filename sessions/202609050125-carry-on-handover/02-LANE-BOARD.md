@@ -26,6 +26,8 @@ every generation must touch and git cannot merge meaningfully. One lane each.
 | 01:31 | A | claude | `6e85062` | renamed it `00-LOG.md`, the entry point CLAUDE.md already documents | github 200 |
 | 01:39 | A | globalgrid2050 | `a4faffc1` | front page shows only what is being built now; old page archived byte-identical at `/historical_builds.html`; search wired for the first time; `catalogue-gridatlas-v9.yml` retired with its reasoning | live 5,934 bytes, was 111,836 |
 | 01:45 | A | globalgrid2050 | `6ecc0dc0` | carried the 15 published-version labels the exact-commit gates require, read from the archive rather than retyped; corrected v9.7/v9.6.2 to the estate's own CANDIDATE / LIVE VALIDATED labels | gates re-running |
+| 02:00 | A | globalgrid2050 | `1a6445cc` | spiders link off the front page on his word; engine-graph row says what it is | live |
+| 02:58 | A | gridatlas | (built, unpushed) | v9.117 gen 202609050158: attribution out of the map into About, last, small print; About gains an Estate group (engine graph, federation map, spider printer) | proof 17/17 made to fail first; suite 779/780 |
 
 ## Open at the time of writing
 
@@ -34,6 +36,13 @@ every generation must touch and git cannot merge meaningfully. One lane each.
   from the run log, not guessed.
 - `Verify published versions are reachable` was already failing before tonight.
   Pre-existing; not touched yet.
+- **V9.5.1 / V9.6.1 / V9.6.2 / V9.7 exact-commit gates are red for a reason that is
+  not any commit.** Read from the V9.7 run log: the gate recomputes news scoring and
+  the fixture has aged - `recency: 10` is now `8`, `confidence: 91` is now `89`,
+  `runner_up_score: 91` is now `89`. A gate whose expectation moves with the clock
+  fails on every push until the clock is frozen for the fixture. V9.3, V9.4 and V9.5
+  went green again once the published-version labels were carried, so those four are
+  a separate, time-driven fault. **Lane B territory; named, not papered over.**
 - Two Pages deploy workflows run on every push to `globalgrid2050`
   (`Deploy GlobalGrid2050 Pages` and `Deploy Jekyll…`). Noted, not changed.
 
