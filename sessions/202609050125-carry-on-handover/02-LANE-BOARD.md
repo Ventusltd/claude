@@ -39,6 +39,8 @@ every generation must touch and git cannot merge meaningfully. One lane each.
 | 03:15 | C | claude | (this commit) | **THE AGENDA AND THE FLAWS — `05-LANE-C-agenda-and-flaws.md`.** 39 repos enumerated from the API (26 active in 7 days), 1,120 commits on default branches, 187 on 53 branches that never merged, 323 of Vikram's own messages read in full across 20 transcripts / 133 MB. Ten located flaws. Three worth acting on first: **F1** the four exact-commit gates crossed a calendar boundary between `5260db10` (green, 04 Sep 22:37Z) and `a4faffc1` (red, 05 Sep 01:39Z) — `major_project_news_v6.py:612` reads `datetime.now()` inside a byte-identity gate, and it decays again on **2026-09-20** and **2026-11-19**; **F2** `Verify published versions are reachable` pins 14 generation stamps and a `v9.99→v9.106` chain in `test_verify_published_versions.py` while live is v9.119, and asserts a homepage block `a4faffc1` deliberately removed — the producer was retired, the consumer check was not; **F3** the sizing double-count is served HTTP 200 at `/solar-bess-topology-v6,-v7/…/gis-sld-v5-calculations.js:147`, byte-identical in five files, beside a correction none of them import. Agenda gap that matters most: **8 of 10 core repos carry no licence file** against *"I am designing this to be open source and public"* (03 Sep 10:20Z). Lane C changed nothing but this row and its report. | all evidence names a commit, a run id or a live URL; `sweep2.py` / `ci.py` / `stamps.py` reproduce it |
 | 03:10 | B | pipelinenews | `6e30dc0` | release `202609050309-pipelinenews`, cartridge `the-estate-is-in-the-menu`: the GB price + grid constraint study, engine graph, federation map and spider printer in both navs, plus all 44 engine nodes read from the genome | see B4 below |
 | 03:11 | B | globalgrid2050 | `362b679a` | published to `pipelinenews_intelligence/202609050309/` — **new directory only; root `index.html` not touched** | live 200; served bytes SHA-256 identical; 44 nodes load cross-origin on the real globalgrid2050.com origin |
+| 03:53 | B | globalgrid2050 | `5fa6ebf7` | **the V9.7 MAP button lands where the engine is.** All 7 plugin generations moved off the retired V8 overlay onto the receiver the engine publishes; 28 records that had a silently dead button now have a working one | see B5 below |
+| 03:53 | B | pipelinenews | `7432805` | retired the `legacy` branch from both deep-link source parts — their default was the dead receiver | testcode driver 10 FAIL → 4/4 pass, exit 0 |
 
 ## Open at the time of writing
 
@@ -385,3 +387,61 @@ byte-identical across the lineage — 24,916 B up to `202609050233`, 26,831 B
 here. That byte identity was the evidence used in the truncation investigation,
 so: it holds for every release up to and including `202609050233`, and this
 release adds menu rows on purpose.
+
+### B5 · 202609050353 · the MAP button lands where the engine is
+
+| | |
+|---|---|
+| commits | `Ventusltd/globalgrid2050@5fa6ebf7` · `Ventusltd/pipelinenews@7432805` |
+| live URL | https://globalgrid2050.com/uk_renewables_pipeline/v9.7/ |
+| HTTP | 200; all 7 served plugins carry **0** mentions of the retired route; the new `scripts/core/atlas-receiver-v9-7.js` serves 200, 7,677 B |
+
+Vikram, on Longfield in Firefox: *"grid engine didnt compute or fire via map
+button"*. **It was never going to.** Every MAP link in V9.7 was built against
+the V8 overlay, which still serves — so nothing 404'd and no link checker went
+red — and which carries no engine.
+
+**Both receivers, same project, same parameters, driven live:**
+
+| | retired | canonical |
+|---|---|---|
+| shell | 0 cartridges, 0 `current.json` | 20 cartridges, 3 `current.json` |
+| in the page | **zero** `__GRIDATLAS_*` globals, no module list, no `nearest()`, never names Longfield | 14 engine modules incl. `networkTopology`, `electricalDistance`, `ratingEnvelope`, `corridorEstimate` |
+| arrival | — | *"Longfield solar 500 MW … CM3 3AS · Essex REPD 8162 · awaiting construction"* |
+| the engine computes | — | **BRAINTREE · 9.44 km · 400/132 kV · NGET · 4 transformers · 4 circuits** |
+
+**Seven files, not one.** V9.7 carries seven plugin generations side by side and
+every one built its own link. All seven now go through one module that holds
+**no URL**: it reads `ventus-grid-engine/deeplink/receivers.json`. CORS verified
+with a real `Origin` header first. **No fallback, ever** — if the contract
+cannot be read there is no link and the cell says why.
+
+**The 28 silent buttons.** `geometry_status !== "valid"` gave 28 of 7,680 an
+empty link and a hover-only reason a phone cannot reach. The contract requires
+only `repd_ref`; measured on REPD 13429 (Ossian, no REPD coordinate) the arrival
+names the project. They now get a working MAP button and a sentence **in the
+cell**.
+
+**Gate:** `Ventusltd/testcode drivers/link-targets.mjs` — **10 live sites
+failing, exit 1 → 4/4 passed, exit 0**, with the 54 sites in superseded
+published versions and the archive correctly left alone. The V9.7 static gate
+passes and `node --check` passes on every source.
+
+**A correction against myself:** my first `nearest()` call returned **7,355 km**
+because I passed `(lat, lon)`. This estate's geodesy is **`(lon, lat)`**. The
+7,355 km was my instrument, not the engine.
+
+**Named, not fixed:** `check_v9_0.mjs` and `check_v9_5_1.mjs` still fail at their
+last assertions, which demand `"V9.0 INTERIM"` and `"UK RENEWABLES PIPELINE
+V9.5.1"` from V9.7's `index.html` — strings that have never been in this tree,
+and `index.html` is not in the diff. `check_v9_7.mjs` fails on a clean checkout
+until its own regional-news build is re-run (stale committed manifest digest);
+`run_v9_7.sh` runs that build first, so the suite passes. And the CSV column is
+still headed **"Atlas V8 URL"** while carrying a V9 link — that label is pinned
+by `contracts/projects-plugin.v7.2.json` and by a test, so renaming it is a
+governed decision, recorded as an erratum rather than taken here.
+
+**v9.6.2 and every earlier published version still build MAP against the retired
+receiver** — 54 sites. They are immutable history and were left alone. If v9.6.2
+is to keep its LIVE VALIDATED label with a working MAP button, that is Vikram's
+call, not Lane B's.
