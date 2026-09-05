@@ -7,7 +7,7 @@ one points at.
 
 ## Latest handover
 
-**[sessions/202609050125-carry-on-handover/00-HANDOVER.md](sessions/202609050125-carry-on-handover/00-HANDOVER.md)**
+**[sessions/202609050125-carry-on-handover/00-LOG.md](sessions/202609050125-carry-on-handover/00-LOG.md)**
 
 Covers session `82e00a22`, 2026-09-04 12:21 UTC → 2026-09-05 (cut off at 23:25:05 UTC on the
 usage limit). GridAtlas v9.108 → v9.116, the ventus-grid-engine repo, the shared estate menu,
