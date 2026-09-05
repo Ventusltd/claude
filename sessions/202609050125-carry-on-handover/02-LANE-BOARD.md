@@ -33,6 +33,8 @@ every generation must touch and git cannot merge meaningfully. One lane each.
 | 03:05 | A | ventus-grid-engine | `30efa2b` | receiver takes `?focus=<module>` so a dashboard menu can link INTO one piece of maths; proof run against the pre-change bytes first and failed 5/8 there | live 200, confirmed in Chrome landing on `engine/v9-nearest-search.js` |
 | 02:19 | B | pipelinenews | `e9aef6f` | release `202609050216-pipelinenews`, cartridge `the-pager-belongs-to-the-cut-on-screen`: the shared table pager stops repainting the product's rows under a wider-fleet cut, and stops naming a window size it does not move | see B2 below |
 | 02:20 | B | globalgrid2050 | `1b51cf26` | published that release to `pipelinenews_intelligence/202609050216/` — **new directory only; `index.html` not touched** | live 200; served bytes SHA-256 identical to the release; both defects gone on the live URL |
+| 02:35 | B | pipelinenews | `6b7890d` | release `202609050233-pipelinenews`, cartridge `every-status-the-register-has`: 2,416 of the 7,680 records were in ten official REPD statuses no control could select | see B3 below |
+| 02:35 | B | globalgrid2050 | `347d93fa` | published that release to `pipelinenews_intelligence/202609050233/` — **new directory only; `index.html` not touched** | live 200; served bytes SHA-256 identical; 7,680 of 7,680 now reachable, 0 unreachable |
 
 ## Open at the time of writing
 
@@ -231,3 +233,92 @@ are **0 of 7**; the wider-fleet deep link still arrives
   at the top right and opens a 360×679 menu of 20 links, every one 44px tall.
   **v9.7's discontinued-v9.6 mobile failure has not recurred here.** One gap:
   the opener never sets `aria-expanded` — noted, not fixed.
+
+### B3 · 202609050235 · every status the register has, not the four the row draws
+
+| | |
+|---|---|
+| stamp | `202609050235` in both repos, `date -u` in the commit command, checked against `git log --format=%ct` |
+| commits | `Ventusltd/pipelinenews@6b7890d` · `Ventusltd/globalgrid2050@347d93fa` |
+| release | `202609050233-pipelinenews`, from `202609050216-pipelinenews` |
+| live URL | https://globalgrid2050.com/pipelinenews_intelligence/202609050233/ |
+| HTTP | 200; `index.html` and `app.mjs` SHA-256 identical served vs release |
+
+**The defect.** The status row draws four of the register's **fourteen** official
+REPD statuses. Measured by clicking every status control on the live parent and
+reading its own filtered count:
+
+| | records |
+|---|---|
+| reachable by a status control | **5,264** |
+| reachable by no control at all | **2,416** — 31.5% of the register |
+
+Application Refused 667 · Revised 531 · Application Withdrawn 420 · Appeal
+Refused 295 · Planning Permission Expired 227 · Abandoned 221 · Appeal Withdrawn
+39 · Decommissioned 9 · Appeal Lodged 5 · No Application Required 2.
+
+Every one of those rows was loaded, searchable, sortable and in the CSV. None
+could be *selected*. `?status=Abandoned` was silently coerced to `All` by a
+five-member whitelist — **221 records answered with 7,680, and no word about
+why.** Nothing on the surface said the four tabs stop 2,416 records short of the
+register, which is precisely what the product's own STATUS DISCIPLINE panel
+promises it will not do.
+
+**The fix.** One labelled select in the status row, on the pattern the
+technology row already settled on after the same objection from Vikram. Names
+and counts read from the payload at boot and never listed in source, so a status
+DESNZ adds tomorrow gets an option with its own count and no edit. It reuses the
+wider-fleet control's existing classes — no CSS change, same 44px phone floor.
+It is **not** a separate cut: it sets the spine's own `status` and calls the
+spine's own `apply()`. `releaseWiderStatus()` is the single place the select and
+the four tabs are reconciled, and the tabs, CLEAR FILTERS and
+`hydrateFiltersFromUrl` all call it — the same discipline as B1, one row up.
+
+**Measurement, on the live URLs:**
+
+| | `202609050216` parent | `202609050233` child |
+|---|---|---|
+| MORE STATUS control | absent | 10 options + placeholder |
+| reachable by a control | 5,264 of 7,680 | **7,680 of 7,680** |
+| unreachable | 2,416 | **0** |
+| `?status=Abandoned` | 7,680 records | **221 records**, table holds `Abandoned` and nothing else |
+| each option's own cut | — | 667 / 531 / 420 / 295 / 227 / 221 / 39 / 9 / 5 / 2, **every one pure** |
+
+**One tightening came with it:** the status test moves from
+`item.status.includes(status)` to equality. Substring and equality agree exactly
+on the four tab values across all 7,680 records — 2,232 / 282 / 1,910 / 840,
+leak zero — so **no answer changes today**. It is tightened because the control
+now reaches ten more values, and `Appeal Refused` inside `Application Refused`
+is the pair a substring test finds the day one more status is added.
+
+**Regressions, all on the child:** the wider-fleet six-trigger check is 0 of 6
+with the new MORE STATUS select added as a trigger; the pager still holds the
+wider cut (`1–50` → `51–100 of 275`, 50 Landfill Gas badges) and the product
+returns to `1–100 of 7,680`; CLEAR FILTERS resets the select and ALL STATUS;
+both wider controls mount. At 393×852 the new select is 44px and the document
+does not overflow (`scrollWidth` 379 against a 389 viewport).
+
+---
+
+## Lane B — two corrections against myself
+
+Both are the same root cause, and it is worth carrying.
+
+**1. A CDP timeout is not a stopped script.** A `Runtime.evaluate` that times out
+at the transport keeps running in the page. Two probes then drove the same
+controls at once and I read the result as a finding: *"selecting ONSHORE and
+then changing the sort switches the technology filter to BESS."* It does not.
+Re-run in isolation behind a `__running` refusal flag, `wind_onshore` × six sort
+modes returns 100 Onshore Wind badges and `2,399 of 7,680` every time.
+
+**2. A background tab throttles `setTimeout` to about once a minute, so any
+probe built out of `await sleep(...)` reads the DOM at times it did not choose.**
+That produced a second false finding — the ALL news chip appearing to drop from
+132 headlines to 100 and back. Re-measured with **no timers at all** (both
+`apply()` and `drawNews()` are synchronous, so click and read in the same task),
+the sequence is 132 → 77 → 55 → 1 → 132 → 132, stable and repeatable.
+
+**The rule that follows:** when the code under test is synchronous, *never* put a
+timer in the instrument. Where a timer is unavoidable, guard re-entry and make
+the probe refuse rather than overlap. Both B1 and B2 were re-confirmed against
+this standard before shipping.
