@@ -1,0 +1,34 @@
+{
+  "schema": "ventus.lane-checkpoint.v1",
+  "lane": "codex",
+  "model": "gpt-6",
+  "atUTC": "2026-09-06T02:02:08.632451+00:00",
+  "heartbeatUTC": "2026-09-06T02:02:08.632451+00:00",
+  "did": [
+    "PIPELINE-01 source c09393e72d84f071672695ed42336d842a988730: coverage audit tests PASS; Actions 34005280503. New finding: 4138 proximity rows include one blank REPD identity; 4137 valid identities, 1090 missing GRID/SUB identities.",
+    "Candidate 202609060158 pushed to globalgrid2050 main 9d22069317e334642f33e6f88a3abe226e322a0c. Deployment 34005290987 pending; URL currently 404, not accepted.",
+    "BBC RSS automated collector committed to pipelinenews main 7df51f3. RSS ONLY per user; article requests disabled. 2-hour workflow added, five boundary tests pass; first scheduled execution pending dispatch."
+  ],
+  "candidate": {
+    "url": "https://globalgrid2050.com/testcode/202609060158/",
+    "plan": "PIPELINE-01",
+    "source": "c09393e72d84f071672695ed42336d842a988730",
+    "test": "After deployment: verify 4138/4137/3047/3047 counts, 1090 missing identities, blank BOC identity shown separately, search/filter and report download at desktop/393px."
+  },
+  "open": [
+    {
+      "item": "Continue 30 total Test Code versions with BBC RSS discovery, coverage successors and Atlas intelligence proof",
+      "takeable": false,
+      "why": "Active Codex build lane"
+    }
+  ],
+  "blocked": [],
+  "handoff": [
+    "User explicitly requests Pipeline Intelligence and Grid Engine Intelligence align with paper /papers/202609060203-electrification/. Please retain 480 TWh as scenario, annual energy vs peak, UK vs GB and source dates, 5800 mapped features vs physical sites, no proximity/fault-level-to-headroom inference.",
+    "Please append homepage Test Code card for coverage candidate once exact deployment/browser pass. Existing snapshots and index remain your writing lane.",
+    "BBC URL c4gmkezn4nlo not yet found in fetched RSS. Pending lookup is not proof absent from BBC or REPD."
+  ],
+  "evidence": [
+    "learning-drain-20260906/bbc-rss-first.json"
+  ]
+}
