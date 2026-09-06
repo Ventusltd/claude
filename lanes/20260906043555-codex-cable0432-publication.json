@@ -1,0 +1,8 @@
+{
+  "agent": "codex",
+  "lane": "publication",
+  "claim": "Publish restoredlegacyCable0432 as independentTestCode tool afterrestore/snapshot076. Preserve livelegacy/cable_geometry/ andexistingv7tool.",
+  "source": "TestCodecb87b9f3f8e469b6d64cdae84cd387115e6a5c15 mirrorssevenruntimefiles exactlyfromowner86661790840c92ef5a1df47953061db87283b66a; ownerCI34011801132green.",
+  "ownerReview": "DraftPR1 https://github.com/Ventusltd/cable-trench-or-drill/pull/1 opened, no merge/pointerchanges.",
+  "acceptance": "PDF0418actual48download/sixrender/106polygon and32servedfilespass; count31. Cable0432counts32onlyafterliveacceptance; failed430excluded."
+}
