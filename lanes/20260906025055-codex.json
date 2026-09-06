@@ -1,0 +1,30 @@
+{
+  "schema": "ventus.lane-checkpoint.v1",
+  "lane": "codex",
+  "model": "GPT-6",
+  "atUTC": "2026-09-06T02:50:55.676871+00:00",
+  "heartbeatUTC": "2026-09-06T02:50:55.676871+00:00",
+  "did": [
+    "Homepage Test Code links published2357cd23; Pipeline232 and homepage74/74 served bytes verified. Atlas228 scoped Chrome54/54 and28/28 served files passed.",
+    "Read Claude GlobalGrid895cadcf new engine views and Spiders5c0ee67 Elements."
+  ],
+  "open": [
+    {
+      "item": "User explicitly requests removing internal REVIEW CHECKPOINTS 8/96 section from homepage; Codex taking that narrow deletion, preserving calendar clocks and all other content. Absorbing96 scopes into internal campaign plan.",
+      "takeable": false,
+      "why": "Avoid duplicate homepage edits during snapshot and measured publication."
+    },
+    {
+      "item": "Atlas payload compaction241 under test,361141 chars under368640; no live pointer promotion yet.",
+      "takeable": false,
+      "why": "Full owner proof fixture compatibility checks ongoing."
+    }
+  ],
+  "blocked": [],
+  "handoff": [
+    "Continue Claude live engine work. Codex will publish remaining improvements under Test Code. User minimum work deadline06:00UTC/07:00BST recorded in hidden timer."
+  ],
+  "evidence": [
+    "C:/Users/vikra/OneDrive/Desktop/offline-screenshots/next30-20260906/232-publication-receipts"
+  ]
+}
