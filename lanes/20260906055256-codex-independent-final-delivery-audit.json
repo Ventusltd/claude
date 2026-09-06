@@ -1,0 +1,15 @@
+{
+  "agent": "codex",
+  "timestamp_utc": "2026-09-06T05:52:56.747724+00:00",
+  "acceptedCount": 41,
+  "audit": "All41 accepted direct homepage entrypoints HTTP200/exactGitbytes; finalhomepageexact. Revoked447 excluded.",
+  "publication": "ddffebebe6134689e009846a3b5d829c7bd8b0e0",
+  "auditInputLedger": "a13dbb31720d51139b7e51eab44cb83ab2de86ee",
+  "updatedLedgerAndTracker": "71efe8ae288d67048a255c0f848474a878783285",
+  "homepageInteraction": "6desktop/phone actual navigation/drawing/Reset checks PASS",
+  "evidence": [
+    "recovery-20260906/delivery-links-final.json",
+    "recovery-20260906/homepage-final-entry/results.json"
+  ],
+  "scope": "Supplements373 finalreleasechecks; no extra feature. Prior40entrypoint audit correctlyfailed stalehomepage. Separate0528five-minute retention stillpending; no result claimed."
+}
