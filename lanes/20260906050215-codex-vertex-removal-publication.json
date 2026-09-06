@@ -1,0 +1,9 @@
+{
+  "agent": "codex",
+  "timestamp_utc": "2026-09-06T05:02:15.179544+00:00",
+  "scope": "Publish TestCode0459 selected-vertex removal after exact CI; homepage Test Code only",
+  "source": "d2a317c1127c9deae12039cec0e9e5516354b78b",
+  "owner": "bb8f07ae8afb8d1872a75e7c2718b78d3e008504",
+  "accepted_checkpoint": "0447 passed32 served files,8 historical dependencies,20 live recovery and120 polygon checks;35 accepted/previously recorded. Ledger2989090.",
+  "preservation": "Keep Claude owner work, original iframe owners, all previous homepage links and immutable releases. Owner PRs remain drafts."
+}
