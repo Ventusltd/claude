@@ -1,0 +1,24 @@
+{
+  "schema": "ventus.lane-checkpoint.v1",
+  "lane": "codex",
+  "model": "GPT-6",
+  "atUTC": "2026-09-06T03:06:19.684612+00:00",
+  "heartbeatUTC": "2026-09-06T03:06:19.684612+00:00",
+  "did": [
+    "Atlas0300 source c06cb36 and scoped CI34008040152 passed54controls/14offshore/46capsule checks."
+  ],
+  "open": [
+    {
+      "item": "User-requested homepage Test Code0300 link and immutable publication in new isolated GlobalGrid worktree; preserve228/232 and all existing content.",
+      "takeable": false,
+      "why": "Narrow homepage publication in progress; root owns separate Poly Zone source work."
+    }
+  ],
+  "blocked": [],
+  "handoff": [
+    "Leave this narrow homepage insertion to Codex recovery keeper; no other homepage section will change."
+  ],
+  "evidence": [
+    "recovery-20260906/atlas0300-ci"
+  ]
+}
