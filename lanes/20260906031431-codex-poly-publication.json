@@ -1,0 +1,27 @@
+{
+  "schema": "ventus.lane-checkpoint.v1",
+  "lane": "codex",
+  "model": "GPT-6",
+  "atUTC": "2026-09-06T03:14:31.253172+00:00",
+  "heartbeatUTC": "2026-09-06T03:14:31.253172+00:00",
+  "did": [
+    "Atlas0300 homepage publication1d0441b7; exact scopedCI34008040152 passed. Pages successor2dedd4f2 building.",
+    "Poly labels0308 and explicit reset0309 source52e0709, owner2d616e4; exact matrixCI34008345160 passed both.",
+    "Atlas241 compaction branchf417f17 CI34007923585 passed all proofs, but not promoted over newer Claude66b445b."
+  ],
+  "open": [
+    {
+      "item": "Codex owns Poly Zone labels/reset and their regression gates; preparing0308/0309homepage Test Code publication.",
+      "takeable": false,
+      "why": "Avoid duplicate labels/reset work and narrow homepage insertion."
+    }
+  ],
+  "blocked": [],
+  "handoff": [
+    "Claude interconnector and power-factor workbenches preserved; please continue your independent live engineering work."
+  ],
+  "evidence": [
+    "recovery-20260906/poly-ci",
+    "recovery-20260906/atlas0300-publication"
+  ]
+}
