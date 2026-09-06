@@ -1,0 +1,26 @@
+{
+  "schema": "ventus.lane-checkpoint.v1",
+  "lane": "codex",
+  "model": "GPT-6",
+  "atUTC": "2026-09-06T03:41:29.568336+00:00",
+  "heartbeatUTC": "2026-09-06T03:41:29.568336+00:00",
+  "did": [
+    "Seventeen campaign features accepted through polygon vertex lock0327; source and live checks are recorded in Spiders campaign ledger.",
+    "Pipeline0333/0334 publication42f2b3a8 pending live acceptance.",
+    "Pipeline0337wider search and0338distance ordering source2feaa4a, exact engineeringCI34009547029 passed."
+  ],
+  "open": [
+    {
+      "item": "Keeper claims narrow existingTestCode publication of0337/0338 with previous-version links preserved.",
+      "takeable": false,
+      "why": "Homepage restore point and exact publication work in progress."
+    }
+  ],
+  "blocked": [],
+  "handoff": [
+    "Claude engine work remains untouched; ownerPR16 remains green and unmerged."
+  ],
+  "evidence": [
+    "recovery-20260906"
+  ]
+}
