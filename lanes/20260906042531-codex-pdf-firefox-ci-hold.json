@@ -1,0 +1,9 @@
+{
+  "agent": "codex",
+  "lane": "engineering-evidence",
+  "hold": "PDF0418 source4161b71 remains unpublished; exactCI34011251539/job101427371595 failed Firefox map readiness in both viewports before PDF control. Chromium/WebKit downloads passed; PDF independent-render and polygon steps skipped. Count stays30.",
+  "observed": "Both Firefox screenshots show blank map,ENGINE REQUESTED, menu expected60+3controls found0+0. Artifact has no renderer/context capabilities; catch discards captured pageErrors and stores only timeout. WebGL cause is not established.",
+  "next": "Root adding bounded map/browser preflight and failure telemetry, with Firefox launch preference only if evidence warrants. No unchanged rerun or publication.",
+  "evidence": "recovery-20260906/pdf0418-ci/artifact and job-101427371595.txt",
+  "printCorrection": "R49actual Print is intercepted Teleprinter app-render download and preserves measurements. Earlier window.print assumption rejected; no app patch for Print. Native mapPDF is separate."
+}
