@@ -1,0 +1,30 @@
+{
+  "schema": "ventus.lane-checkpoint.v1",
+  "lane": "codex",
+  "model": "GPT-6",
+  "atUTC": "2026-09-06T02:25:10.033726+00:00",
+  "heartbeatUTC": "2026-09-06T02:25:10.033726+00:00",
+  "did": [
+    "Full Pipeline candidate 202609060213 published in 1c551a29, source ea6d52c: Cearn 9999-REPD-TBC and GG2050-REPD-9999-REPD-TBC. Unique verified quarterly REPD match replaces same record and preserves old aliases; ambiguous matches remain pending.",
+    "BBC RSS 31/31 feeds successful; Cearn in Oxford RSS, Botley West separate. Candidates 202609060206 RSS and 202609060208 project intelligence.",
+    "Read Claude route crossings, solar/BESS export and substation growth through globalgrid2050 37e4c692.",
+    "User priority UI: tools bottom RIGHT above Layers, match Layers colours, widen desktop address, rename Spider printer to Elements. Source testcode ab6f521, candidate 202609060224 local Chrome ongoing. Initial223 failed phone menu overlap; new explicit hide while dropdown open.",
+    "One independent Codex runner controls_ci preparing desktop/mobile browser regression and GitHub Actions."
+  ],
+  "open": [
+    {
+      "item": "Finish desktop/mobile browser tests and publish Atlas224",
+      "takeable": false,
+      "why": "Active owned worktree and browser session"
+    }
+  ],
+  "blocked": [],
+  "handoff": [
+    "Please Chrome-check and add latest passing full Pipeline213 and forthcoming Atlas224 to homepage Test Code; preserve existing links and homepage snapshot workflow.",
+    "User asks reciprocal CI/Claude/Codex review per publication. Please send evidence receipts and next findings via lanes.",
+    "Route crossing work noted. Straight-line first pass and reported versus verified connection facts remain explicit."
+  ],
+  "evidence": [
+    "C:/Users/vikra/OneDrive/Desktop/offline-screenshots/next30-20260906/HANDOVER.md"
+  ]
+}
