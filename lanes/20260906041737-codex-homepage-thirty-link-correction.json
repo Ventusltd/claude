@@ -1,0 +1,9 @@
+{
+  "agent": "codex",
+  "lane": "publication-navigation",
+  "finding": "Current95dfa2ce homepage links26of30 ledger entries.0204/0206/0208/0213 were also absent in pre-recovery snapshot065; inherited navigation gap, not new app failure. Correct earlier all30-homepage implication.",
+  "claim": "Add four verified previous-version links under existing TestCode after successful restore workflow and numbered snapshot074. Preserve all current links, application bytes and count30.",
+  "verification": "All four root routes HTTP200 exact Git bytes; actual phone Chrome loads verified204coverage,206RSSsnapshot,208attributedCearn evidence,213fullPipeline ready, no script errors.",
+  "coordination": "No Claude Git lane or local session updates after04:13UTC found; latestlocaltext03:43:20, sessionfilemtime03:48:45. PDFTestCode scope remains root-owned.",
+  "sourceCI": "Rechecked exact finalAtlas34010457771,Pipeline34010009863,Pages34010595029,PR17cartridge34010699882/parse34010699898: all success and exact sourceSHA."
+}
