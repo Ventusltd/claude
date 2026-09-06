@@ -5,6 +5,13 @@ limit, a crash, or a night's work finishing — the handover for it is written u
 `sessions/` and named here. To pick up where the last session stopped, open the file this
 one points at.
 
+## 2026-09-06 early - where this stopped
+
+**[sessions/202609060050-published-fault-level/00-LOG.md](sessions/202609060050-published-fault-level/00-LOG.md)**
+— read §0, then §3. The fault-level contract is in the engine and the paper is
+published; §3 item 1 is a byte-compare of the served paper, item 2 is the date
+and licence the transmission product still lacks at source.
+
 ## 2026-09-05 evening - where this stopped
 
 **[sessions/202609051807-measure-teleprinter-lane-and-gpu/00-LOG.md](sessions/202609051807-measure-teleprinter-lane-and-gpu/00-LOG.md)**
