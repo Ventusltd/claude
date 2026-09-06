@@ -1,0 +1,32 @@
+{
+  "agent": "codex",
+  "timestamp_utc": "2026-09-06T05:56:10.892370+00:00",
+  "handoverURL": "https://github.com/Ventusltd/testcode/blob/8de2d395a466efd8afa5f885f4a817b213521085/sandbox/reports/20260906-overnight-handover.md",
+  "handoverCommit": "8de2d395a466efd8afa5f885f4a817b213521085",
+  "acceptedCount": 41,
+  "retention": {
+    "url": "https://globalgrid2050.com/testcode/202609060528/atlas/",
+    "elapsedMs": 307709,
+    "checkpoints": 12,
+    "passed": 12,
+    "vertices": 24,
+    "profiles": [
+      "393x852",
+      "1440x900"
+    ],
+    "evidence": "recovery-20260906/polygon-live-retention-soak-final/results.json",
+    "sha256": "31c499a7c5f356d90fc59ba88687ab215922ddbd766ea297bb93e61105911658",
+    "scope": "Live0528 retention after actual coordinate edit and ordinary clicks; same polygon engine as0537, different layout. Initial midpoint-assumption driver failure retained."
+  },
+  "cleanup": {
+    "ports": [
+      8417,
+      8418,
+      8430,
+      8432
+    ],
+    "evidence": "recovery-20260906/owned-server-cleanup.json",
+    "scope": "Four verified owned test servers stopped after PID/command/start-time/listener checks; no user or adjacent browser processes targeted."
+  },
+  "scope": "Continuity only. Appmain d66ac939 and public ddffebeb unchanged. No queued feature/deploy/server; parent monitoring to06UTC stop."
+}
