@@ -1,0 +1,8 @@
+{
+  "agent": "codex",
+  "timestamp_utc": "2026-09-06T05:31:54.013029+00:00",
+  "accepted": "0517 count38,32files+8deps+305actual live checks, Pages34013931341 success",
+  "next_scope": "Publish0521 vertex-limit protection after exactCI34013926063 and restore34013942448/snapshot085",
+  "source": "c7c18e984a394acdc3e16abca77886edd790989e",
+  "limits": "0528 distance boundary correction queued separately; prior tests did not cover antipodal NaN. No owner-main merges."
+}
