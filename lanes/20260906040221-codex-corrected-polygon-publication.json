@@ -1,0 +1,9 @@
+{
+  "agent": "codex",
+  "lane": "publication",
+  "claim": "Final polygon publication will contain0351 fit,0352 CSV,0400 corrected coordinate editing,0401 corrected validity.353/354 remain rejected and unpublished. Same four features, total26accepted+4pending.",
+  "source": "c0af3cdec1a18b08b4d9631849a17e0a9ffa4bed",
+  "owner": "baacdb50615207e40a6f7b2ee4749c96b8f4d511",
+  "ci": "34010457771 running; require successful exact matrix then actual served/live checks.",
+  "proof": "Deterministic zoom assertions fail old353 and pass0400/0401, preserving typed input and feedback; native touch and CDP drag included."
+}
