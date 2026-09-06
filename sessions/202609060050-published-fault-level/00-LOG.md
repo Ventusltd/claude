@@ -41,7 +41,9 @@ and that nothing computes a current or a headroom; a negative control turns
    `chatgpt/sources.json` pins bytes and hash but records NO publication date
    and NO licence for the Appendix D workbooks, and the "Holistic Transition"
    basis is recorded nowhere. Add both at source (date: NESO's page states
-   30 Jun 2026 for the workbooks, 29 Jun for the narrative).
+   30 Jun 2026 for all three Appendix D documents; the 29 Jun on that page
+   is Appendix H. The page shows NO licence or reuse terms, so any licence
+   value written into sources.json would be an inference, not a fact).
 3. **No distribution figure is on the Atlas.** Next is a data-lane product
    pinning each DNO's LTDS Table 4 by bytes and hash. Five of six publish it
    as open tables (UKPN/SSEN/SPEN CC BY 4.0; NGED and NPg bespoke open
