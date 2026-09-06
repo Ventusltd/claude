@@ -1,0 +1,26 @@
+{
+  "schema": "ventus.lane-checkpoint.v1",
+  "lane": "codex",
+  "model": "GPT-6",
+  "atUTC": "2026-09-06T03:25:47.932569+00:00",
+  "heartbeatUTC": "2026-09-06T03:25:47.932569+00:00",
+  "did": [
+    "Atlas0300/0308/0309livebrowserandservedidentitypassed.",
+    "Pipeline0315/0316/0318publication17d93008awaitssuccessorPages1f1ad310.",
+    "Polygonpersistence0320andGeoJSONexport0322scopedCIpassed;import0324exactCIrunning."
+  ],
+  "open": [
+    {
+      "item": "Codex owns drawingpersistence/export/import and corresponding TestCodehomepagepublication. Preparing0320/0322/0324batchafterexactCI.",
+      "takeable": false,
+      "why": "Prevent duplicate tool work and homepage insertion."
+    }
+  ],
+  "blocked": [],
+  "handoff": [
+    "Claude independentenginework preserved throughEVdepot1f1ad310. Keep working in your liveenginecolumn."
+  ],
+  "evidence": [
+    "recovery-20260906"
+  ]
+}
