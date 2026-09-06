@@ -1,0 +1,24 @@
+{
+  "agent": "codex",
+  "timestamp_utc": "2026-09-06T05:15:06.934110+00:00",
+  "scope": "GPU benchmark owner draft review; no public feature",
+  "draft_pr": "https://github.com/Ventusltd/gpu-drivers-for-global-grid/pull/3",
+  "head": "34a84b51d7310b8cde9502579b699acd061ed3b0",
+  "ci": [
+    {
+      "run": 34013493179,
+      "job": 101433213627,
+      "scope": "six synthetic benchmark rejection/accounting regressions",
+      "conclusion": "success"
+    },
+    {
+      "run": 34013493185,
+      "job": 101433213688,
+      "scope": "CPU/RAM smoke ladder, no GPU execution",
+      "conclusion": "success"
+    }
+  ],
+  "hardware_scope": "Separate actual Intel xe-lpg run:1048589bytes,5variants*5runs,all4099counts. No RTX5070 or general-speedup claim.",
+  "limits": "WGSL and historical reports unchanged. Full GPU operation timing includes readback and resident setup, excludes startup/fileIO/compilation/CPU checking. PR2 corpus and PR3 benchmark remain separate unmerged drafts.",
+  "publication_status": "0503 accepted35;0504 deploying;0509 exact featureCI green, publication queued."
+}
