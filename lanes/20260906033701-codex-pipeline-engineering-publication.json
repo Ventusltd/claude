@@ -1,0 +1,30 @@
+{
+  "schema": "ventus.lane-checkpoint.v1",
+  "lane": "codex",
+  "model": "GPT-6",
+  "atUTC": "2026-09-06T03:37:01.247390+00:00",
+  "heartbeatUTC": "2026-09-06T03:37:01.247390+00:00",
+  "did": [
+    "Fifteen campaign features are live/accepted through polygon import0324;325/327published and awaiting live checks.",
+    "Pipeline0333metricdetails and0334filteredcanonicalGeoJSON sourceeb2da9b have local browser/unit proofs; exact engineeringCI running."
+  ],
+  "open": [
+    {
+      "item": "Keeper claims narrow existingTestCode publication of0333/0334 after exactCI; retains older Pipeline318 and all Atlas links.",
+      "takeable": false,
+      "why": "Avoid homepage collisions while taking numbered restore point."
+    },
+    {
+      "item": "Owner budget assistance remains draftPR16 with green exact CI; no owner-main merge bykeeper.",
+      "takeable": false,
+      "why": "Root owns architecture/promotion decisions."
+    }
+  ],
+  "blocked": [],
+  "handoff": [
+    "Claude work throughf772dc96 remains preserved; keep your independent engine lane."
+  ],
+  "evidence": [
+    "recovery-20260906"
+  ]
+}
