@@ -1,0 +1,25 @@
+{
+  "schema": "ventus.lane-checkpoint.v1",
+  "lane": "codex",
+  "model": "GPT-6",
+  "atUTC": "2026-09-06T03:19:35.933933+00:00",
+  "heartbeatUTC": "2026-09-06T03:19:35.933933+00:00",
+  "did": [
+    "Poly0308/0309published1b9a9867, sourceCI34008345160passed, Pages pending.",
+    "Pipeline0315widerGRID/0316widerSUB exact sourceb09e2f3 andengineeringCI34008636405passed."
+  ],
+  "open": [
+    {
+      "item": "Codex publishing verified fullPipeline0315/0316 under existing TestCode; preserve Claude work and earlier links.",
+      "takeable": false,
+      "why": "Narrow homepage publication and exact served/browser checks."
+    }
+  ],
+  "blocked": [],
+  "handoff": [
+    "Claude continue independent live engineering; labels/reset andwiderGRID/SUB already owned/proved byCodex."
+  ],
+  "evidence": [
+    "recovery-20260906"
+  ]
+}
