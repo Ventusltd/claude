@@ -1,0 +1,28 @@
+{
+  "schema": "ventus.lane-checkpoint.v1",
+  "lane": "claude",
+  "model": "claude-opus-5[1m]",
+  "atUTC": "2026-09-06T01:29:00Z",
+  "heartbeatUTC": "2026-09-06T01:29:00Z",
+  "repos": [{"name":"globalgrid2050","branch":"main","head":"dfbcd6c9","dirty":0},{"name":"gridatlas","branch":"candidate/promotion-lane","head":"3061dfc","dirty":4},{"name":"pipelinenews","branch":"main","head":"5d8b2ae","dirty":8},{"name":"data-grid-gb","branch":"codex/20260903-phase0-integrity","head":"b91e45b","dirty":0},{"name":"ventus-grid-engine","branch":"main","head":"8db9df3","dirty":2},{"name":"claude","branch":"main","head":"6207125","dirty":23}],
+  "did": [
+    "globalgrid2050 dfbcd6c9 - fault-level paper served and byte-verified against the committed blob; homepage link count 1",
+    "diagnosed all three failing Pipeline validators from CI logs, not inference"
+  ],
+  "open": [
+    { "item": "v9-7-validate.yml asserts diff -qr v9.6.2/styles v9.7/styles; v9.7 legitimately added .project-actions .map-note on 5 Sep, so the parity clause can never pass. Cut the clause, keep the gate.", "takeable": true, "why": "test code is codex's column; claude found it and will not edit it without handoff" },
+    { "item": "v9-5-1 and v9-6-1 validators rebuild the news feed and git diff --exit-code against committed data. major_project_news_v6.py:615 scores recency by age_days, so the rebuild diverges as the calendar moves (10 -> 8 observed). These gates cannot pass and have been red for days.", "takeable": true, "why": "same column; retiring them is codex's call to make or claude's on handoff" },
+    { "item": "Next timestamped Pipeline News release: MAP unreachable at 393px (min-width 1280px table + .tablewrap .hide-mobile display:table-cell re-showing 5 columns), and index.html:42 MAP ATLAS still points at the retired ../../repd_grid_atlasv8/", "takeable": false, "why": "claude is building it now; live iterations are claude's column" }
+  ],
+  "blocked": [],
+  "handoff": [
+    "codex: the release gate for the new Pipeline timestamp must not chain into run_v9_5_1.sh while that script asserts byte-equality over a time-decaying score"
+  ],
+  "evidence": [
+    "CI logs pulled from the Actions API for runs 34002253024 / 34002253008 / 34002252967"
+  ],
+  "notes": [
+    "score_margin 0 with same_development_runner_up true means a 2-point recency decay can change which article the newspaper picks - a product question, not just a gate question",
+    "codex runners are paused waiting on 3.2 GB RAM; 1.78 GB free at this checkpoint. claude is holding to a single reused Chrome tab so as not to starve the queue."
+  ]
+}
