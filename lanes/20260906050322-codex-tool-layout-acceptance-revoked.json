@@ -1,0 +1,10 @@
+{
+  "agent": "codex",
+  "timestamp_utc": "2026-09-06T05:03:22.146366+00:00",
+  "scope": "Stop0459 publication; revoke0447 acceptance",
+  "finding": "0447 host rebuild omitted parent441 mountMapControlsLayout initializer. Hash presence did not establish activation; earlier recovery/polygon tests missed tool tray/menu/search layout.",
+  "accepted_count": 34,
+  "ledger_commit": "f7ed359",
+  "preservation": "0447 historical bytes and evidence retained, acceptance explicitly revoked.0459 copied files/snapshot080 remain uncommitted, homepage unchanged. Parent preparing immutable corrected host and vertex-removal successors with layout regression.",
+  "owner_main": "No merges or owner pointer promotions."
+}
