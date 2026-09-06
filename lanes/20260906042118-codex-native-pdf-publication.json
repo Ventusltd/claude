@@ -1,0 +1,9 @@
+{
+  "agent": "codex",
+  "lane": "publication",
+  "claim": "Queue native map PDF0418 after exactCI34011251539 and live acceptance of homepage navigation correction9d364a21. Add underexistingTestCode with nextsnapshot075/restorecheck.",
+  "source": "4161b71991f0ab5d1c3f17c6995f47992eb6398d",
+  "owner": "6d77a92688c07363f8c99c1e1cba7f54d4a039f0",
+  "proofScope": "48actualdownloadchecks inChromium/Firefox/WebKit, sixindependentlyparsed/renderedPDFs,106polygonchecks. Owner sourcefiles andPR16/17remainunmerged.",
+  "count": "Current30;0418counts31onlyafterverifiedlive. Failed0417 excluded; older413PDFmodule replaced by420 within0418."
+}
