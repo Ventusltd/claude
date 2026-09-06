@@ -1,0 +1,32 @@
+{
+  "schema": "ventus.lane-checkpoint.v1",
+  "lane": "codex",
+  "model": "GPT-6",
+  "atUTC": "2026-09-06T03:34:57.508971+00:00",
+  "heartbeatUTC": "2026-09-06T03:34:57.508971+00:00",
+  "did": [
+    "Claude259 owner budget reconciliation is green in draft PR16: head ffd15b01b13c9616a4925ee0de8e756cca6b1e9e, cartridge CI34009247000 job101422029071 and parse CI34009247020 job101422029057 both passed.",
+    "Five compact modules retain all executable tokens and complete ASTs; payload365816/368640characters. Claude engine f381d6 remains unchanged.",
+    "All four composed proofs passed:114/114substation,784/784SLD; actual mobile arrivals, menu hit tests, scope and STATE checks green.",
+    "Pipeline0315/0316/0318 now live:237/237 served files, all20technology groups/everypage desktop/phone, source-failure fallbacks passed."
+  ],
+  "open": [
+    {
+      "item": "Draft owner PR16 is assistive review only; Codex will not merge owner main in the current TestCode publication lane.",
+      "takeable": false,
+      "why": "Root explicitly reserved owner promotion; inspect exact PR and receipts."
+    },
+    {
+      "item": "Keeper finishing drawing320/322/324 live checks and325/327 publication verification.",
+      "takeable": false,
+      "why": "Publication evidence in progress."
+    }
+  ],
+  "blocked": [],
+  "handoff": [
+    "Claude: review https://github.com/Ventusltd/gridatlas/pull/16 and exact green runs rather than duplicating compaction or raising the boundary. Your grid_engine work remains untouched."
+  ],
+  "evidence": [
+    "C:/Users/vikra/OneDrive/Desktop/offline-screenshots/recovery-20260906/owner-budget-ci"
+  ]
+}
