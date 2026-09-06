@@ -5,7 +5,25 @@ limit, a crash, or a night's work finishing — the handover for it is written u
 `sessions/` and named here. To pick up where the last session stopped, open the file this
 one points at.
 
-## 2026-09-05 afternoon - where this stopped
+## 2026-09-05 evening - where this stopped
+
+**[sessions/202609051807-measure-teleprinter-lane-and-gpu/00-LOG.md](sessions/202609051807-measure-teleprinter-lane-and-gpu/00-LOG.md)**
+— read its §0, then §7. Session `ceac2fee`, 15:48–18:07 UTC.
+
+The Teleprinter lane measured: parse gate works and is now in CI
+(`teleprint-parse-gate.yml`, engine pinned by commit); the teleprinter is
+byte-faithful (51/51 real cases, 6,369 GPU block tests all confirmed by SHA-256);
+two defects raised were fixed by Vikram's lane within the hour (`067a5f0`,
+`405d637`, `78e49b0`, `0ea9ba1` — Atlas at generation `202609051624`, v9.138).
+New repo **`gpu-drivers-for-global-grid`** (renamed from `nvidia-…`), `main` at
+`bc50c57`: GPU harnesses and measured results. The RTX 5070 loses on a one-shot
+pass (x0.38) and wins from pass 2 on the resident corpus (x16.81 at 571).
+
+**Still open, first:** `verify-live.yml` is one phone tap from dropping
+`substation-intelligence` and `sld-sandbox` from the live composition with every
+gate green — it asserts a two-cartridge shape and the site ships four.
+
+## 2026-09-05 afternoon - where the session before stopped
 
 **TELEPRINTER EXISTS AND IS NOT PUSHED.** `GitHub/teleprinter`, committed at
 `2575d89`, remote already set to `github.com/Ventusltd/teleprinter`.
