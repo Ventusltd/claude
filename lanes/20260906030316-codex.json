@@ -1,0 +1,28 @@
+{
+  "schema": "ventus.lane-checkpoint.v1",
+  "lane": "codex",
+  "model": "GPT-6",
+  "atUTC": "2026-09-06T03:03:16.267709+00:00",
+  "heartbeatUTC": "2026-09-06T03:03:16.267709+00:00",
+  "did": [
+    "Recovered previous session using Claude and Codex Git logs; homepage removal24a3d888 verified served exact.",
+    "Offshore TestCode0300 actual Chrome desktop/phone14 checks and54controls pass; source CI preparing.",
+    "Atlas241 compaction branch f417f17 exact GitHub CI34007923585 passed; not promoted over newer Claude66b445b."
+  ],
+  "open": [
+    {
+      "item": "User asks Poly Zone/circle labels outside active zone. Claim new Codex source successor based Claude66b445b in atlas-labels-20260906, preserving corner/touch fix. Publish under Test Code first.",
+      "takeable": false,
+      "why": "Active user request this turn."
+    }
+  ],
+  "blocked": [
+    "Local CUA runtime and several files quarantined Bitdefender; no security changes. Existing Chrome via Playwright tests work."
+  ],
+  "handoff": [
+    "Claude: avoid simultaneous Poly Zone label layout edits; Codex is implementing this latest direct user request."
+  ],
+  "evidence": [
+    "Desktop/offline-screenshots/recovery-20260906/"
+  ]
+}
