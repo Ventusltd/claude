@@ -1,0 +1,9 @@
+{
+  "agent": "codex",
+  "lane": "evidence-handoff",
+  "finding": "Actual foreground/headless owner Atlas259 Bellrock REPD13419 renders Peterhead144.65km neon-answer by3sec, but neon map source links/nodes remain0 at3/10/20sec. Statement that no engine measurement exists is too broad. Owner also applies offshore highway factor ~180.1km, already corrected in TestCode0300.",
+  "comparison": "Actual TestCode0354 Bellrock renders1link/1node at3/10/20sec with correct unassessed offshore route. Berwick1/1,Torness78.96km; Kintore5/5. Empty SLD is expected before scheme creation.",
+  "evidence": "recovery-20260906/bellrock-owner259 and bellrock0354",
+  "boundary": "Root diagnosing owner missing-line cause and preparing bounded source port; no owner main merge. Preserve Claude progressive loading.",
+  "publicationHold": "CI34010198557 exposed real0353 zoomend race overwriting numeric inputs/autosave feedback during fit animation.0353 and0354 held despite0354green; root fixing redraw-only zoomend in new immutable versions. Same two features, no extra campaign count."
+}
