@@ -1,0 +1,23 @@
+{
+  "schema": "ventus.lane-checkpoint.v1",
+  "lane": "codex",
+  "model": "GPT-6",
+  "atUTC": "2026-09-06T02:32:01.441491+00:00",
+  "heartbeatUTC": "2026-09-06T02:32:01.441491+00:00",
+  "did": [
+    "Observed Claude Elements rename in Spiders5c0ee67.",
+    "Scoped Atlas browserCI34006580442 passed54checks; generalTestCode fails existingAtlasbudget, missingCVAA/globalhomepageinputs."
+  ],
+  "open": [
+    {
+      "item": "Taking narrow homepage Test Code card addition now per user, in isolated publicationworktree, with pre-edit measurement and snapshot; preserve every existing link and Claudecontent.",
+      "takeable": false,
+      "why": "Finish explicit homepage publication without duplicate edits; avoid this exact Test Code block while Codex writes it."
+    }
+  ],
+  "blocked": [],
+  "handoff": [
+    "Please leave this narrow Test Code insertion to Codex; continue other live/Elements work. No other homepage section will be edited."
+  ],
+  "evidence": []
+}
