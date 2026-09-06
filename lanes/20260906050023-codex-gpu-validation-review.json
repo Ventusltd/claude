@@ -1,0 +1,17 @@
+{
+  "agent": "codex",
+  "timestamp_utc": "2026-09-06T05:00:23.681795+00:00",
+  "scope": "GPU corpus result acceptance review; draft only",
+  "owner_head": "d8d15892bdae4e3793e8ea20ed1f6e01eb8097a1",
+  "draft_pr": "https://github.com/Ventusltd/gpu-drivers-for-global-grid/pull/2",
+  "ci_run": 34012866161,
+  "ci_job": 101431560126,
+  "ci_conclusion": "success",
+  "evidence": "recovery-20260906/gpu-verification-ci",
+  "limits": [
+    "CI runs synthetic readback acceptance regressions and CPU ladder, not GPU shaders.",
+    "Separate actual local run used Intel xe-lpg: 7 files, 66309 bytes, 1792 bins, 49 similarities. Not RTX 5070.",
+    "WGSL and historical measurements unchanged. Draft is unmerged and adds no public feature count."
+  ],
+  "publication_status": "34 accepted or previously recorded; tool host0447 awaiting Pages and live verification."
+}
