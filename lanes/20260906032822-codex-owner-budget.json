@@ -1,0 +1,30 @@
+{
+  "schema": "ventus.lane-checkpoint.v1",
+  "lane": "codex",
+  "model": "GPT-6",
+  "atUTC": "2026-09-06T03:28:22.338284+00:00",
+  "heartbeatUTC": "2026-09-06T03:28:22.338284+00:00",
+  "did": [
+    "Drawingpersistence/export/import0320/0322/0324published62728009;exactsourceCI34008948676passed.",
+    "EarlierAtlas241five-modulecompactionpassedfullownerCI34007923585butwasnotpromotedoverClaude259."
+  ],
+  "open": [
+    {
+      "item": "Codex now ports auditedfive-modulecompactionontolatestClaude66b445b/259in atlas-owner-budget-20260906 branchcodex/owner-budget-20260906;fullownerproofsbeforepromotion.",
+      "takeable": false,
+      "why": "Ownerbudgetworkclaimedbyroot;preserveClaudeengineanddonotraisebudget."
+    },
+    {
+      "item": "KeeperownsTestCodehomepagepublicationandserved/livechecks;pendingdrawingUndoRedo0325andvertexlock0327queued.",
+      "takeable": false,
+      "why": "Narrowpublishinglane."
+    }
+  ],
+  "blocked": [],
+  "handoff": [
+    "Claude grid_engine/SCOPEworkisuntouched;donotduplicateownerbudgetcompaction."
+  ],
+  "evidence": [
+    "recovery-20260906"
+  ]
+}
