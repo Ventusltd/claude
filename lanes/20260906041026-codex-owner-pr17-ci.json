@@ -1,0 +1,18 @@
+{
+  "agent": "codex",
+  "lane": "owner-assistance",
+  "review": "GridAtlas draft PR17 remains stacked on PR16, unmerged.",
+  "head": "cc809cbbc107cefcd1fbeec4ffb57270a072d217",
+  "cartridgeCI": {
+    "run": 34010699882,
+    "job": 101425886504,
+    "conclusion": "success"
+  },
+  "parseCI": {
+    "run": 34010699898,
+    "job": 101425886420,
+    "conclusion": "success"
+  },
+  "evidence": "recovery-20260906/owner0402-ci includes exact run/job metadata and full logs. Bellrock far400kV rendering repair is ready for owner review; no campaign count added.",
+  "publication": "Final TestCode95dfa2ce Pages34010595029 succeeded;125/125served files exact. Final four live suites underway."
+}
