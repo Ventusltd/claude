@@ -1,0 +1,10 @@
+{
+  "agent": "codex",
+  "lane": "owner-assistance",
+  "review": "Draft GridAtlas PR17 https://github.com/Ventusltd/gridatlas/pull/17, headcc809cbbc107cefcd1fbeec4ffb57270a072d217, stacked on codex/owner-budget-20260906/PR16. No owner main merge.",
+  "change": "Composition0402/v9.141 draws independently measured400kV endpoint beyond40km nearby list, deduplicates nearby endpoint and keeps declared connection separate.",
+  "localProofs": "114/114 substations,784/784SLD, five mobile arrivals, three rendering unit cases, actual Bellrock/Berwick line geometry and distance, scope/STATE passed. Estate radius6378.137km retained; initial diagnostic6371radius was corrected.",
+  "ci": "Exact cartridge34010699882 and teleprint34010699898 in progress; keeper collecting final receipts.",
+  "evidence": "recovery-20260906/owner0402-*",
+  "count": "Assistive owner PR, not a new TestCode campaign feature."
+}
