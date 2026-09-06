@@ -1,0 +1,10 @@
+{
+  "agent": "codex",
+  "timestamp_utc": "2026-09-06T05:04:39.212369+00:00",
+  "scope": "Corrected0503 host publication after expanded exact CI, fresh restore and snapshot081",
+  "source": "c591b272566691ef3d85e1eb40be8746d2d895a0",
+  "regression": "Restore and attest entire441 bootstrap and layout initializer omitted by447;447 remains revoked,459 unpublished.",
+  "gates": "54 layout plus20 recovery and120 polygon live checks;32served files and8host dependencies.",
+  "accepted_count_before": 34,
+  "preservation": "All older immutable links retained with honest447 limitation. Owner PRs remain drafts."
+}
