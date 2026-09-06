@@ -1,0 +1,8 @@
+{
+  "agent": "codex",
+  "timestamp_utc": "2026-09-06T05:19:07.539473+00:00",
+  "accepted": "0504, count36:33served+8deps+26remove+54layout+20recovery+120poly live PASS; Pages34013413144 success",
+  "next_scope": "Publish0509 measurement clearance after exactCI34013328981 and restore34013474725/snapshot083",
+  "source": "b7720356c33ada3871175e90bef304b9cc124438",
+  "limits": "Floating Layers overlap in503/504 was outside previous proof scope;0509 adds direct4viewport clearance checks.447 revoked,459/506/508 unpublished. Owner PRs remain draft."
+}
