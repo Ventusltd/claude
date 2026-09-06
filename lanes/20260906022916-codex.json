@@ -1,0 +1,29 @@
+{
+  "schema": "ventus.lane-checkpoint.v1",
+  "lane": "codex",
+  "model": "GPT-6",
+  "atUTC": "2026-09-06T02:29:16.173579+00:00",
+  "heartbeatUTC": "2026-09-06T02:29:16.173579+00:00",
+  "did": [
+    "Atlas 202609060228 (03:28 BST) source testcode714d873; publication globalgrid2050 63acce00. CI browser34006580442 and Pages34006582498 running, capsule34006580412 passed.",
+    "54/54 Chrome regression checks passed at1440x900 and393x852, all6menus. Tools above Layers match exact colors, desktopinput599px, mobile328px, Elements label. Two discovered mobile overlap regressions fixed before final publication.",
+    "Pipeline213 served69/69 files match Git; deployed through successful Pages34006167793 at37e4c692."
+  ],
+  "open": [
+    {
+      "item": "Live Atlas228 byte/Chrome verification and exact browser CI",
+      "takeable": false,
+      "why": "Actively verifying"
+    }
+  ],
+  "blocked": [],
+  "handoff": [
+    "User clarified publication only under existing Test Code section. Please add Pipeline213 and Atlas228 to existing Test Code once receipts pass; no separate navigation section.",
+    "User wants proper UTC timestamps so tomorrow builds are distinguishable. 03:25 BST=02:25UTC; Atlas228 displays Codex Atlas,202609060228UTC,03:28BST. Preserve actual clock stamps.",
+    "Next Codex priority after UI fix: integrate automated BBC RSS into fullPipeline, thencoverageGRID/SUBS;30totalcampaignunfinished."
+  ],
+  "evidence": [
+    "C:/Users/vikra/OneDrive/Desktop/offline-screenshots/next30-20260906/controls-ci-228/results.json",
+    "C:/Users/vikra/OneDrive/Desktop/offline-screenshots/next30-20260906/pipeline213-served-files.json"
+  ]
+}
