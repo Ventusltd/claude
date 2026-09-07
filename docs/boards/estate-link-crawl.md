@@ -4,24 +4,35 @@ Crawled from GitHub Actions against the LIVE origins, one runner per surface.
 INFORMATIONAL: the job exits 0 on every finding. A 404 below is a fact to read,
 not an alarm that mailed anyone.
 
-- crawled at: `2026-09-06T07:18:30Z`
-- releases crawled: 89 (41 whose page did not answer)
-- routes checked: 1182, dead: 174
-- sentinels checked: 38, dead: 9, **dead AND shipped: 9**
+- crawled at: `2026-09-07T07:31:35Z`
+- releases crawled: 55 (41 whose page did not answer)
+- routes checked: 302, dead: 176
+- sentinels checked: 9, dead: 9, **dead AND shipped: 9**
 
 A sentinel is *shipped* when its base URL appears in a module the page actually
 imports. A dead sentinel that is only *declared* is a stale record in a manifest.
 A dead sentinel that is shipped is what a user gets when they click.
 
-## `globalgrid2050` - 1 releases, 0/171 routes dead, 0/0 sentinels dead (0 shipped)
+## `globalgrid2050` - 1 releases, 2/4 routes dead, 0/0 sentinels dead (0 shipped)
 
-crawled in 1.3s
+crawled in 0.5s
 
-Every release on this surface answered 200 on every route and sentinel.
+| release | state | page | routes dead | sentinels dead (shipped) |
+|---|---|---|---|---|
+| `homepage` | routes-dead | 200 | 2/4 | 0/0 (0) |
+
+<details><summary>2 distinct dead URLs on this surface</summary>
+
+| status + url | seen in N releases |
+|---|---|
+| `404` `https://globalgrid2050.com/${encodeURI(e.url)}` | 1 |
+| `404` `https://globalgrid2050.com/${encodeURI(current.url)}` | 1 |
+
+</details>
 
 ## `gridatlas-atlas` - 10 releases, 170/238 routes dead, 0/0 sentinels dead (0 shipped)
 
-crawled in 7.1s
+crawled in 7.2s
 
 | release | state | page | routes dead | sentinels dead (shipped) |
 |---|---|---|---|---|
@@ -102,15 +113,15 @@ crawled in 7.1s
 
 </details>
 
-## `pipelinenews-intel` - 34 releases, 0/713 routes dead, 0/29 sentinels dead (0 shipped)
+## `pipelinenews-intel` - 0 releases, 0/0 routes dead, 0/0 sentinels dead (0 shipped)
 
-crawled in 47.5s
+crawled in 0.2s
 
 Every release on this surface answered 200 on every route and sentinel.
 
 ## `pipelinenews-releases` - 44 releases, 4/60 routes dead, 9/9 sentinels dead (9 shipped)
 
-crawled in 3.5s
+crawled in 7.6s
 
 | release | state | page | routes dead | sentinels dead (shipped) |
 |---|---|---|---|---|
