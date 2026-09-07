@@ -7,7 +7,7 @@ while the disk holds CRLF and the blob holds LF.
 INFORMATIONAL: this job exits 0 on every finding. The gates that must block already
 exist and already fail loudly. This is a report.
 
-- surveyed at: `2026-09-06T08:46:53Z`
+- surveyed at: `2026-09-07T09:34:11Z`
 - repositories: 18
 
 ## Line endings and `.gitattributes`
@@ -26,7 +26,7 @@ carry across both.
 | repo | head | tracked | i/crlf | w/crlf | mixed | .gitattributes | renormalize changes |
 |---|---|---:|---:|---:|---:|---|---:|
 | `chatgpt-audits` | `008952fef1ee` | 3265 | 0 | 0 | 0 | bare | 0 |
-| `claude` | `6d85d18e8fd9` | 337 | 0 | 0 | 2 | canonical | 1 |
+| `claude` | `8ca75c80d747` | 337 | 0 | 0 | 2 | canonical | 1 |
 | `codex-chatgpt` | `9bc0a5feaa81` | 26 | 0 | 0 | 0 | bare | 0 |
 | `companies` | `ac70a37408d4` | 76 | 0 | 0 | 0 | canonical | 0 |
 | `cvaa` | `a1fae46a1cb3` | 61 | 0 | 0 | 0 | canonical | 0 |
@@ -38,11 +38,11 @@ carry across both.
 | `data-interconnectors` | `1e00d0e4d7bf` | 11 | 0 | 0 | 0 | canonical | 0 |
 | `gb-electricity-ui` | `5b4533914bb2` | 15 | 0 | 0 | 0 | canonical | 0 |
 | `gemini` | `16122ae08d45` | 10 | 0 | 0 | 0 | bare | 0 |
-| `globalgrid2050` | `ddffebebe613` | 13883 | 224 | 224 | 0 | canonical | 0 |
+| `globalgrid2050` | `0ca3e893da2d` | 14548 | 224 | 224 | 0 | canonical | 0 |
 | `grid-distance-maths` | `30aa4e0456f9` | 12 | 0 | 0 | 0 | canonical | 0 |
-| `gridatlas` | `66b445b90800` | 786 | 0 | 0 | 0 | canonical | 0 |
-| `pipelinenews` | `66bb873a9f78` | 3896 | 0 | 0 | 0 | canonical | 0 |
-| `spiders` | `41b198d7fca5` | 181 | 0 | 0 | 0 | canonical | 0 |
+| `gridatlas` | `9e558fa21390` | 814 | 0 | 0 | 0 | canonical | 0 |
+| `pipelinenews` | `bf5e87b73705` | 3896 | 0 | 0 | 0 | canonical | 0 |
+| `spiders` | `9cd0ba033afd` | 182 | 0 | 0 | 0 | canonical | 0 |
 
 `bare` means the file carries GitHub's default `* text=auto` with no `eol=lf`.
 It normalises on commit and permits a CRLF checkout, which is the trap: `chatgpt-audits`, `codex-chatgpt`, `gemini`.
