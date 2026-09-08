@@ -7,7 +7,7 @@ while the disk holds CRLF and the blob holds LF.
 INFORMATIONAL: this job exits 0 on every finding. The gates that must block already
 exist and already fail loudly. This is a report.
 
-- surveyed at: `2026-09-07T09:34:11Z`
+- surveyed at: `2026-09-08T08:58:56Z`
 - repositories: 18
 
 ## Line endings and `.gitattributes`
@@ -25,11 +25,11 @@ carry across both.
 
 | repo | head | tracked | i/crlf | w/crlf | mixed | .gitattributes | renormalize changes |
 |---|---|---:|---:|---:|---:|---|---:|
-| `chatgpt-audits` | `008952fef1ee` | 3265 | 0 | 0 | 0 | bare | 0 |
-| `claude` | `8ca75c80d747` | 337 | 0 | 0 | 2 | canonical | 1 |
+| `chatgpt-audits` | `2ffb435d105d` | 3268 | 0 | 0 | 0 | bare | 0 |
+| `claude` | `96d1a24e4793` | 337 | 0 | 0 | 2 | canonical | 1 |
 | `codex-chatgpt` | `9bc0a5feaa81` | 26 | 0 | 0 | 0 | bare | 0 |
 | `companies` | `ac70a37408d4` | 76 | 0 | 0 | 0 | canonical | 0 |
-| `cvaa` | `a1fae46a1cb3` | 61 | 0 | 0 | 0 | canonical | 0 |
+| `cvaa` | `4db0b6764ec9` | 62 | 0 | 0 | 0 | canonical | 0 |
 | `data-centres-gb` | `f9f47286fae6` | 33 | 0 | 0 | 0 | canonical | 0 |
 | `data-federation-map-for-globalgrid2050-all-repos` | `b759a7d2b5ec` | 152 | 0 | 0 | 0 | canonical | 0 |
 | `data-gb-electricity` | `d310e3cec8cd` | 492 | 0 | 0 | 0 | canonical | 0 |
@@ -38,16 +38,16 @@ carry across both.
 | `data-interconnectors` | `1e00d0e4d7bf` | 11 | 0 | 0 | 0 | canonical | 0 |
 | `gb-electricity-ui` | `5b4533914bb2` | 15 | 0 | 0 | 0 | canonical | 0 |
 | `gemini` | `16122ae08d45` | 10 | 0 | 0 | 0 | bare | 0 |
-| `globalgrid2050` | `0ca3e893da2d` | 14548 | 224 | 224 | 0 | canonical | 0 |
+| `globalgrid2050` | `ad2626f008d6` | 14992 | 224 | 224 | 0 | canonical | 0 |
 | `grid-distance-maths` | `30aa4e0456f9` | 12 | 0 | 0 | 0 | canonical | 0 |
-| `gridatlas` | `9e558fa21390` | 814 | 0 | 0 | 0 | canonical | 0 |
-| `pipelinenews` | `bf5e87b73705` | 3896 | 0 | 0 | 0 | canonical | 0 |
-| `spiders` | `9cd0ba033afd` | 182 | 0 | 0 | 0 | canonical | 0 |
+| `gridatlas` | `b4227c5010db` | 864 | 0 | 0 | 0 | canonical | 0 |
+| `pipelinenews` | `7d4474e35180` | 3896 | 0 | 0 | 0 | canonical | 0 |
+| `spiders` | `bd292a9b92a2` | 183 | 0 | 0 | 0 | canonical | 0 |
 
 `bare` means the file carries GitHub's default `* text=auto` with no `eol=lf`.
 It normalises on commit and permits a CRLF checkout, which is the trap: `chatgpt-audits`, `codex-chatgpt`, `gemini`.
 
-## Cartridge ceilings in `gridatlas` (generation `202609060259`)
+## Cartridge ceilings in `gridatlas` (generation `202609080850`)
 
 Three ceilings are enforced in this estate and they are three different numbers:
 **368640 characters** is what the proof asserts, **400000 bytes** is what `loop.mjs lint`
@@ -58,7 +58,7 @@ apart the two gauges are for that file.
 | cartridge | chars | bytes | b-c | clear of 368640 chars | clear of 400000 bytes | sha256 |
 |---|---:|---:|---:|---:|---:|---|
 | `streaming-parquet-bridge` | 13316 | 13316 | 0 | 355324 | 386684 | matches |
-| `uk-gazetteer-flyto` | 34719 | 34731 | 12 | 333921 | 365269 | matches |
-| `sld-sandbox` | 360801 | 364209 | 3408 | 7839 | 35791 | matches |
-| `substation-intelligence` | 443444 | 449530 | 6086 | -74804 | -49530 | matches |
+| `uk-gazetteer-flyto` | 41102 | 41120 | 18 | 327538 | 358880 | matches |
+| `sld-sandbox` | 423060 | 426488 | 3428 | -54420 | -26488 | matches |
+| `substation-intelligence` | 445849 | 451935 | 6086 | -77209 | -51935 | matches |
 
