@@ -4,7 +4,7 @@ Crawled from GitHub Actions against the LIVE origins, one runner per surface.
 INFORMATIONAL: the job exits 0 on every finding. A 404 below is a fact to read,
 not an alarm that mailed anyone.
 
-- crawled at: `2026-09-07T07:31:35Z`
+- crawled at: `2026-09-08T07:24:59Z`
 - releases crawled: 55 (41 whose page did not answer)
 - routes checked: 302, dead: 176
 - sentinels checked: 9, dead: 9, **dead AND shipped: 9**
@@ -15,7 +15,7 @@ A dead sentinel that is shipped is what a user gets when they click.
 
 ## `globalgrid2050` - 1 releases, 2/4 routes dead, 0/0 sentinels dead (0 shipped)
 
-crawled in 0.5s
+crawled in 0.2s
 
 | release | state | page | routes dead | sentinels dead (shipped) |
 |---|---|---|---|---|
@@ -32,7 +32,7 @@ crawled in 0.5s
 
 ## `gridatlas-atlas` - 10 releases, 170/238 routes dead, 0/0 sentinels dead (0 shipped)
 
-crawled in 7.2s
+crawled in 2.8s
 
 | release | state | page | routes dead | sentinels dead (shipped) |
 |---|---|---|---|---|
@@ -115,13 +115,13 @@ crawled in 7.2s
 
 ## `pipelinenews-intel` - 0 releases, 0/0 routes dead, 0/0 sentinels dead (0 shipped)
 
-crawled in 0.2s
+crawled in 0.1s
 
 Every release on this surface answered 200 on every route and sentinel.
 
 ## `pipelinenews-releases` - 44 releases, 4/60 routes dead, 9/9 sentinels dead (9 shipped)
 
-crawled in 7.6s
+crawled in 7.3s
 
 | release | state | page | routes dead | sentinels dead (shipped) |
 |---|---|---|---|---|
