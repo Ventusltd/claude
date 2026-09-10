@@ -7,7 +7,7 @@ while the disk holds CRLF and the blob holds LF.
 INFORMATIONAL: this job exits 0 on every finding. The gates that must block already
 exist and already fail loudly. This is a report.
 
-- surveyed at: `2026-09-09T09:05:03Z`
+- surveyed at: `2026-09-10T09:04:17Z`
 - repositories: 18
 
 ## Line endings and `.gitattributes`
@@ -26,7 +26,7 @@ carry across both.
 | repo | head | tracked | i/crlf | w/crlf | mixed | .gitattributes | renormalize changes |
 |---|---|---:|---:|---:|---:|---|---:|
 | `chatgpt-audits` | `2ffb435d105d` | 3268 | 0 | 0 | 0 | bare | 0 |
-| `claude` | `3a63e71ed084` | 337 | 0 | 0 | 2 | canonical | 1 |
+| `claude` | `8073002f958f` | 337 | 0 | 0 | 2 | canonical | 1 |
 | `codex-chatgpt` | `9bc0a5feaa81` | 26 | 0 | 0 | 0 | bare | 0 |
 | `companies` | `ac70a37408d4` | 76 | 0 | 0 | 0 | canonical | 0 |
 | `cvaa` | `4db0b6764ec9` | 62 | 0 | 0 | 0 | canonical | 0 |
@@ -41,8 +41,8 @@ carry across both.
 | `globalgrid2050` | `bbdedab1eb8a` | 15457 | 224 | 224 | 0 | canonical | 0 |
 | `grid-distance-maths` | `30aa4e0456f9` | 12 | 0 | 0 | 0 | canonical | 0 |
 | `gridatlas` | `b4227c5010db` | 864 | 0 | 0 | 0 | canonical | 0 |
-| `pipelinenews` | `d16b0ae0d7d5` | 3896 | 0 | 0 | 0 | canonical | 0 |
-| `spiders` | `0f734cb322f8` | 184 | 0 | 0 | 0 | canonical | 0 |
+| `pipelinenews` | `3926a8a850ae` | 3896 | 0 | 0 | 0 | canonical | 0 |
+| `spiders` | `b35f9b538528` | 185 | 0 | 0 | 0 | canonical | 0 |
 
 `bare` means the file carries GitHub's default `* text=auto` with no `eol=lf`.
 It normalises on commit and permits a CRLF checkout, which is the trap: `chatgpt-audits`, `codex-chatgpt`, `gemini`.
